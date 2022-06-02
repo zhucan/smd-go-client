@@ -1,0 +1,1659 @@
+---
+swagger: "2.0"
+info:
+  description: "Resource for managing storage"
+  version: "1.0.0"
+  title: "SmdService"
+  contact:
+    name: "canzhu"
+    url: "https://www.deeproute.ai/"
+    email: "canzhu@deeproute.ai"
+tags:
+- name: "smd"
+  description: "Managing storage resources"
+paths:
+  /action_logs:
+    get:
+      tags:
+      - "action_logs"
+      summary: "get all action logs"
+      operationId: "ListActionLogs"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "offset"
+        in: "query"
+        description: "offset"
+        required: false
+        type: "integer"
+        x-exportParamName: "Offset"
+        x-optionalDataType: "Int32"
+      - name: "limit"
+        in: "query"
+        description: "limit"
+        required: false
+        type: "integer"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int32"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/*models.ActionLog"
+  /action_logs/{log-id}:
+    get:
+      tags:
+      - "action_logs"
+      summary: "get a action log"
+      operationId: "GetActionLog"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "log-id"
+        in: "path"
+        description: "identifier of the action log"
+        required: true
+        type: "integer"
+        x-exportParamName: "LogId"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/models.ActionLog"
+  /ceph-clusters:
+    get:
+      tags:
+      - "ceph-clusters"
+      summary: "get ceph cluster"
+      operationId: "GetCephCluster"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters: []
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/models.CephCluster"
+    post:
+      tags:
+      - "ceph-clusters"
+      summary: "create ceph cluster"
+      operationId: "CreateCephCluster"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/routes.CreateCephClusterRequestParams"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/models.CephCluster"
+    delete:
+      tags:
+      - "ceph-clusters"
+      summary: "delete ceph cluster"
+      operationId: "DeleteCephCluster"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters: []
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/models.CephCluster"
+  /crush-roots:
+    get:
+      tags:
+      - "crush-roots"
+      summary: "get all crush roots"
+      operationId: "ListCrushRoots"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "offset"
+        in: "query"
+        description: "offset"
+        required: false
+        type: "integer"
+        x-exportParamName: "Offset"
+        x-optionalDataType: "Int32"
+      - name: "limit"
+        in: "query"
+        description: "limit"
+        required: false
+        type: "integer"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int32"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/*models.CrushRoot"
+    post:
+      tags:
+      - "crush-roots"
+      summary: "create crush root"
+      operationId: "CreateCrushRoot"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/routes.CrushRootRequestParams"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/models.CrushRoot"
+  /crush-roots/{crush-root-id}:
+    get:
+      tags:
+      - "crush-roots"
+      summary: "get a crush root"
+      operationId: "GetCrushRoot"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "crush-root-id"
+        in: "path"
+        description: "identifier of the crush root"
+        required: true
+        type: "integer"
+        x-exportParamName: "CrushRootId"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/models.CrushRoot"
+    delete:
+      tags:
+      - "crush-roots"
+      summary: "delete a crush root"
+      operationId: "DeleteCrushRoot"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "crush-root-id"
+        in: "path"
+        description: "identifier of the crush root"
+        required: true
+        type: "integer"
+        x-exportParamName: "CrushRootId"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/models.CrushRoot"
+  /disks:
+    get:
+      tags:
+      - "disks"
+      summary: "get all disks"
+      operationId: "ListDisks"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "offset"
+        in: "query"
+        description: "offset"
+        required: false
+        type: "integer"
+        x-exportParamName: "Offset"
+        x-optionalDataType: "Int32"
+      - name: "limit"
+        in: "query"
+        description: "limit"
+        required: false
+        type: "integer"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int32"
+      - name: "host-id"
+        in: "query"
+        description: "identifier of the host"
+        required: false
+        type: "integer"
+        x-exportParamName: "HostId"
+        x-optionalDataType: "Int32"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/*models.Disk"
+  /disks/{disk-id}:
+    get:
+      tags:
+      - "disks"
+      summary: "get a disk"
+      operationId: "GetDisk"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "disk-id"
+        in: "path"
+        description: "identifier of the disk"
+        required: true
+        type: "integer"
+        x-exportParamName: "DiskId"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/models.Disk"
+  /hosts:
+    get:
+      tags:
+      - "hosts"
+      summary: "get all hosts"
+      operationId: "ListHosts"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "offset"
+        in: "query"
+        description: "offset"
+        required: false
+        type: "integer"
+        x-exportParamName: "Offset"
+        x-optionalDataType: "Int32"
+      - name: "limit"
+        in: "query"
+        description: "limit"
+        required: false
+        type: "integer"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int32"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/*models.Host"
+    post:
+      tags:
+      - "hosts"
+      summary: "create a host"
+      operationId: "CreateHost"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/routes.CreateHostRequestParams"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/models.Host"
+  /hosts/{host-id}:
+    get:
+      tags:
+      - "hosts"
+      summary: "get a host"
+      operationId: "GetHost"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "host-id"
+        in: "path"
+        description: "identifier of the host"
+        required: true
+        type: "integer"
+        x-exportParamName: "HostId"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/models.Host"
+    delete:
+      tags:
+      - "hosts"
+      summary: "delete a host"
+      operationId: "DeleteHost"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "host-id"
+        in: "path"
+        description: "identifier of the host"
+        required: true
+        type: "integer"
+        x-exportParamName: "HostId"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/models.Host"
+  /object-stores:
+    get:
+      tags:
+      - "object-stores"
+      summary: "get all object stores"
+      operationId: "ListObjectStores"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "offset"
+        in: "query"
+        description: "offset"
+        required: false
+        type: "integer"
+        x-exportParamName: "Offset"
+        x-optionalDataType: "Int32"
+      - name: "limit"
+        in: "query"
+        description: "limit"
+        required: false
+        type: "integer"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int32"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/*models.ObjectStore"
+    post:
+      tags:
+      - "object-stores"
+      summary: "create an object store"
+      operationId: "CreateObjectStore"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/routes.ObjectStoreRequestParams"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/models.ObjectStore"
+  /object-stores/{object-store-id}:
+    get:
+      tags:
+      - "object-stores"
+      summary: "get an object store"
+      operationId: "GetObjectStore"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "object-store-id"
+        in: "path"
+        description: "identifier of the object store"
+        required: true
+        type: "integer"
+        x-exportParamName: "ObjectStoreId"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/models.ObjectStore"
+    delete:
+      tags:
+      - "object-stores"
+      summary: "delete an object store"
+      operationId: "DeleteObjectStore"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "object-store-id"
+        in: "path"
+        description: "identifier of the object store"
+        required: true
+        type: "integer"
+        x-exportParamName: "ObjectStoreId"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/models.ObjectStore"
+  /os-users:
+    get:
+      tags:
+      - "os-user"
+      summary: "list all kind of os users"
+      operationId: "ListOsUsers"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "offset"
+        in: "query"
+        description: "offset"
+        required: false
+        type: "integer"
+        x-exportParamName: "Offset"
+        x-optionalDataType: "Int32"
+      - name: "limit"
+        in: "query"
+        description: "limit"
+        required: false
+        type: "integer"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int32"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/*models.OsUser"
+    post:
+      tags:
+      - "os-user"
+      summary: "create os user"
+      operationId: "CreateOsUser"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/routes.CreateOsUserRequestParams"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/models.OsUser"
+  /os-users/{os-user-id}:
+    get:
+      tags:
+      - "os-user"
+      summary: "get an os user"
+      operationId: "GetOsUser"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "os-user-id"
+        in: "path"
+        description: "identifier of the os user"
+        required: true
+        type: "integer"
+        x-exportParamName: "OsUserId"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/models.OsUser"
+    delete:
+      tags:
+      - "os-user"
+      summary: "delete os user"
+      operationId: "DeleteOsUser"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "os-user-id"
+        in: "path"
+        description: "identifier of the os user"
+        required: true
+        type: "integer"
+        x-exportParamName: "OsUserId"
+      responses:
+        "200":
+          description: "OK"
+  /osds:
+    get:
+      tags:
+      - "osds"
+      summary: "get all osds"
+      operationId: "ListOsds"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "offset"
+        in: "query"
+        description: "offset"
+        required: false
+        type: "integer"
+        x-exportParamName: "Offset"
+        x-optionalDataType: "Int32"
+      - name: "limit"
+        in: "query"
+        description: "limit"
+        required: false
+        type: "integer"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int32"
+      - name: "host-id"
+        in: "query"
+        description: "identifier of the host"
+        required: false
+        type: "integer"
+        x-exportParamName: "HostId"
+        x-optionalDataType: "Int32"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/*models.Osd"
+    post:
+      tags:
+      - "osds"
+      summary: "create osds"
+      operationId: "CreateOsds"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/routes.OsdsRequestParams"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/*models.Osd"
+    delete:
+      tags:
+      - "osds"
+      summary: "delete osds"
+      operationId: "DeleteOsds"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/routes.OsdsRequestParams"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/*models.Osd"
+  /osds/{osd-id}:
+    get:
+      tags:
+      - "osds"
+      summary: "get a osd"
+      operationId: "GetOsd"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "osd-id"
+        in: "path"
+        description: "identifier of the osd"
+        required: true
+        type: "integer"
+        x-exportParamName: "OsdId"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/models.Osd"
+definitions:
+  '*models.ActionLog': {}
+  '*models.CrushRoot': {}
+  '*models.Disk': {}
+  '*models.Host': {}
+  '*models.ObjectStore': {}
+  '*models.OsUser': {}
+  '*models.Osd': {}
+  ".ceph_cluster":
+    required:
+    - "name"
+    properties:
+      name:
+        type: "string"
+  ".crush_root":
+    required:
+    - "name"
+    - "osd_ids"
+    properties:
+      name:
+        type: "string"
+      osd_ids:
+        type: "array"
+        items:
+          type: "integer"
+  ".host":
+    required:
+    - "Host"
+    properties:
+      Host:
+        $ref: "#/definitions/models.Host"
+  ".object_store":
+    required:
+    - "data_pool"
+    - "gateway_instances"
+    - "metadata_pool"
+    - "name"
+    - "preserve_pools_on_delete"
+    properties:
+      data_pool:
+        $ref: "#/definitions/routes.PoolRequestParams"
+      gateway_instances:
+        type: "integer"
+        format: "int32"
+      metadata_pool:
+        $ref: "#/definitions/routes.PoolRequestParams"
+      name:
+        type: "string"
+      preserve_pools_on_delete:
+        type: "boolean"
+  ".os_user":
+    required:
+    - "bucket_capability"
+    - "bucket_quota_max_buckets"
+    - "bucket_quota_max_objects"
+    - "bucket_quota_max_size"
+    - "metadata_capability"
+    - "name"
+    - "object_store_id"
+    - "usage_capability"
+    - "user_capability"
+    - "zone_capability"
+    properties:
+      bucket_capability:
+        type: "string"
+      bucket_quota_max_buckets:
+        type: "integer"
+        format: "int32"
+      bucket_quota_max_objects:
+        type: "integer"
+        format: "int64"
+      bucket_quota_max_size:
+        type: "string"
+      metadata_capability:
+        type: "string"
+      name:
+        type: "string"
+      object_store_id:
+        type: "integer"
+        format: "integer"
+      usage_capability:
+        type: "string"
+      user_capability:
+        type: "string"
+      zone_capability:
+        type: "string"
+  ".osds":
+    required:
+    - "disk_ids"
+    properties:
+      disk_ids:
+        type: "array"
+        items:
+          type: "integer"
+  gorm.Model:
+    required:
+    - "CreatedAt"
+    - "DeletedAt"
+    - "ID"
+    - "UpdatedAt"
+    properties:
+      CreatedAt:
+        type: "string"
+        format: "date-time"
+      DeletedAt:
+        type: "string"
+      ID:
+        type: "integer"
+        format: "integer"
+      UpdatedAt:
+        type: "string"
+        format: "date-time"
+  models.ActionLog:
+    required:
+    - "Action"
+    - "CreatedAt"
+    - "FinishedAt"
+    - "ID"
+    - "Message"
+    - "NewData"
+    - "OldData"
+    - "Parameter"
+    - "ResourceIDs"
+    - "ResourceType"
+    - "Status"
+    properties:
+      Action:
+        type: "string"
+      CreatedAt:
+        type: "string"
+        format: "date-time"
+      FinishedAt:
+        type: "string"
+        format: "date-time"
+      ID:
+        type: "integer"
+        format: "integer"
+      Message:
+        type: "string"
+      NewData:
+        type: "string"
+      OldData:
+        type: "string"
+      Parameter:
+        type: "string"
+      ResourceIDs:
+        type: "string"
+      ResourceType:
+        type: "string"
+      Status:
+        type: "string"
+    example:
+      Status: "Status"
+      Action: "Action"
+      Message: "Message"
+      ResourceIDs: "ResourceIDs"
+      NewData: "NewData"
+      CreatedAt: "2000-01-23T04:56:07.000+00:00"
+      OldData: "OldData"
+      FinishedAt: "2000-01-23T04:56:07.000+00:00"
+      Parameter: "Parameter"
+      ResourceType: "ResourceType"
+      ID: 0
+  models.CephCluster:
+    required:
+    - "CreatedAt"
+    - "DeletedAt"
+    - "ID"
+    - "Name"
+    - "State"
+    - "Status"
+    - "UpdatedAt"
+    properties:
+      CreatedAt:
+        type: "string"
+        format: "date-time"
+      DeletedAt:
+        type: "string"
+      ID:
+        type: "integer"
+        format: "integer"
+      Name:
+        type: "string"
+      State:
+        type: "string"
+      Status:
+        type: "string"
+      UpdatedAt:
+        type: "string"
+        format: "date-time"
+    example:
+      Status: "Status"
+      State: "State"
+      CreatedAt: "2000-01-23T04:56:07.000+00:00"
+      ID: 0
+      DeletedAt: "DeletedAt"
+      UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+      Name: "Name"
+  models.CrushRoot:
+    required:
+    - "CreatedAt"
+    - "DeletedAt"
+    - "ID"
+    - "Name"
+    - "Osds"
+    - "Parent"
+    - "ParentID"
+    - "PoolProperty"
+    - "Status"
+    - "UpdatedAt"
+    properties:
+      CreatedAt:
+        type: "string"
+        format: "date-time"
+      DeletedAt:
+        type: "string"
+      ID:
+        type: "integer"
+        format: "integer"
+      Name:
+        type: "string"
+      Osds:
+        type: "array"
+        items:
+          $ref: "#/definitions/models.Osd"
+      Parent:
+        $ref: "#/definitions/models.CrushRoot"
+      ParentID:
+        type: "integer"
+        format: "integer"
+      PoolProperty:
+        $ref: "#/definitions/models.PoolProperty"
+      Status:
+        type: "string"
+      UpdatedAt:
+        type: "string"
+        format: "date-time"
+    example:
+      ParentID: 1
+      Status: "Status"
+      Osds:
+      - Status: "Status"
+        OsdID: 7
+        In: true
+        CreatedAt: "2000-01-23T04:56:07.000+00:00"
+        CrushRootID: 6
+        ID: 4
+        Up: true
+        DeletedAt: "DeletedAt"
+        Disk:
+          DeviceModel: "DeviceModel"
+          IsRoot: true
+          MBytes: 3
+          Encrypted: true
+          CreatedAt: "2000-01-23T04:56:07.000+00:00"
+          Host:
+            public_ip: "public_ip"
+            OS: "OS"
+            CreatedAt: "2000-01-23T04:56:07.000+00:00"
+            Vendor: "Vendor"
+            admin_ip: "admin_ip"
+            UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+            Cores: 5
+            HostModel: "HostModel"
+            Serial: "Serial"
+            Type: "Type"
+            CPUs: 1
+            MemoryMB: 2
+            ID: 5
+            DeletedAt: "DeletedAt"
+            cluster_ip: "cluster_ip"
+            host_name: "host_name"
+            CPUModel: "CPUModel"
+          Vendor: "Vendor"
+          HostID: 7
+          Rotational: true
+          UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+          Name: "Name"
+          WWN: "WWN"
+          PathID: "PathID"
+          RealPath: "RealPath"
+          HasChildren: true
+          Empty: true
+          Serial: "Serial"
+          Type: "Type"
+          ID: 9
+          DeletedAt: "DeletedAt"
+          Filesystem: "Filesystem"
+          UUID: "UUID"
+        UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+        DiskID: 2
+        Name: "Name"
+      - Status: "Status"
+        OsdID: 7
+        In: true
+        CreatedAt: "2000-01-23T04:56:07.000+00:00"
+        CrushRootID: 6
+        ID: 4
+        Up: true
+        DeletedAt: "DeletedAt"
+        Disk:
+          DeviceModel: "DeviceModel"
+          IsRoot: true
+          MBytes: 3
+          Encrypted: true
+          CreatedAt: "2000-01-23T04:56:07.000+00:00"
+          Host:
+            public_ip: "public_ip"
+            OS: "OS"
+            CreatedAt: "2000-01-23T04:56:07.000+00:00"
+            Vendor: "Vendor"
+            admin_ip: "admin_ip"
+            UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+            Cores: 5
+            HostModel: "HostModel"
+            Serial: "Serial"
+            Type: "Type"
+            CPUs: 1
+            MemoryMB: 2
+            ID: 5
+            DeletedAt: "DeletedAt"
+            cluster_ip: "cluster_ip"
+            host_name: "host_name"
+            CPUModel: "CPUModel"
+          Vendor: "Vendor"
+          HostID: 7
+          Rotational: true
+          UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+          Name: "Name"
+          WWN: "WWN"
+          PathID: "PathID"
+          RealPath: "RealPath"
+          HasChildren: true
+          Empty: true
+          Serial: "Serial"
+          Type: "Type"
+          ID: 9
+          DeletedAt: "DeletedAt"
+          Filesystem: "Filesystem"
+          UUID: "UUID"
+        UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+        DiskID: 2
+        Name: "Name"
+      CreatedAt: "2000-01-23T04:56:07.000+00:00"
+      ID: 0
+      DeletedAt: "DeletedAt"
+      PoolProperty:
+        Type: "Type"
+        Replicated: 4
+        CreatedAt: "2000-01-23T04:56:07.000+00:00"
+        ECDataChunks: 6
+        ObjectStoreID: 1
+        CrushRootID: 1
+        ID: 7
+        DeletedAt: "DeletedAt"
+        ECCodingChunks: 1
+        UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+      UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+      Name: "Name"
+  models.Disk:
+    required:
+    - "CreatedAt"
+    - "DeletedAt"
+    - "DeviceModel"
+    - "Empty"
+    - "Encrypted"
+    - "Filesystem"
+    - "HasChildren"
+    - "Host"
+    - "HostID"
+    - "ID"
+    - "IsRoot"
+    - "MBytes"
+    - "Name"
+    - "Osd"
+    - "PathID"
+    - "RealPath"
+    - "Rotational"
+    - "Serial"
+    - "Type"
+    - "UUID"
+    - "UpdatedAt"
+    - "Vendor"
+    - "WWN"
+    properties:
+      CreatedAt:
+        type: "string"
+        format: "date-time"
+      DeletedAt:
+        type: "string"
+      DeviceModel:
+        type: "string"
+      Empty:
+        type: "boolean"
+      Encrypted:
+        type: "boolean"
+      Filesystem:
+        type: "string"
+      HasChildren:
+        type: "boolean"
+      Host:
+        $ref: "#/definitions/models.Host"
+      HostID:
+        type: "integer"
+        format: "integer"
+      ID:
+        type: "integer"
+        format: "integer"
+      IsRoot:
+        type: "boolean"
+      MBytes:
+        type: "integer"
+        format: "integer"
+      Name:
+        type: "string"
+      Osd:
+        $ref: "#/definitions/models.Osd"
+      PathID:
+        type: "string"
+      RealPath:
+        type: "string"
+      Rotational:
+        type: "boolean"
+      Serial:
+        type: "string"
+      Type:
+        type: "string"
+      UUID:
+        type: "string"
+      UpdatedAt:
+        type: "string"
+        format: "date-time"
+      Vendor:
+        type: "string"
+      WWN:
+        type: "string"
+    example:
+      DeviceModel: "DeviceModel"
+      IsRoot: true
+      MBytes: 3
+      Encrypted: true
+      CreatedAt: "2000-01-23T04:56:07.000+00:00"
+      Host:
+        public_ip: "public_ip"
+        OS: "OS"
+        CreatedAt: "2000-01-23T04:56:07.000+00:00"
+        Vendor: "Vendor"
+        admin_ip: "admin_ip"
+        UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+        Cores: 5
+        HostModel: "HostModel"
+        Serial: "Serial"
+        Type: "Type"
+        CPUs: 1
+        MemoryMB: 2
+        ID: 5
+        DeletedAt: "DeletedAt"
+        cluster_ip: "cluster_ip"
+        host_name: "host_name"
+        CPUModel: "CPUModel"
+      Vendor: "Vendor"
+      HostID: 7
+      Rotational: true
+      UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+      Name: "Name"
+      WWN: "WWN"
+      PathID: "PathID"
+      RealPath: "RealPath"
+      HasChildren: true
+      Empty: true
+      Serial: "Serial"
+      Type: "Type"
+      ID: 9
+      DeletedAt: "DeletedAt"
+      Filesystem: "Filesystem"
+      UUID: "UUID"
+  models.Host:
+    required:
+    - "CPUModel"
+    - "CPUs"
+    - "Cores"
+    - "CreatedAt"
+    - "DeletedAt"
+    - "HostModel"
+    - "ID"
+    - "MemoryMB"
+    - "OS"
+    - "Serial"
+    - "Type"
+    - "UpdatedAt"
+    - "Vendor"
+    - "admin_ip"
+    - "cluster_ip"
+    - "host_name"
+    - "public_ip"
+    properties:
+      CPUModel:
+        type: "string"
+      CPUs:
+        type: "integer"
+        format: "int32"
+      Cores:
+        type: "integer"
+        format: "int32"
+      CreatedAt:
+        type: "string"
+        format: "date-time"
+      DeletedAt:
+        type: "string"
+      HostModel:
+        type: "string"
+      ID:
+        type: "integer"
+        format: "integer"
+      MemoryMB:
+        type: "integer"
+        format: "integer"
+      OS:
+        type: "string"
+      Serial:
+        type: "string"
+      Type:
+        type: "string"
+      UpdatedAt:
+        type: "string"
+        format: "date-time"
+      Vendor:
+        type: "string"
+      admin_ip:
+        type: "string"
+      cluster_ip:
+        type: "string"
+      host_name:
+        type: "string"
+      public_ip:
+        type: "string"
+    example:
+      public_ip: "public_ip"
+      OS: "OS"
+      CreatedAt: "2000-01-23T04:56:07.000+00:00"
+      Vendor: "Vendor"
+      admin_ip: "admin_ip"
+      UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+      Cores: 5
+      HostModel: "HostModel"
+      Serial: "Serial"
+      Type: "Type"
+      CPUs: 1
+      MemoryMB: 2
+      ID: 5
+      DeletedAt: "DeletedAt"
+      cluster_ip: "cluster_ip"
+      host_name: "host_name"
+      CPUModel: "CPUModel"
+  models.ObjectStore:
+    required:
+    - "CreatedAt"
+    - "DeletedAt"
+    - "ID"
+    - "Name"
+    - "PoolProperties"
+    - "PreservePoolsOnDelete"
+    - "Status"
+    - "UpdatedAt"
+    properties:
+      CreatedAt:
+        type: "string"
+        format: "date-time"
+      DeletedAt:
+        type: "string"
+      ID:
+        type: "integer"
+        format: "integer"
+      Name:
+        type: "string"
+      PoolProperties:
+        type: "array"
+        items:
+          $ref: "#/definitions/models.PoolProperty"
+      PreservePoolsOnDelete:
+        type: "boolean"
+      Status:
+        type: "string"
+      UpdatedAt:
+        type: "string"
+        format: "date-time"
+    example:
+      Status: "Status"
+      CreatedAt: "2000-01-23T04:56:07.000+00:00"
+      PreservePoolsOnDelete: true
+      ID: 0
+      DeletedAt: "DeletedAt"
+      UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+      Name: "Name"
+      PoolProperties:
+      - Type: "Type"
+        Replicated: 4
+        CreatedAt: "2000-01-23T04:56:07.000+00:00"
+        ECDataChunks: 6
+        ObjectStoreID: 1
+        CrushRootID: 1
+        ID: 7
+        DeletedAt: "DeletedAt"
+        ECCodingChunks: 1
+        UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+      - Type: "Type"
+        Replicated: 4
+        CreatedAt: "2000-01-23T04:56:07.000+00:00"
+        ECDataChunks: 6
+        ObjectStoreID: 1
+        CrushRootID: 1
+        ID: 7
+        DeletedAt: "DeletedAt"
+        ECCodingChunks: 1
+        UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+  models.OsUser:
+    required:
+    - "CreatedAt"
+    - "DeletedAt"
+    - "ID"
+    - "UpdatedAt"
+    - "ak"
+    - "cap_bucket"
+    - "cap_metadata"
+    - "cap_usage"
+    - "cap_user"
+    - "cap_zone"
+    - "max_buckets"
+    - "max_objects"
+    - "max_size"
+    - "name"
+    - "object_store"
+    - "object_store_id"
+    - "sk"
+    - "status"
+    properties:
+      CreatedAt:
+        type: "string"
+        format: "date-time"
+      DeletedAt:
+        type: "string"
+      ID:
+        type: "integer"
+        format: "integer"
+      UpdatedAt:
+        type: "string"
+        format: "date-time"
+      ak:
+        type: "string"
+      cap_bucket:
+        type: "string"
+      cap_metadata:
+        type: "string"
+      cap_usage:
+        type: "string"
+      cap_user:
+        type: "string"
+      cap_zone:
+        type: "string"
+      max_buckets:
+        type: "integer"
+        format: "int32"
+      max_objects:
+        type: "integer"
+        format: "int64"
+      max_size:
+        type: "string"
+      name:
+        type: "string"
+      object_store:
+        $ref: "#/definitions/models.ObjectStore"
+      object_store_id:
+        type: "integer"
+        format: "integer"
+      sk:
+        type: "string"
+      status:
+        type: "string"
+    example:
+      object_store_id: 5
+      CreatedAt: "2000-01-23T04:56:07.000+00:00"
+      max_buckets: 6
+      ak: "ak"
+      object_store:
+        Status: "Status"
+        CreatedAt: "2000-01-23T04:56:07.000+00:00"
+        PreservePoolsOnDelete: true
+        ID: 0
+        DeletedAt: "DeletedAt"
+        UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+        Name: "Name"
+        PoolProperties:
+        - Type: "Type"
+          Replicated: 4
+          CreatedAt: "2000-01-23T04:56:07.000+00:00"
+          ECDataChunks: 6
+          ObjectStoreID: 1
+          CrushRootID: 1
+          ID: 7
+          DeletedAt: "DeletedAt"
+          ECCodingChunks: 1
+          UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+        - Type: "Type"
+          Replicated: 4
+          CreatedAt: "2000-01-23T04:56:07.000+00:00"
+          ECDataChunks: 6
+          ObjectStoreID: 1
+          CrushRootID: 1
+          ID: 7
+          DeletedAt: "DeletedAt"
+          ECCodingChunks: 1
+          UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+      UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+      max_size: "max_size"
+      cap_usage: "cap_usage"
+      cap_metadata: "cap_metadata"
+      max_objects: 1
+      cap_bucket: "cap_bucket"
+      name: "name"
+      sk: "sk"
+      cap_user: "cap_user"
+      cap_zone: "cap_zone"
+      ID: 0
+      DeletedAt: "DeletedAt"
+      status: "status"
+  models.Osd:
+    required:
+    - "CreatedAt"
+    - "CrushRootID"
+    - "DeletedAt"
+    - "Disk"
+    - "DiskID"
+    - "ID"
+    - "In"
+    - "Name"
+    - "OsdID"
+    - "Status"
+    - "Up"
+    - "UpdatedAt"
+    properties:
+      CreatedAt:
+        type: "string"
+        format: "date-time"
+      CrushRootID:
+        type: "integer"
+        format: "integer"
+      DeletedAt:
+        type: "string"
+      Disk:
+        $ref: "#/definitions/models.Disk"
+      DiskID:
+        type: "integer"
+        format: "integer"
+      ID:
+        type: "integer"
+        format: "integer"
+      In:
+        type: "boolean"
+      Name:
+        type: "string"
+      OsdID:
+        type: "integer"
+        format: "int32"
+      Status:
+        type: "string"
+      Up:
+        type: "boolean"
+      UpdatedAt:
+        type: "string"
+        format: "date-time"
+    example:
+      Status: "Status"
+      OsdID: 7
+      In: true
+      CreatedAt: "2000-01-23T04:56:07.000+00:00"
+      CrushRootID: 6
+      ID: 4
+      Up: true
+      DeletedAt: "DeletedAt"
+      Disk:
+        DeviceModel: "DeviceModel"
+        IsRoot: true
+        MBytes: 3
+        Encrypted: true
+        CreatedAt: "2000-01-23T04:56:07.000+00:00"
+        Host:
+          public_ip: "public_ip"
+          OS: "OS"
+          CreatedAt: "2000-01-23T04:56:07.000+00:00"
+          Vendor: "Vendor"
+          admin_ip: "admin_ip"
+          UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+          Cores: 5
+          HostModel: "HostModel"
+          Serial: "Serial"
+          Type: "Type"
+          CPUs: 1
+          MemoryMB: 2
+          ID: 5
+          DeletedAt: "DeletedAt"
+          cluster_ip: "cluster_ip"
+          host_name: "host_name"
+          CPUModel: "CPUModel"
+        Vendor: "Vendor"
+        HostID: 7
+        Rotational: true
+        UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+        Name: "Name"
+        WWN: "WWN"
+        PathID: "PathID"
+        RealPath: "RealPath"
+        HasChildren: true
+        Empty: true
+        Serial: "Serial"
+        Type: "Type"
+        ID: 9
+        DeletedAt: "DeletedAt"
+        Filesystem: "Filesystem"
+        UUID: "UUID"
+      UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+      DiskID: 2
+      Name: "Name"
+  models.PoolProperty:
+    required:
+    - "CreatedAt"
+    - "CrushRoot"
+    - "CrushRootID"
+    - "DeletedAt"
+    - "ECCodingChunks"
+    - "ECDataChunks"
+    - "ID"
+    - "ObjectStoreID"
+    - "Replicated"
+    - "Type"
+    - "UpdatedAt"
+    properties:
+      CreatedAt:
+        type: "string"
+        format: "date-time"
+      CrushRoot:
+        $ref: "#/definitions/models.CrushRoot"
+      CrushRootID:
+        type: "integer"
+        format: "integer"
+      DeletedAt:
+        type: "string"
+      ECCodingChunks:
+        type: "integer"
+        format: "integer"
+      ECDataChunks:
+        type: "integer"
+        format: "integer"
+      ID:
+        type: "integer"
+        format: "integer"
+      ObjectStoreID:
+        type: "integer"
+        format: "integer"
+      Replicated:
+        type: "integer"
+        format: "integer"
+      Type:
+        type: "string"
+      UpdatedAt:
+        type: "string"
+        format: "date-time"
+    example:
+      Type: "Type"
+      Replicated: 4
+      CreatedAt: "2000-01-23T04:56:07.000+00:00"
+      ECDataChunks: 6
+      ObjectStoreID: 1
+      CrushRootID: 1
+      ID: 7
+      DeletedAt: "DeletedAt"
+      ECCodingChunks: 1
+      UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+  routes.CreateCephClusterRequestParams:
+    required:
+    - "ceph_cluster"
+    properties:
+      ceph_cluster:
+        $ref: "#/definitions/.ceph_cluster"
+  routes.CreateHostRequestParams:
+    required:
+    - "host"
+    properties:
+      host:
+        $ref: "#/definitions/.host"
+  routes.CreateOsUserRequestParams:
+    required:
+    - "os_user"
+    properties:
+      os_user:
+        $ref: "#/definitions/.os_user"
+  routes.CrushRootRequestParams:
+    required:
+    - "crush_root"
+    properties:
+      crush_root:
+        $ref: "#/definitions/.crush_root"
+  routes.ObjectStoreRequestParams:
+    required:
+    - "object_store"
+    properties:
+      object_store:
+        $ref: "#/definitions/.object_store"
+  routes.OsdsRequestParams:
+    required:
+    - "osds"
+    properties:
+      osds:
+        $ref: "#/definitions/.osds"
+  routes.PoolRequestParams:
+    required:
+    - "crush_root_id"
+    - "ec_coding_chunks"
+    - "ec_data_chunks"
+    - "replicated"
+    - "type"
+    properties:
+      crush_root_id:
+        type: "integer"
+        format: "integer"
+      ec_coding_chunks:
+        type: "integer"
+        format: "integer"
+      ec_data_chunks:
+        type: "integer"
+        format: "integer"
+      replicated:
+        type: "integer"
+        format: "integer"
+      type:
+        type: "string"
