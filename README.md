@@ -37,6 +37,14 @@ Class | Method | HTTP request | Description
 *HostsApi* | [**DeleteHost**](docs/HostsApi.md#deletehost) | **Delete** /hosts/{host-id} | delete a host
 *HostsApi* | [**GetHost**](docs/HostsApi.md#gethost) | **Get** /hosts/{host-id} | get a host
 *HostsApi* | [**ListHosts**](docs/HostsApi.md#listhosts) | **Get** /hosts | get all hosts
+*ObjectBucketsApi* | [**CreateObjectBucket**](docs/ObjectBucketsApi.md#createobjectbucket) | **Post** /object-buckets | create an object bucket
+*ObjectBucketsApi* | [**DeleteObjectBucket**](docs/ObjectBucketsApi.md#deleteobjectbucket) | **Delete** /object-buckets/{object-bucket-id} | delete an object bucket
+*ObjectBucketsApi* | [**GetObjectBucket**](docs/ObjectBucketsApi.md#getobjectbucket) | **Get** /object-buckets/{object-bucket-id} | get an object bucket
+*ObjectBucketsApi* | [**ListObjectBuckets**](docs/ObjectBucketsApi.md#listobjectbuckets) | **Get** /object-buckets | get all object buckets
+*ObjectStorageClassesApi* | [**CreateObjectStorageClass**](docs/ObjectStorageClassesApi.md#createobjectstorageclass) | **Post** /object-storage-classes | create an object storage class
+*ObjectStorageClassesApi* | [**DeleteObjectStorageClass**](docs/ObjectStorageClassesApi.md#deleteobjectstorageclass) | **Delete** /object-storage-classes/{object-storage-class-id} | delete an object storage class
+*ObjectStorageClassesApi* | [**GetObjectStorageClass**](docs/ObjectStorageClassesApi.md#getobjectstorageclass) | **Get** /object-storage-classes/{object-storage-class-id} | get an object storage classs
+*ObjectStorageClassesApi* | [**ListObjectStorageClasses**](docs/ObjectStorageClassesApi.md#listobjectstorageclasses) | **Get** /object-storage-classes | get all object storage classes
 *ObjectStoresApi* | [**CreateObjectStore**](docs/ObjectStoresApi.md#createobjectstore) | **Post** /object-stores | create an object store
 *ObjectStoresApi* | [**DeleteObjectStore**](docs/ObjectStoresApi.md#deleteobjectstore) | **Delete** /object-stores/{object-store-id} | delete an object store
 *ObjectStoresApi* | [**GetObjectStore**](docs/ObjectStoresApi.md#getobjectstore) | **Get** /object-stores/{object-store-id} | get an object store
@@ -62,10 +70,14 @@ Class | Method | HTTP request | Description
  - [ModelsCrushRoot](docs/ModelsCrushRoot.md)
  - [ModelsDisk](docs/ModelsDisk.md)
  - [ModelsHost](docs/ModelsHost.md)
+ - [ModelsObjectBucket](docs/ModelsObjectBucket.md)
+ - [ModelsObjectStorageClass](docs/ModelsObjectStorageClass.md)
  - [ModelsObjectStore](docs/ModelsObjectStore.md)
  - [ModelsOsUser](docs/ModelsOsUser.md)
  - [ModelsOsd](docs/ModelsOsd.md)
  - [ModelsPoolProperty](docs/ModelsPoolProperty.md)
+ - [ObjectBucket](docs/ObjectBucket.md)
+ - [ObjectStorageClass](docs/ObjectStorageClass.md)
  - [ObjectStore](docs/ObjectStore.md)
  - [OsUser](docs/OsUser.md)
  - [Osds](docs/Osds.md)
@@ -73,6 +85,8 @@ Class | Method | HTTP request | Description
  - [RoutesCreateHostRequestParams](docs/RoutesCreateHostRequestParams.md)
  - [RoutesCreateOsUserRequestParams](docs/RoutesCreateOsUserRequestParams.md)
  - [RoutesCrushRootRequestParams](docs/RoutesCrushRootRequestParams.md)
+ - [RoutesObjectBucketRequestParams](docs/RoutesObjectBucketRequestParams.md)
+ - [RoutesObjectStorageClassRequestParams](docs/RoutesObjectStorageClassRequestParams.md)
  - [RoutesObjectStoreRequestParams](docs/RoutesObjectStoreRequestParams.md)
  - [RoutesOsdsRequestParams](docs/RoutesOsdsRequestParams.md)
  - [RoutesPoolRequestParams](docs/RoutesPoolRequestParams.md)

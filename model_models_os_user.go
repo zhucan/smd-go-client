@@ -18,6 +18,7 @@ type ModelsOsUser struct {
 	CreatedAt time.Time `json:"CreatedAt"`
 	DeletedAt string `json:"DeletedAt"`
 	ID int32 `json:"ID"`
+	ObjectBuckets []ModelsObjectBucket `json:"ObjectBuckets"`
 	UpdatedAt time.Time `json:"UpdatedAt"`
 	Ak string `json:"ak"`
 	CapBucket string `json:"cap_bucket"`
