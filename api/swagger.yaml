@@ -401,6 +401,214 @@ paths:
           description: "OK"
           schema:
             $ref: "#/definitions/models.Host"
+  /object-buckets:
+    get:
+      tags:
+      - "object-buckets"
+      summary: "get all object buckets"
+      operationId: "ListObjectBuckets"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "offset"
+        in: "query"
+        description: "offset"
+        required: false
+        type: "integer"
+        x-exportParamName: "Offset"
+        x-optionalDataType: "Int32"
+      - name: "limit"
+        in: "query"
+        description: "limit"
+        required: false
+        type: "integer"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int32"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/*models.ObjectBucket"
+    post:
+      tags:
+      - "object-buckets"
+      summary: "create an object bucket"
+      operationId: "CreateObjectBucket"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/routes.ObjectBucketRequestParams"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/models.ObjectBucket"
+  /object-buckets/{object-bucket-id}:
+    get:
+      tags:
+      - "object-buckets"
+      summary: "get an object bucket"
+      operationId: "GetObjectBucket"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "object-bucket-id"
+        in: "path"
+        description: "identifier of the object bucket"
+        required: true
+        type: "integer"
+        x-exportParamName: "ObjectBucketId"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/models.ObjectBucket"
+    delete:
+      tags:
+      - "object-buckets"
+      summary: "delete an object bucket"
+      operationId: "DeleteObjectBucket"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "object-bucket-id"
+        in: "path"
+        description: "identifier of the object bucket"
+        required: true
+        type: "integer"
+        x-exportParamName: "ObjectBucketId"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/models.ObjectBucket"
+  /object-storage-classes:
+    get:
+      tags:
+      - "object-storage-classes"
+      summary: "get all object storage classes"
+      operationId: "ListObjectStorageClasses"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "offset"
+        in: "query"
+        description: "offset"
+        required: false
+        type: "integer"
+        x-exportParamName: "Offset"
+        x-optionalDataType: "Int32"
+      - name: "limit"
+        in: "query"
+        description: "limit"
+        required: false
+        type: "integer"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int32"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/*models.ObjectStorageClass"
+    post:
+      tags:
+      - "object-storage-classes"
+      summary: "create an object storage class"
+      operationId: "CreateObjectStorageClass"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/routes.ObjectStorageClassRequestParams"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/models.ObjectStorageClass"
+  /object-storage-classes/{object-storage-class-id}:
+    get:
+      tags:
+      - "object-storage-classes"
+      summary: "get an object storage classs"
+      operationId: "GetObjectStorageClass"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "object-storage-class-id"
+        in: "path"
+        description: "identifier of the object storage class"
+        required: true
+        type: "integer"
+        x-exportParamName: "ObjectStorageClassId"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/models.ObjectStorageClass"
+    delete:
+      tags:
+      - "object-storage-classes"
+      summary: "delete an object storage class"
+      operationId: "DeleteObjectStorageClass"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "object-storage-class-id"
+        in: "path"
+        description: "identifier of the object storage class"
+        required: true
+        type: "integer"
+        x-exportParamName: "ObjectStorageClassId"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/models.ObjectStorageClass"
   /object-stores:
     get:
       tags:
@@ -727,6 +935,8 @@ definitions:
   '*models.CrushRoot': {}
   '*models.Disk': {}
   '*models.Host': {}
+  '*models.ObjectBucket': {}
+  '*models.ObjectStorageClass': {}
   '*models.ObjectStore': {}
   '*models.OsUser': {}
   '*models.Osd': {}
@@ -753,6 +963,37 @@ definitions:
     properties:
       Host:
         $ref: "#/definitions/models.Host"
+  ".object_bucket":
+    required:
+    - "max_objects"
+    - "max_size"
+    - "name"
+    - "object_storage_class_id"
+    - "os_user_id"
+    properties:
+      max_objects:
+        type: "integer"
+        format: "integer"
+      max_size:
+        type: "string"
+      name:
+        type: "string"
+      object_storage_class_id:
+        type: "integer"
+        format: "integer"
+      os_user_id:
+        type: "integer"
+        format: "integer"
+  ".object_storage_class":
+    required:
+    - "name"
+    - "object_store_id"
+    properties:
+      name:
+        type: "string"
+      object_store_id:
+        type: "integer"
+        format: "integer"
   ".object_store":
     required:
     - "data_pool"
@@ -1276,6 +1517,248 @@ definitions:
       cluster_ip: "cluster_ip"
       host_name: "host_name"
       CPUModel: "CPUModel"
+  models.ObjectBucket:
+    required:
+    - "BucketName"
+    - "CreatedAt"
+    - "DeletedAt"
+    - "Host"
+    - "ID"
+    - "MaxObjects"
+    - "MaxSize"
+    - "Name"
+    - "ObjectStorageClass"
+    - "ObjectStorageClassID"
+    - "OsUser"
+    - "OsUserID"
+    - "Port"
+    - "Region"
+    - "Status"
+    - "SubRegion"
+    - "UpdatedAt"
+    properties:
+      BucketName:
+        type: "string"
+      CreatedAt:
+        type: "string"
+        format: "date-time"
+      DeletedAt:
+        type: "string"
+      Host:
+        type: "string"
+      ID:
+        type: "integer"
+        format: "integer"
+      MaxObjects:
+        type: "integer"
+        format: "integer"
+      MaxSize:
+        type: "string"
+      Name:
+        type: "string"
+      ObjectStorageClass:
+        $ref: "#/definitions/models.ObjectStorageClass"
+      ObjectStorageClassID:
+        type: "integer"
+        format: "integer"
+      OsUser:
+        $ref: "#/definitions/models.OsUser"
+      OsUserID:
+        type: "integer"
+        format: "integer"
+      Port:
+        type: "string"
+      Region:
+        type: "string"
+      Status:
+        type: "string"
+      SubRegion:
+        type: "string"
+      UpdatedAt:
+        type: "string"
+        format: "date-time"
+    example:
+      Status: "Status"
+      OsUser:
+        object_store_id: 2
+        CreatedAt: "2000-01-23T04:56:07.000+00:00"
+        ObjectBuckets:
+        - null
+        - null
+        max_buckets: 9
+        ak: "ak"
+        object_store:
+          Status: "Status"
+          CreatedAt: "2000-01-23T04:56:07.000+00:00"
+          PreservePoolsOnDelete: true
+          ID: 5
+          DeletedAt: "DeletedAt"
+          UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+          Name: "Name"
+          PoolProperties:
+          - Type: "Type"
+            Replicated: 4
+            CreatedAt: "2000-01-23T04:56:07.000+00:00"
+            ECDataChunks: 6
+            ObjectStoreID: 1
+            CrushRootID: 1
+            ID: 7
+            DeletedAt: "DeletedAt"
+            ECCodingChunks: 1
+            UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+          - Type: "Type"
+            Replicated: 4
+            CreatedAt: "2000-01-23T04:56:07.000+00:00"
+            ECDataChunks: 6
+            ObjectStoreID: 1
+            CrushRootID: 1
+            ID: 7
+            DeletedAt: "DeletedAt"
+            ECCodingChunks: 1
+            UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+        UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+        max_size: "max_size"
+        cap_usage: "cap_usage"
+        cap_metadata: "cap_metadata"
+        max_objects: 3
+        cap_bucket: "cap_bucket"
+        name: "name"
+        sk: "sk"
+        cap_user: "cap_user"
+        cap_zone: "cap_zone"
+        ID: 7
+        DeletedAt: "DeletedAt"
+        status: "status"
+      CreatedAt: "2000-01-23T04:56:07.000+00:00"
+      Port: "Port"
+      ObjectStorageClassID: 2
+      Host: "Host"
+      MaxSize: "MaxSize"
+      UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+      MaxObjects: 6
+      Name: "Name"
+      BucketName: "BucketName"
+      OsUserID: 4
+      Region: "Region"
+      ID: 0
+      DeletedAt: "DeletedAt"
+      ObjectStorageClass:
+        Status: "Status"
+        ObjectStore:
+          Status: "Status"
+          CreatedAt: "2000-01-23T04:56:07.000+00:00"
+          PreservePoolsOnDelete: true
+          ID: 5
+          DeletedAt: "DeletedAt"
+          UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+          Name: "Name"
+          PoolProperties:
+          - Type: "Type"
+            Replicated: 4
+            CreatedAt: "2000-01-23T04:56:07.000+00:00"
+            ECDataChunks: 6
+            ObjectStoreID: 1
+            CrushRootID: 1
+            ID: 7
+            DeletedAt: "DeletedAt"
+            ECCodingChunks: 1
+            UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+          - Type: "Type"
+            Replicated: 4
+            CreatedAt: "2000-01-23T04:56:07.000+00:00"
+            ECDataChunks: 6
+            ObjectStoreID: 1
+            CrushRootID: 1
+            ID: 7
+            DeletedAt: "DeletedAt"
+            ECCodingChunks: 1
+            UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+        CreatedAt: "2000-01-23T04:56:07.000+00:00"
+        ObjectBuckets:
+        - null
+        - null
+        ObjectStoreID: 5
+        ID: 1
+        DeletedAt: "DeletedAt"
+        UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+        Name: "Name"
+      SubRegion: "SubRegion"
+  models.ObjectStorageClass:
+    required:
+    - "CreatedAt"
+    - "DeletedAt"
+    - "ID"
+    - "Name"
+    - "ObjectBuckets"
+    - "ObjectStore"
+    - "ObjectStoreID"
+    - "Status"
+    - "UpdatedAt"
+    properties:
+      CreatedAt:
+        type: "string"
+        format: "date-time"
+      DeletedAt:
+        type: "string"
+      ID:
+        type: "integer"
+        format: "integer"
+      Name:
+        type: "string"
+      ObjectBuckets:
+        type: "array"
+        items:
+          $ref: "#/definitions/models.ObjectBucket"
+      ObjectStore:
+        $ref: "#/definitions/models.ObjectStore"
+      ObjectStoreID:
+        type: "integer"
+        format: "integer"
+      Status:
+        type: "string"
+      UpdatedAt:
+        type: "string"
+        format: "date-time"
+    example:
+      Status: "Status"
+      ObjectStore:
+        Status: "Status"
+        CreatedAt: "2000-01-23T04:56:07.000+00:00"
+        PreservePoolsOnDelete: true
+        ID: 5
+        DeletedAt: "DeletedAt"
+        UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+        Name: "Name"
+        PoolProperties:
+        - Type: "Type"
+          Replicated: 4
+          CreatedAt: "2000-01-23T04:56:07.000+00:00"
+          ECDataChunks: 6
+          ObjectStoreID: 1
+          CrushRootID: 1
+          ID: 7
+          DeletedAt: "DeletedAt"
+          ECCodingChunks: 1
+          UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+        - Type: "Type"
+          Replicated: 4
+          CreatedAt: "2000-01-23T04:56:07.000+00:00"
+          ECDataChunks: 6
+          ObjectStoreID: 1
+          CrushRootID: 1
+          ID: 7
+          DeletedAt: "DeletedAt"
+          ECCodingChunks: 1
+          UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+      CreatedAt: "2000-01-23T04:56:07.000+00:00"
+      ObjectBuckets:
+      - null
+      - null
+      ObjectStoreID: 5
+      ID: 1
+      DeletedAt: "DeletedAt"
+      UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+      Name: "Name"
   models.ObjectStore:
     required:
     - "CreatedAt"
@@ -1312,7 +1795,7 @@ definitions:
       Status: "Status"
       CreatedAt: "2000-01-23T04:56:07.000+00:00"
       PreservePoolsOnDelete: true
-      ID: 0
+      ID: 5
       DeletedAt: "DeletedAt"
       UpdatedAt: "2000-01-23T04:56:07.000+00:00"
       Name: "Name"
@@ -1342,6 +1825,7 @@ definitions:
     - "CreatedAt"
     - "DeletedAt"
     - "ID"
+    - "ObjectBuckets"
     - "UpdatedAt"
     - "ak"
     - "cap_bucket"
@@ -1366,6 +1850,10 @@ definitions:
       ID:
         type: "integer"
         format: "integer"
+      ObjectBuckets:
+        type: "array"
+        items:
+          $ref: "#/definitions/models.ObjectBucket"
       UpdatedAt:
         type: "string"
         format: "date-time"
@@ -1401,15 +1889,18 @@ definitions:
       status:
         type: "string"
     example:
-      object_store_id: 5
+      object_store_id: 2
       CreatedAt: "2000-01-23T04:56:07.000+00:00"
-      max_buckets: 6
+      ObjectBuckets:
+      - null
+      - null
+      max_buckets: 9
       ak: "ak"
       object_store:
         Status: "Status"
         CreatedAt: "2000-01-23T04:56:07.000+00:00"
         PreservePoolsOnDelete: true
-        ID: 0
+        ID: 5
         DeletedAt: "DeletedAt"
         UpdatedAt: "2000-01-23T04:56:07.000+00:00"
         Name: "Name"
@@ -1438,13 +1929,13 @@ definitions:
       max_size: "max_size"
       cap_usage: "cap_usage"
       cap_metadata: "cap_metadata"
-      max_objects: 1
+      max_objects: 3
       cap_bucket: "cap_bucket"
       name: "name"
       sk: "sk"
       cap_user: "cap_user"
       cap_zone: "cap_zone"
-      ID: 0
+      ID: 7
       DeletedAt: "DeletedAt"
       status: "status"
   models.Osd:
@@ -1623,6 +2114,18 @@ definitions:
     properties:
       crush_root:
         $ref: "#/definitions/.crush_root"
+  routes.ObjectBucketRequestParams:
+    required:
+    - "object_bucket"
+    properties:
+      object_bucket:
+        $ref: "#/definitions/.object_bucket"
+  routes.ObjectStorageClassRequestParams:
+    required:
+    - "object_storage_class"
+    properties:
+      object_storage_class:
+        $ref: "#/definitions/.object_storage_class"
   routes.ObjectStoreRequestParams:
     required:
     - "object_store"
