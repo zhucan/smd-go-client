@@ -227,6 +227,13 @@ paths:
         required: true
         type: "integer"
         x-exportParamName: "CrushRootId"
+      - name: "force"
+        in: "query"
+        description: "force option will ignore errors"
+        required: false
+        type: "boolean"
+        x-exportParamName: "Force"
+        x-optionalDataType: "Bool"
       responses:
         "200":
           description: "OK"

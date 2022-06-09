@@ -119,10 +119,17 @@ func (a *CrushRootsApiService) CreateCrushRoot(ctx context.Context, body RoutesC
 CrushRootsApiService delete a crush root
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param crushRootId identifier of the crush root
+ * @param optional nil or *CrushRootsApiDeleteCrushRootOpts - Optional Parameters:
+     * @param "Force" (optional.Bool) -  force option will ignore errors
 
 @return ModelsCrushRoot
 */
-func (a *CrushRootsApiService) DeleteCrushRoot(ctx context.Context, crushRootId int32) (ModelsCrushRoot, *http.Response, error) {
+
+type CrushRootsApiDeleteCrushRootOpts struct { 
+	Force optional.Bool
+}
+
+func (a *CrushRootsApiService) DeleteCrushRoot(ctx context.Context, crushRootId int32, localVarOptionals *CrushRootsApiDeleteCrushRootOpts) (ModelsCrushRoot, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
 		localVarPostBody   interface{}
@@ -139,6 +146,9 @@ func (a *CrushRootsApiService) DeleteCrushRoot(ctx context.Context, crushRootId 
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.Force.IsSet() {
+		localVarQueryParams.Add("force", parameterToString(localVarOptionals.Force.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{"application/xml", "application/json"}
 
