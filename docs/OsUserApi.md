@@ -37,7 +37,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **DeleteOsUser**
-> DeleteOsUser(ctx, osUserId)
+> ModelsOsUser DeleteOsUser(ctx, osUserId)
 delete os user
 
 ### Required Parameters
@@ -49,7 +49,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
- (empty response body)
+[**ModelsOsUser**](models.OsUser.md)
 
 ### Authorization
 
