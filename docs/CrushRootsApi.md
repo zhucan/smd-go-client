@@ -37,7 +37,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **DeleteCrushRoot**
-> ModelsCrushRoot DeleteCrushRoot(ctx, crushRootId)
+> ModelsCrushRoot DeleteCrushRoot(ctx, crushRootId, optional)
 delete a crush root
 
 ### Required Parameters
@@ -46,6 +46,15 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **crushRootId** | **int32**| identifier of the crush root | 
+ **optional** | ***CrushRootsApiDeleteCrushRootOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a CrushRootsApiDeleteCrushRootOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **force** | **optional.Bool**| force option will ignore errors | 
 
 ### Return type
 
