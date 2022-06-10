@@ -20,7 +20,7 @@ type ModelsObjectBucket struct {
 	DeletedAt string `json:"DeletedAt"`
 	Host string `json:"Host"`
 	ID int32 `json:"ID"`
-	MaxObjects int32 `json:"MaxObjects"`
+	MaxObjects int64 `json:"MaxObjects"`
 	MaxSize string `json:"MaxSize"`
 	Name string `json:"Name"`
 	ObjectStorageClass *ModelsObjectStorageClass `json:"ObjectStorageClass"`

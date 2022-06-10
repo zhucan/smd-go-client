@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **DeletedAt** | **string** |  | [default to null]
 **Host** | **string** |  | [default to null]
 **ID** | **int32** |  | [default to null]
-**MaxObjects** | **int32** |  | [default to null]
+**MaxObjects** | **int64** |  | [default to null]
 **MaxSize** | **string** |  | [default to null]
 **Name** | **string** |  | [default to null]
 **ObjectStorageClass** | [***ModelsObjectStorageClass**](models.ObjectStorageClass.md) |  | [default to null]

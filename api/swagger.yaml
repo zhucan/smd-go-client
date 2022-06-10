@@ -974,17 +974,10 @@ definitions:
         $ref: "#/definitions/models.Host"
   ".object_bucket":
     required:
-    - "max_objects"
-    - "max_size"
     - "name"
     - "object_storage_class_id"
     - "os_user_id"
     properties:
-      max_objects:
-        type: "integer"
-        format: "integer"
-      max_size:
-        type: "string"
       name:
         type: "string"
       object_storage_class_id:
@@ -1560,7 +1553,7 @@ definitions:
         format: "integer"
       MaxObjects:
         type: "integer"
-        format: "integer"
+        format: "int64"
       MaxSize:
         type: "string"
       Name:

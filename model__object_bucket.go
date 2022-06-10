@@ -11,8 +11,6 @@
 package smdclient
 
 type ObjectBucket struct {
-	MaxObjects int32 `json:"max_objects"`
-	MaxSize string `json:"max_size"`
 	Name string `json:"name"`
 	ObjectStorageClassId int32 `json:"object_storage_class_id"`
 	OsUserId int32 `json:"os_user_id"`

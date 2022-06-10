@@ -3,8 +3,6 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**MaxObjects** | **int32** |  | [default to null]
-**MaxSize** | **string** |  | [default to null]
 **Name** | **string** |  | [default to null]
 **ObjectStorageClassId** | **int32** |  | [default to null]
 **OsUserId** | **int32** |  | [default to null]
