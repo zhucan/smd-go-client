@@ -11,5 +11,5 @@
 package smdclient
 
 type RoutesOsdsRequestParams struct {
-	Osds *Osds `json:"osds"`
+	Disks *Disks `json:"disks"`
 }

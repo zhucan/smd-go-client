@@ -15,6 +15,7 @@ import (
 )
 
 type ModelsOsd struct {
+	ClusterID int32 `json:"ClusterID"`
 	CreatedAt time.Time `json:"CreatedAt"`
 	CrushRootID int32 `json:"CrushRootID"`
 	DeletedAt string `json:"DeletedAt"`

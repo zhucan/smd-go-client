@@ -5,8 +5,9 @@ All URIs are relative to *https://localhost*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateCephCluster**](CephClustersApi.md#CreateCephCluster) | **Post** /ceph-clusters | create ceph cluster
-[**DeleteCephCluster**](CephClustersApi.md#DeleteCephCluster) | **Delete** /ceph-clusters | delete ceph cluster
-[**GetCephCluster**](CephClustersApi.md#GetCephCluster) | **Get** /ceph-clusters | get ceph cluster
+[**DeleteCephCluster**](CephClustersApi.md#DeleteCephCluster) | **Delete** /ceph-clusters/{ceph-cluster-id} | delete ceph cluster
+[**GetCephCluster**](CephClustersApi.md#GetCephCluster) | **Get** /ceph-clusters/{ceph-cluster-id} | get ceph cluster
+[**ListCephClusters**](CephClustersApi.md#ListCephClusters) | **Get** /ceph-clusters | get all ceph cluster
 
 
 # **CreateCephCluster**
@@ -36,11 +37,15 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **DeleteCephCluster**
-> ModelsCephCluster DeleteCephCluster(ctx, )
+> ModelsCephCluster DeleteCephCluster(ctx, cephClusterId)
 delete ceph cluster
 
 ### Required Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **cephClusterId** | **int32**| identifier of the ceph cluster | 
 
 ### Return type
 
@@ -58,15 +63,53 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetCephCluster**
-> ModelsCephCluster GetCephCluster(ctx, )
+> ModelsCephCluster GetCephCluster(ctx, cephClusterId)
 get ceph cluster
 
 ### Required Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **cephClusterId** | **int32**| identifier of the ceph cluster | 
 
 ### Return type
 
 [**ModelsCephCluster**](models.CephCluster.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/xml, application/json
+ - **Accept**: application/json, application/xml
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **ListCephClusters**
+> []ModelsCephCluster ListCephClusters(ctx, optional)
+get all ceph cluster
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+ **optional** | ***CephClustersApiListCephClustersOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a CephClustersApiListCephClustersOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **offset** | **optional.Int32**| offset | 
+ **limit** | **optional.Int32**| limit | 
+
+### Return type
+
+[**[]ModelsCephCluster**](*models.CephCluster.md)
 
 ### Authorization
 
