@@ -26,26 +26,26 @@ var (
 	_ context.Context
 )
 
-type CephClustersApiService service
+type PoolsApiService service
 
 /*
-CephClustersApiService create ceph cluster
+PoolsApiService create a pool
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body
 
-@return ModelsCephCluster
+@return ModelsPool
 */
-func (a *CephClustersApiService) CreateCephCluster(ctx context.Context, body RoutesCreateCephClusterRequestParams) (ModelsCephCluster, *http.Response, error) {
+func (a *PoolsApiService) CreatePool(ctx context.Context, body RoutesPoolCreateRequestParams) (ModelsPool, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue ModelsCephCluster
+		localVarReturnValue ModelsPool
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/ceph-clusters"
+	localVarPath := a.client.cfg.BasePath + "/pools"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -99,7 +99,7 @@ func (a *CephClustersApiService) CreateCephCluster(ctx context.Context, body Rou
 		}
 		
 		if localVarHttpResponse.StatusCode == 200 {
-			var v ModelsCephCluster
+			var v ModelsPool
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -116,24 +116,24 @@ func (a *CephClustersApiService) CreateCephCluster(ctx context.Context, body Rou
 }
 
 /*
-CephClustersApiService delete ceph cluster
+PoolsApiService delete a pool
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param cephClusterId identifier of the ceph cluster
+ * @param poolId identifier of the pool
 
-@return ModelsCephCluster
+@return ModelsPool
 */
-func (a *CephClustersApiService) DeleteCephCluster(ctx context.Context, cephClusterId int32) (ModelsCephCluster, *http.Response, error) {
+func (a *PoolsApiService) DeletePool(ctx context.Context, poolId int32) (ModelsPool, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue ModelsCephCluster
+		localVarReturnValue ModelsPool
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/ceph-clusters/{ceph-cluster-id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"ceph-cluster-id"+"}", fmt.Sprintf("%v", cephClusterId), -1)
+	localVarPath := a.client.cfg.BasePath + "/pools/{pool-id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"pool-id"+"}", fmt.Sprintf("%v", poolId), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -185,7 +185,7 @@ func (a *CephClustersApiService) DeleteCephCluster(ctx context.Context, cephClus
 		}
 		
 		if localVarHttpResponse.StatusCode == 200 {
-			var v ModelsCephCluster
+			var v ModelsPool
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -202,24 +202,24 @@ func (a *CephClustersApiService) DeleteCephCluster(ctx context.Context, cephClus
 }
 
 /*
-CephClustersApiService get ceph cluster
+PoolsApiService get a pool
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param cephClusterId identifier of the ceph cluster
+ * @param poolId identifier of the pool
 
-@return ModelsCephCluster
+@return ModelsPool
 */
-func (a *CephClustersApiService) GetCephCluster(ctx context.Context, cephClusterId int32) (ModelsCephCluster, *http.Response, error) {
+func (a *PoolsApiService) GetPool(ctx context.Context, poolId int32) (ModelsPool, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue ModelsCephCluster
+		localVarReturnValue ModelsPool
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/ceph-clusters/{ceph-cluster-id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"ceph-cluster-id"+"}", fmt.Sprintf("%v", cephClusterId), -1)
+	localVarPath := a.client.cfg.BasePath + "/pools/{pool-id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"pool-id"+"}", fmt.Sprintf("%v", poolId), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -271,7 +271,7 @@ func (a *CephClustersApiService) GetCephCluster(ctx context.Context, cephCluster
 		}
 		
 		if localVarHttpResponse.StatusCode == 200 {
-			var v ModelsCephCluster
+			var v ModelsPool
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -288,31 +288,31 @@ func (a *CephClustersApiService) GetCephCluster(ctx context.Context, cephCluster
 }
 
 /*
-CephClustersApiService get all ceph cluster
+PoolsApiService get all pools
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *CephClustersApiListCephClustersOpts - Optional Parameters:
+ * @param optional nil or *PoolsApiListPoolsOpts - Optional Parameters:
      * @param "Offset" (optional.Int32) -  offset
      * @param "Limit" (optional.Int32) -  limit
 
-@return []ModelsCephCluster
+@return []ModelsPool
 */
 
-type CephClustersApiListCephClustersOpts struct { 
+type PoolsApiListPoolsOpts struct { 
 	Offset optional.Int32
 	Limit optional.Int32
 }
 
-func (a *CephClustersApiService) ListCephClusters(ctx context.Context, localVarOptionals *CephClustersApiListCephClustersOpts) ([]ModelsCephCluster, *http.Response, error) {
+func (a *PoolsApiService) ListPools(ctx context.Context, localVarOptionals *PoolsApiListPoolsOpts) ([]ModelsPool, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue []ModelsCephCluster
+		localVarReturnValue []ModelsPool
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/ceph-clusters"
+	localVarPath := a.client.cfg.BasePath + "/pools"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -370,7 +370,7 @@ func (a *CephClustersApiService) ListCephClusters(ctx context.Context, localVarO
 		}
 		
 		if localVarHttpResponse.StatusCode == 200 {
-			var v []ModelsCephCluster
+			var v []ModelsPool
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()

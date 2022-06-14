@@ -11,5 +11,5 @@
 package smdclient
 
 type Osds struct {
-	DiskIds []int32 `json:"disk_ids"`
+	OsdIds []int32 `json:"osd_ids"`
 }

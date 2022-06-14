@@ -20,6 +20,7 @@ type ModelsObjectStore struct {
 	ID int32 `json:"ID"`
 	Name string `json:"Name"`
 	PoolProperties []ModelsPoolProperty `json:"PoolProperties"`
+	Port int32 `json:"Port"`
 	PreservePoolsOnDelete bool `json:"PreservePoolsOnDelete"`
 	Status string `json:"Status"`
 	UpdatedAt time.Time `json:"UpdatedAt"`

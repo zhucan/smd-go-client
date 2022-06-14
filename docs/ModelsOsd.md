@@ -3,6 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClusterID** | **int32** |  | [default to null]
 **CreatedAt** | [**time.Time**](time.Time.md) |  | [default to null]
 **CrushRootID** | **int32** |  | [default to null]
 **DeletedAt** | **string** |  | [default to null]

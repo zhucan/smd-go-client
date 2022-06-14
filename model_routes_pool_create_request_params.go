@@ -10,7 +10,6 @@
 
 package smdclient
 
-type CephCluster struct {
-	Name string `json:"name"`
-	Namespace string `json:"namespace"`
+type RoutesPoolCreateRequestParams struct {
+	Pool *Pool `json:"pool"`
 }

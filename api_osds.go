@@ -116,13 +116,13 @@ func (a *OsdsApiService) CreateOsds(ctx context.Context, body RoutesOsdsRequestP
 }
 
 /*
-OsdsApiService delete osds
+OsdsApiService delete osds from specific ceph cluster
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body
 
 @return []ModelsOsd
 */
-func (a *OsdsApiService) DeleteOsds(ctx context.Context, body RoutesOsdsRequestParams) ([]ModelsOsd, *http.Response, error) {
+func (a *OsdsApiService) DeleteOsds(ctx context.Context, body RoutesOsdsDeleteParams) ([]ModelsOsd, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
 		localVarPostBody   interface{}

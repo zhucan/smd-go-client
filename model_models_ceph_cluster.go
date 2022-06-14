@@ -19,6 +19,8 @@ type ModelsCephCluster struct {
 	DeletedAt string `json:"DeletedAt"`
 	ID int32 `json:"ID"`
 	Name string `json:"Name"`
+	Namespace string `json:"Namespace"`
+	Osds []ModelsOsd `json:"Osds"`
 	State string `json:"State"`
 	Status string `json:"Status"`
 	UpdatedAt time.Time `json:"UpdatedAt"`

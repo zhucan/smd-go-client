@@ -74,20 +74,36 @@ paths:
     get:
       tags:
       - "ceph-clusters"
-      summary: "get ceph cluster"
-      operationId: "GetCephCluster"
+      summary: "get all ceph cluster"
+      operationId: "ListCephClusters"
       consumes:
       - "application/xml"
       - "application/json"
       produces:
       - "application/json"
       - "application/xml"
-      parameters: []
+      parameters:
+      - name: "offset"
+        in: "query"
+        description: "offset"
+        required: false
+        type: "integer"
+        x-exportParamName: "Offset"
+        x-optionalDataType: "Int32"
+      - name: "limit"
+        in: "query"
+        description: "limit"
+        required: false
+        type: "integer"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int32"
       responses:
         "200":
           description: "OK"
           schema:
-            $ref: "#/definitions/models.CephCluster"
+            type: "array"
+            items:
+              $ref: "#/definitions/*models.CephCluster"
     post:
       tags:
       - "ceph-clusters"
@@ -111,6 +127,30 @@ paths:
           description: "OK"
           schema:
             $ref: "#/definitions/models.CephCluster"
+  /ceph-clusters/{ceph-cluster-id}:
+    get:
+      tags:
+      - "ceph-clusters"
+      summary: "get ceph cluster"
+      operationId: "GetCephCluster"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "ceph-cluster-id"
+        in: "path"
+        description: "identifier of the ceph cluster"
+        required: true
+        type: "integer"
+        x-exportParamName: "CephClusterId"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/models.CephCluster"
     delete:
       tags:
       - "ceph-clusters"
@@ -122,7 +162,13 @@ paths:
       produces:
       - "application/json"
       - "application/xml"
-      parameters: []
+      parameters:
+      - name: "ceph-cluster-id"
+        in: "path"
+        description: "identifier of the ceph cluster"
+        required: true
+        type: "integer"
+        x-exportParamName: "CephClusterId"
       responses:
         "200":
           description: "OK"
@@ -893,7 +939,7 @@ paths:
     delete:
       tags:
       - "osds"
-      summary: "delete osds"
+      summary: "delete osds from specific ceph cluster"
       operationId: "DeleteOsds"
       consumes:
       - "application/xml"
@@ -906,7 +952,7 @@ paths:
         name: "body"
         required: true
         schema:
-          $ref: "#/definitions/routes.OsdsRequestParams"
+          $ref: "#/definitions/routes.OsdsDeleteParams"
         x-exportParamName: "Body"
       responses:
         "200":
@@ -939,8 +985,113 @@ paths:
           description: "OK"
           schema:
             $ref: "#/definitions/models.Osd"
+  /pools:
+    get:
+      tags:
+      - "pools"
+      summary: "get all pools"
+      operationId: "ListPools"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "offset"
+        in: "query"
+        description: "offset"
+        required: false
+        type: "integer"
+        x-exportParamName: "Offset"
+        x-optionalDataType: "Int32"
+      - name: "limit"
+        in: "query"
+        description: "limit"
+        required: false
+        type: "integer"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int32"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/*models.Pool"
+    post:
+      tags:
+      - "pools"
+      summary: "create a pool"
+      operationId: "CreatePool"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/routes.PoolCreateRequestParams"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/models.Pool"
+  /pools/{pool-id}:
+    get:
+      tags:
+      - "pools"
+      summary: "get a pool"
+      operationId: "GetPool"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "pool-id"
+        in: "path"
+        description: "identifier of the pool"
+        required: true
+        type: "integer"
+        x-exportParamName: "PoolId"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/models.Pool"
+    delete:
+      tags:
+      - "pools"
+      summary: "delete a pool"
+      operationId: "DeletePool"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "pool-id"
+        in: "path"
+        description: "identifier of the pool"
+        required: true
+        type: "integer"
+        x-exportParamName: "PoolId"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/models.Pool"
 definitions:
   '*models.ActionLog': {}
+  '*models.CephCluster': {}
   '*models.CrushRoot': {}
   '*models.Disk': {}
   '*models.Host': {}
@@ -949,11 +1100,15 @@ definitions:
   '*models.ObjectStore': {}
   '*models.OsUser': {}
   '*models.Osd': {}
+  '*models.Pool': {}
   ".ceph_cluster":
     required:
     - "name"
+    - "namespace"
     properties:
       name:
+        type: "string"
+      namespace:
         type: "string"
   ".crush_root":
     required:
@@ -963,6 +1118,18 @@ definitions:
       name:
         type: "string"
       osd_ids:
+        type: "array"
+        items:
+          type: "integer"
+  ".disks":
+    required:
+    - "cluster_id"
+    - "disk_ids"
+    properties:
+      cluster_id:
+        type: "integer"
+        format: "integer"
+      disk_ids:
         type: "array"
         items:
           type: "integer"
@@ -1002,6 +1169,7 @@ definitions:
     - "gateway_instances"
     - "metadata_pool"
     - "name"
+    - "port"
     - "preserve_pools_on_delete"
     properties:
       data_pool:
@@ -1013,6 +1181,9 @@ definitions:
         $ref: "#/definitions/routes.PoolRequestParams"
       name:
         type: "string"
+      port:
+        type: "integer"
+        format: "integer"
       preserve_pools_on_delete:
         type: "boolean"
   ".os_user":
@@ -1053,12 +1224,21 @@ definitions:
         type: "string"
   ".osds":
     required:
-    - "disk_ids"
+    - "osd_ids"
     properties:
-      disk_ids:
+      osd_ids:
         type: "array"
         items:
           type: "integer"
+  ".pool":
+    required:
+    - "name"
+    - "type"
+    properties:
+      name:
+        type: "string"
+      type:
+        type: "string"
   gorm.Model:
     required:
     - "CreatedAt"
@@ -1134,6 +1314,8 @@ definitions:
     - "DeletedAt"
     - "ID"
     - "Name"
+    - "Namespace"
+    - "Osds"
     - "State"
     - "Status"
     - "UpdatedAt"
@@ -1148,6 +1330,12 @@ definitions:
         format: "integer"
       Name:
         type: "string"
+      Namespace:
+        type: "string"
+      Osds:
+        type: "array"
+        items:
+          $ref: "#/definitions/models.Osd"
       State:
         type: "string"
       Status:
@@ -1157,11 +1345,117 @@ definitions:
         format: "date-time"
     example:
       Status: "Status"
+      Osds:
+      - Status: "Status"
+        ClusterID: 6
+        In: true
+        CreatedAt: "2000-01-23T04:56:07.000+00:00"
+        UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+        Name: "Name"
+        OsdID: 1
+        CrushRootID: 1
+        ID: 7
+        Up: true
+        DeletedAt: "DeletedAt"
+        Disk:
+          DeviceModel: "DeviceModel"
+          IsRoot: true
+          MBytes: 2
+          Encrypted: true
+          CreatedAt: "2000-01-23T04:56:07.000+00:00"
+          Host:
+            public_ip: "public_ip"
+            OS: "OS"
+            CreatedAt: "2000-01-23T04:56:07.000+00:00"
+            Vendor: "Vendor"
+            admin_ip: "admin_ip"
+            UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+            Cores: 5
+            HostModel: "HostModel"
+            Serial: "Serial"
+            Type: "Type"
+            CPUs: 5
+            MemoryMB: 7
+            ID: 2
+            DeletedAt: "DeletedAt"
+            cluster_ip: "cluster_ip"
+            host_name: "host_name"
+            CPUModel: "CPUModel"
+          Vendor: "Vendor"
+          HostID: 9
+          Rotational: true
+          UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+          Name: "Name"
+          WWN: "WWN"
+          PathID: "PathID"
+          RealPath: "RealPath"
+          HasChildren: true
+          Empty: true
+          Serial: "Serial"
+          Type: "Type"
+          ID: 3
+          DeletedAt: "DeletedAt"
+          Filesystem: "Filesystem"
+          UUID: "UUID"
+        DiskID: 4
+      - Status: "Status"
+        ClusterID: 6
+        In: true
+        CreatedAt: "2000-01-23T04:56:07.000+00:00"
+        UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+        Name: "Name"
+        OsdID: 1
+        CrushRootID: 1
+        ID: 7
+        Up: true
+        DeletedAt: "DeletedAt"
+        Disk:
+          DeviceModel: "DeviceModel"
+          IsRoot: true
+          MBytes: 2
+          Encrypted: true
+          CreatedAt: "2000-01-23T04:56:07.000+00:00"
+          Host:
+            public_ip: "public_ip"
+            OS: "OS"
+            CreatedAt: "2000-01-23T04:56:07.000+00:00"
+            Vendor: "Vendor"
+            admin_ip: "admin_ip"
+            UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+            Cores: 5
+            HostModel: "HostModel"
+            Serial: "Serial"
+            Type: "Type"
+            CPUs: 5
+            MemoryMB: 7
+            ID: 2
+            DeletedAt: "DeletedAt"
+            cluster_ip: "cluster_ip"
+            host_name: "host_name"
+            CPUModel: "CPUModel"
+          Vendor: "Vendor"
+          HostID: 9
+          Rotational: true
+          UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+          Name: "Name"
+          WWN: "WWN"
+          PathID: "PathID"
+          RealPath: "RealPath"
+          HasChildren: true
+          Empty: true
+          Serial: "Serial"
+          Type: "Type"
+          ID: 3
+          DeletedAt: "DeletedAt"
+          Filesystem: "Filesystem"
+          UUID: "UUID"
+        DiskID: 4
       State: "State"
       CreatedAt: "2000-01-23T04:56:07.000+00:00"
       ID: 0
       DeletedAt: "DeletedAt"
       UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+      Namespace: "Namespace"
       Name: "Name"
   models.CrushRoot:
     required:
@@ -1203,21 +1497,24 @@ definitions:
         type: "string"
         format: "date-time"
     example:
-      ParentID: 1
+      ParentID: 6
       Status: "Status"
       Osds:
       - Status: "Status"
-        OsdID: 7
+        ClusterID: 6
         In: true
         CreatedAt: "2000-01-23T04:56:07.000+00:00"
-        CrushRootID: 6
-        ID: 4
+        UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+        Name: "Name"
+        OsdID: 1
+        CrushRootID: 1
+        ID: 7
         Up: true
         DeletedAt: "DeletedAt"
         Disk:
           DeviceModel: "DeviceModel"
           IsRoot: true
-          MBytes: 3
+          MBytes: 2
           Encrypted: true
           CreatedAt: "2000-01-23T04:56:07.000+00:00"
           Host:
@@ -1231,15 +1528,15 @@ definitions:
             HostModel: "HostModel"
             Serial: "Serial"
             Type: "Type"
-            CPUs: 1
-            MemoryMB: 2
-            ID: 5
+            CPUs: 5
+            MemoryMB: 7
+            ID: 2
             DeletedAt: "DeletedAt"
             cluster_ip: "cluster_ip"
             host_name: "host_name"
             CPUModel: "CPUModel"
           Vendor: "Vendor"
-          HostID: 7
+          HostID: 9
           Rotational: true
           UpdatedAt: "2000-01-23T04:56:07.000+00:00"
           Name: "Name"
@@ -1250,25 +1547,26 @@ definitions:
           Empty: true
           Serial: "Serial"
           Type: "Type"
-          ID: 9
+          ID: 3
           DeletedAt: "DeletedAt"
           Filesystem: "Filesystem"
           UUID: "UUID"
-        UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-        DiskID: 2
-        Name: "Name"
+        DiskID: 4
       - Status: "Status"
-        OsdID: 7
+        ClusterID: 6
         In: true
         CreatedAt: "2000-01-23T04:56:07.000+00:00"
-        CrushRootID: 6
-        ID: 4
+        UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+        Name: "Name"
+        OsdID: 1
+        CrushRootID: 1
+        ID: 7
         Up: true
         DeletedAt: "DeletedAt"
         Disk:
           DeviceModel: "DeviceModel"
           IsRoot: true
-          MBytes: 3
+          MBytes: 2
           Encrypted: true
           CreatedAt: "2000-01-23T04:56:07.000+00:00"
           Host:
@@ -1282,15 +1580,15 @@ definitions:
             HostModel: "HostModel"
             Serial: "Serial"
             Type: "Type"
-            CPUs: 1
-            MemoryMB: 2
-            ID: 5
+            CPUs: 5
+            MemoryMB: 7
+            ID: 2
             DeletedAt: "DeletedAt"
             cluster_ip: "cluster_ip"
             host_name: "host_name"
             CPUModel: "CPUModel"
           Vendor: "Vendor"
-          HostID: 7
+          HostID: 9
           Rotational: true
           UpdatedAt: "2000-01-23T04:56:07.000+00:00"
           Name: "Name"
@@ -1301,26 +1599,24 @@ definitions:
           Empty: true
           Serial: "Serial"
           Type: "Type"
-          ID: 9
+          ID: 3
           DeletedAt: "DeletedAt"
           Filesystem: "Filesystem"
           UUID: "UUID"
-        UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-        DiskID: 2
-        Name: "Name"
+        DiskID: 4
       CreatedAt: "2000-01-23T04:56:07.000+00:00"
       ID: 0
       DeletedAt: "DeletedAt"
       PoolProperty:
         Type: "Type"
-        Replicated: 4
+        Replicated: 9
         CreatedAt: "2000-01-23T04:56:07.000+00:00"
-        ECDataChunks: 6
-        ObjectStoreID: 1
+        ECDataChunks: 5
+        ObjectStoreID: 7
         CrushRootID: 1
-        ID: 7
+        ID: 2
         DeletedAt: "DeletedAt"
-        ECCodingChunks: 1
+        ECCodingChunks: 5
         UpdatedAt: "2000-01-23T04:56:07.000+00:00"
       UpdatedAt: "2000-01-23T04:56:07.000+00:00"
       Name: "Name"
@@ -1404,7 +1700,7 @@ definitions:
     example:
       DeviceModel: "DeviceModel"
       IsRoot: true
-      MBytes: 3
+      MBytes: 2
       Encrypted: true
       CreatedAt: "2000-01-23T04:56:07.000+00:00"
       Host:
@@ -1418,15 +1714,15 @@ definitions:
         HostModel: "HostModel"
         Serial: "Serial"
         Type: "Type"
-        CPUs: 1
-        MemoryMB: 2
-        ID: 5
+        CPUs: 5
+        MemoryMB: 7
+        ID: 2
         DeletedAt: "DeletedAt"
         cluster_ip: "cluster_ip"
         host_name: "host_name"
         CPUModel: "CPUModel"
       Vendor: "Vendor"
-      HostID: 7
+      HostID: 9
       Rotational: true
       UpdatedAt: "2000-01-23T04:56:07.000+00:00"
       Name: "Name"
@@ -1437,7 +1733,7 @@ definitions:
       Empty: true
       Serial: "Serial"
       Type: "Type"
-      ID: 9
+      ID: 3
       DeletedAt: "DeletedAt"
       Filesystem: "Filesystem"
       UUID: "UUID"
@@ -1512,9 +1808,9 @@ definitions:
       HostModel: "HostModel"
       Serial: "Serial"
       Type: "Type"
-      CPUs: 1
-      MemoryMB: 2
-      ID: 5
+      CPUs: 5
+      MemoryMB: 7
+      ID: 2
       DeletedAt: "DeletedAt"
       cluster_ip: "cluster_ip"
       host_name: "host_name"
@@ -1582,16 +1878,17 @@ definitions:
     example:
       Status: "Status"
       OsUser:
-        object_store_id: 2
+        object_store_id: 4
         CreatedAt: "2000-01-23T04:56:07.000+00:00"
         ObjectBuckets:
         - null
         - null
-        max_buckets: 9
+        max_buckets: 3
         ak: "ak"
         object_store:
           Status: "Status"
           CreatedAt: "2000-01-23T04:56:07.000+00:00"
+          Port: 5
           PreservePoolsOnDelete: true
           ID: 5
           DeletedAt: "DeletedAt"
@@ -1599,48 +1896,48 @@ definitions:
           Name: "Name"
           PoolProperties:
           - Type: "Type"
-            Replicated: 4
+            Replicated: 9
             CreatedAt: "2000-01-23T04:56:07.000+00:00"
-            ECDataChunks: 6
-            ObjectStoreID: 1
+            ECDataChunks: 5
+            ObjectStoreID: 7
             CrushRootID: 1
-            ID: 7
+            ID: 2
             DeletedAt: "DeletedAt"
-            ECCodingChunks: 1
+            ECCodingChunks: 5
             UpdatedAt: "2000-01-23T04:56:07.000+00:00"
           - Type: "Type"
-            Replicated: 4
+            Replicated: 9
             CreatedAt: "2000-01-23T04:56:07.000+00:00"
-            ECDataChunks: 6
-            ObjectStoreID: 1
+            ECDataChunks: 5
+            ObjectStoreID: 7
             CrushRootID: 1
-            ID: 7
+            ID: 2
             DeletedAt: "DeletedAt"
-            ECCodingChunks: 1
+            ECCodingChunks: 5
             UpdatedAt: "2000-01-23T04:56:07.000+00:00"
         UpdatedAt: "2000-01-23T04:56:07.000+00:00"
         max_size: "max_size"
         cap_usage: "cap_usage"
         cap_metadata: "cap_metadata"
-        max_objects: 3
+        max_objects: 2
         cap_bucket: "cap_bucket"
         name: "name"
         sk: "sk"
         cap_user: "cap_user"
         cap_zone: "cap_zone"
-        ID: 7
+        ID: 9
         DeletedAt: "DeletedAt"
         status: "status"
       CreatedAt: "2000-01-23T04:56:07.000+00:00"
       Port: "Port"
-      ObjectStorageClassID: 2
+      ObjectStorageClassID: 7
       Host: "Host"
       MaxSize: "MaxSize"
       UpdatedAt: "2000-01-23T04:56:07.000+00:00"
       MaxObjects: 6
       Name: "Name"
       BucketName: "BucketName"
-      OsUserID: 4
+      OsUserID: 7
       Region: "Region"
       ID: 0
       DeletedAt: "DeletedAt"
@@ -1649,6 +1946,7 @@ definitions:
         ObjectStore:
           Status: "Status"
           CreatedAt: "2000-01-23T04:56:07.000+00:00"
+          Port: 5
           PreservePoolsOnDelete: true
           ID: 5
           DeletedAt: "DeletedAt"
@@ -1656,30 +1954,30 @@ definitions:
           Name: "Name"
           PoolProperties:
           - Type: "Type"
-            Replicated: 4
+            Replicated: 9
             CreatedAt: "2000-01-23T04:56:07.000+00:00"
-            ECDataChunks: 6
-            ObjectStoreID: 1
+            ECDataChunks: 5
+            ObjectStoreID: 7
             CrushRootID: 1
-            ID: 7
+            ID: 2
             DeletedAt: "DeletedAt"
-            ECCodingChunks: 1
+            ECCodingChunks: 5
             UpdatedAt: "2000-01-23T04:56:07.000+00:00"
           - Type: "Type"
-            Replicated: 4
+            Replicated: 9
             CreatedAt: "2000-01-23T04:56:07.000+00:00"
-            ECDataChunks: 6
-            ObjectStoreID: 1
+            ECDataChunks: 5
+            ObjectStoreID: 7
             CrushRootID: 1
-            ID: 7
+            ID: 2
             DeletedAt: "DeletedAt"
-            ECCodingChunks: 1
+            ECCodingChunks: 5
             UpdatedAt: "2000-01-23T04:56:07.000+00:00"
         CreatedAt: "2000-01-23T04:56:07.000+00:00"
         ObjectBuckets:
         - null
         - null
-        ObjectStoreID: 5
+        ObjectStoreID: 2
         ID: 1
         DeletedAt: "DeletedAt"
         UpdatedAt: "2000-01-23T04:56:07.000+00:00"
@@ -1726,6 +2024,7 @@ definitions:
       ObjectStore:
         Status: "Status"
         CreatedAt: "2000-01-23T04:56:07.000+00:00"
+        Port: 5
         PreservePoolsOnDelete: true
         ID: 5
         DeletedAt: "DeletedAt"
@@ -1733,30 +2032,30 @@ definitions:
         Name: "Name"
         PoolProperties:
         - Type: "Type"
-          Replicated: 4
+          Replicated: 9
           CreatedAt: "2000-01-23T04:56:07.000+00:00"
-          ECDataChunks: 6
-          ObjectStoreID: 1
+          ECDataChunks: 5
+          ObjectStoreID: 7
           CrushRootID: 1
-          ID: 7
+          ID: 2
           DeletedAt: "DeletedAt"
-          ECCodingChunks: 1
+          ECCodingChunks: 5
           UpdatedAt: "2000-01-23T04:56:07.000+00:00"
         - Type: "Type"
-          Replicated: 4
+          Replicated: 9
           CreatedAt: "2000-01-23T04:56:07.000+00:00"
-          ECDataChunks: 6
-          ObjectStoreID: 1
+          ECDataChunks: 5
+          ObjectStoreID: 7
           CrushRootID: 1
-          ID: 7
+          ID: 2
           DeletedAt: "DeletedAt"
-          ECCodingChunks: 1
+          ECCodingChunks: 5
           UpdatedAt: "2000-01-23T04:56:07.000+00:00"
       CreatedAt: "2000-01-23T04:56:07.000+00:00"
       ObjectBuckets:
       - null
       - null
-      ObjectStoreID: 5
+      ObjectStoreID: 2
       ID: 1
       DeletedAt: "DeletedAt"
       UpdatedAt: "2000-01-23T04:56:07.000+00:00"
@@ -1768,6 +2067,7 @@ definitions:
     - "ID"
     - "Name"
     - "PoolProperties"
+    - "Port"
     - "PreservePoolsOnDelete"
     - "Status"
     - "UpdatedAt"
@@ -1786,6 +2086,9 @@ definitions:
         type: "array"
         items:
           $ref: "#/definitions/models.PoolProperty"
+      Port:
+        type: "integer"
+        format: "integer"
       PreservePoolsOnDelete:
         type: "boolean"
       Status:
@@ -1796,6 +2099,7 @@ definitions:
     example:
       Status: "Status"
       CreatedAt: "2000-01-23T04:56:07.000+00:00"
+      Port: 5
       PreservePoolsOnDelete: true
       ID: 5
       DeletedAt: "DeletedAt"
@@ -1803,24 +2107,24 @@ definitions:
       Name: "Name"
       PoolProperties:
       - Type: "Type"
-        Replicated: 4
+        Replicated: 9
         CreatedAt: "2000-01-23T04:56:07.000+00:00"
-        ECDataChunks: 6
-        ObjectStoreID: 1
+        ECDataChunks: 5
+        ObjectStoreID: 7
         CrushRootID: 1
-        ID: 7
+        ID: 2
         DeletedAt: "DeletedAt"
-        ECCodingChunks: 1
+        ECCodingChunks: 5
         UpdatedAt: "2000-01-23T04:56:07.000+00:00"
       - Type: "Type"
-        Replicated: 4
+        Replicated: 9
         CreatedAt: "2000-01-23T04:56:07.000+00:00"
-        ECDataChunks: 6
-        ObjectStoreID: 1
+        ECDataChunks: 5
+        ObjectStoreID: 7
         CrushRootID: 1
-        ID: 7
+        ID: 2
         DeletedAt: "DeletedAt"
-        ECCodingChunks: 1
+        ECCodingChunks: 5
         UpdatedAt: "2000-01-23T04:56:07.000+00:00"
   models.OsUser:
     required:
@@ -1891,16 +2195,17 @@ definitions:
       status:
         type: "string"
     example:
-      object_store_id: 2
+      object_store_id: 4
       CreatedAt: "2000-01-23T04:56:07.000+00:00"
       ObjectBuckets:
       - null
       - null
-      max_buckets: 9
+      max_buckets: 3
       ak: "ak"
       object_store:
         Status: "Status"
         CreatedAt: "2000-01-23T04:56:07.000+00:00"
+        Port: 5
         PreservePoolsOnDelete: true
         ID: 5
         DeletedAt: "DeletedAt"
@@ -1908,40 +2213,41 @@ definitions:
         Name: "Name"
         PoolProperties:
         - Type: "Type"
-          Replicated: 4
+          Replicated: 9
           CreatedAt: "2000-01-23T04:56:07.000+00:00"
-          ECDataChunks: 6
-          ObjectStoreID: 1
+          ECDataChunks: 5
+          ObjectStoreID: 7
           CrushRootID: 1
-          ID: 7
+          ID: 2
           DeletedAt: "DeletedAt"
-          ECCodingChunks: 1
+          ECCodingChunks: 5
           UpdatedAt: "2000-01-23T04:56:07.000+00:00"
         - Type: "Type"
-          Replicated: 4
+          Replicated: 9
           CreatedAt: "2000-01-23T04:56:07.000+00:00"
-          ECDataChunks: 6
-          ObjectStoreID: 1
+          ECDataChunks: 5
+          ObjectStoreID: 7
           CrushRootID: 1
-          ID: 7
+          ID: 2
           DeletedAt: "DeletedAt"
-          ECCodingChunks: 1
+          ECCodingChunks: 5
           UpdatedAt: "2000-01-23T04:56:07.000+00:00"
       UpdatedAt: "2000-01-23T04:56:07.000+00:00"
       max_size: "max_size"
       cap_usage: "cap_usage"
       cap_metadata: "cap_metadata"
-      max_objects: 3
+      max_objects: 2
       cap_bucket: "cap_bucket"
       name: "name"
       sk: "sk"
       cap_user: "cap_user"
       cap_zone: "cap_zone"
-      ID: 7
+      ID: 9
       DeletedAt: "DeletedAt"
       status: "status"
   models.Osd:
     required:
+    - "ClusterID"
     - "CreatedAt"
     - "CrushRootID"
     - "DeletedAt"
@@ -1955,6 +2261,9 @@ definitions:
     - "Up"
     - "UpdatedAt"
     properties:
+      ClusterID:
+        type: "integer"
+        format: "integer"
       CreatedAt:
         type: "string"
         format: "date-time"
@@ -1987,17 +2296,20 @@ definitions:
         format: "date-time"
     example:
       Status: "Status"
-      OsdID: 7
+      ClusterID: 6
       In: true
       CreatedAt: "2000-01-23T04:56:07.000+00:00"
-      CrushRootID: 6
-      ID: 4
+      UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+      Name: "Name"
+      OsdID: 1
+      CrushRootID: 1
+      ID: 7
       Up: true
       DeletedAt: "DeletedAt"
       Disk:
         DeviceModel: "DeviceModel"
         IsRoot: true
-        MBytes: 3
+        MBytes: 2
         Encrypted: true
         CreatedAt: "2000-01-23T04:56:07.000+00:00"
         Host:
@@ -2011,15 +2323,15 @@ definitions:
           HostModel: "HostModel"
           Serial: "Serial"
           Type: "Type"
-          CPUs: 1
-          MemoryMB: 2
-          ID: 5
+          CPUs: 5
+          MemoryMB: 7
+          ID: 2
           DeletedAt: "DeletedAt"
           cluster_ip: "cluster_ip"
           host_name: "host_name"
           CPUModel: "CPUModel"
         Vendor: "Vendor"
-        HostID: 7
+        HostID: 9
         Rotational: true
         UpdatedAt: "2000-01-23T04:56:07.000+00:00"
         Name: "Name"
@@ -2030,12 +2342,67 @@ definitions:
         Empty: true
         Serial: "Serial"
         Type: "Type"
-        ID: 9
+        ID: 3
         DeletedAt: "DeletedAt"
         Filesystem: "Filesystem"
         UUID: "UUID"
+      DiskID: 4
+  models.Pool:
+    required:
+    - "CreatedAt"
+    - "DeletedAt"
+    - "ErasureCodeProfile"
+    - "ID"
+    - "Name"
+    - "PgAutoscaleMode"
+    - "PgNum"
+    - "PoolID"
+    - "PoolName"
+    - "Status"
+    - "Type"
+    - "UpdatedAt"
+    properties:
+      CreatedAt:
+        type: "string"
+        format: "date-time"
+      DeletedAt:
+        type: "string"
+      ErasureCodeProfile:
+        type: "string"
+      ID:
+        type: "integer"
+        format: "integer"
+      Name:
+        type: "string"
+      PgAutoscaleMode:
+        type: "boolean"
+      PgNum:
+        type: "integer"
+        format: "int64"
+      PoolID:
+        type: "integer"
+        format: "int32"
+      PoolName:
+        type: "string"
+      Status:
+        type: "string"
+      Type:
+        type: "string"
+      UpdatedAt:
+        type: "string"
+        format: "date-time"
+    example:
+      Status: "Status"
+      Type: "Type"
+      PoolID: 1
+      PoolName: "PoolName"
+      CreatedAt: "2000-01-23T04:56:07.000+00:00"
+      ErasureCodeProfile: "ErasureCodeProfile"
+      PgNum: 6
+      ID: 0
+      DeletedAt: "DeletedAt"
       UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-      DiskID: 2
+      PgAutoscaleMode: true
       Name: "Name"
   models.PoolProperty:
     required:
@@ -2083,14 +2450,14 @@ definitions:
         format: "date-time"
     example:
       Type: "Type"
-      Replicated: 4
+      Replicated: 9
       CreatedAt: "2000-01-23T04:56:07.000+00:00"
-      ECDataChunks: 6
-      ObjectStoreID: 1
+      ECDataChunks: 5
+      ObjectStoreID: 7
       CrushRootID: 1
-      ID: 7
+      ID: 2
       DeletedAt: "DeletedAt"
-      ECCodingChunks: 1
+      ECCodingChunks: 5
       UpdatedAt: "2000-01-23T04:56:07.000+00:00"
   routes.CreateCephClusterRequestParams:
     required:
@@ -2134,12 +2501,24 @@ definitions:
     properties:
       object_store:
         $ref: "#/definitions/.object_store"
-  routes.OsdsRequestParams:
+  routes.OsdsDeleteParams:
     required:
     - "osds"
     properties:
       osds:
         $ref: "#/definitions/.osds"
+  routes.OsdsRequestParams:
+    required:
+    - "disks"
+    properties:
+      disks:
+        $ref: "#/definitions/.disks"
+  routes.PoolCreateRequestParams:
+    required:
+    - "pool"
+    properties:
+      pool:
+        $ref: "#/definitions/.pool"
   routes.PoolRequestParams:
     required:
     - "crush_root_id"

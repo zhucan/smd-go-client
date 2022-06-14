@@ -25,8 +25,9 @@ Class | Method | HTTP request | Description
 *ActionLogsApi* | [**GetActionLog**](docs/ActionLogsApi.md#getactionlog) | **Get** /action_logs/{log-id} | get a action log
 *ActionLogsApi* | [**ListActionLogs**](docs/ActionLogsApi.md#listactionlogs) | **Get** /action_logs | get all action logs
 *CephClustersApi* | [**CreateCephCluster**](docs/CephClustersApi.md#createcephcluster) | **Post** /ceph-clusters | create ceph cluster
-*CephClustersApi* | [**DeleteCephCluster**](docs/CephClustersApi.md#deletecephcluster) | **Delete** /ceph-clusters | delete ceph cluster
-*CephClustersApi* | [**GetCephCluster**](docs/CephClustersApi.md#getcephcluster) | **Get** /ceph-clusters | get ceph cluster
+*CephClustersApi* | [**DeleteCephCluster**](docs/CephClustersApi.md#deletecephcluster) | **Delete** /ceph-clusters/{ceph-cluster-id} | delete ceph cluster
+*CephClustersApi* | [**GetCephCluster**](docs/CephClustersApi.md#getcephcluster) | **Get** /ceph-clusters/{ceph-cluster-id} | get ceph cluster
+*CephClustersApi* | [**ListCephClusters**](docs/CephClustersApi.md#listcephclusters) | **Get** /ceph-clusters | get all ceph cluster
 *CrushRootsApi* | [**CreateCrushRoot**](docs/CrushRootsApi.md#createcrushroot) | **Post** /crush-roots | create crush root
 *CrushRootsApi* | [**DeleteCrushRoot**](docs/CrushRootsApi.md#deletecrushroot) | **Delete** /crush-roots/{crush-root-id} | delete a crush root
 *CrushRootsApi* | [**GetCrushRoot**](docs/CrushRootsApi.md#getcrushroot) | **Get** /crush-roots/{crush-root-id} | get a crush root
@@ -54,15 +55,20 @@ Class | Method | HTTP request | Description
 *OsUserApi* | [**GetOsUser**](docs/OsUserApi.md#getosuser) | **Get** /os-users/{os-user-id} | get an os user
 *OsUserApi* | [**ListOsUsers**](docs/OsUserApi.md#listosusers) | **Get** /os-users | list all kind of os users
 *OsdsApi* | [**CreateOsds**](docs/OsdsApi.md#createosds) | **Post** /osds | create osds
-*OsdsApi* | [**DeleteOsds**](docs/OsdsApi.md#deleteosds) | **Delete** /osds | delete osds
+*OsdsApi* | [**DeleteOsds**](docs/OsdsApi.md#deleteosds) | **Delete** /osds | delete osds from specific ceph cluster
 *OsdsApi* | [**GetOsd**](docs/OsdsApi.md#getosd) | **Get** /osds/{osd-id} | get a osd
 *OsdsApi* | [**ListOsds**](docs/OsdsApi.md#listosds) | **Get** /osds | get all osds
+*PoolsApi* | [**CreatePool**](docs/PoolsApi.md#createpool) | **Post** /pools | create a pool
+*PoolsApi* | [**DeletePool**](docs/PoolsApi.md#deletepool) | **Delete** /pools/{pool-id} | delete a pool
+*PoolsApi* | [**GetPool**](docs/PoolsApi.md#getpool) | **Get** /pools/{pool-id} | get a pool
+*PoolsApi* | [**ListPools**](docs/PoolsApi.md#listpools) | **Get** /pools | get all pools
 
 
 ## Documentation For Models
 
  - [CephCluster](docs/CephCluster.md)
  - [CrushRoot](docs/CrushRoot.md)
+ - [Disks](docs/Disks.md)
  - [GormModel](docs/GormModel.md)
  - [Host](docs/Host.md)
  - [ModelsActionLog](docs/ModelsActionLog.md)
@@ -75,12 +81,14 @@ Class | Method | HTTP request | Description
  - [ModelsObjectStore](docs/ModelsObjectStore.md)
  - [ModelsOsUser](docs/ModelsOsUser.md)
  - [ModelsOsd](docs/ModelsOsd.md)
+ - [ModelsPool](docs/ModelsPool.md)
  - [ModelsPoolProperty](docs/ModelsPoolProperty.md)
  - [ObjectBucket](docs/ObjectBucket.md)
  - [ObjectStorageClass](docs/ObjectStorageClass.md)
  - [ObjectStore](docs/ObjectStore.md)
  - [OsUser](docs/OsUser.md)
  - [Osds](docs/Osds.md)
+ - [Pool](docs/Pool.md)
  - [RoutesCreateCephClusterRequestParams](docs/RoutesCreateCephClusterRequestParams.md)
  - [RoutesCreateHostRequestParams](docs/RoutesCreateHostRequestParams.md)
  - [RoutesCreateOsUserRequestParams](docs/RoutesCreateOsUserRequestParams.md)
@@ -88,7 +96,9 @@ Class | Method | HTTP request | Description
  - [RoutesObjectBucketRequestParams](docs/RoutesObjectBucketRequestParams.md)
  - [RoutesObjectStorageClassRequestParams](docs/RoutesObjectStorageClassRequestParams.md)
  - [RoutesObjectStoreRequestParams](docs/RoutesObjectStoreRequestParams.md)
+ - [RoutesOsdsDeleteParams](docs/RoutesOsdsDeleteParams.md)
  - [RoutesOsdsRequestParams](docs/RoutesOsdsRequestParams.md)
+ - [RoutesPoolCreateRequestParams](docs/RoutesPoolCreateRequestParams.md)
  - [RoutesPoolRequestParams](docs/RoutesPoolRequestParams.md)
 
 

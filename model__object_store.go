@@ -15,5 +15,6 @@ type ObjectStore struct {
 	GatewayInstances int32 `json:"gateway_instances"`
 	MetadataPool *RoutesPoolRequestParams `json:"metadata_pool"`
 	Name string `json:"name"`
+	Port int32 `json:"port"`
 	PreservePoolsOnDelete bool `json:"preserve_pools_on_delete"`
 }

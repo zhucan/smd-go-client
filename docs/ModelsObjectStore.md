@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ID** | **int32** |  | [default to null]
 **Name** | **string** |  | [default to null]
 **PoolProperties** | [**[]ModelsPoolProperty**](models.PoolProperty.md) |  | [default to null]
+**Port** | **int32** |  | [default to null]
 **PreservePoolsOnDelete** | **bool** |  | [default to null]
 **Status** | **string** |  | [default to null]
 **UpdatedAt** | [**time.Time**](time.Time.md) |  | [default to null]
