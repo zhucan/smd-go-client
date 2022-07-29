@@ -10,7 +10,7 @@
 
 package smdclient
 
-type CephCluster struct {
-	Name string `json:"name"`
-	Namespace string `json:"namespace"`
+type Disks struct {
+	ClusterId int32 `json:"cluster_id"`
+	DiskIds []int32 `json:"disk_ids"`
 }

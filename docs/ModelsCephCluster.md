@@ -7,6 +7,8 @@ Name | Type | Description | Notes
 **DeletedAt** | **string** |  | [default to null]
 **ID** | **int32** |  | [default to null]
 **Name** | **string** |  | [default to null]
+**Namespace** | **string** |  | [default to null]
+**Osds** | [**[]ModelsOsd**](models.Osd.md) |  | [default to null]
 **State** | **string** |  | [default to null]
 **Status** | **string** |  | [default to null]
 **UpdatedAt** | [**time.Time**](time.Time.md) |  | [default to null]

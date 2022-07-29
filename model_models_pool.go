@@ -16,11 +16,15 @@ import (
 
 type ModelsPool struct {
 	CreatedAt time.Time `json:"CreatedAt"`
-	CrushRoot *ModelsCrushRoot `json:"CrushRoot"`
-	CrushRootID int32 `json:"CrushRootID"`
 	DeletedAt string `json:"DeletedAt"`
+	ErasureCodeProfile string `json:"ErasureCodeProfile"`
 	ID int32 `json:"ID"`
 	Name string `json:"Name"`
+	PgAutoscaleMode bool `json:"PgAutoscaleMode"`
+	PgNum int64 `json:"PgNum"`
+	PoolID int32 `json:"PoolID"`
+	PoolName string `json:"PoolName"`
 	Status string `json:"Status"`
+	Type_ string `json:"Type"`
 	UpdatedAt time.Time `json:"UpdatedAt"`
 }
