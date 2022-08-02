@@ -22,8 +22,8 @@ All URIs are relative to *https://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*ActionLogsApi* | [**GetActionLog**](docs/ActionLogsApi.md#getactionlog) | **Get** /action_logs/{log-id} | get a action log
-*ActionLogsApi* | [**ListActionLogs**](docs/ActionLogsApi.md#listactionlogs) | **Get** /action_logs | get all action logs
+*ActionLogsApi* | [**GetActionLog**](docs/ActionLogsApi.md#getactionlog) | **Get** /action-logs/{log-id} | get a action log
+*ActionLogsApi* | [**ListActionLogs**](docs/ActionLogsApi.md#listactionlogs) | **Get** /action-logs | get all action logs
 *CephClustersApi* | [**CreateCephCluster**](docs/CephClustersApi.md#createcephcluster) | **Post** /ceph-clusters | create ceph cluster
 *CephClustersApi* | [**DeleteCephCluster**](docs/CephClustersApi.md#deletecephcluster) | **Delete** /ceph-clusters/{ceph-cluster-id} | delete ceph cluster
 *CephClustersApi* | [**GetCephCluster**](docs/CephClustersApi.md#getcephcluster) | **Get** /ceph-clusters/{ceph-cluster-id} | get ceph cluster
@@ -58,10 +58,6 @@ Class | Method | HTTP request | Description
 *OsdsApi* | [**DeleteOsds**](docs/OsdsApi.md#deleteosds) | **Delete** /osds | delete osds from specific ceph cluster
 *OsdsApi* | [**GetOsd**](docs/OsdsApi.md#getosd) | **Get** /osds/{osd-id} | get a osd
 *OsdsApi* | [**ListOsds**](docs/OsdsApi.md#listosds) | **Get** /osds | get all osds
-*PoolsApi* | [**CreatePool**](docs/PoolsApi.md#createpool) | **Post** /pools | create a pool
-*PoolsApi* | [**DeletePool**](docs/PoolsApi.md#deletepool) | **Delete** /pools/{pool-id} | delete a pool
-*PoolsApi* | [**GetPool**](docs/PoolsApi.md#getpool) | **Get** /pools/{pool-id} | get a pool
-*PoolsApi* | [**ListPools**](docs/PoolsApi.md#listpools) | **Get** /pools | get all pools
 
 
 ## Documentation For Models
@@ -81,14 +77,12 @@ Class | Method | HTTP request | Description
  - [ModelsObjectStore](docs/ModelsObjectStore.md)
  - [ModelsOsUser](docs/ModelsOsUser.md)
  - [ModelsOsd](docs/ModelsOsd.md)
- - [ModelsPool](docs/ModelsPool.md)
  - [ModelsPoolProperty](docs/ModelsPoolProperty.md)
  - [ObjectBucket](docs/ObjectBucket.md)
  - [ObjectStorageClass](docs/ObjectStorageClass.md)
  - [ObjectStore](docs/ObjectStore.md)
  - [OsUser](docs/OsUser.md)
  - [Osds](docs/Osds.md)
- - [Pool](docs/Pool.md)
  - [RoutesCreateCephClusterRequestParams](docs/RoutesCreateCephClusterRequestParams.md)
  - [RoutesCreateHostRequestParams](docs/RoutesCreateHostRequestParams.md)
  - [RoutesCreateOsUserRequestParams](docs/RoutesCreateOsUserRequestParams.md)
@@ -98,7 +92,6 @@ Class | Method | HTTP request | Description
  - [RoutesObjectStoreRequestParams](docs/RoutesObjectStoreRequestParams.md)
  - [RoutesOsdsDeleteParams](docs/RoutesOsdsDeleteParams.md)
  - [RoutesOsdsRequestParams](docs/RoutesOsdsRequestParams.md)
- - [RoutesPoolCreateRequestParams](docs/RoutesPoolCreateRequestParams.md)
  - [RoutesPoolRequestParams](docs/RoutesPoolRequestParams.md)
 
 

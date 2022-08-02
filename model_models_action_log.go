@@ -16,14 +16,14 @@ import (
 
 type ModelsActionLog struct {
 	Action string `json:"Action"`
+	AssociatedResource string `json:"AssociatedResource"`
 	CreatedAt time.Time `json:"CreatedAt"`
-	FinishedAt time.Time `json:"FinishedAt"`
+	Data string `json:"Data"`
+	DeletedAt string `json:"DeletedAt"`
 	ID int32 `json:"ID"`
 	Message string `json:"Message"`
-	NewData string `json:"NewData"`
-	OldData string `json:"OldData"`
 	Parameter string `json:"Parameter"`
 	ResourceIDs string `json:"ResourceIDs"`
 	ResourceType string `json:"ResourceType"`
-	Status string `json:"Status"`
+	UpdatedAt time.Time `json:"UpdatedAt"`
 }

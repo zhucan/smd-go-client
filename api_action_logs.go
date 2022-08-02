@@ -45,7 +45,7 @@ func (a *ActionLogsApiService) GetActionLog(ctx context.Context, logId int32) (M
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/action_logs/{log-id}"
+	localVarPath := a.client.cfg.BasePath + "/action-logs/{log-id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"log-id"+"}", fmt.Sprintf("%v", logId), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -139,7 +139,7 @@ func (a *ActionLogsApiService) ListActionLogs(ctx context.Context, localVarOptio
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/action_logs"
+	localVarPath := a.client.cfg.BasePath + "/action-logs"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

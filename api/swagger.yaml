@@ -12,10 +12,10 @@ tags:
 - name: "smd"
   description: "Managing storage resources"
 paths:
-  /action_logs:
+  /action-logs:
     get:
       tags:
-      - "action_logs"
+      - "action-logs"
       summary: "get all action logs"
       operationId: "ListActionLogs"
       consumes:
@@ -46,10 +46,10 @@ paths:
             type: "array"
             items:
               $ref: "#/definitions/*models.ActionLog"
-  /action_logs/{log-id}:
+  /action-logs/{log-id}:
     get:
       tags:
-      - "action_logs"
+      - "action-logs"
       summary: "get a action log"
       operationId: "GetActionLog"
       consumes:
@@ -985,110 +985,6 @@ paths:
           description: "OK"
           schema:
             $ref: "#/definitions/models.Osd"
-  /pools:
-    get:
-      tags:
-      - "pools"
-      summary: "get all pools"
-      operationId: "ListPools"
-      consumes:
-      - "application/xml"
-      - "application/json"
-      produces:
-      - "application/json"
-      - "application/xml"
-      parameters:
-      - name: "offset"
-        in: "query"
-        description: "offset"
-        required: false
-        type: "integer"
-        x-exportParamName: "Offset"
-        x-optionalDataType: "Int32"
-      - name: "limit"
-        in: "query"
-        description: "limit"
-        required: false
-        type: "integer"
-        x-exportParamName: "Limit"
-        x-optionalDataType: "Int32"
-      responses:
-        "200":
-          description: "OK"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/*models.Pool"
-    post:
-      tags:
-      - "pools"
-      summary: "create a pool"
-      operationId: "CreatePool"
-      consumes:
-      - "application/xml"
-      - "application/json"
-      produces:
-      - "application/json"
-      - "application/xml"
-      parameters:
-      - in: "body"
-        name: "body"
-        required: true
-        schema:
-          $ref: "#/definitions/routes.PoolCreateRequestParams"
-        x-exportParamName: "Body"
-      responses:
-        "200":
-          description: "OK"
-          schema:
-            $ref: "#/definitions/models.Pool"
-  /pools/{pool-id}:
-    get:
-      tags:
-      - "pools"
-      summary: "get a pool"
-      operationId: "GetPool"
-      consumes:
-      - "application/xml"
-      - "application/json"
-      produces:
-      - "application/json"
-      - "application/xml"
-      parameters:
-      - name: "pool-id"
-        in: "path"
-        description: "identifier of the pool"
-        required: true
-        type: "integer"
-        x-exportParamName: "PoolId"
-      responses:
-        "200":
-          description: "OK"
-          schema:
-            $ref: "#/definitions/models.Pool"
-    delete:
-      tags:
-      - "pools"
-      summary: "delete a pool"
-      operationId: "DeletePool"
-      consumes:
-      - "application/xml"
-      - "application/json"
-      produces:
-      - "application/json"
-      - "application/xml"
-      parameters:
-      - name: "pool-id"
-        in: "path"
-        description: "identifier of the pool"
-        required: true
-        type: "integer"
-        x-exportParamName: "PoolId"
-      responses:
-        "200":
-          description: "OK"
-          schema:
-            $ref: "#/definitions/models.Pool"
 definitions:
   '*models.ActionLog': {}
   '*models.CephCluster': {}
@@ -1100,7 +996,6 @@ definitions:
   '*models.ObjectStore': {}
   '*models.OsUser': {}
   '*models.Osd': {}
-  '*models.Pool': {}
   ".ceph_cluster":
     required:
     - "name"
@@ -1230,15 +1125,6 @@ definitions:
         type: "array"
         items:
           type: "integer"
-  ".pool":
-    required:
-    - "name"
-    - "type"
-    properties:
-      name:
-        type: "string"
-      type:
-        type: "string"
   gorm.Model:
     required:
     - "CreatedAt"
@@ -1260,33 +1146,32 @@ definitions:
   models.ActionLog:
     required:
     - "Action"
+    - "AssociatedResource"
     - "CreatedAt"
-    - "FinishedAt"
+    - "Data"
+    - "DeletedAt"
     - "ID"
     - "Message"
-    - "NewData"
-    - "OldData"
     - "Parameter"
     - "ResourceIDs"
     - "ResourceType"
-    - "Status"
+    - "UpdatedAt"
     properties:
       Action:
+        type: "string"
+      AssociatedResource:
         type: "string"
       CreatedAt:
         type: "string"
         format: "date-time"
-      FinishedAt:
+      Data:
         type: "string"
-        format: "date-time"
+      DeletedAt:
+        type: "string"
       ID:
         type: "integer"
         format: "integer"
       Message:
-        type: "string"
-      NewData:
-        type: "string"
-      OldData:
         type: "string"
       Parameter:
         type: "string"
@@ -1294,20 +1179,21 @@ definitions:
         type: "string"
       ResourceType:
         type: "string"
-      Status:
+      UpdatedAt:
         type: "string"
+        format: "date-time"
     example:
-      Status: "Status"
       Action: "Action"
       Message: "Message"
       ResourceIDs: "ResourceIDs"
-      NewData: "NewData"
+      AssociatedResource: "AssociatedResource"
       CreatedAt: "2000-01-23T04:56:07.000+00:00"
-      OldData: "OldData"
-      FinishedAt: "2000-01-23T04:56:07.000+00:00"
       Parameter: "Parameter"
+      Data: "Data"
       ResourceType: "ResourceType"
       ID: 0
+      DeletedAt: "DeletedAt"
+      UpdatedAt: "2000-01-23T04:56:07.000+00:00"
   models.CephCluster:
     required:
     - "CreatedAt"
@@ -2347,63 +2233,6 @@ definitions:
         Filesystem: "Filesystem"
         UUID: "UUID"
       DiskID: 4
-  models.Pool:
-    required:
-    - "CreatedAt"
-    - "DeletedAt"
-    - "ErasureCodeProfile"
-    - "ID"
-    - "Name"
-    - "PgAutoscaleMode"
-    - "PgNum"
-    - "PoolID"
-    - "PoolName"
-    - "Status"
-    - "Type"
-    - "UpdatedAt"
-    properties:
-      CreatedAt:
-        type: "string"
-        format: "date-time"
-      DeletedAt:
-        type: "string"
-      ErasureCodeProfile:
-        type: "string"
-      ID:
-        type: "integer"
-        format: "integer"
-      Name:
-        type: "string"
-      PgAutoscaleMode:
-        type: "boolean"
-      PgNum:
-        type: "integer"
-        format: "int64"
-      PoolID:
-        type: "integer"
-        format: "int32"
-      PoolName:
-        type: "string"
-      Status:
-        type: "string"
-      Type:
-        type: "string"
-      UpdatedAt:
-        type: "string"
-        format: "date-time"
-    example:
-      Status: "Status"
-      Type: "Type"
-      PoolID: 1
-      PoolName: "PoolName"
-      CreatedAt: "2000-01-23T04:56:07.000+00:00"
-      ErasureCodeProfile: "ErasureCodeProfile"
-      PgNum: 6
-      ID: 0
-      DeletedAt: "DeletedAt"
-      UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-      PgAutoscaleMode: true
-      Name: "Name"
   models.PoolProperty:
     required:
     - "CreatedAt"
@@ -2513,12 +2342,6 @@ definitions:
     properties:
       disks:
         $ref: "#/definitions/.disks"
-  routes.PoolCreateRequestParams:
-    required:
-    - "pool"
-    properties:
-      pool:
-        $ref: "#/definitions/.pool"
   routes.PoolRequestParams:
     required:
     - "crush_root_id"

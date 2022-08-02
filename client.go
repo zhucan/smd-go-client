@@ -65,8 +65,6 @@ type APIClient struct {
 	OsUserApi *OsUserApiService
 
 	OsdsApi *OsdsApiService
-
-	PoolsApi *PoolsApiService
 }
 
 type service struct {
@@ -95,7 +93,6 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.ObjectStoresApi = (*ObjectStoresApiService)(&c.common)
 	c.OsUserApi = (*OsUserApiService)(&c.common)
 	c.OsdsApi = (*OsdsApiService)(&c.common)
-	c.PoolsApi = (*PoolsApiService)(&c.common)
 
 	return c
 }

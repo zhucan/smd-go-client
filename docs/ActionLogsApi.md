@@ -4,8 +4,8 @@ All URIs are relative to *https://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetActionLog**](ActionLogsApi.md#GetActionLog) | **Get** /action_logs/{log-id} | get a action log
-[**ListActionLogs**](ActionLogsApi.md#ListActionLogs) | **Get** /action_logs | get all action logs
+[**GetActionLog**](ActionLogsApi.md#GetActionLog) | **Get** /action-logs/{log-id} | get a action log
+[**ListActionLogs**](ActionLogsApi.md#ListActionLogs) | **Get** /action-logs | get all action logs
 
 
 # **GetActionLog**
