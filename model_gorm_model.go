@@ -17,6 +17,6 @@ import (
 type GormModel struct {
 	CreatedAt time.Time `json:"CreatedAt"`
 	DeletedAt string `json:"DeletedAt"`
-	ID int32 `json:"ID"`
+	ID int64 `json:"ID"`
 	UpdatedAt time.Time `json:"UpdatedAt"`
 }

@@ -12,5 +12,5 @@ package smdclient
 
 type ObjectStorageClass struct {
 	Name string `json:"name"`
-	ObjectStoreId int32 `json:"object_store_id"`
+	ObjectStoreId int64 `json:"object_store_id"`
 }

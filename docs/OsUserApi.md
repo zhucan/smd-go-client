@@ -45,7 +45,7 @@ delete os user
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **osUserId** | **int32**| identifier of the os user | 
+  **osUserId** | **int64**| identifier of the os user | 
 
 ### Return type
 
@@ -71,7 +71,7 @@ get an os user
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **osUserId** | **int32**| identifier of the os user | 
+  **osUserId** | **int64**| identifier of the os user | 
 
 ### Return type
 
@@ -104,8 +104,8 @@ Optional parameters are passed through a pointer to a OsUserApiListOsUsersOpts s
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **offset** | **optional.Int32**| offset | 
- **limit** | **optional.Int32**| limit | 
+ **offset** | **optional.Int64**| offset | 
+ **limit** | **optional.Int64**| limit | 
 
 ### Return type
 

@@ -17,11 +17,11 @@ import (
 type ModelsCrushRoot struct {
 	CreatedAt time.Time `json:"CreatedAt"`
 	DeletedAt string `json:"DeletedAt"`
-	ID int32 `json:"ID"`
+	ID int64 `json:"ID"`
 	Name string `json:"Name"`
 	Osds []ModelsOsd `json:"Osds"`
 	Parent *ModelsCrushRoot `json:"Parent"`
-	ParentID int32 `json:"ParentID"`
+	ParentID int64 `json:"ParentID"`
 	PoolProperty *ModelsPoolProperty `json:"PoolProperty"`
 	Status string `json:"Status"`
 	UpdatedAt time.Time `json:"UpdatedAt"`

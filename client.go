@@ -48,7 +48,11 @@ type APIClient struct {
 
 	ActionLogsApi *ActionLogsApiService
 
+	BlockVolumesApi *BlockVolumesApiService
+
 	CephClustersApi *CephClustersApiService
+
+	CephFilesystemsApi *CephFilesystemsApiService
 
 	CrushRootsApi *CrushRootsApiService
 
@@ -65,6 +69,8 @@ type APIClient struct {
 	OsUserApi *OsUserApiService
 
 	OsdsApi *OsdsApiService
+
+	PoolsApi *PoolsApiService
 }
 
 type service struct {
@@ -84,7 +90,9 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 
 	// API Services
 	c.ActionLogsApi = (*ActionLogsApiService)(&c.common)
+	c.BlockVolumesApi = (*BlockVolumesApiService)(&c.common)
 	c.CephClustersApi = (*CephClustersApiService)(&c.common)
+	c.CephFilesystemsApi = (*CephFilesystemsApiService)(&c.common)
 	c.CrushRootsApi = (*CrushRootsApiService)(&c.common)
 	c.DisksApi = (*DisksApiService)(&c.common)
 	c.HostsApi = (*HostsApiService)(&c.common)
@@ -93,6 +101,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.ObjectStoresApi = (*ObjectStoresApiService)(&c.common)
 	c.OsUserApi = (*OsUserApiService)(&c.common)
 	c.OsdsApi = (*OsdsApiService)(&c.common)
+	c.PoolsApi = (*PoolsApiService)(&c.common)
 
 	return c
 }

@@ -15,15 +15,17 @@ import (
 )
 
 type ModelsPoolProperty struct {
+	CephfsID int64 `json:"CephfsID"`
 	CreatedAt time.Time `json:"CreatedAt"`
 	CrushRoot *ModelsCrushRoot `json:"CrushRoot"`
-	CrushRootID int32 `json:"CrushRootID"`
+	CrushRootID int64 `json:"CrushRootID"`
 	DeletedAt string `json:"DeletedAt"`
-	ECCodingChunks int32 `json:"ECCodingChunks"`
-	ECDataChunks int32 `json:"ECDataChunks"`
-	ID int32 `json:"ID"`
-	ObjectStoreID int32 `json:"ObjectStoreID"`
-	Replicated int32 `json:"Replicated"`
+	ECCodingChunks int64 `json:"ECCodingChunks"`
+	ECDataChunks int64 `json:"ECDataChunks"`
+	ID int64 `json:"ID"`
+	ObjectStoreID int64 `json:"ObjectStoreID"`
+	PoolID int64 `json:"PoolID"`
+	Replicated int64 `json:"Replicated"`
 	Type_ string `json:"Type"`
 	UpdatedAt time.Time `json:"UpdatedAt"`
 }

@@ -3,6 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Cache** | **bool** |  | [default to null]
 **CreatedAt** | [**time.Time**](time.Time.md) |  | [default to null]
 **DeletedAt** | **string** |  | [default to null]
 **DeviceModel** | **string** |  | [default to null]
@@ -11,10 +12,10 @@ Name | Type | Description | Notes
 **Filesystem** | **string** |  | [default to null]
 **HasChildren** | **bool** |  | [default to null]
 **Host** | [***ModelsHost**](models.Host.md) |  | [default to null]
-**HostID** | **int32** |  | [default to null]
-**ID** | **int32** |  | [default to null]
+**HostID** | **int64** |  | [default to null]
+**ID** | **int64** |  | [default to null]
 **IsRoot** | **bool** |  | [default to null]
-**MBytes** | **int32** |  | [default to null]
+**MBytes** | **int64** |  | [default to null]
 **Name** | **string** |  | [default to null]
 **Osd** | [***ModelsOsd**](models.Osd.md) |  | [default to null]
 **PathID** | **string** |  | [default to null]

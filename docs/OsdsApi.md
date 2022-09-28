@@ -71,7 +71,7 @@ get a osd
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **osdId** | **int32**| identifier of the osd | 
+  **osdId** | **int64**| identifier of the osd | 
 
 ### Return type
 
@@ -104,9 +104,9 @@ Optional parameters are passed through a pointer to a OsdsApiListOsdsOpts struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **offset** | **optional.Int32**| offset | 
- **limit** | **optional.Int32**| limit | 
- **hostId** | **optional.Int32**| identifier of the host | 
+ **offset** | **optional.Int64**| offset | 
+ **limit** | **optional.Int64**| limit | 
+ **hostId** | **optional.Int64**| identifier of the host | 
 
 ### Return type
 

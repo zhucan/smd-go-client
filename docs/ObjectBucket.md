@@ -4,8 +4,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | **string** |  | [default to null]
-**ObjectStorageClassId** | **int32** |  | [default to null]
-**OsUserId** | **int32** |  | [default to null]
+**ObjectStorageClassId** | **int64** |  | [default to null]
+**OsUserId** | **int64** |  | [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

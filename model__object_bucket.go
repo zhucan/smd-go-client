@@ -12,6 +12,6 @@ package smdclient
 
 type ObjectBucket struct {
 	Name string `json:"name"`
-	ObjectStorageClassId int32 `json:"object_storage_class_id"`
-	OsUserId int32 `json:"os_user_id"`
+	ObjectStorageClassId int64 `json:"object_storage_class_id"`
+	OsUserId int64 `json:"os_user_id"`
 }

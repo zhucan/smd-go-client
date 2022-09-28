@@ -17,11 +17,11 @@ import (
 type ModelsObjectStorageClass struct {
 	CreatedAt time.Time `json:"CreatedAt"`
 	DeletedAt string `json:"DeletedAt"`
-	ID int32 `json:"ID"`
+	ID int64 `json:"ID"`
 	Name string `json:"Name"`
 	ObjectBuckets []ModelsObjectBucket `json:"ObjectBuckets"`
 	ObjectStore *ModelsObjectStore `json:"ObjectStore"`
-	ObjectStoreID int32 `json:"ObjectStoreID"`
+	ObjectStoreID int64 `json:"ObjectStoreID"`
 	Status string `json:"Status"`
 	UpdatedAt time.Time `json:"UpdatedAt"`
 }

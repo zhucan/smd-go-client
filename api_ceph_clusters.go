@@ -122,7 +122,7 @@ CephClustersApiService delete ceph cluster
 
 @return ModelsCephCluster
 */
-func (a *CephClustersApiService) DeleteCephCluster(ctx context.Context, cephClusterId int32) (ModelsCephCluster, *http.Response, error) {
+func (a *CephClustersApiService) DeleteCephCluster(ctx context.Context, cephClusterId int64) (ModelsCephCluster, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
 		localVarPostBody   interface{}
@@ -208,7 +208,7 @@ CephClustersApiService get ceph cluster
 
 @return ModelsCephCluster
 */
-func (a *CephClustersApiService) GetCephCluster(ctx context.Context, cephClusterId int32) (ModelsCephCluster, *http.Response, error) {
+func (a *CephClustersApiService) GetCephCluster(ctx context.Context, cephClusterId int64) (ModelsCephCluster, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
@@ -291,15 +291,15 @@ func (a *CephClustersApiService) GetCephCluster(ctx context.Context, cephCluster
 CephClustersApiService get all ceph cluster
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param optional nil or *CephClustersApiListCephClustersOpts - Optional Parameters:
-     * @param "Offset" (optional.Int32) -  offset
-     * @param "Limit" (optional.Int32) -  limit
+     * @param "Offset" (optional.Int64) -  offset
+     * @param "Limit" (optional.Int64) -  limit
 
 @return []ModelsCephCluster
 */
 
 type CephClustersApiListCephClustersOpts struct { 
-	Offset optional.Int32
-	Limit optional.Int32
+	Offset optional.Int64
+	Limit optional.Int64
 }
 
 func (a *CephClustersApiService) ListCephClusters(ctx context.Context, localVarOptionals *CephClustersApiListCephClustersOpts) ([]ModelsCephCluster, *http.Response, error) {

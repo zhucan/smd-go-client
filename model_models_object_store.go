@@ -17,7 +17,7 @@ import (
 type ModelsObjectStore struct {
 	CreatedAt time.Time `json:"CreatedAt"`
 	DeletedAt string `json:"DeletedAt"`
-	ID int32 `json:"ID"`
+	ID int64 `json:"ID"`
 	Name string `json:"Name"`
 	PoolProperties []ModelsPoolProperty `json:"PoolProperties"`
 	Port int32 `json:"Port"`

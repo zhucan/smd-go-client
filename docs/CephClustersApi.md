@@ -45,7 +45,7 @@ delete ceph cluster
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **cephClusterId** | **int32**| identifier of the ceph cluster | 
+  **cephClusterId** | **int64**| identifier of the ceph cluster | 
 
 ### Return type
 
@@ -71,7 +71,7 @@ get ceph cluster
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **cephClusterId** | **int32**| identifier of the ceph cluster | 
+  **cephClusterId** | **int64**| identifier of the ceph cluster | 
 
 ### Return type
 
@@ -104,8 +104,8 @@ Optional parameters are passed through a pointer to a CephClustersApiListCephClu
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **offset** | **optional.Int32**| offset | 
- **limit** | **optional.Int32**| limit | 
+ **offset** | **optional.Int64**| offset | 
+ **limit** | **optional.Int64**| limit | 
 
 ### Return type
 

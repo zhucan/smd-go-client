@@ -17,7 +17,7 @@ import (
 type ModelsCephCluster struct {
 	CreatedAt time.Time `json:"CreatedAt"`
 	DeletedAt string `json:"DeletedAt"`
-	ID int32 `json:"ID"`
+	ID int64 `json:"ID"`
 	Name string `json:"Name"`
 	Namespace string `json:"Namespace"`
 	Osds []ModelsOsd `json:"Osds"`

@@ -129,7 +129,7 @@ type CrushRootsApiDeleteCrushRootOpts struct {
 	Force optional.Bool
 }
 
-func (a *CrushRootsApiService) DeleteCrushRoot(ctx context.Context, crushRootId int32, localVarOptionals *CrushRootsApiDeleteCrushRootOpts) (ModelsCrushRoot, *http.Response, error) {
+func (a *CrushRootsApiService) DeleteCrushRoot(ctx context.Context, crushRootId int64, localVarOptionals *CrushRootsApiDeleteCrushRootOpts) (ModelsCrushRoot, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
 		localVarPostBody   interface{}
@@ -218,7 +218,7 @@ CrushRootsApiService get a crush root
 
 @return ModelsCrushRoot
 */
-func (a *CrushRootsApiService) GetCrushRoot(ctx context.Context, crushRootId int32) (ModelsCrushRoot, *http.Response, error) {
+func (a *CrushRootsApiService) GetCrushRoot(ctx context.Context, crushRootId int64) (ModelsCrushRoot, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
@@ -301,15 +301,15 @@ func (a *CrushRootsApiService) GetCrushRoot(ctx context.Context, crushRootId int
 CrushRootsApiService get all crush roots
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param optional nil or *CrushRootsApiListCrushRootsOpts - Optional Parameters:
-     * @param "Offset" (optional.Int32) -  offset
-     * @param "Limit" (optional.Int32) -  limit
+     * @param "Offset" (optional.Int64) -  offset
+     * @param "Limit" (optional.Int64) -  limit
 
 @return []ModelsCrushRoot
 */
 
 type CrushRootsApiListCrushRootsOpts struct { 
-	Offset optional.Int32
-	Limit optional.Int32
+	Offset optional.Int64
+	Limit optional.Int64
 }
 
 func (a *CrushRootsApiService) ListCrushRoots(ctx context.Context, localVarOptionals *CrushRootsApiListCrushRootsOpts) ([]ModelsCrushRoot, *http.Response, error) {

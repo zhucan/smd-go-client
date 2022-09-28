@@ -122,7 +122,7 @@ HostsApiService delete a host
 
 @return ModelsHost
 */
-func (a *HostsApiService) DeleteHost(ctx context.Context, hostId int32) (ModelsHost, *http.Response, error) {
+func (a *HostsApiService) DeleteHost(ctx context.Context, hostId int64) (ModelsHost, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
 		localVarPostBody   interface{}
@@ -208,7 +208,7 @@ HostsApiService get a host
 
 @return ModelsHost
 */
-func (a *HostsApiService) GetHost(ctx context.Context, hostId int32) (ModelsHost, *http.Response, error) {
+func (a *HostsApiService) GetHost(ctx context.Context, hostId int64) (ModelsHost, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
@@ -291,15 +291,15 @@ func (a *HostsApiService) GetHost(ctx context.Context, hostId int32) (ModelsHost
 HostsApiService get all hosts
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param optional nil or *HostsApiListHostsOpts - Optional Parameters:
-     * @param "Offset" (optional.Int32) -  offset
-     * @param "Limit" (optional.Int32) -  limit
+     * @param "Offset" (optional.Int64) -  offset
+     * @param "Limit" (optional.Int64) -  limit
 
 @return []ModelsHost
 */
 
 type HostsApiListHostsOpts struct { 
-	Offset optional.Int32
-	Limit optional.Int32
+	Offset optional.Int64
+	Limit optional.Int64
 }
 
 func (a *HostsApiService) ListHosts(ctx context.Context, localVarOptionals *HostsApiListHostsOpts) ([]ModelsHost, *http.Response, error) {

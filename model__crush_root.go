@@ -12,5 +12,5 @@ package smdclient
 
 type CrushRoot struct {
 	Name string `json:"name"`
-	OsdIds []int32 `json:"osd_ids"`
+	OsdIds []int64 `json:"osd_ids"`
 }

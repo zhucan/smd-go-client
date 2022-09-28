@@ -5,7 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CreatedAt** | [**time.Time**](time.Time.md) |  | [default to null]
 **DeletedAt** | **string** |  | [default to null]
-**ID** | **int32** |  | [default to null]
+**ID** | **int64** |  | [default to null]
 **Name** | **string** |  | [default to null]
 **PoolProperties** | [**[]ModelsPoolProperty**](models.PoolProperty.md) |  | [default to null]
 **Port** | **int32** |  | [default to null]

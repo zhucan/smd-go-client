@@ -45,7 +45,7 @@ delete a crush root
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **crushRootId** | **int32**| identifier of the crush root | 
+  **crushRootId** | **int64**| identifier of the crush root | 
  **optional** | ***CrushRootsApiDeleteCrushRootOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -80,7 +80,7 @@ get a crush root
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **crushRootId** | **int32**| identifier of the crush root | 
+  **crushRootId** | **int64**| identifier of the crush root | 
 
 ### Return type
 
@@ -113,8 +113,8 @@ Optional parameters are passed through a pointer to a CrushRootsApiListCrushRoot
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **offset** | **optional.Int32**| offset | 
- **limit** | **optional.Int32**| limit | 
+ **offset** | **optional.Int64**| offset | 
+ **limit** | **optional.Int64**| limit | 
 
 ### Return type
 

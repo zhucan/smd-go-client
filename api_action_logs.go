@@ -35,7 +35,7 @@ ActionLogsApiService get a action log
 
 @return ModelsActionLog
 */
-func (a *ActionLogsApiService) GetActionLog(ctx context.Context, logId int32) (ModelsActionLog, *http.Response, error) {
+func (a *ActionLogsApiService) GetActionLog(ctx context.Context, logId int64) (ModelsActionLog, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
@@ -118,15 +118,15 @@ func (a *ActionLogsApiService) GetActionLog(ctx context.Context, logId int32) (M
 ActionLogsApiService get all action logs
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param optional nil or *ActionLogsApiListActionLogsOpts - Optional Parameters:
-     * @param "Offset" (optional.Int32) -  offset
-     * @param "Limit" (optional.Int32) -  limit
+     * @param "Offset" (optional.Int64) -  offset
+     * @param "Limit" (optional.Int64) -  limit
 
 @return []ModelsActionLog
 */
 
 type ActionLogsApiListActionLogsOpts struct { 
-	Offset optional.Int32
-	Limit optional.Int32
+	Offset optional.Int64
+	Limit optional.Int64
 }
 
 func (a *ActionLogsApiService) ListActionLogs(ctx context.Context, localVarOptionals *ActionLogsApiListActionLogsOpts) ([]ModelsActionLog, *http.Response, error) {

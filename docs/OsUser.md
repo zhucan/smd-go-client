@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **BucketQuotaMaxSize** | **string** |  | [default to null]
 **MetadataCapability** | **string** |  | [default to null]
 **Name** | **string** |  | [default to null]
-**ObjectStoreId** | **int32** |  | [default to null]
+**ObjectStoreId** | **int64** |  | [default to null]
 **UsageCapability** | **string** |  | [default to null]
 **UserCapability** | **string** |  | [default to null]
 **ZoneCapability** | **string** |  | [default to null]

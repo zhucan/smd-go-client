@@ -15,13 +15,13 @@ import (
 )
 
 type ModelsOsd struct {
-	ClusterID int32 `json:"ClusterID"`
+	ClusterID int64 `json:"ClusterID"`
 	CreatedAt time.Time `json:"CreatedAt"`
-	CrushRootID int32 `json:"CrushRootID"`
+	CrushRootID int64 `json:"CrushRootID"`
 	DeletedAt string `json:"DeletedAt"`
 	Disk *ModelsDisk `json:"Disk"`
-	DiskID int32 `json:"DiskID"`
-	ID int32 `json:"ID"`
+	DiskID int64 `json:"DiskID"`
+	ID int64 `json:"ID"`
 	In bool `json:"In"`
 	Name string `json:"Name"`
 	OsdID int32 `json:"OsdID"`

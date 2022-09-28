@@ -45,7 +45,7 @@ delete an object storage class
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **objectStorageClassId** | **int32**| identifier of the object storage class | 
+  **objectStorageClassId** | **int64**| identifier of the object storage class | 
 
 ### Return type
 
@@ -71,7 +71,7 @@ get an object storage classs
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **objectStorageClassId** | **int32**| identifier of the object storage class | 
+  **objectStorageClassId** | **int64**| identifier of the object storage class | 
 
 ### Return type
 
@@ -104,8 +104,8 @@ Optional parameters are passed through a pointer to a ObjectStorageClassesApiLis
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **offset** | **optional.Int32**| offset | 
- **limit** | **optional.Int32**| limit | 
+ **offset** | **optional.Int64**| offset | 
+ **limit** | **optional.Int64**| limit | 
 
 ### Return type
 
