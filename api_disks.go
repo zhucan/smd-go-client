@@ -35,7 +35,7 @@ DisksApiService get a disk
 
 @return ModelsDisk
 */
-func (a *DisksApiService) GetDisk(ctx context.Context, diskId int32) (ModelsDisk, *http.Response, error) {
+func (a *DisksApiService) GetDisk(ctx context.Context, diskId int64) (ModelsDisk, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
@@ -118,17 +118,17 @@ func (a *DisksApiService) GetDisk(ctx context.Context, diskId int32) (ModelsDisk
 DisksApiService get all disks
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param optional nil or *DisksApiListDisksOpts - Optional Parameters:
-     * @param "Offset" (optional.Int32) -  offset
-     * @param "Limit" (optional.Int32) -  limit
-     * @param "HostId" (optional.Int32) -  identifier of the host
+     * @param "Offset" (optional.Int64) -  offset
+     * @param "Limit" (optional.Int64) -  limit
+     * @param "HostId" (optional.Int64) -  identifier of the host
 
 @return []ModelsDisk
 */
 
 type DisksApiListDisksOpts struct { 
-	Offset optional.Int32
-	Limit optional.Int32
-	HostId optional.Int32
+	Offset optional.Int64
+	Limit optional.Int64
+	HostId optional.Int64
 }
 
 func (a *DisksApiService) ListDisks(ctx context.Context, localVarOptionals *DisksApiListDisksOpts) ([]ModelsDisk, *http.Response, error) {

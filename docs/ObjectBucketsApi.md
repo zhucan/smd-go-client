@@ -45,7 +45,7 @@ delete an object bucket
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **objectBucketId** | **int32**| identifier of the object bucket | 
+  **objectBucketId** | **int64**| identifier of the object bucket | 
 
 ### Return type
 
@@ -71,7 +71,7 @@ get an object bucket
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **objectBucketId** | **int32**| identifier of the object bucket | 
+  **objectBucketId** | **int64**| identifier of the object bucket | 
 
 ### Return type
 
@@ -104,8 +104,8 @@ Optional parameters are passed through a pointer to a ObjectBucketsApiListObject
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **offset** | **optional.Int32**| offset | 
- **limit** | **optional.Int32**| limit | 
+ **offset** | **optional.Int64**| offset | 
+ **limit** | **optional.Int64**| limit | 
 
 ### Return type
 

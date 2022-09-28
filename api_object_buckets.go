@@ -122,7 +122,7 @@ ObjectBucketsApiService delete an object bucket
 
 @return ModelsObjectBucket
 */
-func (a *ObjectBucketsApiService) DeleteObjectBucket(ctx context.Context, objectBucketId int32) (ModelsObjectBucket, *http.Response, error) {
+func (a *ObjectBucketsApiService) DeleteObjectBucket(ctx context.Context, objectBucketId int64) (ModelsObjectBucket, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
 		localVarPostBody   interface{}
@@ -208,7 +208,7 @@ ObjectBucketsApiService get an object bucket
 
 @return ModelsObjectBucket
 */
-func (a *ObjectBucketsApiService) GetObjectBucket(ctx context.Context, objectBucketId int32) (ModelsObjectBucket, *http.Response, error) {
+func (a *ObjectBucketsApiService) GetObjectBucket(ctx context.Context, objectBucketId int64) (ModelsObjectBucket, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
@@ -291,15 +291,15 @@ func (a *ObjectBucketsApiService) GetObjectBucket(ctx context.Context, objectBuc
 ObjectBucketsApiService get all object buckets
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param optional nil or *ObjectBucketsApiListObjectBucketsOpts - Optional Parameters:
-     * @param "Offset" (optional.Int32) -  offset
-     * @param "Limit" (optional.Int32) -  limit
+     * @param "Offset" (optional.Int64) -  offset
+     * @param "Limit" (optional.Int64) -  limit
 
 @return []ModelsObjectBucket
 */
 
 type ObjectBucketsApiListObjectBucketsOpts struct { 
-	Offset optional.Int32
-	Limit optional.Int32
+	Offset optional.Int64
+	Limit optional.Int64
 }
 
 func (a *ObjectBucketsApiService) ListObjectBuckets(ctx context.Context, localVarOptionals *ObjectBucketsApiListObjectBucketsOpts) ([]ModelsObjectBucket, *http.Response, error) {

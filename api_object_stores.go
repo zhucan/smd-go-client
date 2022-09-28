@@ -122,7 +122,7 @@ ObjectStoresApiService delete an object store
 
 @return ModelsObjectStore
 */
-func (a *ObjectStoresApiService) DeleteObjectStore(ctx context.Context, objectStoreId int32) (ModelsObjectStore, *http.Response, error) {
+func (a *ObjectStoresApiService) DeleteObjectStore(ctx context.Context, objectStoreId int64) (ModelsObjectStore, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
 		localVarPostBody   interface{}
@@ -208,7 +208,7 @@ ObjectStoresApiService get an object store
 
 @return ModelsObjectStore
 */
-func (a *ObjectStoresApiService) GetObjectStore(ctx context.Context, objectStoreId int32) (ModelsObjectStore, *http.Response, error) {
+func (a *ObjectStoresApiService) GetObjectStore(ctx context.Context, objectStoreId int64) (ModelsObjectStore, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
@@ -291,15 +291,15 @@ func (a *ObjectStoresApiService) GetObjectStore(ctx context.Context, objectStore
 ObjectStoresApiService get all object stores
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param optional nil or *ObjectStoresApiListObjectStoresOpts - Optional Parameters:
-     * @param "Offset" (optional.Int32) -  offset
-     * @param "Limit" (optional.Int32) -  limit
+     * @param "Offset" (optional.Int64) -  offset
+     * @param "Limit" (optional.Int64) -  limit
 
 @return []ModelsObjectStore
 */
 
 type ObjectStoresApiListObjectStoresOpts struct { 
-	Offset optional.Int32
-	Limit optional.Int32
+	Offset optional.Int64
+	Limit optional.Int64
 }
 
 func (a *ObjectStoresApiService) ListObjectStores(ctx context.Context, localVarOptionals *ObjectStoresApiListObjectStoresOpts) ([]ModelsObjectStore, *http.Response, error) {

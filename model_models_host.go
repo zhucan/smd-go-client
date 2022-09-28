@@ -21,8 +21,8 @@ type ModelsHost struct {
 	CreatedAt time.Time `json:"CreatedAt"`
 	DeletedAt string `json:"DeletedAt"`
 	HostModel string `json:"HostModel"`
-	ID int32 `json:"ID"`
-	MemoryMB int32 `json:"MemoryMB"`
+	ID int64 `json:"ID"`
+	MemoryMB int64 `json:"MemoryMB"`
 	OS string `json:"OS"`
 	Serial string `json:"Serial"`
 	Type_ string `json:"Type"`

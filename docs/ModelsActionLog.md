@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **CreatedAt** | [**time.Time**](time.Time.md) |  | [default to null]
 **Data** | **string** |  | [default to null]
 **DeletedAt** | **string** |  | [default to null]
-**ID** | **int32** |  | [default to null]
+**ID** | **int64** |  | [default to null]
 **Message** | **string** |  | [default to null]
 **Parameter** | **string** |  | [default to null]
 **ResourceIDs** | **string** |  | [default to null]

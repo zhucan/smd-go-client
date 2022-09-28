@@ -122,7 +122,7 @@ ObjectStorageClassesApiService delete an object storage class
 
 @return ModelsObjectStorageClass
 */
-func (a *ObjectStorageClassesApiService) DeleteObjectStorageClass(ctx context.Context, objectStorageClassId int32) (ModelsObjectStorageClass, *http.Response, error) {
+func (a *ObjectStorageClassesApiService) DeleteObjectStorageClass(ctx context.Context, objectStorageClassId int64) (ModelsObjectStorageClass, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
 		localVarPostBody   interface{}
@@ -208,7 +208,7 @@ ObjectStorageClassesApiService get an object storage classs
 
 @return ModelsObjectStorageClass
 */
-func (a *ObjectStorageClassesApiService) GetObjectStorageClass(ctx context.Context, objectStorageClassId int32) (ModelsObjectStorageClass, *http.Response, error) {
+func (a *ObjectStorageClassesApiService) GetObjectStorageClass(ctx context.Context, objectStorageClassId int64) (ModelsObjectStorageClass, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
@@ -291,15 +291,15 @@ func (a *ObjectStorageClassesApiService) GetObjectStorageClass(ctx context.Conte
 ObjectStorageClassesApiService get all object storage classes
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param optional nil or *ObjectStorageClassesApiListObjectStorageClassesOpts - Optional Parameters:
-     * @param "Offset" (optional.Int32) -  offset
-     * @param "Limit" (optional.Int32) -  limit
+     * @param "Offset" (optional.Int64) -  offset
+     * @param "Limit" (optional.Int64) -  limit
 
 @return []ModelsObjectStorageClass
 */
 
 type ObjectStorageClassesApiListObjectStorageClassesOpts struct { 
-	Offset optional.Int32
-	Limit optional.Int32
+	Offset optional.Int64
+	Limit optional.Int64
 }
 
 func (a *ObjectStorageClassesApiService) ListObjectStorageClasses(ctx context.Context, localVarOptionals *ObjectStorageClassesApiListObjectStorageClassesOpts) ([]ModelsObjectStorageClass, *http.Response, error) {

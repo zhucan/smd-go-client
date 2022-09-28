@@ -122,7 +122,7 @@ OsUserApiService delete os user
 
 @return ModelsOsUser
 */
-func (a *OsUserApiService) DeleteOsUser(ctx context.Context, osUserId int32) (ModelsOsUser, *http.Response, error) {
+func (a *OsUserApiService) DeleteOsUser(ctx context.Context, osUserId int64) (ModelsOsUser, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
 		localVarPostBody   interface{}
@@ -208,7 +208,7 @@ OsUserApiService get an os user
 
 @return ModelsOsUser
 */
-func (a *OsUserApiService) GetOsUser(ctx context.Context, osUserId int32) (ModelsOsUser, *http.Response, error) {
+func (a *OsUserApiService) GetOsUser(ctx context.Context, osUserId int64) (ModelsOsUser, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
@@ -291,15 +291,15 @@ func (a *OsUserApiService) GetOsUser(ctx context.Context, osUserId int32) (Model
 OsUserApiService list all kind of os users
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param optional nil or *OsUserApiListOsUsersOpts - Optional Parameters:
-     * @param "Offset" (optional.Int32) -  offset
-     * @param "Limit" (optional.Int32) -  limit
+     * @param "Offset" (optional.Int64) -  offset
+     * @param "Limit" (optional.Int64) -  limit
 
 @return []ModelsOsUser
 */
 
 type OsUserApiListOsUsersOpts struct { 
-	Offset optional.Int32
-	Limit optional.Int32
+	Offset optional.Int64
+	Limit optional.Int64
 }
 
 func (a *OsUserApiService) ListOsUsers(ctx context.Context, localVarOptionals *OsUserApiListOsUsersOpts) ([]ModelsOsUser, *http.Response, error) {

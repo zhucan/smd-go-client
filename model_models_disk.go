@@ -15,6 +15,7 @@ import (
 )
 
 type ModelsDisk struct {
+	Cache bool `json:"Cache"`
 	CreatedAt time.Time `json:"CreatedAt"`
 	DeletedAt string `json:"DeletedAt"`
 	DeviceModel string `json:"DeviceModel"`
@@ -23,10 +24,10 @@ type ModelsDisk struct {
 	Filesystem string `json:"Filesystem"`
 	HasChildren bool `json:"HasChildren"`
 	Host *ModelsHost `json:"Host"`
-	HostID int32 `json:"HostID"`
-	ID int32 `json:"ID"`
+	HostID int64 `json:"HostID"`
+	ID int64 `json:"ID"`
 	IsRoot bool `json:"IsRoot"`
-	MBytes int32 `json:"MBytes"`
+	MBytes int64 `json:"MBytes"`
 	Name string `json:"Name"`
 	Osd *ModelsOsd `json:"Osd"`
 	PathID string `json:"PathID"`

@@ -30,15 +30,17 @@ paths:
         description: "offset"
         required: false
         type: "integer"
+        format: "int64"
         x-exportParamName: "Offset"
-        x-optionalDataType: "Int32"
+        x-optionalDataType: "Int64"
       - name: "limit"
         in: "query"
         description: "limit"
         required: false
         type: "integer"
+        format: "int64"
         x-exportParamName: "Limit"
-        x-optionalDataType: "Int32"
+        x-optionalDataType: "Int64"
       responses:
         "200":
           description: "OK"
@@ -64,12 +66,74 @@ paths:
         description: "identifier of the action log"
         required: true
         type: "integer"
+        format: "int64"
         x-exportParamName: "LogId"
       responses:
         "200":
           description: "OK"
           schema:
             $ref: "#/definitions/models.ActionLog"
+  /block-volumes:
+    get:
+      tags:
+      - "block-volumes"
+      summary: "get all volumes"
+      operationId: "ListVolumes"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "offset"
+        in: "query"
+        description: "offset"
+        required: false
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Offset"
+        x-optionalDataType: "Int64"
+      - name: "limit"
+        in: "query"
+        description: "limit"
+        required: false
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int64"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/*models.Volume"
+  /block-volumes/{volume-id}:
+    get:
+      tags:
+      - "block-volumes"
+      summary: "get an volume"
+      operationId: "GetVolume"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "volume-id"
+        in: "path"
+        description: "identifier of the volume"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "VolumeId"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/models.Volume"
   /ceph-clusters:
     get:
       tags:
@@ -88,15 +152,17 @@ paths:
         description: "offset"
         required: false
         type: "integer"
+        format: "int64"
         x-exportParamName: "Offset"
-        x-optionalDataType: "Int32"
+        x-optionalDataType: "Int64"
       - name: "limit"
         in: "query"
         description: "limit"
         required: false
         type: "integer"
+        format: "int64"
         x-exportParamName: "Limit"
-        x-optionalDataType: "Int32"
+        x-optionalDataType: "Int64"
       responses:
         "200":
           description: "OK"
@@ -145,6 +211,7 @@ paths:
         description: "identifier of the ceph cluster"
         required: true
         type: "integer"
+        format: "int64"
         x-exportParamName: "CephClusterId"
       responses:
         "200":
@@ -168,12 +235,121 @@ paths:
         description: "identifier of the ceph cluster"
         required: true
         type: "integer"
+        format: "int64"
         x-exportParamName: "CephClusterId"
       responses:
         "200":
           description: "OK"
           schema:
             $ref: "#/definitions/models.CephCluster"
+  /ceph-filesystems:
+    get:
+      tags:
+      - "ceph-filesystems"
+      summary: "get all ceph filesystems"
+      operationId: "ListCephFilesystems"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "offset"
+        in: "query"
+        description: "offset"
+        required: false
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Offset"
+        x-optionalDataType: "Int64"
+      - name: "limit"
+        in: "query"
+        description: "limit"
+        required: false
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int64"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/*models.Cephfs"
+    post:
+      tags:
+      - "ceph-filesystems"
+      summary: "create a ceph filesystem"
+      operationId: "CreateCephFilesystem"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/routes.CephfsRequestParams"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/models.Cephfs"
+  /ceph-filesystems/{cephfs-id}:
+    get:
+      tags:
+      - "ceph-filesystems"
+      summary: "get a ceph filesystem"
+      operationId: "GetCephFilesystem"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "cephfs-id"
+        in: "path"
+        description: "identifier of the ceph filesystem"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "CephfsId"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/models.Cephfs"
+    delete:
+      tags:
+      - "ceph-filesystems"
+      summary: "delete a ceph filesystem"
+      operationId: "DeleteCephFilesystem"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "cephfs-id"
+        in: "path"
+        description: "identifier of the ceph filesystem"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "CephfsId"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/models.Cephfs"
   /crush-roots:
     get:
       tags:
@@ -192,15 +368,17 @@ paths:
         description: "offset"
         required: false
         type: "integer"
+        format: "int64"
         x-exportParamName: "Offset"
-        x-optionalDataType: "Int32"
+        x-optionalDataType: "Int64"
       - name: "limit"
         in: "query"
         description: "limit"
         required: false
         type: "integer"
+        format: "int64"
         x-exportParamName: "Limit"
-        x-optionalDataType: "Int32"
+        x-optionalDataType: "Int64"
       responses:
         "200":
           description: "OK"
@@ -249,6 +427,7 @@ paths:
         description: "identifier of the crush root"
         required: true
         type: "integer"
+        format: "int64"
         x-exportParamName: "CrushRootId"
       responses:
         "200":
@@ -272,6 +451,7 @@ paths:
         description: "identifier of the crush root"
         required: true
         type: "integer"
+        format: "int64"
         x-exportParamName: "CrushRootId"
       - name: "force"
         in: "query"
@@ -303,22 +483,25 @@ paths:
         description: "offset"
         required: false
         type: "integer"
+        format: "int64"
         x-exportParamName: "Offset"
-        x-optionalDataType: "Int32"
+        x-optionalDataType: "Int64"
       - name: "limit"
         in: "query"
         description: "limit"
         required: false
         type: "integer"
+        format: "int64"
         x-exportParamName: "Limit"
-        x-optionalDataType: "Int32"
+        x-optionalDataType: "Int64"
       - name: "host-id"
         in: "query"
         description: "identifier of the host"
         required: false
         type: "integer"
+        format: "int64"
         x-exportParamName: "HostId"
-        x-optionalDataType: "Int32"
+        x-optionalDataType: "Int64"
       responses:
         "200":
           description: "OK"
@@ -344,6 +527,7 @@ paths:
         description: "identifier of the disk"
         required: true
         type: "integer"
+        format: "int64"
         x-exportParamName: "DiskId"
       responses:
         "200":
@@ -368,15 +552,17 @@ paths:
         description: "offset"
         required: false
         type: "integer"
+        format: "int64"
         x-exportParamName: "Offset"
-        x-optionalDataType: "Int32"
+        x-optionalDataType: "Int64"
       - name: "limit"
         in: "query"
         description: "limit"
         required: false
         type: "integer"
+        format: "int64"
         x-exportParamName: "Limit"
-        x-optionalDataType: "Int32"
+        x-optionalDataType: "Int64"
       responses:
         "200":
           description: "OK"
@@ -425,6 +611,7 @@ paths:
         description: "identifier of the host"
         required: true
         type: "integer"
+        format: "int64"
         x-exportParamName: "HostId"
       responses:
         "200":
@@ -448,6 +635,7 @@ paths:
         description: "identifier of the host"
         required: true
         type: "integer"
+        format: "int64"
         x-exportParamName: "HostId"
       responses:
         "200":
@@ -472,15 +660,17 @@ paths:
         description: "offset"
         required: false
         type: "integer"
+        format: "int64"
         x-exportParamName: "Offset"
-        x-optionalDataType: "Int32"
+        x-optionalDataType: "Int64"
       - name: "limit"
         in: "query"
         description: "limit"
         required: false
         type: "integer"
+        format: "int64"
         x-exportParamName: "Limit"
-        x-optionalDataType: "Int32"
+        x-optionalDataType: "Int64"
       responses:
         "200":
           description: "OK"
@@ -529,6 +719,7 @@ paths:
         description: "identifier of the object bucket"
         required: true
         type: "integer"
+        format: "int64"
         x-exportParamName: "ObjectBucketId"
       responses:
         "200":
@@ -552,6 +743,7 @@ paths:
         description: "identifier of the object bucket"
         required: true
         type: "integer"
+        format: "int64"
         x-exportParamName: "ObjectBucketId"
       responses:
         "200":
@@ -576,15 +768,17 @@ paths:
         description: "offset"
         required: false
         type: "integer"
+        format: "int64"
         x-exportParamName: "Offset"
-        x-optionalDataType: "Int32"
+        x-optionalDataType: "Int64"
       - name: "limit"
         in: "query"
         description: "limit"
         required: false
         type: "integer"
+        format: "int64"
         x-exportParamName: "Limit"
-        x-optionalDataType: "Int32"
+        x-optionalDataType: "Int64"
       responses:
         "200":
           description: "OK"
@@ -633,6 +827,7 @@ paths:
         description: "identifier of the object storage class"
         required: true
         type: "integer"
+        format: "int64"
         x-exportParamName: "ObjectStorageClassId"
       responses:
         "200":
@@ -656,6 +851,7 @@ paths:
         description: "identifier of the object storage class"
         required: true
         type: "integer"
+        format: "int64"
         x-exportParamName: "ObjectStorageClassId"
       responses:
         "200":
@@ -680,15 +876,17 @@ paths:
         description: "offset"
         required: false
         type: "integer"
+        format: "int64"
         x-exportParamName: "Offset"
-        x-optionalDataType: "Int32"
+        x-optionalDataType: "Int64"
       - name: "limit"
         in: "query"
         description: "limit"
         required: false
         type: "integer"
+        format: "int64"
         x-exportParamName: "Limit"
-        x-optionalDataType: "Int32"
+        x-optionalDataType: "Int64"
       responses:
         "200":
           description: "OK"
@@ -737,6 +935,7 @@ paths:
         description: "identifier of the object store"
         required: true
         type: "integer"
+        format: "int64"
         x-exportParamName: "ObjectStoreId"
       responses:
         "200":
@@ -760,6 +959,7 @@ paths:
         description: "identifier of the object store"
         required: true
         type: "integer"
+        format: "int64"
         x-exportParamName: "ObjectStoreId"
       responses:
         "200":
@@ -784,15 +984,17 @@ paths:
         description: "offset"
         required: false
         type: "integer"
+        format: "int64"
         x-exportParamName: "Offset"
-        x-optionalDataType: "Int32"
+        x-optionalDataType: "Int64"
       - name: "limit"
         in: "query"
         description: "limit"
         required: false
         type: "integer"
+        format: "int64"
         x-exportParamName: "Limit"
-        x-optionalDataType: "Int32"
+        x-optionalDataType: "Int64"
       responses:
         "200":
           description: "OK"
@@ -841,6 +1043,7 @@ paths:
         description: "identifier of the os user"
         required: true
         type: "integer"
+        format: "int64"
         x-exportParamName: "OsUserId"
       responses:
         "200":
@@ -864,6 +1067,7 @@ paths:
         description: "identifier of the os user"
         required: true
         type: "integer"
+        format: "int64"
         x-exportParamName: "OsUserId"
       responses:
         "200":
@@ -888,22 +1092,25 @@ paths:
         description: "offset"
         required: false
         type: "integer"
+        format: "int64"
         x-exportParamName: "Offset"
-        x-optionalDataType: "Int32"
+        x-optionalDataType: "Int64"
       - name: "limit"
         in: "query"
         description: "limit"
         required: false
         type: "integer"
+        format: "int64"
         x-exportParamName: "Limit"
-        x-optionalDataType: "Int32"
+        x-optionalDataType: "Int64"
       - name: "host-id"
         in: "query"
         description: "identifier of the host"
         required: false
         type: "integer"
+        format: "int64"
         x-exportParamName: "HostId"
-        x-optionalDataType: "Int32"
+        x-optionalDataType: "Int64"
       responses:
         "200":
           description: "OK"
@@ -979,15 +1186,125 @@ paths:
         description: "identifier of the osd"
         required: true
         type: "integer"
+        format: "int64"
         x-exportParamName: "OsdId"
       responses:
         "200":
           description: "OK"
           schema:
             $ref: "#/definitions/models.Osd"
+  /pools:
+    get:
+      tags:
+      - "pools"
+      summary: "get all pools"
+      operationId: "ListPools"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "offset"
+        in: "query"
+        description: "offset"
+        required: false
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Offset"
+        x-optionalDataType: "Int64"
+      - name: "limit"
+        in: "query"
+        description: "limit"
+        required: false
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int64"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/*models.Pool"
+    post:
+      tags:
+      - "pools"
+      summary: "create a pool"
+      operationId: "CreatePool"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/routes.PoolCreateRequestParams"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/models.Pool"
+  /pools/{pool-id}:
+    get:
+      tags:
+      - "pools"
+      summary: "get a pool"
+      operationId: "GetPool"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "pool-id"
+        in: "path"
+        description: "identifier of the pool"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "PoolId"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/models.Pool"
+    delete:
+      tags:
+      - "pools"
+      summary: "delete a pool"
+      operationId: "DeletePool"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "pool-id"
+        in: "path"
+        description: "identifier of the pool"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "PoolId"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/models.Pool"
 definitions:
   '*models.ActionLog': {}
   '*models.CephCluster': {}
+  '*models.Cephfs': {}
   '*models.CrushRoot': {}
   '*models.Disk': {}
   '*models.Host': {}
@@ -996,6 +1313,8 @@ definitions:
   '*models.ObjectStore': {}
   '*models.OsUser': {}
   '*models.Osd': {}
+  '*models.Pool': {}
+  '*models.Volume': {}
   ".ceph_cluster":
     required:
     - "name"
@@ -1005,6 +1324,26 @@ definitions:
         type: "string"
       namespace:
         type: "string"
+  ".cephfs":
+    required:
+    - "data_pools"
+    - "metadata_pool"
+    - "name"
+    - "preserve_filesystem_on_delete"
+    - "preserve_pools_on_delete"
+    properties:
+      data_pools:
+        type: "array"
+        items:
+          $ref: "#/definitions/routes.PoolRequestParams"
+      metadata_pool:
+        $ref: "#/definitions/routes.PoolRequestParams"
+      name:
+        type: "string"
+      preserve_filesystem_on_delete:
+        type: "boolean"
+      preserve_pools_on_delete:
+        type: "boolean"
   ".crush_root":
     required:
     - "name"
@@ -1016,18 +1355,26 @@ definitions:
         type: "array"
         items:
           type: "integer"
+          format: "int64"
   ".disks":
     required:
     - "cluster_id"
     - "disk_ids"
+    - "metadata_disk_ids"
     properties:
       cluster_id:
         type: "integer"
-        format: "integer"
+        format: "int64"
       disk_ids:
         type: "array"
         items:
           type: "integer"
+          format: "int64"
+      metadata_disk_ids:
+        type: "array"
+        items:
+          type: "integer"
+          format: "int64"
   ".host":
     required:
     - "Host"
@@ -1044,10 +1391,10 @@ definitions:
         type: "string"
       object_storage_class_id:
         type: "integer"
-        format: "integer"
+        format: "int64"
       os_user_id:
         type: "integer"
-        format: "integer"
+        format: "int64"
   ".object_storage_class":
     required:
     - "name"
@@ -1057,7 +1404,7 @@ definitions:
         type: "string"
       object_store_id:
         type: "integer"
-        format: "integer"
+        format: "int64"
   ".object_store":
     required:
     - "data_pool"
@@ -1110,7 +1457,7 @@ definitions:
         type: "string"
       object_store_id:
         type: "integer"
-        format: "integer"
+        format: "int64"
       usage_capability:
         type: "string"
       user_capability:
@@ -1125,6 +1472,16 @@ definitions:
         type: "array"
         items:
           type: "integer"
+          format: "int64"
+  ".pool":
+    required:
+    - "block_pool"
+    - "name"
+    properties:
+      block_pool:
+        $ref: "#/definitions/routes.PoolRequestParams"
+      name:
+        type: "string"
   gorm.Model:
     required:
     - "CreatedAt"
@@ -1139,7 +1496,7 @@ definitions:
         type: "string"
       ID:
         type: "integer"
-        format: "integer"
+        format: "int64"
       UpdatedAt:
         type: "string"
         format: "date-time"
@@ -1170,7 +1527,7 @@ definitions:
         type: "string"
       ID:
         type: "integer"
-        format: "integer"
+        format: "int64"
       Message:
         type: "string"
       Parameter:
@@ -1213,7 +1570,7 @@ definitions:
         type: "string"
       ID:
         type: "integer"
-        format: "integer"
+        format: "int64"
       Name:
         type: "string"
       Namespace:
@@ -1233,20 +1590,20 @@ definitions:
       Status: "Status"
       Osds:
       - Status: "Status"
-        ClusterID: 6
+        ClusterID: 2
         In: true
         CreatedAt: "2000-01-23T04:56:07.000+00:00"
         UpdatedAt: "2000-01-23T04:56:07.000+00:00"
         Name: "Name"
-        OsdID: 1
-        CrushRootID: 1
-        ID: 7
+        OsdID: 7
+        CrushRootID: 7
+        ID: 6
         Up: true
         DeletedAt: "DeletedAt"
         Disk:
           DeviceModel: "DeviceModel"
           IsRoot: true
-          MBytes: 2
+          MBytes: 1
           Encrypted: true
           CreatedAt: "2000-01-23T04:56:07.000+00:00"
           Host:
@@ -1256,19 +1613,19 @@ definitions:
             Vendor: "Vendor"
             admin_ip: "admin_ip"
             UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-            Cores: 5
+            Cores: 3
             HostModel: "HostModel"
             Serial: "Serial"
             Type: "Type"
-            CPUs: 5
-            MemoryMB: 7
+            CPUs: 9
+            MemoryMB: 4
             ID: 2
             DeletedAt: "DeletedAt"
             cluster_ip: "cluster_ip"
             host_name: "host_name"
             CPUModel: "CPUModel"
           Vendor: "Vendor"
-          HostID: 9
+          HostID: 7
           Rotational: true
           UpdatedAt: "2000-01-23T04:56:07.000+00:00"
           Name: "Name"
@@ -1279,26 +1636,27 @@ definitions:
           Empty: true
           Serial: "Serial"
           Type: "Type"
-          ID: 3
+          ID: 1
           DeletedAt: "DeletedAt"
           Filesystem: "Filesystem"
           UUID: "UUID"
-        DiskID: 4
+          Cache: true
+        DiskID: 1
       - Status: "Status"
-        ClusterID: 6
+        ClusterID: 2
         In: true
         CreatedAt: "2000-01-23T04:56:07.000+00:00"
         UpdatedAt: "2000-01-23T04:56:07.000+00:00"
         Name: "Name"
-        OsdID: 1
-        CrushRootID: 1
-        ID: 7
+        OsdID: 7
+        CrushRootID: 7
+        ID: 6
         Up: true
         DeletedAt: "DeletedAt"
         Disk:
           DeviceModel: "DeviceModel"
           IsRoot: true
-          MBytes: 2
+          MBytes: 1
           Encrypted: true
           CreatedAt: "2000-01-23T04:56:07.000+00:00"
           Host:
@@ -1308,19 +1666,19 @@ definitions:
             Vendor: "Vendor"
             admin_ip: "admin_ip"
             UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-            Cores: 5
+            Cores: 3
             HostModel: "HostModel"
             Serial: "Serial"
             Type: "Type"
-            CPUs: 5
-            MemoryMB: 7
+            CPUs: 9
+            MemoryMB: 4
             ID: 2
             DeletedAt: "DeletedAt"
             cluster_ip: "cluster_ip"
             host_name: "host_name"
             CPUModel: "CPUModel"
           Vendor: "Vendor"
-          HostID: 9
+          HostID: 7
           Rotational: true
           UpdatedAt: "2000-01-23T04:56:07.000+00:00"
           Name: "Name"
@@ -1331,11 +1689,12 @@ definitions:
           Empty: true
           Serial: "Serial"
           Type: "Type"
-          ID: 3
+          ID: 1
           DeletedAt: "DeletedAt"
           Filesystem: "Filesystem"
           UUID: "UUID"
-        DiskID: 4
+          Cache: true
+        DiskID: 1
       State: "State"
       CreatedAt: "2000-01-23T04:56:07.000+00:00"
       ID: 0
@@ -1343,6 +1702,305 @@ definitions:
       UpdatedAt: "2000-01-23T04:56:07.000+00:00"
       Namespace: "Namespace"
       Name: "Name"
+  models.Cephfs:
+    required:
+    - "CreatedAt"
+    - "DeletedAt"
+    - "ID"
+    - "Name"
+    - "PoolProperties"
+    - "PreserveFilesystemOnDelete"
+    - "PreservePoolsOnDelete"
+    - "Status"
+    - "UpdatedAt"
+    properties:
+      CreatedAt:
+        type: "string"
+        format: "date-time"
+      DeletedAt:
+        type: "string"
+      ID:
+        type: "integer"
+        format: "int64"
+      Name:
+        type: "string"
+      PoolProperties:
+        type: "array"
+        items:
+          $ref: "#/definitions/models.PoolProperty"
+      PreserveFilesystemOnDelete:
+        type: "boolean"
+      PreservePoolsOnDelete:
+        type: "boolean"
+      Status:
+        type: "string"
+      UpdatedAt:
+        type: "string"
+        format: "date-time"
+    example:
+      Status: "Status"
+      CreatedAt: "2000-01-23T04:56:07.000+00:00"
+      PreservePoolsOnDelete: true
+      ID: 0
+      DeletedAt: "DeletedAt"
+      PreserveFilesystemOnDelete: true
+      UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+      Name: "Name"
+      PoolProperties:
+      - Replicated: 9
+        PoolID: 8
+        CreatedAt: "2000-01-23T04:56:07.000+00:00"
+        ECCodingChunks: 5
+        UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+        CephfsID: 5
+        Type: "Type"
+        CrushRoot:
+          ParentID: 1
+          Status: "Status"
+          Osds:
+          - Status: "Status"
+            ClusterID: 2
+            In: true
+            CreatedAt: "2000-01-23T04:56:07.000+00:00"
+            UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+            Name: "Name"
+            OsdID: 7
+            CrushRootID: 7
+            ID: 6
+            Up: true
+            DeletedAt: "DeletedAt"
+            Disk:
+              DeviceModel: "DeviceModel"
+              IsRoot: true
+              MBytes: 1
+              Encrypted: true
+              CreatedAt: "2000-01-23T04:56:07.000+00:00"
+              Host:
+                public_ip: "public_ip"
+                OS: "OS"
+                CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                Vendor: "Vendor"
+                admin_ip: "admin_ip"
+                UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                Cores: 3
+                HostModel: "HostModel"
+                Serial: "Serial"
+                Type: "Type"
+                CPUs: 9
+                MemoryMB: 4
+                ID: 2
+                DeletedAt: "DeletedAt"
+                cluster_ip: "cluster_ip"
+                host_name: "host_name"
+                CPUModel: "CPUModel"
+              Vendor: "Vendor"
+              HostID: 7
+              Rotational: true
+              UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+              Name: "Name"
+              WWN: "WWN"
+              PathID: "PathID"
+              RealPath: "RealPath"
+              HasChildren: true
+              Empty: true
+              Serial: "Serial"
+              Type: "Type"
+              ID: 1
+              DeletedAt: "DeletedAt"
+              Filesystem: "Filesystem"
+              UUID: "UUID"
+              Cache: true
+            DiskID: 1
+          - Status: "Status"
+            ClusterID: 2
+            In: true
+            CreatedAt: "2000-01-23T04:56:07.000+00:00"
+            UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+            Name: "Name"
+            OsdID: 7
+            CrushRootID: 7
+            ID: 6
+            Up: true
+            DeletedAt: "DeletedAt"
+            Disk:
+              DeviceModel: "DeviceModel"
+              IsRoot: true
+              MBytes: 1
+              Encrypted: true
+              CreatedAt: "2000-01-23T04:56:07.000+00:00"
+              Host:
+                public_ip: "public_ip"
+                OS: "OS"
+                CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                Vendor: "Vendor"
+                admin_ip: "admin_ip"
+                UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                Cores: 3
+                HostModel: "HostModel"
+                Serial: "Serial"
+                Type: "Type"
+                CPUs: 9
+                MemoryMB: 4
+                ID: 2
+                DeletedAt: "DeletedAt"
+                cluster_ip: "cluster_ip"
+                host_name: "host_name"
+                CPUModel: "CPUModel"
+              Vendor: "Vendor"
+              HostID: 7
+              Rotational: true
+              UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+              Name: "Name"
+              WWN: "WWN"
+              PathID: "PathID"
+              RealPath: "RealPath"
+              HasChildren: true
+              Empty: true
+              Serial: "Serial"
+              Type: "Type"
+              ID: 1
+              DeletedAt: "DeletedAt"
+              Filesystem: "Filesystem"
+              UUID: "UUID"
+              Cache: true
+            DiskID: 1
+          CreatedAt: "2000-01-23T04:56:07.000+00:00"
+          ID: 5
+          DeletedAt: "DeletedAt"
+          UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+          Name: "Name"
+        ECDataChunks: 9
+        ObjectStoreID: 6
+        CrushRootID: 4
+        ID: 9
+        DeletedAt: "DeletedAt"
+      - Replicated: 9
+        PoolID: 8
+        CreatedAt: "2000-01-23T04:56:07.000+00:00"
+        ECCodingChunks: 5
+        UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+        CephfsID: 5
+        Type: "Type"
+        CrushRoot:
+          ParentID: 1
+          Status: "Status"
+          Osds:
+          - Status: "Status"
+            ClusterID: 2
+            In: true
+            CreatedAt: "2000-01-23T04:56:07.000+00:00"
+            UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+            Name: "Name"
+            OsdID: 7
+            CrushRootID: 7
+            ID: 6
+            Up: true
+            DeletedAt: "DeletedAt"
+            Disk:
+              DeviceModel: "DeviceModel"
+              IsRoot: true
+              MBytes: 1
+              Encrypted: true
+              CreatedAt: "2000-01-23T04:56:07.000+00:00"
+              Host:
+                public_ip: "public_ip"
+                OS: "OS"
+                CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                Vendor: "Vendor"
+                admin_ip: "admin_ip"
+                UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                Cores: 3
+                HostModel: "HostModel"
+                Serial: "Serial"
+                Type: "Type"
+                CPUs: 9
+                MemoryMB: 4
+                ID: 2
+                DeletedAt: "DeletedAt"
+                cluster_ip: "cluster_ip"
+                host_name: "host_name"
+                CPUModel: "CPUModel"
+              Vendor: "Vendor"
+              HostID: 7
+              Rotational: true
+              UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+              Name: "Name"
+              WWN: "WWN"
+              PathID: "PathID"
+              RealPath: "RealPath"
+              HasChildren: true
+              Empty: true
+              Serial: "Serial"
+              Type: "Type"
+              ID: 1
+              DeletedAt: "DeletedAt"
+              Filesystem: "Filesystem"
+              UUID: "UUID"
+              Cache: true
+            DiskID: 1
+          - Status: "Status"
+            ClusterID: 2
+            In: true
+            CreatedAt: "2000-01-23T04:56:07.000+00:00"
+            UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+            Name: "Name"
+            OsdID: 7
+            CrushRootID: 7
+            ID: 6
+            Up: true
+            DeletedAt: "DeletedAt"
+            Disk:
+              DeviceModel: "DeviceModel"
+              IsRoot: true
+              MBytes: 1
+              Encrypted: true
+              CreatedAt: "2000-01-23T04:56:07.000+00:00"
+              Host:
+                public_ip: "public_ip"
+                OS: "OS"
+                CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                Vendor: "Vendor"
+                admin_ip: "admin_ip"
+                UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                Cores: 3
+                HostModel: "HostModel"
+                Serial: "Serial"
+                Type: "Type"
+                CPUs: 9
+                MemoryMB: 4
+                ID: 2
+                DeletedAt: "DeletedAt"
+                cluster_ip: "cluster_ip"
+                host_name: "host_name"
+                CPUModel: "CPUModel"
+              Vendor: "Vendor"
+              HostID: 7
+              Rotational: true
+              UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+              Name: "Name"
+              WWN: "WWN"
+              PathID: "PathID"
+              RealPath: "RealPath"
+              HasChildren: true
+              Empty: true
+              Serial: "Serial"
+              Type: "Type"
+              ID: 1
+              DeletedAt: "DeletedAt"
+              Filesystem: "Filesystem"
+              UUID: "UUID"
+              Cache: true
+            DiskID: 1
+          CreatedAt: "2000-01-23T04:56:07.000+00:00"
+          ID: 5
+          DeletedAt: "DeletedAt"
+          UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+          Name: "Name"
+        ECDataChunks: 9
+        ObjectStoreID: 6
+        CrushRootID: 4
+        ID: 9
+        DeletedAt: "DeletedAt"
   models.CrushRoot:
     required:
     - "CreatedAt"
@@ -1363,7 +2021,7 @@ definitions:
         type: "string"
       ID:
         type: "integer"
-        format: "integer"
+        format: "int64"
       Name:
         type: "string"
       Osds:
@@ -1374,7 +2032,7 @@ definitions:
         $ref: "#/definitions/models.CrushRoot"
       ParentID:
         type: "integer"
-        format: "integer"
+        format: "int64"
       PoolProperty:
         $ref: "#/definitions/models.PoolProperty"
       Status:
@@ -1383,24 +2041,24 @@ definitions:
         type: "string"
         format: "date-time"
     example:
-      ParentID: 6
+      ParentID: 1
       Status: "Status"
       Osds:
       - Status: "Status"
-        ClusterID: 6
+        ClusterID: 2
         In: true
         CreatedAt: "2000-01-23T04:56:07.000+00:00"
         UpdatedAt: "2000-01-23T04:56:07.000+00:00"
         Name: "Name"
-        OsdID: 1
-        CrushRootID: 1
-        ID: 7
+        OsdID: 7
+        CrushRootID: 7
+        ID: 6
         Up: true
         DeletedAt: "DeletedAt"
         Disk:
           DeviceModel: "DeviceModel"
           IsRoot: true
-          MBytes: 2
+          MBytes: 1
           Encrypted: true
           CreatedAt: "2000-01-23T04:56:07.000+00:00"
           Host:
@@ -1410,19 +2068,19 @@ definitions:
             Vendor: "Vendor"
             admin_ip: "admin_ip"
             UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-            Cores: 5
+            Cores: 3
             HostModel: "HostModel"
             Serial: "Serial"
             Type: "Type"
-            CPUs: 5
-            MemoryMB: 7
+            CPUs: 9
+            MemoryMB: 4
             ID: 2
             DeletedAt: "DeletedAt"
             cluster_ip: "cluster_ip"
             host_name: "host_name"
             CPUModel: "CPUModel"
           Vendor: "Vendor"
-          HostID: 9
+          HostID: 7
           Rotational: true
           UpdatedAt: "2000-01-23T04:56:07.000+00:00"
           Name: "Name"
@@ -1433,26 +2091,27 @@ definitions:
           Empty: true
           Serial: "Serial"
           Type: "Type"
-          ID: 3
+          ID: 1
           DeletedAt: "DeletedAt"
           Filesystem: "Filesystem"
           UUID: "UUID"
-        DiskID: 4
+          Cache: true
+        DiskID: 1
       - Status: "Status"
-        ClusterID: 6
+        ClusterID: 2
         In: true
         CreatedAt: "2000-01-23T04:56:07.000+00:00"
         UpdatedAt: "2000-01-23T04:56:07.000+00:00"
         Name: "Name"
-        OsdID: 1
-        CrushRootID: 1
-        ID: 7
+        OsdID: 7
+        CrushRootID: 7
+        ID: 6
         Up: true
         DeletedAt: "DeletedAt"
         Disk:
           DeviceModel: "DeviceModel"
           IsRoot: true
-          MBytes: 2
+          MBytes: 1
           Encrypted: true
           CreatedAt: "2000-01-23T04:56:07.000+00:00"
           Host:
@@ -1462,19 +2121,19 @@ definitions:
             Vendor: "Vendor"
             admin_ip: "admin_ip"
             UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-            Cores: 5
+            Cores: 3
             HostModel: "HostModel"
             Serial: "Serial"
             Type: "Type"
-            CPUs: 5
-            MemoryMB: 7
+            CPUs: 9
+            MemoryMB: 4
             ID: 2
             DeletedAt: "DeletedAt"
             cluster_ip: "cluster_ip"
             host_name: "host_name"
             CPUModel: "CPUModel"
           Vendor: "Vendor"
-          HostID: 9
+          HostID: 7
           Rotational: true
           UpdatedAt: "2000-01-23T04:56:07.000+00:00"
           Name: "Name"
@@ -1485,29 +2144,20 @@ definitions:
           Empty: true
           Serial: "Serial"
           Type: "Type"
-          ID: 3
+          ID: 1
           DeletedAt: "DeletedAt"
           Filesystem: "Filesystem"
           UUID: "UUID"
-        DiskID: 4
+          Cache: true
+        DiskID: 1
       CreatedAt: "2000-01-23T04:56:07.000+00:00"
-      ID: 0
+      ID: 5
       DeletedAt: "DeletedAt"
-      PoolProperty:
-        Type: "Type"
-        Replicated: 9
-        CreatedAt: "2000-01-23T04:56:07.000+00:00"
-        ECDataChunks: 5
-        ObjectStoreID: 7
-        CrushRootID: 1
-        ID: 2
-        DeletedAt: "DeletedAt"
-        ECCodingChunks: 5
-        UpdatedAt: "2000-01-23T04:56:07.000+00:00"
       UpdatedAt: "2000-01-23T04:56:07.000+00:00"
       Name: "Name"
   models.Disk:
     required:
+    - "Cache"
     - "CreatedAt"
     - "DeletedAt"
     - "DeviceModel"
@@ -1532,6 +2182,8 @@ definitions:
     - "Vendor"
     - "WWN"
     properties:
+      Cache:
+        type: "boolean"
       CreatedAt:
         type: "string"
         format: "date-time"
@@ -1551,15 +2203,15 @@ definitions:
         $ref: "#/definitions/models.Host"
       HostID:
         type: "integer"
-        format: "integer"
+        format: "int64"
       ID:
         type: "integer"
-        format: "integer"
+        format: "int64"
       IsRoot:
         type: "boolean"
       MBytes:
         type: "integer"
-        format: "integer"
+        format: "int64"
       Name:
         type: "string"
       Osd:
@@ -1586,7 +2238,7 @@ definitions:
     example:
       DeviceModel: "DeviceModel"
       IsRoot: true
-      MBytes: 2
+      MBytes: 1
       Encrypted: true
       CreatedAt: "2000-01-23T04:56:07.000+00:00"
       Host:
@@ -1596,19 +2248,19 @@ definitions:
         Vendor: "Vendor"
         admin_ip: "admin_ip"
         UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-        Cores: 5
+        Cores: 3
         HostModel: "HostModel"
         Serial: "Serial"
         Type: "Type"
-        CPUs: 5
-        MemoryMB: 7
+        CPUs: 9
+        MemoryMB: 4
         ID: 2
         DeletedAt: "DeletedAt"
         cluster_ip: "cluster_ip"
         host_name: "host_name"
         CPUModel: "CPUModel"
       Vendor: "Vendor"
-      HostID: 9
+      HostID: 7
       Rotational: true
       UpdatedAt: "2000-01-23T04:56:07.000+00:00"
       Name: "Name"
@@ -1619,10 +2271,11 @@ definitions:
       Empty: true
       Serial: "Serial"
       Type: "Type"
-      ID: 3
+      ID: 1
       DeletedAt: "DeletedAt"
       Filesystem: "Filesystem"
       UUID: "UUID"
+      Cache: true
   models.Host:
     required:
     - "CPUModel"
@@ -1660,10 +2313,10 @@ definitions:
         type: "string"
       ID:
         type: "integer"
-        format: "integer"
+        format: "int64"
       MemoryMB:
         type: "integer"
-        format: "integer"
+        format: "int64"
       OS:
         type: "string"
       Serial:
@@ -1690,12 +2343,12 @@ definitions:
       Vendor: "Vendor"
       admin_ip: "admin_ip"
       UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-      Cores: 5
+      Cores: 3
       HostModel: "HostModel"
       Serial: "Serial"
       Type: "Type"
-      CPUs: 5
-      MemoryMB: 7
+      CPUs: 9
+      MemoryMB: 4
       ID: 2
       DeletedAt: "DeletedAt"
       cluster_ip: "cluster_ip"
@@ -1732,7 +2385,7 @@ definitions:
         type: "string"
       ID:
         type: "integer"
-        format: "integer"
+        format: "int64"
       MaxObjects:
         type: "integer"
         format: "int64"
@@ -1744,12 +2397,12 @@ definitions:
         $ref: "#/definitions/models.ObjectStorageClass"
       ObjectStorageClassID:
         type: "integer"
-        format: "integer"
+        format: "int64"
       OsUser:
         $ref: "#/definitions/models.OsUser"
       OsUserID:
         type: "integer"
-        format: "integer"
+        format: "int64"
       Port:
         type: "string"
       Region:
@@ -1781,26 +2434,260 @@ definitions:
           UpdatedAt: "2000-01-23T04:56:07.000+00:00"
           Name: "Name"
           PoolProperties:
-          - Type: "Type"
-            Replicated: 9
+          - Replicated: 9
+            PoolID: 8
             CreatedAt: "2000-01-23T04:56:07.000+00:00"
-            ECDataChunks: 5
-            ObjectStoreID: 7
-            CrushRootID: 1
-            ID: 2
-            DeletedAt: "DeletedAt"
             ECCodingChunks: 5
             UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-          - Type: "Type"
-            Replicated: 9
-            CreatedAt: "2000-01-23T04:56:07.000+00:00"
-            ECDataChunks: 5
-            ObjectStoreID: 7
-            CrushRootID: 1
-            ID: 2
+            CephfsID: 5
+            Type: "Type"
+            CrushRoot:
+              ParentID: 1
+              Status: "Status"
+              Osds:
+              - Status: "Status"
+                ClusterID: 2
+                In: true
+                CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                Name: "Name"
+                OsdID: 7
+                CrushRootID: 7
+                ID: 6
+                Up: true
+                DeletedAt: "DeletedAt"
+                Disk:
+                  DeviceModel: "DeviceModel"
+                  IsRoot: true
+                  MBytes: 1
+                  Encrypted: true
+                  CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                  Host:
+                    public_ip: "public_ip"
+                    OS: "OS"
+                    CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                    Vendor: "Vendor"
+                    admin_ip: "admin_ip"
+                    UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                    Cores: 3
+                    HostModel: "HostModel"
+                    Serial: "Serial"
+                    Type: "Type"
+                    CPUs: 9
+                    MemoryMB: 4
+                    ID: 2
+                    DeletedAt: "DeletedAt"
+                    cluster_ip: "cluster_ip"
+                    host_name: "host_name"
+                    CPUModel: "CPUModel"
+                  Vendor: "Vendor"
+                  HostID: 7
+                  Rotational: true
+                  UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                  Name: "Name"
+                  WWN: "WWN"
+                  PathID: "PathID"
+                  RealPath: "RealPath"
+                  HasChildren: true
+                  Empty: true
+                  Serial: "Serial"
+                  Type: "Type"
+                  ID: 1
+                  DeletedAt: "DeletedAt"
+                  Filesystem: "Filesystem"
+                  UUID: "UUID"
+                  Cache: true
+                DiskID: 1
+              - Status: "Status"
+                ClusterID: 2
+                In: true
+                CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                Name: "Name"
+                OsdID: 7
+                CrushRootID: 7
+                ID: 6
+                Up: true
+                DeletedAt: "DeletedAt"
+                Disk:
+                  DeviceModel: "DeviceModel"
+                  IsRoot: true
+                  MBytes: 1
+                  Encrypted: true
+                  CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                  Host:
+                    public_ip: "public_ip"
+                    OS: "OS"
+                    CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                    Vendor: "Vendor"
+                    admin_ip: "admin_ip"
+                    UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                    Cores: 3
+                    HostModel: "HostModel"
+                    Serial: "Serial"
+                    Type: "Type"
+                    CPUs: 9
+                    MemoryMB: 4
+                    ID: 2
+                    DeletedAt: "DeletedAt"
+                    cluster_ip: "cluster_ip"
+                    host_name: "host_name"
+                    CPUModel: "CPUModel"
+                  Vendor: "Vendor"
+                  HostID: 7
+                  Rotational: true
+                  UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                  Name: "Name"
+                  WWN: "WWN"
+                  PathID: "PathID"
+                  RealPath: "RealPath"
+                  HasChildren: true
+                  Empty: true
+                  Serial: "Serial"
+                  Type: "Type"
+                  ID: 1
+                  DeletedAt: "DeletedAt"
+                  Filesystem: "Filesystem"
+                  UUID: "UUID"
+                  Cache: true
+                DiskID: 1
+              CreatedAt: "2000-01-23T04:56:07.000+00:00"
+              ID: 5
+              DeletedAt: "DeletedAt"
+              UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+              Name: "Name"
+            ECDataChunks: 9
+            ObjectStoreID: 6
+            CrushRootID: 4
+            ID: 9
             DeletedAt: "DeletedAt"
+          - Replicated: 9
+            PoolID: 8
+            CreatedAt: "2000-01-23T04:56:07.000+00:00"
             ECCodingChunks: 5
             UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+            CephfsID: 5
+            Type: "Type"
+            CrushRoot:
+              ParentID: 1
+              Status: "Status"
+              Osds:
+              - Status: "Status"
+                ClusterID: 2
+                In: true
+                CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                Name: "Name"
+                OsdID: 7
+                CrushRootID: 7
+                ID: 6
+                Up: true
+                DeletedAt: "DeletedAt"
+                Disk:
+                  DeviceModel: "DeviceModel"
+                  IsRoot: true
+                  MBytes: 1
+                  Encrypted: true
+                  CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                  Host:
+                    public_ip: "public_ip"
+                    OS: "OS"
+                    CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                    Vendor: "Vendor"
+                    admin_ip: "admin_ip"
+                    UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                    Cores: 3
+                    HostModel: "HostModel"
+                    Serial: "Serial"
+                    Type: "Type"
+                    CPUs: 9
+                    MemoryMB: 4
+                    ID: 2
+                    DeletedAt: "DeletedAt"
+                    cluster_ip: "cluster_ip"
+                    host_name: "host_name"
+                    CPUModel: "CPUModel"
+                  Vendor: "Vendor"
+                  HostID: 7
+                  Rotational: true
+                  UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                  Name: "Name"
+                  WWN: "WWN"
+                  PathID: "PathID"
+                  RealPath: "RealPath"
+                  HasChildren: true
+                  Empty: true
+                  Serial: "Serial"
+                  Type: "Type"
+                  ID: 1
+                  DeletedAt: "DeletedAt"
+                  Filesystem: "Filesystem"
+                  UUID: "UUID"
+                  Cache: true
+                DiskID: 1
+              - Status: "Status"
+                ClusterID: 2
+                In: true
+                CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                Name: "Name"
+                OsdID: 7
+                CrushRootID: 7
+                ID: 6
+                Up: true
+                DeletedAt: "DeletedAt"
+                Disk:
+                  DeviceModel: "DeviceModel"
+                  IsRoot: true
+                  MBytes: 1
+                  Encrypted: true
+                  CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                  Host:
+                    public_ip: "public_ip"
+                    OS: "OS"
+                    CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                    Vendor: "Vendor"
+                    admin_ip: "admin_ip"
+                    UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                    Cores: 3
+                    HostModel: "HostModel"
+                    Serial: "Serial"
+                    Type: "Type"
+                    CPUs: 9
+                    MemoryMB: 4
+                    ID: 2
+                    DeletedAt: "DeletedAt"
+                    cluster_ip: "cluster_ip"
+                    host_name: "host_name"
+                    CPUModel: "CPUModel"
+                  Vendor: "Vendor"
+                  HostID: 7
+                  Rotational: true
+                  UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                  Name: "Name"
+                  WWN: "WWN"
+                  PathID: "PathID"
+                  RealPath: "RealPath"
+                  HasChildren: true
+                  Empty: true
+                  Serial: "Serial"
+                  Type: "Type"
+                  ID: 1
+                  DeletedAt: "DeletedAt"
+                  Filesystem: "Filesystem"
+                  UUID: "UUID"
+                  Cache: true
+                DiskID: 1
+              CreatedAt: "2000-01-23T04:56:07.000+00:00"
+              ID: 5
+              DeletedAt: "DeletedAt"
+              UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+              Name: "Name"
+            ECDataChunks: 9
+            ObjectStoreID: 6
+            CrushRootID: 4
+            ID: 9
+            DeletedAt: "DeletedAt"
         UpdatedAt: "2000-01-23T04:56:07.000+00:00"
         max_size: "max_size"
         cap_usage: "cap_usage"
@@ -1839,26 +2726,260 @@ definitions:
           UpdatedAt: "2000-01-23T04:56:07.000+00:00"
           Name: "Name"
           PoolProperties:
-          - Type: "Type"
-            Replicated: 9
+          - Replicated: 9
+            PoolID: 8
             CreatedAt: "2000-01-23T04:56:07.000+00:00"
-            ECDataChunks: 5
-            ObjectStoreID: 7
-            CrushRootID: 1
-            ID: 2
-            DeletedAt: "DeletedAt"
             ECCodingChunks: 5
             UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-          - Type: "Type"
-            Replicated: 9
-            CreatedAt: "2000-01-23T04:56:07.000+00:00"
-            ECDataChunks: 5
-            ObjectStoreID: 7
-            CrushRootID: 1
-            ID: 2
+            CephfsID: 5
+            Type: "Type"
+            CrushRoot:
+              ParentID: 1
+              Status: "Status"
+              Osds:
+              - Status: "Status"
+                ClusterID: 2
+                In: true
+                CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                Name: "Name"
+                OsdID: 7
+                CrushRootID: 7
+                ID: 6
+                Up: true
+                DeletedAt: "DeletedAt"
+                Disk:
+                  DeviceModel: "DeviceModel"
+                  IsRoot: true
+                  MBytes: 1
+                  Encrypted: true
+                  CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                  Host:
+                    public_ip: "public_ip"
+                    OS: "OS"
+                    CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                    Vendor: "Vendor"
+                    admin_ip: "admin_ip"
+                    UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                    Cores: 3
+                    HostModel: "HostModel"
+                    Serial: "Serial"
+                    Type: "Type"
+                    CPUs: 9
+                    MemoryMB: 4
+                    ID: 2
+                    DeletedAt: "DeletedAt"
+                    cluster_ip: "cluster_ip"
+                    host_name: "host_name"
+                    CPUModel: "CPUModel"
+                  Vendor: "Vendor"
+                  HostID: 7
+                  Rotational: true
+                  UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                  Name: "Name"
+                  WWN: "WWN"
+                  PathID: "PathID"
+                  RealPath: "RealPath"
+                  HasChildren: true
+                  Empty: true
+                  Serial: "Serial"
+                  Type: "Type"
+                  ID: 1
+                  DeletedAt: "DeletedAt"
+                  Filesystem: "Filesystem"
+                  UUID: "UUID"
+                  Cache: true
+                DiskID: 1
+              - Status: "Status"
+                ClusterID: 2
+                In: true
+                CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                Name: "Name"
+                OsdID: 7
+                CrushRootID: 7
+                ID: 6
+                Up: true
+                DeletedAt: "DeletedAt"
+                Disk:
+                  DeviceModel: "DeviceModel"
+                  IsRoot: true
+                  MBytes: 1
+                  Encrypted: true
+                  CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                  Host:
+                    public_ip: "public_ip"
+                    OS: "OS"
+                    CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                    Vendor: "Vendor"
+                    admin_ip: "admin_ip"
+                    UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                    Cores: 3
+                    HostModel: "HostModel"
+                    Serial: "Serial"
+                    Type: "Type"
+                    CPUs: 9
+                    MemoryMB: 4
+                    ID: 2
+                    DeletedAt: "DeletedAt"
+                    cluster_ip: "cluster_ip"
+                    host_name: "host_name"
+                    CPUModel: "CPUModel"
+                  Vendor: "Vendor"
+                  HostID: 7
+                  Rotational: true
+                  UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                  Name: "Name"
+                  WWN: "WWN"
+                  PathID: "PathID"
+                  RealPath: "RealPath"
+                  HasChildren: true
+                  Empty: true
+                  Serial: "Serial"
+                  Type: "Type"
+                  ID: 1
+                  DeletedAt: "DeletedAt"
+                  Filesystem: "Filesystem"
+                  UUID: "UUID"
+                  Cache: true
+                DiskID: 1
+              CreatedAt: "2000-01-23T04:56:07.000+00:00"
+              ID: 5
+              DeletedAt: "DeletedAt"
+              UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+              Name: "Name"
+            ECDataChunks: 9
+            ObjectStoreID: 6
+            CrushRootID: 4
+            ID: 9
             DeletedAt: "DeletedAt"
+          - Replicated: 9
+            PoolID: 8
+            CreatedAt: "2000-01-23T04:56:07.000+00:00"
             ECCodingChunks: 5
             UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+            CephfsID: 5
+            Type: "Type"
+            CrushRoot:
+              ParentID: 1
+              Status: "Status"
+              Osds:
+              - Status: "Status"
+                ClusterID: 2
+                In: true
+                CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                Name: "Name"
+                OsdID: 7
+                CrushRootID: 7
+                ID: 6
+                Up: true
+                DeletedAt: "DeletedAt"
+                Disk:
+                  DeviceModel: "DeviceModel"
+                  IsRoot: true
+                  MBytes: 1
+                  Encrypted: true
+                  CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                  Host:
+                    public_ip: "public_ip"
+                    OS: "OS"
+                    CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                    Vendor: "Vendor"
+                    admin_ip: "admin_ip"
+                    UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                    Cores: 3
+                    HostModel: "HostModel"
+                    Serial: "Serial"
+                    Type: "Type"
+                    CPUs: 9
+                    MemoryMB: 4
+                    ID: 2
+                    DeletedAt: "DeletedAt"
+                    cluster_ip: "cluster_ip"
+                    host_name: "host_name"
+                    CPUModel: "CPUModel"
+                  Vendor: "Vendor"
+                  HostID: 7
+                  Rotational: true
+                  UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                  Name: "Name"
+                  WWN: "WWN"
+                  PathID: "PathID"
+                  RealPath: "RealPath"
+                  HasChildren: true
+                  Empty: true
+                  Serial: "Serial"
+                  Type: "Type"
+                  ID: 1
+                  DeletedAt: "DeletedAt"
+                  Filesystem: "Filesystem"
+                  UUID: "UUID"
+                  Cache: true
+                DiskID: 1
+              - Status: "Status"
+                ClusterID: 2
+                In: true
+                CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                Name: "Name"
+                OsdID: 7
+                CrushRootID: 7
+                ID: 6
+                Up: true
+                DeletedAt: "DeletedAt"
+                Disk:
+                  DeviceModel: "DeviceModel"
+                  IsRoot: true
+                  MBytes: 1
+                  Encrypted: true
+                  CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                  Host:
+                    public_ip: "public_ip"
+                    OS: "OS"
+                    CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                    Vendor: "Vendor"
+                    admin_ip: "admin_ip"
+                    UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                    Cores: 3
+                    HostModel: "HostModel"
+                    Serial: "Serial"
+                    Type: "Type"
+                    CPUs: 9
+                    MemoryMB: 4
+                    ID: 2
+                    DeletedAt: "DeletedAt"
+                    cluster_ip: "cluster_ip"
+                    host_name: "host_name"
+                    CPUModel: "CPUModel"
+                  Vendor: "Vendor"
+                  HostID: 7
+                  Rotational: true
+                  UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                  Name: "Name"
+                  WWN: "WWN"
+                  PathID: "PathID"
+                  RealPath: "RealPath"
+                  HasChildren: true
+                  Empty: true
+                  Serial: "Serial"
+                  Type: "Type"
+                  ID: 1
+                  DeletedAt: "DeletedAt"
+                  Filesystem: "Filesystem"
+                  UUID: "UUID"
+                  Cache: true
+                DiskID: 1
+              CreatedAt: "2000-01-23T04:56:07.000+00:00"
+              ID: 5
+              DeletedAt: "DeletedAt"
+              UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+              Name: "Name"
+            ECDataChunks: 9
+            ObjectStoreID: 6
+            CrushRootID: 4
+            ID: 9
+            DeletedAt: "DeletedAt"
         CreatedAt: "2000-01-23T04:56:07.000+00:00"
         ObjectBuckets:
         - null
@@ -1888,7 +3009,7 @@ definitions:
         type: "string"
       ID:
         type: "integer"
-        format: "integer"
+        format: "int64"
       Name:
         type: "string"
       ObjectBuckets:
@@ -1899,7 +3020,7 @@ definitions:
         $ref: "#/definitions/models.ObjectStore"
       ObjectStoreID:
         type: "integer"
-        format: "integer"
+        format: "int64"
       Status:
         type: "string"
       UpdatedAt:
@@ -1917,26 +3038,260 @@ definitions:
         UpdatedAt: "2000-01-23T04:56:07.000+00:00"
         Name: "Name"
         PoolProperties:
-        - Type: "Type"
-          Replicated: 9
+        - Replicated: 9
+          PoolID: 8
           CreatedAt: "2000-01-23T04:56:07.000+00:00"
-          ECDataChunks: 5
-          ObjectStoreID: 7
-          CrushRootID: 1
-          ID: 2
-          DeletedAt: "DeletedAt"
           ECCodingChunks: 5
           UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-        - Type: "Type"
-          Replicated: 9
-          CreatedAt: "2000-01-23T04:56:07.000+00:00"
-          ECDataChunks: 5
-          ObjectStoreID: 7
-          CrushRootID: 1
-          ID: 2
+          CephfsID: 5
+          Type: "Type"
+          CrushRoot:
+            ParentID: 1
+            Status: "Status"
+            Osds:
+            - Status: "Status"
+              ClusterID: 2
+              In: true
+              CreatedAt: "2000-01-23T04:56:07.000+00:00"
+              UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+              Name: "Name"
+              OsdID: 7
+              CrushRootID: 7
+              ID: 6
+              Up: true
+              DeletedAt: "DeletedAt"
+              Disk:
+                DeviceModel: "DeviceModel"
+                IsRoot: true
+                MBytes: 1
+                Encrypted: true
+                CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                Host:
+                  public_ip: "public_ip"
+                  OS: "OS"
+                  CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                  Vendor: "Vendor"
+                  admin_ip: "admin_ip"
+                  UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                  Cores: 3
+                  HostModel: "HostModel"
+                  Serial: "Serial"
+                  Type: "Type"
+                  CPUs: 9
+                  MemoryMB: 4
+                  ID: 2
+                  DeletedAt: "DeletedAt"
+                  cluster_ip: "cluster_ip"
+                  host_name: "host_name"
+                  CPUModel: "CPUModel"
+                Vendor: "Vendor"
+                HostID: 7
+                Rotational: true
+                UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                Name: "Name"
+                WWN: "WWN"
+                PathID: "PathID"
+                RealPath: "RealPath"
+                HasChildren: true
+                Empty: true
+                Serial: "Serial"
+                Type: "Type"
+                ID: 1
+                DeletedAt: "DeletedAt"
+                Filesystem: "Filesystem"
+                UUID: "UUID"
+                Cache: true
+              DiskID: 1
+            - Status: "Status"
+              ClusterID: 2
+              In: true
+              CreatedAt: "2000-01-23T04:56:07.000+00:00"
+              UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+              Name: "Name"
+              OsdID: 7
+              CrushRootID: 7
+              ID: 6
+              Up: true
+              DeletedAt: "DeletedAt"
+              Disk:
+                DeviceModel: "DeviceModel"
+                IsRoot: true
+                MBytes: 1
+                Encrypted: true
+                CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                Host:
+                  public_ip: "public_ip"
+                  OS: "OS"
+                  CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                  Vendor: "Vendor"
+                  admin_ip: "admin_ip"
+                  UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                  Cores: 3
+                  HostModel: "HostModel"
+                  Serial: "Serial"
+                  Type: "Type"
+                  CPUs: 9
+                  MemoryMB: 4
+                  ID: 2
+                  DeletedAt: "DeletedAt"
+                  cluster_ip: "cluster_ip"
+                  host_name: "host_name"
+                  CPUModel: "CPUModel"
+                Vendor: "Vendor"
+                HostID: 7
+                Rotational: true
+                UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                Name: "Name"
+                WWN: "WWN"
+                PathID: "PathID"
+                RealPath: "RealPath"
+                HasChildren: true
+                Empty: true
+                Serial: "Serial"
+                Type: "Type"
+                ID: 1
+                DeletedAt: "DeletedAt"
+                Filesystem: "Filesystem"
+                UUID: "UUID"
+                Cache: true
+              DiskID: 1
+            CreatedAt: "2000-01-23T04:56:07.000+00:00"
+            ID: 5
+            DeletedAt: "DeletedAt"
+            UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+            Name: "Name"
+          ECDataChunks: 9
+          ObjectStoreID: 6
+          CrushRootID: 4
+          ID: 9
           DeletedAt: "DeletedAt"
+        - Replicated: 9
+          PoolID: 8
+          CreatedAt: "2000-01-23T04:56:07.000+00:00"
           ECCodingChunks: 5
           UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+          CephfsID: 5
+          Type: "Type"
+          CrushRoot:
+            ParentID: 1
+            Status: "Status"
+            Osds:
+            - Status: "Status"
+              ClusterID: 2
+              In: true
+              CreatedAt: "2000-01-23T04:56:07.000+00:00"
+              UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+              Name: "Name"
+              OsdID: 7
+              CrushRootID: 7
+              ID: 6
+              Up: true
+              DeletedAt: "DeletedAt"
+              Disk:
+                DeviceModel: "DeviceModel"
+                IsRoot: true
+                MBytes: 1
+                Encrypted: true
+                CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                Host:
+                  public_ip: "public_ip"
+                  OS: "OS"
+                  CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                  Vendor: "Vendor"
+                  admin_ip: "admin_ip"
+                  UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                  Cores: 3
+                  HostModel: "HostModel"
+                  Serial: "Serial"
+                  Type: "Type"
+                  CPUs: 9
+                  MemoryMB: 4
+                  ID: 2
+                  DeletedAt: "DeletedAt"
+                  cluster_ip: "cluster_ip"
+                  host_name: "host_name"
+                  CPUModel: "CPUModel"
+                Vendor: "Vendor"
+                HostID: 7
+                Rotational: true
+                UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                Name: "Name"
+                WWN: "WWN"
+                PathID: "PathID"
+                RealPath: "RealPath"
+                HasChildren: true
+                Empty: true
+                Serial: "Serial"
+                Type: "Type"
+                ID: 1
+                DeletedAt: "DeletedAt"
+                Filesystem: "Filesystem"
+                UUID: "UUID"
+                Cache: true
+              DiskID: 1
+            - Status: "Status"
+              ClusterID: 2
+              In: true
+              CreatedAt: "2000-01-23T04:56:07.000+00:00"
+              UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+              Name: "Name"
+              OsdID: 7
+              CrushRootID: 7
+              ID: 6
+              Up: true
+              DeletedAt: "DeletedAt"
+              Disk:
+                DeviceModel: "DeviceModel"
+                IsRoot: true
+                MBytes: 1
+                Encrypted: true
+                CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                Host:
+                  public_ip: "public_ip"
+                  OS: "OS"
+                  CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                  Vendor: "Vendor"
+                  admin_ip: "admin_ip"
+                  UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                  Cores: 3
+                  HostModel: "HostModel"
+                  Serial: "Serial"
+                  Type: "Type"
+                  CPUs: 9
+                  MemoryMB: 4
+                  ID: 2
+                  DeletedAt: "DeletedAt"
+                  cluster_ip: "cluster_ip"
+                  host_name: "host_name"
+                  CPUModel: "CPUModel"
+                Vendor: "Vendor"
+                HostID: 7
+                Rotational: true
+                UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                Name: "Name"
+                WWN: "WWN"
+                PathID: "PathID"
+                RealPath: "RealPath"
+                HasChildren: true
+                Empty: true
+                Serial: "Serial"
+                Type: "Type"
+                ID: 1
+                DeletedAt: "DeletedAt"
+                Filesystem: "Filesystem"
+                UUID: "UUID"
+                Cache: true
+              DiskID: 1
+            CreatedAt: "2000-01-23T04:56:07.000+00:00"
+            ID: 5
+            DeletedAt: "DeletedAt"
+            UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+            Name: "Name"
+          ECDataChunks: 9
+          ObjectStoreID: 6
+          CrushRootID: 4
+          ID: 9
+          DeletedAt: "DeletedAt"
       CreatedAt: "2000-01-23T04:56:07.000+00:00"
       ObjectBuckets:
       - null
@@ -1965,7 +3320,7 @@ definitions:
         type: "string"
       ID:
         type: "integer"
-        format: "integer"
+        format: "int64"
       Name:
         type: "string"
       PoolProperties:
@@ -1992,26 +3347,260 @@ definitions:
       UpdatedAt: "2000-01-23T04:56:07.000+00:00"
       Name: "Name"
       PoolProperties:
-      - Type: "Type"
-        Replicated: 9
+      - Replicated: 9
+        PoolID: 8
         CreatedAt: "2000-01-23T04:56:07.000+00:00"
-        ECDataChunks: 5
-        ObjectStoreID: 7
-        CrushRootID: 1
-        ID: 2
-        DeletedAt: "DeletedAt"
         ECCodingChunks: 5
         UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-      - Type: "Type"
-        Replicated: 9
-        CreatedAt: "2000-01-23T04:56:07.000+00:00"
-        ECDataChunks: 5
-        ObjectStoreID: 7
-        CrushRootID: 1
-        ID: 2
+        CephfsID: 5
+        Type: "Type"
+        CrushRoot:
+          ParentID: 1
+          Status: "Status"
+          Osds:
+          - Status: "Status"
+            ClusterID: 2
+            In: true
+            CreatedAt: "2000-01-23T04:56:07.000+00:00"
+            UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+            Name: "Name"
+            OsdID: 7
+            CrushRootID: 7
+            ID: 6
+            Up: true
+            DeletedAt: "DeletedAt"
+            Disk:
+              DeviceModel: "DeviceModel"
+              IsRoot: true
+              MBytes: 1
+              Encrypted: true
+              CreatedAt: "2000-01-23T04:56:07.000+00:00"
+              Host:
+                public_ip: "public_ip"
+                OS: "OS"
+                CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                Vendor: "Vendor"
+                admin_ip: "admin_ip"
+                UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                Cores: 3
+                HostModel: "HostModel"
+                Serial: "Serial"
+                Type: "Type"
+                CPUs: 9
+                MemoryMB: 4
+                ID: 2
+                DeletedAt: "DeletedAt"
+                cluster_ip: "cluster_ip"
+                host_name: "host_name"
+                CPUModel: "CPUModel"
+              Vendor: "Vendor"
+              HostID: 7
+              Rotational: true
+              UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+              Name: "Name"
+              WWN: "WWN"
+              PathID: "PathID"
+              RealPath: "RealPath"
+              HasChildren: true
+              Empty: true
+              Serial: "Serial"
+              Type: "Type"
+              ID: 1
+              DeletedAt: "DeletedAt"
+              Filesystem: "Filesystem"
+              UUID: "UUID"
+              Cache: true
+            DiskID: 1
+          - Status: "Status"
+            ClusterID: 2
+            In: true
+            CreatedAt: "2000-01-23T04:56:07.000+00:00"
+            UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+            Name: "Name"
+            OsdID: 7
+            CrushRootID: 7
+            ID: 6
+            Up: true
+            DeletedAt: "DeletedAt"
+            Disk:
+              DeviceModel: "DeviceModel"
+              IsRoot: true
+              MBytes: 1
+              Encrypted: true
+              CreatedAt: "2000-01-23T04:56:07.000+00:00"
+              Host:
+                public_ip: "public_ip"
+                OS: "OS"
+                CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                Vendor: "Vendor"
+                admin_ip: "admin_ip"
+                UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                Cores: 3
+                HostModel: "HostModel"
+                Serial: "Serial"
+                Type: "Type"
+                CPUs: 9
+                MemoryMB: 4
+                ID: 2
+                DeletedAt: "DeletedAt"
+                cluster_ip: "cluster_ip"
+                host_name: "host_name"
+                CPUModel: "CPUModel"
+              Vendor: "Vendor"
+              HostID: 7
+              Rotational: true
+              UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+              Name: "Name"
+              WWN: "WWN"
+              PathID: "PathID"
+              RealPath: "RealPath"
+              HasChildren: true
+              Empty: true
+              Serial: "Serial"
+              Type: "Type"
+              ID: 1
+              DeletedAt: "DeletedAt"
+              Filesystem: "Filesystem"
+              UUID: "UUID"
+              Cache: true
+            DiskID: 1
+          CreatedAt: "2000-01-23T04:56:07.000+00:00"
+          ID: 5
+          DeletedAt: "DeletedAt"
+          UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+          Name: "Name"
+        ECDataChunks: 9
+        ObjectStoreID: 6
+        CrushRootID: 4
+        ID: 9
         DeletedAt: "DeletedAt"
+      - Replicated: 9
+        PoolID: 8
+        CreatedAt: "2000-01-23T04:56:07.000+00:00"
         ECCodingChunks: 5
         UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+        CephfsID: 5
+        Type: "Type"
+        CrushRoot:
+          ParentID: 1
+          Status: "Status"
+          Osds:
+          - Status: "Status"
+            ClusterID: 2
+            In: true
+            CreatedAt: "2000-01-23T04:56:07.000+00:00"
+            UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+            Name: "Name"
+            OsdID: 7
+            CrushRootID: 7
+            ID: 6
+            Up: true
+            DeletedAt: "DeletedAt"
+            Disk:
+              DeviceModel: "DeviceModel"
+              IsRoot: true
+              MBytes: 1
+              Encrypted: true
+              CreatedAt: "2000-01-23T04:56:07.000+00:00"
+              Host:
+                public_ip: "public_ip"
+                OS: "OS"
+                CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                Vendor: "Vendor"
+                admin_ip: "admin_ip"
+                UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                Cores: 3
+                HostModel: "HostModel"
+                Serial: "Serial"
+                Type: "Type"
+                CPUs: 9
+                MemoryMB: 4
+                ID: 2
+                DeletedAt: "DeletedAt"
+                cluster_ip: "cluster_ip"
+                host_name: "host_name"
+                CPUModel: "CPUModel"
+              Vendor: "Vendor"
+              HostID: 7
+              Rotational: true
+              UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+              Name: "Name"
+              WWN: "WWN"
+              PathID: "PathID"
+              RealPath: "RealPath"
+              HasChildren: true
+              Empty: true
+              Serial: "Serial"
+              Type: "Type"
+              ID: 1
+              DeletedAt: "DeletedAt"
+              Filesystem: "Filesystem"
+              UUID: "UUID"
+              Cache: true
+            DiskID: 1
+          - Status: "Status"
+            ClusterID: 2
+            In: true
+            CreatedAt: "2000-01-23T04:56:07.000+00:00"
+            UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+            Name: "Name"
+            OsdID: 7
+            CrushRootID: 7
+            ID: 6
+            Up: true
+            DeletedAt: "DeletedAt"
+            Disk:
+              DeviceModel: "DeviceModel"
+              IsRoot: true
+              MBytes: 1
+              Encrypted: true
+              CreatedAt: "2000-01-23T04:56:07.000+00:00"
+              Host:
+                public_ip: "public_ip"
+                OS: "OS"
+                CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                Vendor: "Vendor"
+                admin_ip: "admin_ip"
+                UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                Cores: 3
+                HostModel: "HostModel"
+                Serial: "Serial"
+                Type: "Type"
+                CPUs: 9
+                MemoryMB: 4
+                ID: 2
+                DeletedAt: "DeletedAt"
+                cluster_ip: "cluster_ip"
+                host_name: "host_name"
+                CPUModel: "CPUModel"
+              Vendor: "Vendor"
+              HostID: 7
+              Rotational: true
+              UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+              Name: "Name"
+              WWN: "WWN"
+              PathID: "PathID"
+              RealPath: "RealPath"
+              HasChildren: true
+              Empty: true
+              Serial: "Serial"
+              Type: "Type"
+              ID: 1
+              DeletedAt: "DeletedAt"
+              Filesystem: "Filesystem"
+              UUID: "UUID"
+              Cache: true
+            DiskID: 1
+          CreatedAt: "2000-01-23T04:56:07.000+00:00"
+          ID: 5
+          DeletedAt: "DeletedAt"
+          UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+          Name: "Name"
+        ECDataChunks: 9
+        ObjectStoreID: 6
+        CrushRootID: 4
+        ID: 9
+        DeletedAt: "DeletedAt"
   models.OsUser:
     required:
     - "CreatedAt"
@@ -2041,7 +3630,7 @@ definitions:
         type: "string"
       ID:
         type: "integer"
-        format: "integer"
+        format: "int64"
       ObjectBuckets:
         type: "array"
         items:
@@ -2075,7 +3664,7 @@ definitions:
         $ref: "#/definitions/models.ObjectStore"
       object_store_id:
         type: "integer"
-        format: "integer"
+        format: "int64"
       sk:
         type: "string"
       status:
@@ -2098,26 +3687,260 @@ definitions:
         UpdatedAt: "2000-01-23T04:56:07.000+00:00"
         Name: "Name"
         PoolProperties:
-        - Type: "Type"
-          Replicated: 9
+        - Replicated: 9
+          PoolID: 8
           CreatedAt: "2000-01-23T04:56:07.000+00:00"
-          ECDataChunks: 5
-          ObjectStoreID: 7
-          CrushRootID: 1
-          ID: 2
-          DeletedAt: "DeletedAt"
           ECCodingChunks: 5
           UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-        - Type: "Type"
-          Replicated: 9
-          CreatedAt: "2000-01-23T04:56:07.000+00:00"
-          ECDataChunks: 5
-          ObjectStoreID: 7
-          CrushRootID: 1
-          ID: 2
+          CephfsID: 5
+          Type: "Type"
+          CrushRoot:
+            ParentID: 1
+            Status: "Status"
+            Osds:
+            - Status: "Status"
+              ClusterID: 2
+              In: true
+              CreatedAt: "2000-01-23T04:56:07.000+00:00"
+              UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+              Name: "Name"
+              OsdID: 7
+              CrushRootID: 7
+              ID: 6
+              Up: true
+              DeletedAt: "DeletedAt"
+              Disk:
+                DeviceModel: "DeviceModel"
+                IsRoot: true
+                MBytes: 1
+                Encrypted: true
+                CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                Host:
+                  public_ip: "public_ip"
+                  OS: "OS"
+                  CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                  Vendor: "Vendor"
+                  admin_ip: "admin_ip"
+                  UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                  Cores: 3
+                  HostModel: "HostModel"
+                  Serial: "Serial"
+                  Type: "Type"
+                  CPUs: 9
+                  MemoryMB: 4
+                  ID: 2
+                  DeletedAt: "DeletedAt"
+                  cluster_ip: "cluster_ip"
+                  host_name: "host_name"
+                  CPUModel: "CPUModel"
+                Vendor: "Vendor"
+                HostID: 7
+                Rotational: true
+                UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                Name: "Name"
+                WWN: "WWN"
+                PathID: "PathID"
+                RealPath: "RealPath"
+                HasChildren: true
+                Empty: true
+                Serial: "Serial"
+                Type: "Type"
+                ID: 1
+                DeletedAt: "DeletedAt"
+                Filesystem: "Filesystem"
+                UUID: "UUID"
+                Cache: true
+              DiskID: 1
+            - Status: "Status"
+              ClusterID: 2
+              In: true
+              CreatedAt: "2000-01-23T04:56:07.000+00:00"
+              UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+              Name: "Name"
+              OsdID: 7
+              CrushRootID: 7
+              ID: 6
+              Up: true
+              DeletedAt: "DeletedAt"
+              Disk:
+                DeviceModel: "DeviceModel"
+                IsRoot: true
+                MBytes: 1
+                Encrypted: true
+                CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                Host:
+                  public_ip: "public_ip"
+                  OS: "OS"
+                  CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                  Vendor: "Vendor"
+                  admin_ip: "admin_ip"
+                  UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                  Cores: 3
+                  HostModel: "HostModel"
+                  Serial: "Serial"
+                  Type: "Type"
+                  CPUs: 9
+                  MemoryMB: 4
+                  ID: 2
+                  DeletedAt: "DeletedAt"
+                  cluster_ip: "cluster_ip"
+                  host_name: "host_name"
+                  CPUModel: "CPUModel"
+                Vendor: "Vendor"
+                HostID: 7
+                Rotational: true
+                UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                Name: "Name"
+                WWN: "WWN"
+                PathID: "PathID"
+                RealPath: "RealPath"
+                HasChildren: true
+                Empty: true
+                Serial: "Serial"
+                Type: "Type"
+                ID: 1
+                DeletedAt: "DeletedAt"
+                Filesystem: "Filesystem"
+                UUID: "UUID"
+                Cache: true
+              DiskID: 1
+            CreatedAt: "2000-01-23T04:56:07.000+00:00"
+            ID: 5
+            DeletedAt: "DeletedAt"
+            UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+            Name: "Name"
+          ECDataChunks: 9
+          ObjectStoreID: 6
+          CrushRootID: 4
+          ID: 9
           DeletedAt: "DeletedAt"
+        - Replicated: 9
+          PoolID: 8
+          CreatedAt: "2000-01-23T04:56:07.000+00:00"
           ECCodingChunks: 5
           UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+          CephfsID: 5
+          Type: "Type"
+          CrushRoot:
+            ParentID: 1
+            Status: "Status"
+            Osds:
+            - Status: "Status"
+              ClusterID: 2
+              In: true
+              CreatedAt: "2000-01-23T04:56:07.000+00:00"
+              UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+              Name: "Name"
+              OsdID: 7
+              CrushRootID: 7
+              ID: 6
+              Up: true
+              DeletedAt: "DeletedAt"
+              Disk:
+                DeviceModel: "DeviceModel"
+                IsRoot: true
+                MBytes: 1
+                Encrypted: true
+                CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                Host:
+                  public_ip: "public_ip"
+                  OS: "OS"
+                  CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                  Vendor: "Vendor"
+                  admin_ip: "admin_ip"
+                  UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                  Cores: 3
+                  HostModel: "HostModel"
+                  Serial: "Serial"
+                  Type: "Type"
+                  CPUs: 9
+                  MemoryMB: 4
+                  ID: 2
+                  DeletedAt: "DeletedAt"
+                  cluster_ip: "cluster_ip"
+                  host_name: "host_name"
+                  CPUModel: "CPUModel"
+                Vendor: "Vendor"
+                HostID: 7
+                Rotational: true
+                UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                Name: "Name"
+                WWN: "WWN"
+                PathID: "PathID"
+                RealPath: "RealPath"
+                HasChildren: true
+                Empty: true
+                Serial: "Serial"
+                Type: "Type"
+                ID: 1
+                DeletedAt: "DeletedAt"
+                Filesystem: "Filesystem"
+                UUID: "UUID"
+                Cache: true
+              DiskID: 1
+            - Status: "Status"
+              ClusterID: 2
+              In: true
+              CreatedAt: "2000-01-23T04:56:07.000+00:00"
+              UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+              Name: "Name"
+              OsdID: 7
+              CrushRootID: 7
+              ID: 6
+              Up: true
+              DeletedAt: "DeletedAt"
+              Disk:
+                DeviceModel: "DeviceModel"
+                IsRoot: true
+                MBytes: 1
+                Encrypted: true
+                CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                Host:
+                  public_ip: "public_ip"
+                  OS: "OS"
+                  CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                  Vendor: "Vendor"
+                  admin_ip: "admin_ip"
+                  UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                  Cores: 3
+                  HostModel: "HostModel"
+                  Serial: "Serial"
+                  Type: "Type"
+                  CPUs: 9
+                  MemoryMB: 4
+                  ID: 2
+                  DeletedAt: "DeletedAt"
+                  cluster_ip: "cluster_ip"
+                  host_name: "host_name"
+                  CPUModel: "CPUModel"
+                Vendor: "Vendor"
+                HostID: 7
+                Rotational: true
+                UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                Name: "Name"
+                WWN: "WWN"
+                PathID: "PathID"
+                RealPath: "RealPath"
+                HasChildren: true
+                Empty: true
+                Serial: "Serial"
+                Type: "Type"
+                ID: 1
+                DeletedAt: "DeletedAt"
+                Filesystem: "Filesystem"
+                UUID: "UUID"
+                Cache: true
+              DiskID: 1
+            CreatedAt: "2000-01-23T04:56:07.000+00:00"
+            ID: 5
+            DeletedAt: "DeletedAt"
+            UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+            Name: "Name"
+          ECDataChunks: 9
+          ObjectStoreID: 6
+          CrushRootID: 4
+          ID: 9
+          DeletedAt: "DeletedAt"
       UpdatedAt: "2000-01-23T04:56:07.000+00:00"
       max_size: "max_size"
       cap_usage: "cap_usage"
@@ -2149,23 +3972,23 @@ definitions:
     properties:
       ClusterID:
         type: "integer"
-        format: "integer"
+        format: "int64"
       CreatedAt:
         type: "string"
         format: "date-time"
       CrushRootID:
         type: "integer"
-        format: "integer"
+        format: "int64"
       DeletedAt:
         type: "string"
       Disk:
         $ref: "#/definitions/models.Disk"
       DiskID:
         type: "integer"
-        format: "integer"
+        format: "int64"
       ID:
         type: "integer"
-        format: "integer"
+        format: "int64"
       In:
         type: "boolean"
       Name:
@@ -2182,20 +4005,20 @@ definitions:
         format: "date-time"
     example:
       Status: "Status"
-      ClusterID: 6
+      ClusterID: 2
       In: true
       CreatedAt: "2000-01-23T04:56:07.000+00:00"
       UpdatedAt: "2000-01-23T04:56:07.000+00:00"
       Name: "Name"
-      OsdID: 1
-      CrushRootID: 1
-      ID: 7
+      OsdID: 7
+      CrushRootID: 7
+      ID: 6
       Up: true
       DeletedAt: "DeletedAt"
       Disk:
         DeviceModel: "DeviceModel"
         IsRoot: true
-        MBytes: 2
+        MBytes: 1
         Encrypted: true
         CreatedAt: "2000-01-23T04:56:07.000+00:00"
         Host:
@@ -2205,19 +4028,19 @@ definitions:
           Vendor: "Vendor"
           admin_ip: "admin_ip"
           UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-          Cores: 5
+          Cores: 3
           HostModel: "HostModel"
           Serial: "Serial"
           Type: "Type"
-          CPUs: 5
-          MemoryMB: 7
+          CPUs: 9
+          MemoryMB: 4
           ID: 2
           DeletedAt: "DeletedAt"
           cluster_ip: "cluster_ip"
           host_name: "host_name"
           CPUModel: "CPUModel"
         Vendor: "Vendor"
-        HostID: 9
+        HostID: 7
         Rotational: true
         UpdatedAt: "2000-01-23T04:56:07.000+00:00"
         Name: "Name"
@@ -2228,13 +4051,207 @@ definitions:
         Empty: true
         Serial: "Serial"
         Type: "Type"
-        ID: 3
+        ID: 1
         DeletedAt: "DeletedAt"
         Filesystem: "Filesystem"
         UUID: "UUID"
-      DiskID: 4
+        Cache: true
+      DiskID: 1
+  models.Pool:
+    required:
+    - "BlockPoolProperty"
+    - "CreatedAt"
+    - "DeletedAt"
+    - "ErasureCodeProfile"
+    - "ID"
+    - "Name"
+    - "PgAutoscaleMode"
+    - "PgNum"
+    - "PoolID"
+    - "PoolName"
+    - "State"
+    - "Status"
+    - "Type"
+    - "UpdatedAt"
+    properties:
+      BlockPoolProperty:
+        $ref: "#/definitions/models.PoolProperty"
+      CreatedAt:
+        type: "string"
+        format: "date-time"
+      DeletedAt:
+        type: "string"
+      ErasureCodeProfile:
+        type: "string"
+      ID:
+        type: "integer"
+        format: "int64"
+      Name:
+        type: "string"
+      PgAutoscaleMode:
+        type: "boolean"
+      PgNum:
+        type: "integer"
+        format: "int64"
+      PoolID:
+        type: "integer"
+        format: "int32"
+      PoolName:
+        type: "string"
+      State:
+        type: "string"
+      Status:
+        type: "string"
+      Type:
+        type: "string"
+      UpdatedAt:
+        type: "string"
+        format: "date-time"
+    example:
+      Status: "Status"
+      PoolID: 6
+      CreatedAt: "2000-01-23T04:56:07.000+00:00"
+      UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+      PgAutoscaleMode: true
+      Name: "Name"
+      BlockPoolProperty:
+        Replicated: 9
+        PoolID: 8
+        CreatedAt: "2000-01-23T04:56:07.000+00:00"
+        ECCodingChunks: 5
+        UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+        CephfsID: 5
+        Type: "Type"
+        CrushRoot:
+          ParentID: 1
+          Status: "Status"
+          Osds:
+          - Status: "Status"
+            ClusterID: 2
+            In: true
+            CreatedAt: "2000-01-23T04:56:07.000+00:00"
+            UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+            Name: "Name"
+            OsdID: 7
+            CrushRootID: 7
+            ID: 6
+            Up: true
+            DeletedAt: "DeletedAt"
+            Disk:
+              DeviceModel: "DeviceModel"
+              IsRoot: true
+              MBytes: 1
+              Encrypted: true
+              CreatedAt: "2000-01-23T04:56:07.000+00:00"
+              Host:
+                public_ip: "public_ip"
+                OS: "OS"
+                CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                Vendor: "Vendor"
+                admin_ip: "admin_ip"
+                UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                Cores: 3
+                HostModel: "HostModel"
+                Serial: "Serial"
+                Type: "Type"
+                CPUs: 9
+                MemoryMB: 4
+                ID: 2
+                DeletedAt: "DeletedAt"
+                cluster_ip: "cluster_ip"
+                host_name: "host_name"
+                CPUModel: "CPUModel"
+              Vendor: "Vendor"
+              HostID: 7
+              Rotational: true
+              UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+              Name: "Name"
+              WWN: "WWN"
+              PathID: "PathID"
+              RealPath: "RealPath"
+              HasChildren: true
+              Empty: true
+              Serial: "Serial"
+              Type: "Type"
+              ID: 1
+              DeletedAt: "DeletedAt"
+              Filesystem: "Filesystem"
+              UUID: "UUID"
+              Cache: true
+            DiskID: 1
+          - Status: "Status"
+            ClusterID: 2
+            In: true
+            CreatedAt: "2000-01-23T04:56:07.000+00:00"
+            UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+            Name: "Name"
+            OsdID: 7
+            CrushRootID: 7
+            ID: 6
+            Up: true
+            DeletedAt: "DeletedAt"
+            Disk:
+              DeviceModel: "DeviceModel"
+              IsRoot: true
+              MBytes: 1
+              Encrypted: true
+              CreatedAt: "2000-01-23T04:56:07.000+00:00"
+              Host:
+                public_ip: "public_ip"
+                OS: "OS"
+                CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                Vendor: "Vendor"
+                admin_ip: "admin_ip"
+                UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                Cores: 3
+                HostModel: "HostModel"
+                Serial: "Serial"
+                Type: "Type"
+                CPUs: 9
+                MemoryMB: 4
+                ID: 2
+                DeletedAt: "DeletedAt"
+                cluster_ip: "cluster_ip"
+                host_name: "host_name"
+                CPUModel: "CPUModel"
+              Vendor: "Vendor"
+              HostID: 7
+              Rotational: true
+              UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+              Name: "Name"
+              WWN: "WWN"
+              PathID: "PathID"
+              RealPath: "RealPath"
+              HasChildren: true
+              Empty: true
+              Serial: "Serial"
+              Type: "Type"
+              ID: 1
+              DeletedAt: "DeletedAt"
+              Filesystem: "Filesystem"
+              UUID: "UUID"
+              Cache: true
+            DiskID: 1
+          CreatedAt: "2000-01-23T04:56:07.000+00:00"
+          ID: 5
+          DeletedAt: "DeletedAt"
+          UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+          Name: "Name"
+        ECDataChunks: 9
+        ObjectStoreID: 6
+        CrushRootID: 4
+        ID: 9
+        DeletedAt: "DeletedAt"
+      Type: "Type"
+      PoolName: "PoolName"
+      State: "State"
+      ErasureCodeProfile: "ErasureCodeProfile"
+      PgNum: 3
+      ID: 6
+      DeletedAt: "DeletedAt"
   models.PoolProperty:
     required:
+    - "CephfsID"
     - "CreatedAt"
     - "CrushRoot"
     - "CrushRootID"
@@ -2243,10 +4260,14 @@ definitions:
     - "ECDataChunks"
     - "ID"
     - "ObjectStoreID"
+    - "PoolID"
     - "Replicated"
     - "Type"
     - "UpdatedAt"
     properties:
+      CephfsID:
+        type: "integer"
+        format: "int64"
       CreatedAt:
         type: "string"
         format: "date-time"
@@ -2254,40 +4275,370 @@ definitions:
         $ref: "#/definitions/models.CrushRoot"
       CrushRootID:
         type: "integer"
-        format: "integer"
+        format: "int64"
       DeletedAt:
         type: "string"
       ECCodingChunks:
         type: "integer"
-        format: "integer"
+        format: "int64"
       ECDataChunks:
         type: "integer"
-        format: "integer"
+        format: "int64"
       ID:
         type: "integer"
-        format: "integer"
+        format: "int64"
       ObjectStoreID:
         type: "integer"
-        format: "integer"
+        format: "int64"
+      PoolID:
+        type: "integer"
+        format: "int64"
       Replicated:
         type: "integer"
-        format: "integer"
+        format: "int64"
       Type:
         type: "string"
       UpdatedAt:
         type: "string"
         format: "date-time"
     example:
-      Type: "Type"
       Replicated: 9
+      PoolID: 8
       CreatedAt: "2000-01-23T04:56:07.000+00:00"
-      ECDataChunks: 5
-      ObjectStoreID: 7
-      CrushRootID: 1
-      ID: 2
-      DeletedAt: "DeletedAt"
       ECCodingChunks: 5
       UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+      CephfsID: 5
+      Type: "Type"
+      CrushRoot:
+        ParentID: 1
+        Status: "Status"
+        Osds:
+        - Status: "Status"
+          ClusterID: 2
+          In: true
+          CreatedAt: "2000-01-23T04:56:07.000+00:00"
+          UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+          Name: "Name"
+          OsdID: 7
+          CrushRootID: 7
+          ID: 6
+          Up: true
+          DeletedAt: "DeletedAt"
+          Disk:
+            DeviceModel: "DeviceModel"
+            IsRoot: true
+            MBytes: 1
+            Encrypted: true
+            CreatedAt: "2000-01-23T04:56:07.000+00:00"
+            Host:
+              public_ip: "public_ip"
+              OS: "OS"
+              CreatedAt: "2000-01-23T04:56:07.000+00:00"
+              Vendor: "Vendor"
+              admin_ip: "admin_ip"
+              UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+              Cores: 3
+              HostModel: "HostModel"
+              Serial: "Serial"
+              Type: "Type"
+              CPUs: 9
+              MemoryMB: 4
+              ID: 2
+              DeletedAt: "DeletedAt"
+              cluster_ip: "cluster_ip"
+              host_name: "host_name"
+              CPUModel: "CPUModel"
+            Vendor: "Vendor"
+            HostID: 7
+            Rotational: true
+            UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+            Name: "Name"
+            WWN: "WWN"
+            PathID: "PathID"
+            RealPath: "RealPath"
+            HasChildren: true
+            Empty: true
+            Serial: "Serial"
+            Type: "Type"
+            ID: 1
+            DeletedAt: "DeletedAt"
+            Filesystem: "Filesystem"
+            UUID: "UUID"
+            Cache: true
+          DiskID: 1
+        - Status: "Status"
+          ClusterID: 2
+          In: true
+          CreatedAt: "2000-01-23T04:56:07.000+00:00"
+          UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+          Name: "Name"
+          OsdID: 7
+          CrushRootID: 7
+          ID: 6
+          Up: true
+          DeletedAt: "DeletedAt"
+          Disk:
+            DeviceModel: "DeviceModel"
+            IsRoot: true
+            MBytes: 1
+            Encrypted: true
+            CreatedAt: "2000-01-23T04:56:07.000+00:00"
+            Host:
+              public_ip: "public_ip"
+              OS: "OS"
+              CreatedAt: "2000-01-23T04:56:07.000+00:00"
+              Vendor: "Vendor"
+              admin_ip: "admin_ip"
+              UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+              Cores: 3
+              HostModel: "HostModel"
+              Serial: "Serial"
+              Type: "Type"
+              CPUs: 9
+              MemoryMB: 4
+              ID: 2
+              DeletedAt: "DeletedAt"
+              cluster_ip: "cluster_ip"
+              host_name: "host_name"
+              CPUModel: "CPUModel"
+            Vendor: "Vendor"
+            HostID: 7
+            Rotational: true
+            UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+            Name: "Name"
+            WWN: "WWN"
+            PathID: "PathID"
+            RealPath: "RealPath"
+            HasChildren: true
+            Empty: true
+            Serial: "Serial"
+            Type: "Type"
+            ID: 1
+            DeletedAt: "DeletedAt"
+            Filesystem: "Filesystem"
+            UUID: "UUID"
+            Cache: true
+          DiskID: 1
+        CreatedAt: "2000-01-23T04:56:07.000+00:00"
+        ID: 5
+        DeletedAt: "DeletedAt"
+        UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+        Name: "Name"
+      ECDataChunks: 9
+      ObjectStoreID: 6
+      CrushRootID: 4
+      ID: 9
+      DeletedAt: "DeletedAt"
+  models.Volume:
+    required:
+    - "ByteSize"
+    - "CreatedAt"
+    - "DeletedAt"
+    - "Format"
+    - "ID"
+    - "ImageID"
+    - "Name"
+    - "Pool"
+    - "PoolID"
+    - "Status"
+    - "UpdatedAt"
+    - "UsedByteSize"
+    - "VolumeName"
+    properties:
+      ByteSize:
+        type: "integer"
+        format: "int64"
+      CreatedAt:
+        type: "string"
+        format: "date-time"
+      DeletedAt:
+        type: "string"
+      Format:
+        type: "integer"
+        format: "int32"
+      ID:
+        type: "integer"
+        format: "int64"
+      ImageID:
+        type: "string"
+      Name:
+        type: "string"
+      Pool:
+        $ref: "#/definitions/models.Pool"
+      PoolID:
+        type: "integer"
+        format: "int64"
+      Status:
+        type: "string"
+      UpdatedAt:
+        type: "string"
+        format: "date-time"
+      UsedByteSize:
+        type: "integer"
+        format: "int64"
+      VolumeName:
+        type: "string"
+    example:
+      Status: "Status"
+      ByteSize: 0
+      VolumeName: "VolumeName"
+      PoolID: 1
+      CreatedAt: "2000-01-23T04:56:07.000+00:00"
+      UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+      Name: "Name"
+      Format: 6
+      UsedByteSize: 2
+      ImageID: "ImageID"
+      Pool:
+        Status: "Status"
+        PoolID: 6
+        CreatedAt: "2000-01-23T04:56:07.000+00:00"
+        UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+        PgAutoscaleMode: true
+        Name: "Name"
+        BlockPoolProperty:
+          Replicated: 9
+          PoolID: 8
+          CreatedAt: "2000-01-23T04:56:07.000+00:00"
+          ECCodingChunks: 5
+          UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+          CephfsID: 5
+          Type: "Type"
+          CrushRoot:
+            ParentID: 1
+            Status: "Status"
+            Osds:
+            - Status: "Status"
+              ClusterID: 2
+              In: true
+              CreatedAt: "2000-01-23T04:56:07.000+00:00"
+              UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+              Name: "Name"
+              OsdID: 7
+              CrushRootID: 7
+              ID: 6
+              Up: true
+              DeletedAt: "DeletedAt"
+              Disk:
+                DeviceModel: "DeviceModel"
+                IsRoot: true
+                MBytes: 1
+                Encrypted: true
+                CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                Host:
+                  public_ip: "public_ip"
+                  OS: "OS"
+                  CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                  Vendor: "Vendor"
+                  admin_ip: "admin_ip"
+                  UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                  Cores: 3
+                  HostModel: "HostModel"
+                  Serial: "Serial"
+                  Type: "Type"
+                  CPUs: 9
+                  MemoryMB: 4
+                  ID: 2
+                  DeletedAt: "DeletedAt"
+                  cluster_ip: "cluster_ip"
+                  host_name: "host_name"
+                  CPUModel: "CPUModel"
+                Vendor: "Vendor"
+                HostID: 7
+                Rotational: true
+                UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                Name: "Name"
+                WWN: "WWN"
+                PathID: "PathID"
+                RealPath: "RealPath"
+                HasChildren: true
+                Empty: true
+                Serial: "Serial"
+                Type: "Type"
+                ID: 1
+                DeletedAt: "DeletedAt"
+                Filesystem: "Filesystem"
+                UUID: "UUID"
+                Cache: true
+              DiskID: 1
+            - Status: "Status"
+              ClusterID: 2
+              In: true
+              CreatedAt: "2000-01-23T04:56:07.000+00:00"
+              UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+              Name: "Name"
+              OsdID: 7
+              CrushRootID: 7
+              ID: 6
+              Up: true
+              DeletedAt: "DeletedAt"
+              Disk:
+                DeviceModel: "DeviceModel"
+                IsRoot: true
+                MBytes: 1
+                Encrypted: true
+                CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                Host:
+                  public_ip: "public_ip"
+                  OS: "OS"
+                  CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                  Vendor: "Vendor"
+                  admin_ip: "admin_ip"
+                  UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                  Cores: 3
+                  HostModel: "HostModel"
+                  Serial: "Serial"
+                  Type: "Type"
+                  CPUs: 9
+                  MemoryMB: 4
+                  ID: 2
+                  DeletedAt: "DeletedAt"
+                  cluster_ip: "cluster_ip"
+                  host_name: "host_name"
+                  CPUModel: "CPUModel"
+                Vendor: "Vendor"
+                HostID: 7
+                Rotational: true
+                UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                Name: "Name"
+                WWN: "WWN"
+                PathID: "PathID"
+                RealPath: "RealPath"
+                HasChildren: true
+                Empty: true
+                Serial: "Serial"
+                Type: "Type"
+                ID: 1
+                DeletedAt: "DeletedAt"
+                Filesystem: "Filesystem"
+                UUID: "UUID"
+                Cache: true
+              DiskID: 1
+            CreatedAt: "2000-01-23T04:56:07.000+00:00"
+            ID: 5
+            DeletedAt: "DeletedAt"
+            UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+            Name: "Name"
+          ECDataChunks: 9
+          ObjectStoreID: 6
+          CrushRootID: 4
+          ID: 9
+          DeletedAt: "DeletedAt"
+        Type: "Type"
+        PoolName: "PoolName"
+        State: "State"
+        ErasureCodeProfile: "ErasureCodeProfile"
+        PgNum: 3
+        ID: 6
+        DeletedAt: "DeletedAt"
+      ID: 1
+      DeletedAt: "DeletedAt"
+  routes.CephfsRequestParams:
+    required:
+    - "cephfs"
+    properties:
+      cephfs:
+        $ref: "#/definitions/.cephfs"
   routes.CreateCephClusterRequestParams:
     required:
     - "ceph_cluster"
@@ -2342,25 +4693,34 @@ definitions:
     properties:
       disks:
         $ref: "#/definitions/.disks"
+  routes.PoolCreateRequestParams:
+    required:
+    - "pool"
+    properties:
+      pool:
+        $ref: "#/definitions/.pool"
   routes.PoolRequestParams:
     required:
     - "crush_root_id"
     - "ec_coding_chunks"
     - "ec_data_chunks"
+    - "name"
     - "replicated"
     - "type"
     properties:
       crush_root_id:
         type: "integer"
-        format: "integer"
+        format: "int64"
       ec_coding_chunks:
         type: "integer"
-        format: "integer"
+        format: "int64"
       ec_data_chunks:
         type: "integer"
-        format: "integer"
+        format: "int64"
+      name:
+        type: "string"
       replicated:
         type: "integer"
-        format: "integer"
+        format: "int64"
       type:
         type: "string"

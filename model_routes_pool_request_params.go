@@ -11,9 +11,10 @@
 package smdclient
 
 type RoutesPoolRequestParams struct {
-	CrushRootId int32 `json:"crush_root_id"`
-	EcCodingChunks int32 `json:"ec_coding_chunks"`
-	EcDataChunks int32 `json:"ec_data_chunks"`
-	Replicated int32 `json:"replicated"`
+	CrushRootId int64 `json:"crush_root_id"`
+	EcCodingChunks int64 `json:"ec_coding_chunks"`
+	EcDataChunks int64 `json:"ec_data_chunks"`
+	Name string `json:"name"`
+	Replicated int64 `json:"replicated"`
 	Type_ string `json:"type"`
 }

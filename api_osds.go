@@ -209,7 +209,7 @@ OsdsApiService get a osd
 
 @return ModelsOsd
 */
-func (a *OsdsApiService) GetOsd(ctx context.Context, osdId int32) (ModelsOsd, *http.Response, error) {
+func (a *OsdsApiService) GetOsd(ctx context.Context, osdId int64) (ModelsOsd, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
@@ -292,17 +292,17 @@ func (a *OsdsApiService) GetOsd(ctx context.Context, osdId int32) (ModelsOsd, *h
 OsdsApiService get all osds
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param optional nil or *OsdsApiListOsdsOpts - Optional Parameters:
-     * @param "Offset" (optional.Int32) -  offset
-     * @param "Limit" (optional.Int32) -  limit
-     * @param "HostId" (optional.Int32) -  identifier of the host
+     * @param "Offset" (optional.Int64) -  offset
+     * @param "Limit" (optional.Int64) -  limit
+     * @param "HostId" (optional.Int64) -  identifier of the host
 
 @return []ModelsOsd
 */
 
 type OsdsApiListOsdsOpts struct { 
-	Offset optional.Int32
-	Limit optional.Int32
-	HostId optional.Int32
+	Offset optional.Int64
+	Limit optional.Int64
+	HostId optional.Int64
 }
 
 func (a *OsdsApiService) ListOsds(ctx context.Context, localVarOptionals *OsdsApiListOsdsOpts) ([]ModelsOsd, *http.Response, error) {

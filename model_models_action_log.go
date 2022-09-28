@@ -20,7 +20,7 @@ type ModelsActionLog struct {
 	CreatedAt time.Time `json:"CreatedAt"`
 	Data string `json:"Data"`
 	DeletedAt string `json:"DeletedAt"`
-	ID int32 `json:"ID"`
+	ID int64 `json:"ID"`
 	Message string `json:"Message"`
 	Parameter string `json:"Parameter"`
 	ResourceIDs string `json:"ResourceIDs"`

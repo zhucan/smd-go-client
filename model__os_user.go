@@ -17,7 +17,7 @@ type OsUser struct {
 	BucketQuotaMaxSize string `json:"bucket_quota_max_size"`
 	MetadataCapability string `json:"metadata_capability"`
 	Name string `json:"name"`
-	ObjectStoreId int32 `json:"object_store_id"`
+	ObjectStoreId int64 `json:"object_store_id"`
 	UsageCapability string `json:"usage_capability"`
 	UserCapability string `json:"user_capability"`
 	ZoneCapability string `json:"zone_capability"`

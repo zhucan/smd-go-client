@@ -5,11 +5,11 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CreatedAt** | [**time.Time**](time.Time.md) |  | [default to null]
 **DeletedAt** | **string** |  | [default to null]
-**ID** | **int32** |  | [default to null]
+**ID** | **int64** |  | [default to null]
 **Name** | **string** |  | [default to null]
 **Osds** | [**[]ModelsOsd**](models.Osd.md) |  | [default to null]
 **Parent** | [***ModelsCrushRoot**](models.CrushRoot.md) |  | [default to null]
-**ParentID** | **int32** |  | [default to null]
+**ParentID** | **int64** |  | [default to null]
 **PoolProperty** | [***ModelsPoolProperty**](models.PoolProperty.md) |  | [default to null]
 **Status** | **string** |  | [default to null]
 **UpdatedAt** | [**time.Time**](time.Time.md) |  | [default to null]

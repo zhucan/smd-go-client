@@ -19,14 +19,14 @@ type ModelsObjectBucket struct {
 	CreatedAt time.Time `json:"CreatedAt"`
 	DeletedAt string `json:"DeletedAt"`
 	Host string `json:"Host"`
-	ID int32 `json:"ID"`
+	ID int64 `json:"ID"`
 	MaxObjects int64 `json:"MaxObjects"`
 	MaxSize string `json:"MaxSize"`
 	Name string `json:"Name"`
 	ObjectStorageClass *ModelsObjectStorageClass `json:"ObjectStorageClass"`
-	ObjectStorageClassID int32 `json:"ObjectStorageClassID"`
+	ObjectStorageClassID int64 `json:"ObjectStorageClassID"`
 	OsUser *ModelsOsUser `json:"OsUser"`
-	OsUserID int32 `json:"OsUserID"`
+	OsUserID int64 `json:"OsUserID"`
 	Port string `json:"Port"`
 	Region string `json:"Region"`
 	Status string `json:"Status"`

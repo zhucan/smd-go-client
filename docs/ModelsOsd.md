@@ -3,13 +3,13 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ClusterID** | **int32** |  | [default to null]
+**ClusterID** | **int64** |  | [default to null]
 **CreatedAt** | [**time.Time**](time.Time.md) |  | [default to null]
-**CrushRootID** | **int32** |  | [default to null]
+**CrushRootID** | **int64** |  | [default to null]
 **DeletedAt** | **string** |  | [default to null]
 **Disk** | [***ModelsDisk**](models.Disk.md) |  | [default to null]
-**DiskID** | **int32** |  | [default to null]
-**ID** | **int32** |  | [default to null]
+**DiskID** | **int64** |  | [default to null]
+**ID** | **int64** |  | [default to null]
 **In** | **bool** |  | [default to null]
 **Name** | **string** |  | [default to null]
 **OsdID** | **int32** |  | [default to null]

@@ -11,6 +11,7 @@
 package smdclient
 
 type Disks struct {
-	ClusterId int32 `json:"cluster_id"`
-	DiskIds []int32 `json:"disk_ids"`
+	ClusterId int64 `json:"cluster_id"`
+	DiskIds []int64 `json:"disk_ids"`
+	MetadataDiskIds []int64 `json:"metadata_disk_ids"`
 }

@@ -24,10 +24,16 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *ActionLogsApi* | [**GetActionLog**](docs/ActionLogsApi.md#getactionlog) | **Get** /action-logs/{log-id} | get a action log
 *ActionLogsApi* | [**ListActionLogs**](docs/ActionLogsApi.md#listactionlogs) | **Get** /action-logs | get all action logs
+*BlockVolumesApi* | [**GetVolume**](docs/BlockVolumesApi.md#getvolume) | **Get** /block-volumes/{volume-id} | get an volume
+*BlockVolumesApi* | [**ListVolumes**](docs/BlockVolumesApi.md#listvolumes) | **Get** /block-volumes | get all volumes
 *CephClustersApi* | [**CreateCephCluster**](docs/CephClustersApi.md#createcephcluster) | **Post** /ceph-clusters | create ceph cluster
 *CephClustersApi* | [**DeleteCephCluster**](docs/CephClustersApi.md#deletecephcluster) | **Delete** /ceph-clusters/{ceph-cluster-id} | delete ceph cluster
 *CephClustersApi* | [**GetCephCluster**](docs/CephClustersApi.md#getcephcluster) | **Get** /ceph-clusters/{ceph-cluster-id} | get ceph cluster
 *CephClustersApi* | [**ListCephClusters**](docs/CephClustersApi.md#listcephclusters) | **Get** /ceph-clusters | get all ceph cluster
+*CephFilesystemsApi* | [**CreateCephFilesystem**](docs/CephFilesystemsApi.md#createcephfilesystem) | **Post** /ceph-filesystems | create a ceph filesystem
+*CephFilesystemsApi* | [**DeleteCephFilesystem**](docs/CephFilesystemsApi.md#deletecephfilesystem) | **Delete** /ceph-filesystems/{cephfs-id} | delete a ceph filesystem
+*CephFilesystemsApi* | [**GetCephFilesystem**](docs/CephFilesystemsApi.md#getcephfilesystem) | **Get** /ceph-filesystems/{cephfs-id} | get a ceph filesystem
+*CephFilesystemsApi* | [**ListCephFilesystems**](docs/CephFilesystemsApi.md#listcephfilesystems) | **Get** /ceph-filesystems | get all ceph filesystems
 *CrushRootsApi* | [**CreateCrushRoot**](docs/CrushRootsApi.md#createcrushroot) | **Post** /crush-roots | create crush root
 *CrushRootsApi* | [**DeleteCrushRoot**](docs/CrushRootsApi.md#deletecrushroot) | **Delete** /crush-roots/{crush-root-id} | delete a crush root
 *CrushRootsApi* | [**GetCrushRoot**](docs/CrushRootsApi.md#getcrushroot) | **Get** /crush-roots/{crush-root-id} | get a crush root
@@ -58,17 +64,23 @@ Class | Method | HTTP request | Description
 *OsdsApi* | [**DeleteOsds**](docs/OsdsApi.md#deleteosds) | **Delete** /osds | delete osds from specific ceph cluster
 *OsdsApi* | [**GetOsd**](docs/OsdsApi.md#getosd) | **Get** /osds/{osd-id} | get a osd
 *OsdsApi* | [**ListOsds**](docs/OsdsApi.md#listosds) | **Get** /osds | get all osds
+*PoolsApi* | [**CreatePool**](docs/PoolsApi.md#createpool) | **Post** /pools | create a pool
+*PoolsApi* | [**DeletePool**](docs/PoolsApi.md#deletepool) | **Delete** /pools/{pool-id} | delete a pool
+*PoolsApi* | [**GetPool**](docs/PoolsApi.md#getpool) | **Get** /pools/{pool-id} | get a pool
+*PoolsApi* | [**ListPools**](docs/PoolsApi.md#listpools) | **Get** /pools | get all pools
 
 
 ## Documentation For Models
 
  - [CephCluster](docs/CephCluster.md)
+ - [Cephfs](docs/Cephfs.md)
  - [CrushRoot](docs/CrushRoot.md)
  - [Disks](docs/Disks.md)
  - [GormModel](docs/GormModel.md)
  - [Host](docs/Host.md)
  - [ModelsActionLog](docs/ModelsActionLog.md)
  - [ModelsCephCluster](docs/ModelsCephCluster.md)
+ - [ModelsCephfs](docs/ModelsCephfs.md)
  - [ModelsCrushRoot](docs/ModelsCrushRoot.md)
  - [ModelsDisk](docs/ModelsDisk.md)
  - [ModelsHost](docs/ModelsHost.md)
@@ -77,12 +89,16 @@ Class | Method | HTTP request | Description
  - [ModelsObjectStore](docs/ModelsObjectStore.md)
  - [ModelsOsUser](docs/ModelsOsUser.md)
  - [ModelsOsd](docs/ModelsOsd.md)
+ - [ModelsPool](docs/ModelsPool.md)
  - [ModelsPoolProperty](docs/ModelsPoolProperty.md)
+ - [ModelsVolume](docs/ModelsVolume.md)
  - [ObjectBucket](docs/ObjectBucket.md)
  - [ObjectStorageClass](docs/ObjectStorageClass.md)
  - [ObjectStore](docs/ObjectStore.md)
  - [OsUser](docs/OsUser.md)
  - [Osds](docs/Osds.md)
+ - [Pool](docs/Pool.md)
+ - [RoutesCephfsRequestParams](docs/RoutesCephfsRequestParams.md)
  - [RoutesCreateCephClusterRequestParams](docs/RoutesCreateCephClusterRequestParams.md)
  - [RoutesCreateHostRequestParams](docs/RoutesCreateHostRequestParams.md)
  - [RoutesCreateOsUserRequestParams](docs/RoutesCreateOsUserRequestParams.md)
@@ -92,6 +108,7 @@ Class | Method | HTTP request | Description
  - [RoutesObjectStoreRequestParams](docs/RoutesObjectStoreRequestParams.md)
  - [RoutesOsdsDeleteParams](docs/RoutesOsdsDeleteParams.md)
  - [RoutesOsdsRequestParams](docs/RoutesOsdsRequestParams.md)
+ - [RoutesPoolCreateRequestParams](docs/RoutesPoolCreateRequestParams.md)
  - [RoutesPoolRequestParams](docs/RoutesPoolRequestParams.md)
 
 

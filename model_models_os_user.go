@@ -17,7 +17,7 @@ import (
 type ModelsOsUser struct {
 	CreatedAt time.Time `json:"CreatedAt"`
 	DeletedAt string `json:"DeletedAt"`
-	ID int32 `json:"ID"`
+	ID int64 `json:"ID"`
 	ObjectBuckets []ModelsObjectBucket `json:"ObjectBuckets"`
 	UpdatedAt time.Time `json:"UpdatedAt"`
 	Ak string `json:"ak"`
@@ -31,7 +31,7 @@ type ModelsOsUser struct {
 	MaxSize string `json:"max_size"`
 	Name string `json:"name"`
 	ObjectStore *ModelsObjectStore `json:"object_store"`
-	ObjectStoreId int32 `json:"object_store_id"`
+	ObjectStoreId int64 `json:"object_store_id"`
 	Sk string `json:"sk"`
 	Status string `json:"status"`
 }
