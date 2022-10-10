@@ -24,16 +24,14 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *ActionLogsApi* | [**GetActionLog**](docs/ActionLogsApi.md#getactionlog) | **Get** /action-logs/{log-id} | get a action log
 *ActionLogsApi* | [**ListActionLogs**](docs/ActionLogsApi.md#listactionlogs) | **Get** /action-logs | get all action logs
+*BlockVolumeSnapshotsApi* | [**GetBlockVolumeSnapshot**](docs/BlockVolumeSnapshotsApi.md#getblockvolumesnapshot) | **Get** /block-volume-snapshots/{snapshot-id} | get a snapshot of block volume
+*BlockVolumeSnapshotsApi* | [**ListBlockVolumeSnapshots**](docs/BlockVolumeSnapshotsApi.md#listblockvolumesnapshots) | **Get** /block-volume-snapshots | list all snapshots of block volume
 *BlockVolumesApi* | [**GetVolume**](docs/BlockVolumesApi.md#getvolume) | **Get** /block-volumes/{volume-id} | get an volume
 *BlockVolumesApi* | [**ListVolumes**](docs/BlockVolumesApi.md#listvolumes) | **Get** /block-volumes | get all volumes
 *CephClustersApi* | [**CreateCephCluster**](docs/CephClustersApi.md#createcephcluster) | **Post** /ceph-clusters | create ceph cluster
 *CephClustersApi* | [**DeleteCephCluster**](docs/CephClustersApi.md#deletecephcluster) | **Delete** /ceph-clusters/{ceph-cluster-id} | delete ceph cluster
 *CephClustersApi* | [**GetCephCluster**](docs/CephClustersApi.md#getcephcluster) | **Get** /ceph-clusters/{ceph-cluster-id} | get ceph cluster
 *CephClustersApi* | [**ListCephClusters**](docs/CephClustersApi.md#listcephclusters) | **Get** /ceph-clusters | get all ceph cluster
-*CephFilesystemsApi* | [**CreateCephFilesystem**](docs/CephFilesystemsApi.md#createcephfilesystem) | **Post** /ceph-filesystems | create a ceph filesystem
-*CephFilesystemsApi* | [**DeleteCephFilesystem**](docs/CephFilesystemsApi.md#deletecephfilesystem) | **Delete** /ceph-filesystems/{cephfs-id} | delete a ceph filesystem
-*CephFilesystemsApi* | [**GetCephFilesystem**](docs/CephFilesystemsApi.md#getcephfilesystem) | **Get** /ceph-filesystems/{cephfs-id} | get a ceph filesystem
-*CephFilesystemsApi* | [**ListCephFilesystems**](docs/CephFilesystemsApi.md#listcephfilesystems) | **Get** /ceph-filesystems | get all ceph filesystems
 *CrushRootsApi* | [**CreateCrushRoot**](docs/CrushRootsApi.md#createcrushroot) | **Post** /crush-roots | create crush root
 *CrushRootsApi* | [**DeleteCrushRoot**](docs/CrushRootsApi.md#deletecrushroot) | **Delete** /crush-roots/{crush-root-id} | delete a crush root
 *CrushRootsApi* | [**GetCrushRoot**](docs/CrushRootsApi.md#getcrushroot) | **Get** /crush-roots/{crush-root-id} | get a crush root
@@ -73,14 +71,13 @@ Class | Method | HTTP request | Description
 ## Documentation For Models
 
  - [CephCluster](docs/CephCluster.md)
- - [Cephfs](docs/Cephfs.md)
  - [CrushRoot](docs/CrushRoot.md)
  - [Disks](docs/Disks.md)
  - [GormModel](docs/GormModel.md)
  - [Host](docs/Host.md)
  - [ModelsActionLog](docs/ModelsActionLog.md)
+ - [ModelsBlockVolumeSnapshot](docs/ModelsBlockVolumeSnapshot.md)
  - [ModelsCephCluster](docs/ModelsCephCluster.md)
- - [ModelsCephfs](docs/ModelsCephfs.md)
  - [ModelsCrushRoot](docs/ModelsCrushRoot.md)
  - [ModelsDisk](docs/ModelsDisk.md)
  - [ModelsHost](docs/ModelsHost.md)
@@ -98,7 +95,6 @@ Class | Method | HTTP request | Description
  - [OsUser](docs/OsUser.md)
  - [Osds](docs/Osds.md)
  - [Pool](docs/Pool.md)
- - [RoutesCephfsRequestParams](docs/RoutesCephfsRequestParams.md)
  - [RoutesCreateCephClusterRequestParams](docs/RoutesCreateCephClusterRequestParams.md)
  - [RoutesCreateHostRequestParams](docs/RoutesCreateHostRequestParams.md)
  - [RoutesCreateOsUserRequestParams](docs/RoutesCreateOsUserRequestParams.md)

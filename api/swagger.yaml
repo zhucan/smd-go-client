@@ -73,6 +73,67 @@ paths:
           description: "OK"
           schema:
             $ref: "#/definitions/models.ActionLog"
+  /block-volume-snapshots:
+    get:
+      tags:
+      - "block-volume-snapshots"
+      summary: "list all snapshots of block volume"
+      operationId: "ListBlockVolumeSnapshots"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "offset"
+        in: "query"
+        description: "offset"
+        required: false
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Offset"
+        x-optionalDataType: "Int64"
+      - name: "limit"
+        in: "query"
+        description: "limit"
+        required: false
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int64"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/*models.BlockVolumeSnapshot"
+  /block-volume-snapshots/{snapshot-id}:
+    get:
+      tags:
+      - "block-volume-snapshots"
+      summary: "get a snapshot of block volume"
+      operationId: "GetBlockVolumeSnapshot"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "snapshot-id"
+        in: "path"
+        description: "identifier of the snapshot"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "SnapshotId"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/models.BlockVolumeSnapshot"
   /block-volumes:
     get:
       tags:
@@ -242,114 +303,6 @@ paths:
           description: "OK"
           schema:
             $ref: "#/definitions/models.CephCluster"
-  /ceph-filesystems:
-    get:
-      tags:
-      - "ceph-filesystems"
-      summary: "get all ceph filesystems"
-      operationId: "ListCephFilesystems"
-      consumes:
-      - "application/xml"
-      - "application/json"
-      produces:
-      - "application/json"
-      - "application/xml"
-      parameters:
-      - name: "offset"
-        in: "query"
-        description: "offset"
-        required: false
-        type: "integer"
-        format: "int64"
-        x-exportParamName: "Offset"
-        x-optionalDataType: "Int64"
-      - name: "limit"
-        in: "query"
-        description: "limit"
-        required: false
-        type: "integer"
-        format: "int64"
-        x-exportParamName: "Limit"
-        x-optionalDataType: "Int64"
-      responses:
-        "200":
-          description: "OK"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/*models.Cephfs"
-    post:
-      tags:
-      - "ceph-filesystems"
-      summary: "create a ceph filesystem"
-      operationId: "CreateCephFilesystem"
-      consumes:
-      - "application/xml"
-      - "application/json"
-      produces:
-      - "application/json"
-      - "application/xml"
-      parameters:
-      - in: "body"
-        name: "body"
-        required: true
-        schema:
-          $ref: "#/definitions/routes.CephfsRequestParams"
-        x-exportParamName: "Body"
-      responses:
-        "200":
-          description: "OK"
-          schema:
-            $ref: "#/definitions/models.Cephfs"
-  /ceph-filesystems/{cephfs-id}:
-    get:
-      tags:
-      - "ceph-filesystems"
-      summary: "get a ceph filesystem"
-      operationId: "GetCephFilesystem"
-      consumes:
-      - "application/xml"
-      - "application/json"
-      produces:
-      - "application/json"
-      - "application/xml"
-      parameters:
-      - name: "cephfs-id"
-        in: "path"
-        description: "identifier of the ceph filesystem"
-        required: true
-        type: "integer"
-        format: "int64"
-        x-exportParamName: "CephfsId"
-      responses:
-        "200":
-          description: "OK"
-          schema:
-            $ref: "#/definitions/models.Cephfs"
-    delete:
-      tags:
-      - "ceph-filesystems"
-      summary: "delete a ceph filesystem"
-      operationId: "DeleteCephFilesystem"
-      consumes:
-      - "application/xml"
-      - "application/json"
-      produces:
-      - "application/json"
-      - "application/xml"
-      parameters:
-      - name: "cephfs-id"
-        in: "path"
-        description: "identifier of the ceph filesystem"
-        required: true
-        type: "integer"
-        format: "int64"
-        x-exportParamName: "CephfsId"
-      responses:
-        "200":
-          description: "OK"
-          schema:
-            $ref: "#/definitions/models.Cephfs"
   /crush-roots:
     get:
       tags:
@@ -1303,8 +1256,8 @@ paths:
             $ref: "#/definitions/models.Pool"
 definitions:
   '*models.ActionLog': {}
+  '*models.BlockVolumeSnapshot': {}
   '*models.CephCluster': {}
-  '*models.Cephfs': {}
   '*models.CrushRoot': {}
   '*models.Disk': {}
   '*models.Host': {}
@@ -1324,26 +1277,6 @@ definitions:
         type: "string"
       namespace:
         type: "string"
-  ".cephfs":
-    required:
-    - "data_pools"
-    - "metadata_pool"
-    - "name"
-    - "preserve_filesystem_on_delete"
-    - "preserve_pools_on_delete"
-    properties:
-      data_pools:
-        type: "array"
-        items:
-          $ref: "#/definitions/routes.PoolRequestParams"
-      metadata_pool:
-        $ref: "#/definitions/routes.PoolRequestParams"
-      name:
-        type: "string"
-      preserve_filesystem_on_delete:
-        type: "boolean"
-      preserve_pools_on_delete:
-        type: "boolean"
   ".crush_root":
     required:
     - "name"
@@ -1551,6 +1484,221 @@ definitions:
       ID: 0
       DeletedAt: "DeletedAt"
       UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+  models.BlockVolumeSnapshot:
+    required:
+    - "CreatedAt"
+    - "DeletedAt"
+    - "ID"
+    - "Name"
+    - "Protected"
+    - "Size"
+    - "SnapID"
+    - "SnapName"
+    - "Status"
+    - "Timestamp"
+    - "UpdatedAt"
+    - "Volume"
+    - "VolumeID"
+    properties:
+      CreatedAt:
+        type: "string"
+        format: "date-time"
+      DeletedAt:
+        type: "string"
+      ID:
+        type: "integer"
+        format: "int64"
+      Name:
+        type: "string"
+      Protected:
+        type: "boolean"
+      Size:
+        type: "integer"
+        format: "int64"
+      SnapID:
+        type: "integer"
+        format: "int64"
+      SnapName:
+        type: "string"
+      Status:
+        type: "string"
+      Timestamp:
+        type: "string"
+      UpdatedAt:
+        type: "string"
+        format: "date-time"
+      Volume:
+        $ref: "#/definitions/models.Volume"
+      VolumeID:
+        type: "integer"
+        format: "int64"
+    example:
+      Status: "Status"
+      Protected: true
+      Size: 6
+      CreatedAt: "2000-01-23T04:56:07.000+00:00"
+      Timestamp: "Timestamp"
+      UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+      Name: "Name"
+      SnapName: "SnapName"
+      VolumeID: 5
+      Volume:
+        Status: "Status"
+        ByteSize: 5
+        VolumeName: "VolumeName"
+        PoolID: 6
+        CreatedAt: "2000-01-23T04:56:07.000+00:00"
+        UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+        Name: "Name"
+        Format: 5
+        UsedByteSize: 6
+        ImageID: "ImageID"
+        Pool:
+          Status: "Status"
+          PoolID: 2
+          CreatedAt: "2000-01-23T04:56:07.000+00:00"
+          UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+          PgAutoscaleMode: true
+          Name: "Name"
+          BlockPoolProperty:
+            Type: "Type"
+            Replicated: 3
+            PoolID: 6
+            CreatedAt: "2000-01-23T04:56:07.000+00:00"
+            CrushRoot:
+              ParentID: 5
+              Status: "Status"
+              Osds:
+              - Status: "Status"
+                ClusterID: 9
+                In: true
+                CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                Name: "Name"
+                OsdID: 4
+                CrushRootID: 3
+                ID: 1
+                Up: true
+                DeletedAt: "DeletedAt"
+                Disk:
+                  DeviceModel: "DeviceModel"
+                  IsRoot: true
+                  MBytes: 6
+                  Encrypted: true
+                  CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                  Host:
+                    public_ip: "public_ip"
+                    OS: "OS"
+                    CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                    Vendor: "Vendor"
+                    admin_ip: "admin_ip"
+                    UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                    Cores: 4
+                    HostModel: "HostModel"
+                    Serial: "Serial"
+                    Type: "Type"
+                    CPUs: 2
+                    MemoryMB: 1
+                    ID: 7
+                    DeletedAt: "DeletedAt"
+                    cluster_ip: "cluster_ip"
+                    host_name: "host_name"
+                    CPUModel: "CPUModel"
+                  Vendor: "Vendor"
+                  HostID: 1
+                  Rotational: true
+                  UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                  Name: "Name"
+                  WWN: "WWN"
+                  PathID: "PathID"
+                  RealPath: "RealPath"
+                  HasChildren: true
+                  Empty: true
+                  Serial: "Serial"
+                  Type: "Type"
+                  ID: 1
+                  DeletedAt: "DeletedAt"
+                  Filesystem: "Filesystem"
+                  UUID: "UUID"
+                  Cache: true
+                DiskID: 7
+              - Status: "Status"
+                ClusterID: 9
+                In: true
+                CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                Name: "Name"
+                OsdID: 4
+                CrushRootID: 3
+                ID: 1
+                Up: true
+                DeletedAt: "DeletedAt"
+                Disk:
+                  DeviceModel: "DeviceModel"
+                  IsRoot: true
+                  MBytes: 6
+                  Encrypted: true
+                  CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                  Host:
+                    public_ip: "public_ip"
+                    OS: "OS"
+                    CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                    Vendor: "Vendor"
+                    admin_ip: "admin_ip"
+                    UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                    Cores: 4
+                    HostModel: "HostModel"
+                    Serial: "Serial"
+                    Type: "Type"
+                    CPUs: 2
+                    MemoryMB: 1
+                    ID: 7
+                    DeletedAt: "DeletedAt"
+                    cluster_ip: "cluster_ip"
+                    host_name: "host_name"
+                    CPUModel: "CPUModel"
+                  Vendor: "Vendor"
+                  HostID: 1
+                  Rotational: true
+                  UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                  Name: "Name"
+                  WWN: "WWN"
+                  PathID: "PathID"
+                  RealPath: "RealPath"
+                  HasChildren: true
+                  Empty: true
+                  Serial: "Serial"
+                  Type: "Type"
+                  ID: 1
+                  DeletedAt: "DeletedAt"
+                  Filesystem: "Filesystem"
+                  UUID: "UUID"
+                  Cache: true
+                DiskID: 7
+              CreatedAt: "2000-01-23T04:56:07.000+00:00"
+              ID: 7
+              DeletedAt: "DeletedAt"
+              UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+              Name: "Name"
+            ECDataChunks: 6
+            ObjectStoreID: 9
+            CrushRootID: 9
+            ID: 8
+            DeletedAt: "DeletedAt"
+            ECCodingChunks: 9
+            UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+          Type: "Type"
+          PoolName: "PoolName"
+          State: "State"
+          ErasureCodeProfile: "ErasureCodeProfile"
+          PgNum: 1
+          ID: 6
+          DeletedAt: "DeletedAt"
+        ID: 2
+        DeletedAt: "DeletedAt"
+      ID: 0
+      SnapID: 1
+      DeletedAt: "DeletedAt"
   models.CephCluster:
     required:
     - "CreatedAt"
@@ -1590,20 +1738,20 @@ definitions:
       Status: "Status"
       Osds:
       - Status: "Status"
-        ClusterID: 2
+        ClusterID: 9
         In: true
         CreatedAt: "2000-01-23T04:56:07.000+00:00"
         UpdatedAt: "2000-01-23T04:56:07.000+00:00"
         Name: "Name"
-        OsdID: 7
-        CrushRootID: 7
-        ID: 6
+        OsdID: 4
+        CrushRootID: 3
+        ID: 1
         Up: true
         DeletedAt: "DeletedAt"
         Disk:
           DeviceModel: "DeviceModel"
           IsRoot: true
-          MBytes: 1
+          MBytes: 6
           Encrypted: true
           CreatedAt: "2000-01-23T04:56:07.000+00:00"
           Host:
@@ -1613,19 +1761,19 @@ definitions:
             Vendor: "Vendor"
             admin_ip: "admin_ip"
             UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-            Cores: 3
+            Cores: 4
             HostModel: "HostModel"
             Serial: "Serial"
             Type: "Type"
-            CPUs: 9
-            MemoryMB: 4
-            ID: 2
+            CPUs: 2
+            MemoryMB: 1
+            ID: 7
             DeletedAt: "DeletedAt"
             cluster_ip: "cluster_ip"
             host_name: "host_name"
             CPUModel: "CPUModel"
           Vendor: "Vendor"
-          HostID: 7
+          HostID: 1
           Rotational: true
           UpdatedAt: "2000-01-23T04:56:07.000+00:00"
           Name: "Name"
@@ -1641,22 +1789,22 @@ definitions:
           Filesystem: "Filesystem"
           UUID: "UUID"
           Cache: true
-        DiskID: 1
+        DiskID: 7
       - Status: "Status"
-        ClusterID: 2
+        ClusterID: 9
         In: true
         CreatedAt: "2000-01-23T04:56:07.000+00:00"
         UpdatedAt: "2000-01-23T04:56:07.000+00:00"
         Name: "Name"
-        OsdID: 7
-        CrushRootID: 7
-        ID: 6
+        OsdID: 4
+        CrushRootID: 3
+        ID: 1
         Up: true
         DeletedAt: "DeletedAt"
         Disk:
           DeviceModel: "DeviceModel"
           IsRoot: true
-          MBytes: 1
+          MBytes: 6
           Encrypted: true
           CreatedAt: "2000-01-23T04:56:07.000+00:00"
           Host:
@@ -1666,19 +1814,19 @@ definitions:
             Vendor: "Vendor"
             admin_ip: "admin_ip"
             UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-            Cores: 3
+            Cores: 4
             HostModel: "HostModel"
             Serial: "Serial"
             Type: "Type"
-            CPUs: 9
-            MemoryMB: 4
-            ID: 2
+            CPUs: 2
+            MemoryMB: 1
+            ID: 7
             DeletedAt: "DeletedAt"
             cluster_ip: "cluster_ip"
             host_name: "host_name"
             CPUModel: "CPUModel"
           Vendor: "Vendor"
-          HostID: 7
+          HostID: 1
           Rotational: true
           UpdatedAt: "2000-01-23T04:56:07.000+00:00"
           Name: "Name"
@@ -1694,7 +1842,7 @@ definitions:
           Filesystem: "Filesystem"
           UUID: "UUID"
           Cache: true
-        DiskID: 1
+        DiskID: 7
       State: "State"
       CreatedAt: "2000-01-23T04:56:07.000+00:00"
       ID: 0
@@ -1702,305 +1850,6 @@ definitions:
       UpdatedAt: "2000-01-23T04:56:07.000+00:00"
       Namespace: "Namespace"
       Name: "Name"
-  models.Cephfs:
-    required:
-    - "CreatedAt"
-    - "DeletedAt"
-    - "ID"
-    - "Name"
-    - "PoolProperties"
-    - "PreserveFilesystemOnDelete"
-    - "PreservePoolsOnDelete"
-    - "Status"
-    - "UpdatedAt"
-    properties:
-      CreatedAt:
-        type: "string"
-        format: "date-time"
-      DeletedAt:
-        type: "string"
-      ID:
-        type: "integer"
-        format: "int64"
-      Name:
-        type: "string"
-      PoolProperties:
-        type: "array"
-        items:
-          $ref: "#/definitions/models.PoolProperty"
-      PreserveFilesystemOnDelete:
-        type: "boolean"
-      PreservePoolsOnDelete:
-        type: "boolean"
-      Status:
-        type: "string"
-      UpdatedAt:
-        type: "string"
-        format: "date-time"
-    example:
-      Status: "Status"
-      CreatedAt: "2000-01-23T04:56:07.000+00:00"
-      PreservePoolsOnDelete: true
-      ID: 0
-      DeletedAt: "DeletedAt"
-      PreserveFilesystemOnDelete: true
-      UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-      Name: "Name"
-      PoolProperties:
-      - Replicated: 9
-        PoolID: 8
-        CreatedAt: "2000-01-23T04:56:07.000+00:00"
-        ECCodingChunks: 5
-        UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-        CephfsID: 5
-        Type: "Type"
-        CrushRoot:
-          ParentID: 1
-          Status: "Status"
-          Osds:
-          - Status: "Status"
-            ClusterID: 2
-            In: true
-            CreatedAt: "2000-01-23T04:56:07.000+00:00"
-            UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-            Name: "Name"
-            OsdID: 7
-            CrushRootID: 7
-            ID: 6
-            Up: true
-            DeletedAt: "DeletedAt"
-            Disk:
-              DeviceModel: "DeviceModel"
-              IsRoot: true
-              MBytes: 1
-              Encrypted: true
-              CreatedAt: "2000-01-23T04:56:07.000+00:00"
-              Host:
-                public_ip: "public_ip"
-                OS: "OS"
-                CreatedAt: "2000-01-23T04:56:07.000+00:00"
-                Vendor: "Vendor"
-                admin_ip: "admin_ip"
-                UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-                Cores: 3
-                HostModel: "HostModel"
-                Serial: "Serial"
-                Type: "Type"
-                CPUs: 9
-                MemoryMB: 4
-                ID: 2
-                DeletedAt: "DeletedAt"
-                cluster_ip: "cluster_ip"
-                host_name: "host_name"
-                CPUModel: "CPUModel"
-              Vendor: "Vendor"
-              HostID: 7
-              Rotational: true
-              UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-              Name: "Name"
-              WWN: "WWN"
-              PathID: "PathID"
-              RealPath: "RealPath"
-              HasChildren: true
-              Empty: true
-              Serial: "Serial"
-              Type: "Type"
-              ID: 1
-              DeletedAt: "DeletedAt"
-              Filesystem: "Filesystem"
-              UUID: "UUID"
-              Cache: true
-            DiskID: 1
-          - Status: "Status"
-            ClusterID: 2
-            In: true
-            CreatedAt: "2000-01-23T04:56:07.000+00:00"
-            UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-            Name: "Name"
-            OsdID: 7
-            CrushRootID: 7
-            ID: 6
-            Up: true
-            DeletedAt: "DeletedAt"
-            Disk:
-              DeviceModel: "DeviceModel"
-              IsRoot: true
-              MBytes: 1
-              Encrypted: true
-              CreatedAt: "2000-01-23T04:56:07.000+00:00"
-              Host:
-                public_ip: "public_ip"
-                OS: "OS"
-                CreatedAt: "2000-01-23T04:56:07.000+00:00"
-                Vendor: "Vendor"
-                admin_ip: "admin_ip"
-                UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-                Cores: 3
-                HostModel: "HostModel"
-                Serial: "Serial"
-                Type: "Type"
-                CPUs: 9
-                MemoryMB: 4
-                ID: 2
-                DeletedAt: "DeletedAt"
-                cluster_ip: "cluster_ip"
-                host_name: "host_name"
-                CPUModel: "CPUModel"
-              Vendor: "Vendor"
-              HostID: 7
-              Rotational: true
-              UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-              Name: "Name"
-              WWN: "WWN"
-              PathID: "PathID"
-              RealPath: "RealPath"
-              HasChildren: true
-              Empty: true
-              Serial: "Serial"
-              Type: "Type"
-              ID: 1
-              DeletedAt: "DeletedAt"
-              Filesystem: "Filesystem"
-              UUID: "UUID"
-              Cache: true
-            DiskID: 1
-          CreatedAt: "2000-01-23T04:56:07.000+00:00"
-          ID: 5
-          DeletedAt: "DeletedAt"
-          UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-          Name: "Name"
-        ECDataChunks: 9
-        ObjectStoreID: 6
-        CrushRootID: 4
-        ID: 9
-        DeletedAt: "DeletedAt"
-      - Replicated: 9
-        PoolID: 8
-        CreatedAt: "2000-01-23T04:56:07.000+00:00"
-        ECCodingChunks: 5
-        UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-        CephfsID: 5
-        Type: "Type"
-        CrushRoot:
-          ParentID: 1
-          Status: "Status"
-          Osds:
-          - Status: "Status"
-            ClusterID: 2
-            In: true
-            CreatedAt: "2000-01-23T04:56:07.000+00:00"
-            UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-            Name: "Name"
-            OsdID: 7
-            CrushRootID: 7
-            ID: 6
-            Up: true
-            DeletedAt: "DeletedAt"
-            Disk:
-              DeviceModel: "DeviceModel"
-              IsRoot: true
-              MBytes: 1
-              Encrypted: true
-              CreatedAt: "2000-01-23T04:56:07.000+00:00"
-              Host:
-                public_ip: "public_ip"
-                OS: "OS"
-                CreatedAt: "2000-01-23T04:56:07.000+00:00"
-                Vendor: "Vendor"
-                admin_ip: "admin_ip"
-                UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-                Cores: 3
-                HostModel: "HostModel"
-                Serial: "Serial"
-                Type: "Type"
-                CPUs: 9
-                MemoryMB: 4
-                ID: 2
-                DeletedAt: "DeletedAt"
-                cluster_ip: "cluster_ip"
-                host_name: "host_name"
-                CPUModel: "CPUModel"
-              Vendor: "Vendor"
-              HostID: 7
-              Rotational: true
-              UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-              Name: "Name"
-              WWN: "WWN"
-              PathID: "PathID"
-              RealPath: "RealPath"
-              HasChildren: true
-              Empty: true
-              Serial: "Serial"
-              Type: "Type"
-              ID: 1
-              DeletedAt: "DeletedAt"
-              Filesystem: "Filesystem"
-              UUID: "UUID"
-              Cache: true
-            DiskID: 1
-          - Status: "Status"
-            ClusterID: 2
-            In: true
-            CreatedAt: "2000-01-23T04:56:07.000+00:00"
-            UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-            Name: "Name"
-            OsdID: 7
-            CrushRootID: 7
-            ID: 6
-            Up: true
-            DeletedAt: "DeletedAt"
-            Disk:
-              DeviceModel: "DeviceModel"
-              IsRoot: true
-              MBytes: 1
-              Encrypted: true
-              CreatedAt: "2000-01-23T04:56:07.000+00:00"
-              Host:
-                public_ip: "public_ip"
-                OS: "OS"
-                CreatedAt: "2000-01-23T04:56:07.000+00:00"
-                Vendor: "Vendor"
-                admin_ip: "admin_ip"
-                UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-                Cores: 3
-                HostModel: "HostModel"
-                Serial: "Serial"
-                Type: "Type"
-                CPUs: 9
-                MemoryMB: 4
-                ID: 2
-                DeletedAt: "DeletedAt"
-                cluster_ip: "cluster_ip"
-                host_name: "host_name"
-                CPUModel: "CPUModel"
-              Vendor: "Vendor"
-              HostID: 7
-              Rotational: true
-              UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-              Name: "Name"
-              WWN: "WWN"
-              PathID: "PathID"
-              RealPath: "RealPath"
-              HasChildren: true
-              Empty: true
-              Serial: "Serial"
-              Type: "Type"
-              ID: 1
-              DeletedAt: "DeletedAt"
-              Filesystem: "Filesystem"
-              UUID: "UUID"
-              Cache: true
-            DiskID: 1
-          CreatedAt: "2000-01-23T04:56:07.000+00:00"
-          ID: 5
-          DeletedAt: "DeletedAt"
-          UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-          Name: "Name"
-        ECDataChunks: 9
-        ObjectStoreID: 6
-        CrushRootID: 4
-        ID: 9
-        DeletedAt: "DeletedAt"
   models.CrushRoot:
     required:
     - "CreatedAt"
@@ -2041,24 +1890,24 @@ definitions:
         type: "string"
         format: "date-time"
     example:
-      ParentID: 1
+      ParentID: 5
       Status: "Status"
       Osds:
       - Status: "Status"
-        ClusterID: 2
+        ClusterID: 9
         In: true
         CreatedAt: "2000-01-23T04:56:07.000+00:00"
         UpdatedAt: "2000-01-23T04:56:07.000+00:00"
         Name: "Name"
-        OsdID: 7
-        CrushRootID: 7
-        ID: 6
+        OsdID: 4
+        CrushRootID: 3
+        ID: 1
         Up: true
         DeletedAt: "DeletedAt"
         Disk:
           DeviceModel: "DeviceModel"
           IsRoot: true
-          MBytes: 1
+          MBytes: 6
           Encrypted: true
           CreatedAt: "2000-01-23T04:56:07.000+00:00"
           Host:
@@ -2068,19 +1917,19 @@ definitions:
             Vendor: "Vendor"
             admin_ip: "admin_ip"
             UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-            Cores: 3
+            Cores: 4
             HostModel: "HostModel"
             Serial: "Serial"
             Type: "Type"
-            CPUs: 9
-            MemoryMB: 4
-            ID: 2
+            CPUs: 2
+            MemoryMB: 1
+            ID: 7
             DeletedAt: "DeletedAt"
             cluster_ip: "cluster_ip"
             host_name: "host_name"
             CPUModel: "CPUModel"
           Vendor: "Vendor"
-          HostID: 7
+          HostID: 1
           Rotational: true
           UpdatedAt: "2000-01-23T04:56:07.000+00:00"
           Name: "Name"
@@ -2096,22 +1945,22 @@ definitions:
           Filesystem: "Filesystem"
           UUID: "UUID"
           Cache: true
-        DiskID: 1
+        DiskID: 7
       - Status: "Status"
-        ClusterID: 2
+        ClusterID: 9
         In: true
         CreatedAt: "2000-01-23T04:56:07.000+00:00"
         UpdatedAt: "2000-01-23T04:56:07.000+00:00"
         Name: "Name"
-        OsdID: 7
-        CrushRootID: 7
-        ID: 6
+        OsdID: 4
+        CrushRootID: 3
+        ID: 1
         Up: true
         DeletedAt: "DeletedAt"
         Disk:
           DeviceModel: "DeviceModel"
           IsRoot: true
-          MBytes: 1
+          MBytes: 6
           Encrypted: true
           CreatedAt: "2000-01-23T04:56:07.000+00:00"
           Host:
@@ -2121,19 +1970,19 @@ definitions:
             Vendor: "Vendor"
             admin_ip: "admin_ip"
             UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-            Cores: 3
+            Cores: 4
             HostModel: "HostModel"
             Serial: "Serial"
             Type: "Type"
-            CPUs: 9
-            MemoryMB: 4
-            ID: 2
+            CPUs: 2
+            MemoryMB: 1
+            ID: 7
             DeletedAt: "DeletedAt"
             cluster_ip: "cluster_ip"
             host_name: "host_name"
             CPUModel: "CPUModel"
           Vendor: "Vendor"
-          HostID: 7
+          HostID: 1
           Rotational: true
           UpdatedAt: "2000-01-23T04:56:07.000+00:00"
           Name: "Name"
@@ -2149,9 +1998,9 @@ definitions:
           Filesystem: "Filesystem"
           UUID: "UUID"
           Cache: true
-        DiskID: 1
+        DiskID: 7
       CreatedAt: "2000-01-23T04:56:07.000+00:00"
-      ID: 5
+      ID: 7
       DeletedAt: "DeletedAt"
       UpdatedAt: "2000-01-23T04:56:07.000+00:00"
       Name: "Name"
@@ -2238,7 +2087,7 @@ definitions:
     example:
       DeviceModel: "DeviceModel"
       IsRoot: true
-      MBytes: 1
+      MBytes: 6
       Encrypted: true
       CreatedAt: "2000-01-23T04:56:07.000+00:00"
       Host:
@@ -2248,19 +2097,19 @@ definitions:
         Vendor: "Vendor"
         admin_ip: "admin_ip"
         UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-        Cores: 3
+        Cores: 4
         HostModel: "HostModel"
         Serial: "Serial"
         Type: "Type"
-        CPUs: 9
-        MemoryMB: 4
-        ID: 2
+        CPUs: 2
+        MemoryMB: 1
+        ID: 7
         DeletedAt: "DeletedAt"
         cluster_ip: "cluster_ip"
         host_name: "host_name"
         CPUModel: "CPUModel"
       Vendor: "Vendor"
-      HostID: 7
+      HostID: 1
       Rotational: true
       UpdatedAt: "2000-01-23T04:56:07.000+00:00"
       Name: "Name"
@@ -2343,13 +2192,13 @@ definitions:
       Vendor: "Vendor"
       admin_ip: "admin_ip"
       UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-      Cores: 3
+      Cores: 4
       HostModel: "HostModel"
       Serial: "Serial"
       Type: "Type"
-      CPUs: 9
-      MemoryMB: 4
-      ID: 2
+      CPUs: 2
+      MemoryMB: 1
+      ID: 7
       DeletedAt: "DeletedAt"
       cluster_ip: "cluster_ip"
       host_name: "host_name"
@@ -2434,32 +2283,29 @@ definitions:
           UpdatedAt: "2000-01-23T04:56:07.000+00:00"
           Name: "Name"
           PoolProperties:
-          - Replicated: 9
-            PoolID: 8
+          - Type: "Type"
+            Replicated: 3
+            PoolID: 6
             CreatedAt: "2000-01-23T04:56:07.000+00:00"
-            ECCodingChunks: 5
-            UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-            CephfsID: 5
-            Type: "Type"
             CrushRoot:
-              ParentID: 1
+              ParentID: 5
               Status: "Status"
               Osds:
               - Status: "Status"
-                ClusterID: 2
+                ClusterID: 9
                 In: true
                 CreatedAt: "2000-01-23T04:56:07.000+00:00"
                 UpdatedAt: "2000-01-23T04:56:07.000+00:00"
                 Name: "Name"
-                OsdID: 7
-                CrushRootID: 7
-                ID: 6
+                OsdID: 4
+                CrushRootID: 3
+                ID: 1
                 Up: true
                 DeletedAt: "DeletedAt"
                 Disk:
                   DeviceModel: "DeviceModel"
                   IsRoot: true
-                  MBytes: 1
+                  MBytes: 6
                   Encrypted: true
                   CreatedAt: "2000-01-23T04:56:07.000+00:00"
                   Host:
@@ -2469,19 +2315,19 @@ definitions:
                     Vendor: "Vendor"
                     admin_ip: "admin_ip"
                     UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-                    Cores: 3
+                    Cores: 4
                     HostModel: "HostModel"
                     Serial: "Serial"
                     Type: "Type"
-                    CPUs: 9
-                    MemoryMB: 4
-                    ID: 2
+                    CPUs: 2
+                    MemoryMB: 1
+                    ID: 7
                     DeletedAt: "DeletedAt"
                     cluster_ip: "cluster_ip"
                     host_name: "host_name"
                     CPUModel: "CPUModel"
                   Vendor: "Vendor"
-                  HostID: 7
+                  HostID: 1
                   Rotational: true
                   UpdatedAt: "2000-01-23T04:56:07.000+00:00"
                   Name: "Name"
@@ -2497,22 +2343,22 @@ definitions:
                   Filesystem: "Filesystem"
                   UUID: "UUID"
                   Cache: true
-                DiskID: 1
+                DiskID: 7
               - Status: "Status"
-                ClusterID: 2
+                ClusterID: 9
                 In: true
                 CreatedAt: "2000-01-23T04:56:07.000+00:00"
                 UpdatedAt: "2000-01-23T04:56:07.000+00:00"
                 Name: "Name"
-                OsdID: 7
-                CrushRootID: 7
-                ID: 6
+                OsdID: 4
+                CrushRootID: 3
+                ID: 1
                 Up: true
                 DeletedAt: "DeletedAt"
                 Disk:
                   DeviceModel: "DeviceModel"
                   IsRoot: true
-                  MBytes: 1
+                  MBytes: 6
                   Encrypted: true
                   CreatedAt: "2000-01-23T04:56:07.000+00:00"
                   Host:
@@ -2522,19 +2368,19 @@ definitions:
                     Vendor: "Vendor"
                     admin_ip: "admin_ip"
                     UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-                    Cores: 3
+                    Cores: 4
                     HostModel: "HostModel"
                     Serial: "Serial"
                     Type: "Type"
-                    CPUs: 9
-                    MemoryMB: 4
-                    ID: 2
+                    CPUs: 2
+                    MemoryMB: 1
+                    ID: 7
                     DeletedAt: "DeletedAt"
                     cluster_ip: "cluster_ip"
                     host_name: "host_name"
                     CPUModel: "CPUModel"
                   Vendor: "Vendor"
-                  HostID: 7
+                  HostID: 1
                   Rotational: true
                   UpdatedAt: "2000-01-23T04:56:07.000+00:00"
                   Name: "Name"
@@ -2550,43 +2396,42 @@ definitions:
                   Filesystem: "Filesystem"
                   UUID: "UUID"
                   Cache: true
-                DiskID: 1
+                DiskID: 7
               CreatedAt: "2000-01-23T04:56:07.000+00:00"
-              ID: 5
+              ID: 7
               DeletedAt: "DeletedAt"
               UpdatedAt: "2000-01-23T04:56:07.000+00:00"
               Name: "Name"
-            ECDataChunks: 9
-            ObjectStoreID: 6
-            CrushRootID: 4
-            ID: 9
+            ECDataChunks: 6
+            ObjectStoreID: 9
+            CrushRootID: 9
+            ID: 8
             DeletedAt: "DeletedAt"
-          - Replicated: 9
-            PoolID: 8
-            CreatedAt: "2000-01-23T04:56:07.000+00:00"
-            ECCodingChunks: 5
+            ECCodingChunks: 9
             UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-            CephfsID: 5
-            Type: "Type"
+          - Type: "Type"
+            Replicated: 3
+            PoolID: 6
+            CreatedAt: "2000-01-23T04:56:07.000+00:00"
             CrushRoot:
-              ParentID: 1
+              ParentID: 5
               Status: "Status"
               Osds:
               - Status: "Status"
-                ClusterID: 2
+                ClusterID: 9
                 In: true
                 CreatedAt: "2000-01-23T04:56:07.000+00:00"
                 UpdatedAt: "2000-01-23T04:56:07.000+00:00"
                 Name: "Name"
-                OsdID: 7
-                CrushRootID: 7
-                ID: 6
+                OsdID: 4
+                CrushRootID: 3
+                ID: 1
                 Up: true
                 DeletedAt: "DeletedAt"
                 Disk:
                   DeviceModel: "DeviceModel"
                   IsRoot: true
-                  MBytes: 1
+                  MBytes: 6
                   Encrypted: true
                   CreatedAt: "2000-01-23T04:56:07.000+00:00"
                   Host:
@@ -2596,19 +2441,19 @@ definitions:
                     Vendor: "Vendor"
                     admin_ip: "admin_ip"
                     UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-                    Cores: 3
+                    Cores: 4
                     HostModel: "HostModel"
                     Serial: "Serial"
                     Type: "Type"
-                    CPUs: 9
-                    MemoryMB: 4
-                    ID: 2
+                    CPUs: 2
+                    MemoryMB: 1
+                    ID: 7
                     DeletedAt: "DeletedAt"
                     cluster_ip: "cluster_ip"
                     host_name: "host_name"
                     CPUModel: "CPUModel"
                   Vendor: "Vendor"
-                  HostID: 7
+                  HostID: 1
                   Rotational: true
                   UpdatedAt: "2000-01-23T04:56:07.000+00:00"
                   Name: "Name"
@@ -2624,22 +2469,22 @@ definitions:
                   Filesystem: "Filesystem"
                   UUID: "UUID"
                   Cache: true
-                DiskID: 1
+                DiskID: 7
               - Status: "Status"
-                ClusterID: 2
+                ClusterID: 9
                 In: true
                 CreatedAt: "2000-01-23T04:56:07.000+00:00"
                 UpdatedAt: "2000-01-23T04:56:07.000+00:00"
                 Name: "Name"
-                OsdID: 7
-                CrushRootID: 7
-                ID: 6
+                OsdID: 4
+                CrushRootID: 3
+                ID: 1
                 Up: true
                 DeletedAt: "DeletedAt"
                 Disk:
                   DeviceModel: "DeviceModel"
                   IsRoot: true
-                  MBytes: 1
+                  MBytes: 6
                   Encrypted: true
                   CreatedAt: "2000-01-23T04:56:07.000+00:00"
                   Host:
@@ -2649,19 +2494,19 @@ definitions:
                     Vendor: "Vendor"
                     admin_ip: "admin_ip"
                     UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-                    Cores: 3
+                    Cores: 4
                     HostModel: "HostModel"
                     Serial: "Serial"
                     Type: "Type"
-                    CPUs: 9
-                    MemoryMB: 4
-                    ID: 2
+                    CPUs: 2
+                    MemoryMB: 1
+                    ID: 7
                     DeletedAt: "DeletedAt"
                     cluster_ip: "cluster_ip"
                     host_name: "host_name"
                     CPUModel: "CPUModel"
                   Vendor: "Vendor"
-                  HostID: 7
+                  HostID: 1
                   Rotational: true
                   UpdatedAt: "2000-01-23T04:56:07.000+00:00"
                   Name: "Name"
@@ -2677,17 +2522,19 @@ definitions:
                   Filesystem: "Filesystem"
                   UUID: "UUID"
                   Cache: true
-                DiskID: 1
+                DiskID: 7
               CreatedAt: "2000-01-23T04:56:07.000+00:00"
-              ID: 5
+              ID: 7
               DeletedAt: "DeletedAt"
               UpdatedAt: "2000-01-23T04:56:07.000+00:00"
               Name: "Name"
-            ECDataChunks: 9
-            ObjectStoreID: 6
-            CrushRootID: 4
-            ID: 9
+            ECDataChunks: 6
+            ObjectStoreID: 9
+            CrushRootID: 9
+            ID: 8
             DeletedAt: "DeletedAt"
+            ECCodingChunks: 9
+            UpdatedAt: "2000-01-23T04:56:07.000+00:00"
         UpdatedAt: "2000-01-23T04:56:07.000+00:00"
         max_size: "max_size"
         cap_usage: "cap_usage"
@@ -2726,32 +2573,29 @@ definitions:
           UpdatedAt: "2000-01-23T04:56:07.000+00:00"
           Name: "Name"
           PoolProperties:
-          - Replicated: 9
-            PoolID: 8
+          - Type: "Type"
+            Replicated: 3
+            PoolID: 6
             CreatedAt: "2000-01-23T04:56:07.000+00:00"
-            ECCodingChunks: 5
-            UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-            CephfsID: 5
-            Type: "Type"
             CrushRoot:
-              ParentID: 1
+              ParentID: 5
               Status: "Status"
               Osds:
               - Status: "Status"
-                ClusterID: 2
+                ClusterID: 9
                 In: true
                 CreatedAt: "2000-01-23T04:56:07.000+00:00"
                 UpdatedAt: "2000-01-23T04:56:07.000+00:00"
                 Name: "Name"
-                OsdID: 7
-                CrushRootID: 7
-                ID: 6
+                OsdID: 4
+                CrushRootID: 3
+                ID: 1
                 Up: true
                 DeletedAt: "DeletedAt"
                 Disk:
                   DeviceModel: "DeviceModel"
                   IsRoot: true
-                  MBytes: 1
+                  MBytes: 6
                   Encrypted: true
                   CreatedAt: "2000-01-23T04:56:07.000+00:00"
                   Host:
@@ -2761,19 +2605,19 @@ definitions:
                     Vendor: "Vendor"
                     admin_ip: "admin_ip"
                     UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-                    Cores: 3
+                    Cores: 4
                     HostModel: "HostModel"
                     Serial: "Serial"
                     Type: "Type"
-                    CPUs: 9
-                    MemoryMB: 4
-                    ID: 2
+                    CPUs: 2
+                    MemoryMB: 1
+                    ID: 7
                     DeletedAt: "DeletedAt"
                     cluster_ip: "cluster_ip"
                     host_name: "host_name"
                     CPUModel: "CPUModel"
                   Vendor: "Vendor"
-                  HostID: 7
+                  HostID: 1
                   Rotational: true
                   UpdatedAt: "2000-01-23T04:56:07.000+00:00"
                   Name: "Name"
@@ -2789,22 +2633,22 @@ definitions:
                   Filesystem: "Filesystem"
                   UUID: "UUID"
                   Cache: true
-                DiskID: 1
+                DiskID: 7
               - Status: "Status"
-                ClusterID: 2
+                ClusterID: 9
                 In: true
                 CreatedAt: "2000-01-23T04:56:07.000+00:00"
                 UpdatedAt: "2000-01-23T04:56:07.000+00:00"
                 Name: "Name"
-                OsdID: 7
-                CrushRootID: 7
-                ID: 6
+                OsdID: 4
+                CrushRootID: 3
+                ID: 1
                 Up: true
                 DeletedAt: "DeletedAt"
                 Disk:
                   DeviceModel: "DeviceModel"
                   IsRoot: true
-                  MBytes: 1
+                  MBytes: 6
                   Encrypted: true
                   CreatedAt: "2000-01-23T04:56:07.000+00:00"
                   Host:
@@ -2814,19 +2658,19 @@ definitions:
                     Vendor: "Vendor"
                     admin_ip: "admin_ip"
                     UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-                    Cores: 3
+                    Cores: 4
                     HostModel: "HostModel"
                     Serial: "Serial"
                     Type: "Type"
-                    CPUs: 9
-                    MemoryMB: 4
-                    ID: 2
+                    CPUs: 2
+                    MemoryMB: 1
+                    ID: 7
                     DeletedAt: "DeletedAt"
                     cluster_ip: "cluster_ip"
                     host_name: "host_name"
                     CPUModel: "CPUModel"
                   Vendor: "Vendor"
-                  HostID: 7
+                  HostID: 1
                   Rotational: true
                   UpdatedAt: "2000-01-23T04:56:07.000+00:00"
                   Name: "Name"
@@ -2842,43 +2686,42 @@ definitions:
                   Filesystem: "Filesystem"
                   UUID: "UUID"
                   Cache: true
-                DiskID: 1
+                DiskID: 7
               CreatedAt: "2000-01-23T04:56:07.000+00:00"
-              ID: 5
+              ID: 7
               DeletedAt: "DeletedAt"
               UpdatedAt: "2000-01-23T04:56:07.000+00:00"
               Name: "Name"
-            ECDataChunks: 9
-            ObjectStoreID: 6
-            CrushRootID: 4
-            ID: 9
+            ECDataChunks: 6
+            ObjectStoreID: 9
+            CrushRootID: 9
+            ID: 8
             DeletedAt: "DeletedAt"
-          - Replicated: 9
-            PoolID: 8
-            CreatedAt: "2000-01-23T04:56:07.000+00:00"
-            ECCodingChunks: 5
+            ECCodingChunks: 9
             UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-            CephfsID: 5
-            Type: "Type"
+          - Type: "Type"
+            Replicated: 3
+            PoolID: 6
+            CreatedAt: "2000-01-23T04:56:07.000+00:00"
             CrushRoot:
-              ParentID: 1
+              ParentID: 5
               Status: "Status"
               Osds:
               - Status: "Status"
-                ClusterID: 2
+                ClusterID: 9
                 In: true
                 CreatedAt: "2000-01-23T04:56:07.000+00:00"
                 UpdatedAt: "2000-01-23T04:56:07.000+00:00"
                 Name: "Name"
-                OsdID: 7
-                CrushRootID: 7
-                ID: 6
+                OsdID: 4
+                CrushRootID: 3
+                ID: 1
                 Up: true
                 DeletedAt: "DeletedAt"
                 Disk:
                   DeviceModel: "DeviceModel"
                   IsRoot: true
-                  MBytes: 1
+                  MBytes: 6
                   Encrypted: true
                   CreatedAt: "2000-01-23T04:56:07.000+00:00"
                   Host:
@@ -2888,19 +2731,19 @@ definitions:
                     Vendor: "Vendor"
                     admin_ip: "admin_ip"
                     UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-                    Cores: 3
+                    Cores: 4
                     HostModel: "HostModel"
                     Serial: "Serial"
                     Type: "Type"
-                    CPUs: 9
-                    MemoryMB: 4
-                    ID: 2
+                    CPUs: 2
+                    MemoryMB: 1
+                    ID: 7
                     DeletedAt: "DeletedAt"
                     cluster_ip: "cluster_ip"
                     host_name: "host_name"
                     CPUModel: "CPUModel"
                   Vendor: "Vendor"
-                  HostID: 7
+                  HostID: 1
                   Rotational: true
                   UpdatedAt: "2000-01-23T04:56:07.000+00:00"
                   Name: "Name"
@@ -2916,22 +2759,22 @@ definitions:
                   Filesystem: "Filesystem"
                   UUID: "UUID"
                   Cache: true
-                DiskID: 1
+                DiskID: 7
               - Status: "Status"
-                ClusterID: 2
+                ClusterID: 9
                 In: true
                 CreatedAt: "2000-01-23T04:56:07.000+00:00"
                 UpdatedAt: "2000-01-23T04:56:07.000+00:00"
                 Name: "Name"
-                OsdID: 7
-                CrushRootID: 7
-                ID: 6
+                OsdID: 4
+                CrushRootID: 3
+                ID: 1
                 Up: true
                 DeletedAt: "DeletedAt"
                 Disk:
                   DeviceModel: "DeviceModel"
                   IsRoot: true
-                  MBytes: 1
+                  MBytes: 6
                   Encrypted: true
                   CreatedAt: "2000-01-23T04:56:07.000+00:00"
                   Host:
@@ -2941,19 +2784,19 @@ definitions:
                     Vendor: "Vendor"
                     admin_ip: "admin_ip"
                     UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-                    Cores: 3
+                    Cores: 4
                     HostModel: "HostModel"
                     Serial: "Serial"
                     Type: "Type"
-                    CPUs: 9
-                    MemoryMB: 4
-                    ID: 2
+                    CPUs: 2
+                    MemoryMB: 1
+                    ID: 7
                     DeletedAt: "DeletedAt"
                     cluster_ip: "cluster_ip"
                     host_name: "host_name"
                     CPUModel: "CPUModel"
                   Vendor: "Vendor"
-                  HostID: 7
+                  HostID: 1
                   Rotational: true
                   UpdatedAt: "2000-01-23T04:56:07.000+00:00"
                   Name: "Name"
@@ -2969,17 +2812,19 @@ definitions:
                   Filesystem: "Filesystem"
                   UUID: "UUID"
                   Cache: true
-                DiskID: 1
+                DiskID: 7
               CreatedAt: "2000-01-23T04:56:07.000+00:00"
-              ID: 5
+              ID: 7
               DeletedAt: "DeletedAt"
               UpdatedAt: "2000-01-23T04:56:07.000+00:00"
               Name: "Name"
-            ECDataChunks: 9
-            ObjectStoreID: 6
-            CrushRootID: 4
-            ID: 9
+            ECDataChunks: 6
+            ObjectStoreID: 9
+            CrushRootID: 9
+            ID: 8
             DeletedAt: "DeletedAt"
+            ECCodingChunks: 9
+            UpdatedAt: "2000-01-23T04:56:07.000+00:00"
         CreatedAt: "2000-01-23T04:56:07.000+00:00"
         ObjectBuckets:
         - null
@@ -3038,32 +2883,29 @@ definitions:
         UpdatedAt: "2000-01-23T04:56:07.000+00:00"
         Name: "Name"
         PoolProperties:
-        - Replicated: 9
-          PoolID: 8
+        - Type: "Type"
+          Replicated: 3
+          PoolID: 6
           CreatedAt: "2000-01-23T04:56:07.000+00:00"
-          ECCodingChunks: 5
-          UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-          CephfsID: 5
-          Type: "Type"
           CrushRoot:
-            ParentID: 1
+            ParentID: 5
             Status: "Status"
             Osds:
             - Status: "Status"
-              ClusterID: 2
+              ClusterID: 9
               In: true
               CreatedAt: "2000-01-23T04:56:07.000+00:00"
               UpdatedAt: "2000-01-23T04:56:07.000+00:00"
               Name: "Name"
-              OsdID: 7
-              CrushRootID: 7
-              ID: 6
+              OsdID: 4
+              CrushRootID: 3
+              ID: 1
               Up: true
               DeletedAt: "DeletedAt"
               Disk:
                 DeviceModel: "DeviceModel"
                 IsRoot: true
-                MBytes: 1
+                MBytes: 6
                 Encrypted: true
                 CreatedAt: "2000-01-23T04:56:07.000+00:00"
                 Host:
@@ -3073,19 +2915,19 @@ definitions:
                   Vendor: "Vendor"
                   admin_ip: "admin_ip"
                   UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-                  Cores: 3
+                  Cores: 4
                   HostModel: "HostModel"
                   Serial: "Serial"
                   Type: "Type"
-                  CPUs: 9
-                  MemoryMB: 4
-                  ID: 2
+                  CPUs: 2
+                  MemoryMB: 1
+                  ID: 7
                   DeletedAt: "DeletedAt"
                   cluster_ip: "cluster_ip"
                   host_name: "host_name"
                   CPUModel: "CPUModel"
                 Vendor: "Vendor"
-                HostID: 7
+                HostID: 1
                 Rotational: true
                 UpdatedAt: "2000-01-23T04:56:07.000+00:00"
                 Name: "Name"
@@ -3101,22 +2943,22 @@ definitions:
                 Filesystem: "Filesystem"
                 UUID: "UUID"
                 Cache: true
-              DiskID: 1
+              DiskID: 7
             - Status: "Status"
-              ClusterID: 2
+              ClusterID: 9
               In: true
               CreatedAt: "2000-01-23T04:56:07.000+00:00"
               UpdatedAt: "2000-01-23T04:56:07.000+00:00"
               Name: "Name"
-              OsdID: 7
-              CrushRootID: 7
-              ID: 6
+              OsdID: 4
+              CrushRootID: 3
+              ID: 1
               Up: true
               DeletedAt: "DeletedAt"
               Disk:
                 DeviceModel: "DeviceModel"
                 IsRoot: true
-                MBytes: 1
+                MBytes: 6
                 Encrypted: true
                 CreatedAt: "2000-01-23T04:56:07.000+00:00"
                 Host:
@@ -3126,19 +2968,19 @@ definitions:
                   Vendor: "Vendor"
                   admin_ip: "admin_ip"
                   UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-                  Cores: 3
+                  Cores: 4
                   HostModel: "HostModel"
                   Serial: "Serial"
                   Type: "Type"
-                  CPUs: 9
-                  MemoryMB: 4
-                  ID: 2
+                  CPUs: 2
+                  MemoryMB: 1
+                  ID: 7
                   DeletedAt: "DeletedAt"
                   cluster_ip: "cluster_ip"
                   host_name: "host_name"
                   CPUModel: "CPUModel"
                 Vendor: "Vendor"
-                HostID: 7
+                HostID: 1
                 Rotational: true
                 UpdatedAt: "2000-01-23T04:56:07.000+00:00"
                 Name: "Name"
@@ -3154,43 +2996,42 @@ definitions:
                 Filesystem: "Filesystem"
                 UUID: "UUID"
                 Cache: true
-              DiskID: 1
+              DiskID: 7
             CreatedAt: "2000-01-23T04:56:07.000+00:00"
-            ID: 5
+            ID: 7
             DeletedAt: "DeletedAt"
             UpdatedAt: "2000-01-23T04:56:07.000+00:00"
             Name: "Name"
-          ECDataChunks: 9
-          ObjectStoreID: 6
-          CrushRootID: 4
-          ID: 9
+          ECDataChunks: 6
+          ObjectStoreID: 9
+          CrushRootID: 9
+          ID: 8
           DeletedAt: "DeletedAt"
-        - Replicated: 9
-          PoolID: 8
-          CreatedAt: "2000-01-23T04:56:07.000+00:00"
-          ECCodingChunks: 5
+          ECCodingChunks: 9
           UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-          CephfsID: 5
-          Type: "Type"
+        - Type: "Type"
+          Replicated: 3
+          PoolID: 6
+          CreatedAt: "2000-01-23T04:56:07.000+00:00"
           CrushRoot:
-            ParentID: 1
+            ParentID: 5
             Status: "Status"
             Osds:
             - Status: "Status"
-              ClusterID: 2
+              ClusterID: 9
               In: true
               CreatedAt: "2000-01-23T04:56:07.000+00:00"
               UpdatedAt: "2000-01-23T04:56:07.000+00:00"
               Name: "Name"
-              OsdID: 7
-              CrushRootID: 7
-              ID: 6
+              OsdID: 4
+              CrushRootID: 3
+              ID: 1
               Up: true
               DeletedAt: "DeletedAt"
               Disk:
                 DeviceModel: "DeviceModel"
                 IsRoot: true
-                MBytes: 1
+                MBytes: 6
                 Encrypted: true
                 CreatedAt: "2000-01-23T04:56:07.000+00:00"
                 Host:
@@ -3200,19 +3041,19 @@ definitions:
                   Vendor: "Vendor"
                   admin_ip: "admin_ip"
                   UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-                  Cores: 3
+                  Cores: 4
                   HostModel: "HostModel"
                   Serial: "Serial"
                   Type: "Type"
-                  CPUs: 9
-                  MemoryMB: 4
-                  ID: 2
+                  CPUs: 2
+                  MemoryMB: 1
+                  ID: 7
                   DeletedAt: "DeletedAt"
                   cluster_ip: "cluster_ip"
                   host_name: "host_name"
                   CPUModel: "CPUModel"
                 Vendor: "Vendor"
-                HostID: 7
+                HostID: 1
                 Rotational: true
                 UpdatedAt: "2000-01-23T04:56:07.000+00:00"
                 Name: "Name"
@@ -3228,22 +3069,22 @@ definitions:
                 Filesystem: "Filesystem"
                 UUID: "UUID"
                 Cache: true
-              DiskID: 1
+              DiskID: 7
             - Status: "Status"
-              ClusterID: 2
+              ClusterID: 9
               In: true
               CreatedAt: "2000-01-23T04:56:07.000+00:00"
               UpdatedAt: "2000-01-23T04:56:07.000+00:00"
               Name: "Name"
-              OsdID: 7
-              CrushRootID: 7
-              ID: 6
+              OsdID: 4
+              CrushRootID: 3
+              ID: 1
               Up: true
               DeletedAt: "DeletedAt"
               Disk:
                 DeviceModel: "DeviceModel"
                 IsRoot: true
-                MBytes: 1
+                MBytes: 6
                 Encrypted: true
                 CreatedAt: "2000-01-23T04:56:07.000+00:00"
                 Host:
@@ -3253,19 +3094,19 @@ definitions:
                   Vendor: "Vendor"
                   admin_ip: "admin_ip"
                   UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-                  Cores: 3
+                  Cores: 4
                   HostModel: "HostModel"
                   Serial: "Serial"
                   Type: "Type"
-                  CPUs: 9
-                  MemoryMB: 4
-                  ID: 2
+                  CPUs: 2
+                  MemoryMB: 1
+                  ID: 7
                   DeletedAt: "DeletedAt"
                   cluster_ip: "cluster_ip"
                   host_name: "host_name"
                   CPUModel: "CPUModel"
                 Vendor: "Vendor"
-                HostID: 7
+                HostID: 1
                 Rotational: true
                 UpdatedAt: "2000-01-23T04:56:07.000+00:00"
                 Name: "Name"
@@ -3281,17 +3122,19 @@ definitions:
                 Filesystem: "Filesystem"
                 UUID: "UUID"
                 Cache: true
-              DiskID: 1
+              DiskID: 7
             CreatedAt: "2000-01-23T04:56:07.000+00:00"
-            ID: 5
+            ID: 7
             DeletedAt: "DeletedAt"
             UpdatedAt: "2000-01-23T04:56:07.000+00:00"
             Name: "Name"
-          ECDataChunks: 9
-          ObjectStoreID: 6
-          CrushRootID: 4
-          ID: 9
+          ECDataChunks: 6
+          ObjectStoreID: 9
+          CrushRootID: 9
+          ID: 8
           DeletedAt: "DeletedAt"
+          ECCodingChunks: 9
+          UpdatedAt: "2000-01-23T04:56:07.000+00:00"
       CreatedAt: "2000-01-23T04:56:07.000+00:00"
       ObjectBuckets:
       - null
@@ -3347,32 +3190,29 @@ definitions:
       UpdatedAt: "2000-01-23T04:56:07.000+00:00"
       Name: "Name"
       PoolProperties:
-      - Replicated: 9
-        PoolID: 8
+      - Type: "Type"
+        Replicated: 3
+        PoolID: 6
         CreatedAt: "2000-01-23T04:56:07.000+00:00"
-        ECCodingChunks: 5
-        UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-        CephfsID: 5
-        Type: "Type"
         CrushRoot:
-          ParentID: 1
+          ParentID: 5
           Status: "Status"
           Osds:
           - Status: "Status"
-            ClusterID: 2
+            ClusterID: 9
             In: true
             CreatedAt: "2000-01-23T04:56:07.000+00:00"
             UpdatedAt: "2000-01-23T04:56:07.000+00:00"
             Name: "Name"
-            OsdID: 7
-            CrushRootID: 7
-            ID: 6
+            OsdID: 4
+            CrushRootID: 3
+            ID: 1
             Up: true
             DeletedAt: "DeletedAt"
             Disk:
               DeviceModel: "DeviceModel"
               IsRoot: true
-              MBytes: 1
+              MBytes: 6
               Encrypted: true
               CreatedAt: "2000-01-23T04:56:07.000+00:00"
               Host:
@@ -3382,19 +3222,19 @@ definitions:
                 Vendor: "Vendor"
                 admin_ip: "admin_ip"
                 UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-                Cores: 3
+                Cores: 4
                 HostModel: "HostModel"
                 Serial: "Serial"
                 Type: "Type"
-                CPUs: 9
-                MemoryMB: 4
-                ID: 2
+                CPUs: 2
+                MemoryMB: 1
+                ID: 7
                 DeletedAt: "DeletedAt"
                 cluster_ip: "cluster_ip"
                 host_name: "host_name"
                 CPUModel: "CPUModel"
               Vendor: "Vendor"
-              HostID: 7
+              HostID: 1
               Rotational: true
               UpdatedAt: "2000-01-23T04:56:07.000+00:00"
               Name: "Name"
@@ -3410,22 +3250,22 @@ definitions:
               Filesystem: "Filesystem"
               UUID: "UUID"
               Cache: true
-            DiskID: 1
+            DiskID: 7
           - Status: "Status"
-            ClusterID: 2
+            ClusterID: 9
             In: true
             CreatedAt: "2000-01-23T04:56:07.000+00:00"
             UpdatedAt: "2000-01-23T04:56:07.000+00:00"
             Name: "Name"
-            OsdID: 7
-            CrushRootID: 7
-            ID: 6
+            OsdID: 4
+            CrushRootID: 3
+            ID: 1
             Up: true
             DeletedAt: "DeletedAt"
             Disk:
               DeviceModel: "DeviceModel"
               IsRoot: true
-              MBytes: 1
+              MBytes: 6
               Encrypted: true
               CreatedAt: "2000-01-23T04:56:07.000+00:00"
               Host:
@@ -3435,19 +3275,19 @@ definitions:
                 Vendor: "Vendor"
                 admin_ip: "admin_ip"
                 UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-                Cores: 3
+                Cores: 4
                 HostModel: "HostModel"
                 Serial: "Serial"
                 Type: "Type"
-                CPUs: 9
-                MemoryMB: 4
-                ID: 2
+                CPUs: 2
+                MemoryMB: 1
+                ID: 7
                 DeletedAt: "DeletedAt"
                 cluster_ip: "cluster_ip"
                 host_name: "host_name"
                 CPUModel: "CPUModel"
               Vendor: "Vendor"
-              HostID: 7
+              HostID: 1
               Rotational: true
               UpdatedAt: "2000-01-23T04:56:07.000+00:00"
               Name: "Name"
@@ -3463,43 +3303,42 @@ definitions:
               Filesystem: "Filesystem"
               UUID: "UUID"
               Cache: true
-            DiskID: 1
+            DiskID: 7
           CreatedAt: "2000-01-23T04:56:07.000+00:00"
-          ID: 5
+          ID: 7
           DeletedAt: "DeletedAt"
           UpdatedAt: "2000-01-23T04:56:07.000+00:00"
           Name: "Name"
-        ECDataChunks: 9
-        ObjectStoreID: 6
-        CrushRootID: 4
-        ID: 9
+        ECDataChunks: 6
+        ObjectStoreID: 9
+        CrushRootID: 9
+        ID: 8
         DeletedAt: "DeletedAt"
-      - Replicated: 9
-        PoolID: 8
-        CreatedAt: "2000-01-23T04:56:07.000+00:00"
-        ECCodingChunks: 5
+        ECCodingChunks: 9
         UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-        CephfsID: 5
-        Type: "Type"
+      - Type: "Type"
+        Replicated: 3
+        PoolID: 6
+        CreatedAt: "2000-01-23T04:56:07.000+00:00"
         CrushRoot:
-          ParentID: 1
+          ParentID: 5
           Status: "Status"
           Osds:
           - Status: "Status"
-            ClusterID: 2
+            ClusterID: 9
             In: true
             CreatedAt: "2000-01-23T04:56:07.000+00:00"
             UpdatedAt: "2000-01-23T04:56:07.000+00:00"
             Name: "Name"
-            OsdID: 7
-            CrushRootID: 7
-            ID: 6
+            OsdID: 4
+            CrushRootID: 3
+            ID: 1
             Up: true
             DeletedAt: "DeletedAt"
             Disk:
               DeviceModel: "DeviceModel"
               IsRoot: true
-              MBytes: 1
+              MBytes: 6
               Encrypted: true
               CreatedAt: "2000-01-23T04:56:07.000+00:00"
               Host:
@@ -3509,19 +3348,19 @@ definitions:
                 Vendor: "Vendor"
                 admin_ip: "admin_ip"
                 UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-                Cores: 3
+                Cores: 4
                 HostModel: "HostModel"
                 Serial: "Serial"
                 Type: "Type"
-                CPUs: 9
-                MemoryMB: 4
-                ID: 2
+                CPUs: 2
+                MemoryMB: 1
+                ID: 7
                 DeletedAt: "DeletedAt"
                 cluster_ip: "cluster_ip"
                 host_name: "host_name"
                 CPUModel: "CPUModel"
               Vendor: "Vendor"
-              HostID: 7
+              HostID: 1
               Rotational: true
               UpdatedAt: "2000-01-23T04:56:07.000+00:00"
               Name: "Name"
@@ -3537,22 +3376,22 @@ definitions:
               Filesystem: "Filesystem"
               UUID: "UUID"
               Cache: true
-            DiskID: 1
+            DiskID: 7
           - Status: "Status"
-            ClusterID: 2
+            ClusterID: 9
             In: true
             CreatedAt: "2000-01-23T04:56:07.000+00:00"
             UpdatedAt: "2000-01-23T04:56:07.000+00:00"
             Name: "Name"
-            OsdID: 7
-            CrushRootID: 7
-            ID: 6
+            OsdID: 4
+            CrushRootID: 3
+            ID: 1
             Up: true
             DeletedAt: "DeletedAt"
             Disk:
               DeviceModel: "DeviceModel"
               IsRoot: true
-              MBytes: 1
+              MBytes: 6
               Encrypted: true
               CreatedAt: "2000-01-23T04:56:07.000+00:00"
               Host:
@@ -3562,19 +3401,19 @@ definitions:
                 Vendor: "Vendor"
                 admin_ip: "admin_ip"
                 UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-                Cores: 3
+                Cores: 4
                 HostModel: "HostModel"
                 Serial: "Serial"
                 Type: "Type"
-                CPUs: 9
-                MemoryMB: 4
-                ID: 2
+                CPUs: 2
+                MemoryMB: 1
+                ID: 7
                 DeletedAt: "DeletedAt"
                 cluster_ip: "cluster_ip"
                 host_name: "host_name"
                 CPUModel: "CPUModel"
               Vendor: "Vendor"
-              HostID: 7
+              HostID: 1
               Rotational: true
               UpdatedAt: "2000-01-23T04:56:07.000+00:00"
               Name: "Name"
@@ -3590,17 +3429,19 @@ definitions:
               Filesystem: "Filesystem"
               UUID: "UUID"
               Cache: true
-            DiskID: 1
+            DiskID: 7
           CreatedAt: "2000-01-23T04:56:07.000+00:00"
-          ID: 5
+          ID: 7
           DeletedAt: "DeletedAt"
           UpdatedAt: "2000-01-23T04:56:07.000+00:00"
           Name: "Name"
-        ECDataChunks: 9
-        ObjectStoreID: 6
-        CrushRootID: 4
-        ID: 9
+        ECDataChunks: 6
+        ObjectStoreID: 9
+        CrushRootID: 9
+        ID: 8
         DeletedAt: "DeletedAt"
+        ECCodingChunks: 9
+        UpdatedAt: "2000-01-23T04:56:07.000+00:00"
   models.OsUser:
     required:
     - "CreatedAt"
@@ -3687,32 +3528,29 @@ definitions:
         UpdatedAt: "2000-01-23T04:56:07.000+00:00"
         Name: "Name"
         PoolProperties:
-        - Replicated: 9
-          PoolID: 8
+        - Type: "Type"
+          Replicated: 3
+          PoolID: 6
           CreatedAt: "2000-01-23T04:56:07.000+00:00"
-          ECCodingChunks: 5
-          UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-          CephfsID: 5
-          Type: "Type"
           CrushRoot:
-            ParentID: 1
+            ParentID: 5
             Status: "Status"
             Osds:
             - Status: "Status"
-              ClusterID: 2
+              ClusterID: 9
               In: true
               CreatedAt: "2000-01-23T04:56:07.000+00:00"
               UpdatedAt: "2000-01-23T04:56:07.000+00:00"
               Name: "Name"
-              OsdID: 7
-              CrushRootID: 7
-              ID: 6
+              OsdID: 4
+              CrushRootID: 3
+              ID: 1
               Up: true
               DeletedAt: "DeletedAt"
               Disk:
                 DeviceModel: "DeviceModel"
                 IsRoot: true
-                MBytes: 1
+                MBytes: 6
                 Encrypted: true
                 CreatedAt: "2000-01-23T04:56:07.000+00:00"
                 Host:
@@ -3722,19 +3560,19 @@ definitions:
                   Vendor: "Vendor"
                   admin_ip: "admin_ip"
                   UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-                  Cores: 3
+                  Cores: 4
                   HostModel: "HostModel"
                   Serial: "Serial"
                   Type: "Type"
-                  CPUs: 9
-                  MemoryMB: 4
-                  ID: 2
+                  CPUs: 2
+                  MemoryMB: 1
+                  ID: 7
                   DeletedAt: "DeletedAt"
                   cluster_ip: "cluster_ip"
                   host_name: "host_name"
                   CPUModel: "CPUModel"
                 Vendor: "Vendor"
-                HostID: 7
+                HostID: 1
                 Rotational: true
                 UpdatedAt: "2000-01-23T04:56:07.000+00:00"
                 Name: "Name"
@@ -3750,22 +3588,22 @@ definitions:
                 Filesystem: "Filesystem"
                 UUID: "UUID"
                 Cache: true
-              DiskID: 1
+              DiskID: 7
             - Status: "Status"
-              ClusterID: 2
+              ClusterID: 9
               In: true
               CreatedAt: "2000-01-23T04:56:07.000+00:00"
               UpdatedAt: "2000-01-23T04:56:07.000+00:00"
               Name: "Name"
-              OsdID: 7
-              CrushRootID: 7
-              ID: 6
+              OsdID: 4
+              CrushRootID: 3
+              ID: 1
               Up: true
               DeletedAt: "DeletedAt"
               Disk:
                 DeviceModel: "DeviceModel"
                 IsRoot: true
-                MBytes: 1
+                MBytes: 6
                 Encrypted: true
                 CreatedAt: "2000-01-23T04:56:07.000+00:00"
                 Host:
@@ -3775,19 +3613,19 @@ definitions:
                   Vendor: "Vendor"
                   admin_ip: "admin_ip"
                   UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-                  Cores: 3
+                  Cores: 4
                   HostModel: "HostModel"
                   Serial: "Serial"
                   Type: "Type"
-                  CPUs: 9
-                  MemoryMB: 4
-                  ID: 2
+                  CPUs: 2
+                  MemoryMB: 1
+                  ID: 7
                   DeletedAt: "DeletedAt"
                   cluster_ip: "cluster_ip"
                   host_name: "host_name"
                   CPUModel: "CPUModel"
                 Vendor: "Vendor"
-                HostID: 7
+                HostID: 1
                 Rotational: true
                 UpdatedAt: "2000-01-23T04:56:07.000+00:00"
                 Name: "Name"
@@ -3803,43 +3641,42 @@ definitions:
                 Filesystem: "Filesystem"
                 UUID: "UUID"
                 Cache: true
-              DiskID: 1
+              DiskID: 7
             CreatedAt: "2000-01-23T04:56:07.000+00:00"
-            ID: 5
+            ID: 7
             DeletedAt: "DeletedAt"
             UpdatedAt: "2000-01-23T04:56:07.000+00:00"
             Name: "Name"
-          ECDataChunks: 9
-          ObjectStoreID: 6
-          CrushRootID: 4
-          ID: 9
+          ECDataChunks: 6
+          ObjectStoreID: 9
+          CrushRootID: 9
+          ID: 8
           DeletedAt: "DeletedAt"
-        - Replicated: 9
-          PoolID: 8
-          CreatedAt: "2000-01-23T04:56:07.000+00:00"
-          ECCodingChunks: 5
+          ECCodingChunks: 9
           UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-          CephfsID: 5
-          Type: "Type"
+        - Type: "Type"
+          Replicated: 3
+          PoolID: 6
+          CreatedAt: "2000-01-23T04:56:07.000+00:00"
           CrushRoot:
-            ParentID: 1
+            ParentID: 5
             Status: "Status"
             Osds:
             - Status: "Status"
-              ClusterID: 2
+              ClusterID: 9
               In: true
               CreatedAt: "2000-01-23T04:56:07.000+00:00"
               UpdatedAt: "2000-01-23T04:56:07.000+00:00"
               Name: "Name"
-              OsdID: 7
-              CrushRootID: 7
-              ID: 6
+              OsdID: 4
+              CrushRootID: 3
+              ID: 1
               Up: true
               DeletedAt: "DeletedAt"
               Disk:
                 DeviceModel: "DeviceModel"
                 IsRoot: true
-                MBytes: 1
+                MBytes: 6
                 Encrypted: true
                 CreatedAt: "2000-01-23T04:56:07.000+00:00"
                 Host:
@@ -3849,19 +3686,19 @@ definitions:
                   Vendor: "Vendor"
                   admin_ip: "admin_ip"
                   UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-                  Cores: 3
+                  Cores: 4
                   HostModel: "HostModel"
                   Serial: "Serial"
                   Type: "Type"
-                  CPUs: 9
-                  MemoryMB: 4
-                  ID: 2
+                  CPUs: 2
+                  MemoryMB: 1
+                  ID: 7
                   DeletedAt: "DeletedAt"
                   cluster_ip: "cluster_ip"
                   host_name: "host_name"
                   CPUModel: "CPUModel"
                 Vendor: "Vendor"
-                HostID: 7
+                HostID: 1
                 Rotational: true
                 UpdatedAt: "2000-01-23T04:56:07.000+00:00"
                 Name: "Name"
@@ -3877,22 +3714,22 @@ definitions:
                 Filesystem: "Filesystem"
                 UUID: "UUID"
                 Cache: true
-              DiskID: 1
+              DiskID: 7
             - Status: "Status"
-              ClusterID: 2
+              ClusterID: 9
               In: true
               CreatedAt: "2000-01-23T04:56:07.000+00:00"
               UpdatedAt: "2000-01-23T04:56:07.000+00:00"
               Name: "Name"
-              OsdID: 7
-              CrushRootID: 7
-              ID: 6
+              OsdID: 4
+              CrushRootID: 3
+              ID: 1
               Up: true
               DeletedAt: "DeletedAt"
               Disk:
                 DeviceModel: "DeviceModel"
                 IsRoot: true
-                MBytes: 1
+                MBytes: 6
                 Encrypted: true
                 CreatedAt: "2000-01-23T04:56:07.000+00:00"
                 Host:
@@ -3902,19 +3739,19 @@ definitions:
                   Vendor: "Vendor"
                   admin_ip: "admin_ip"
                   UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-                  Cores: 3
+                  Cores: 4
                   HostModel: "HostModel"
                   Serial: "Serial"
                   Type: "Type"
-                  CPUs: 9
-                  MemoryMB: 4
-                  ID: 2
+                  CPUs: 2
+                  MemoryMB: 1
+                  ID: 7
                   DeletedAt: "DeletedAt"
                   cluster_ip: "cluster_ip"
                   host_name: "host_name"
                   CPUModel: "CPUModel"
                 Vendor: "Vendor"
-                HostID: 7
+                HostID: 1
                 Rotational: true
                 UpdatedAt: "2000-01-23T04:56:07.000+00:00"
                 Name: "Name"
@@ -3930,17 +3767,19 @@ definitions:
                 Filesystem: "Filesystem"
                 UUID: "UUID"
                 Cache: true
-              DiskID: 1
+              DiskID: 7
             CreatedAt: "2000-01-23T04:56:07.000+00:00"
-            ID: 5
+            ID: 7
             DeletedAt: "DeletedAt"
             UpdatedAt: "2000-01-23T04:56:07.000+00:00"
             Name: "Name"
-          ECDataChunks: 9
-          ObjectStoreID: 6
-          CrushRootID: 4
-          ID: 9
+          ECDataChunks: 6
+          ObjectStoreID: 9
+          CrushRootID: 9
+          ID: 8
           DeletedAt: "DeletedAt"
+          ECCodingChunks: 9
+          UpdatedAt: "2000-01-23T04:56:07.000+00:00"
       UpdatedAt: "2000-01-23T04:56:07.000+00:00"
       max_size: "max_size"
       cap_usage: "cap_usage"
@@ -4005,20 +3844,20 @@ definitions:
         format: "date-time"
     example:
       Status: "Status"
-      ClusterID: 2
+      ClusterID: 9
       In: true
       CreatedAt: "2000-01-23T04:56:07.000+00:00"
       UpdatedAt: "2000-01-23T04:56:07.000+00:00"
       Name: "Name"
-      OsdID: 7
-      CrushRootID: 7
-      ID: 6
+      OsdID: 4
+      CrushRootID: 3
+      ID: 1
       Up: true
       DeletedAt: "DeletedAt"
       Disk:
         DeviceModel: "DeviceModel"
         IsRoot: true
-        MBytes: 1
+        MBytes: 6
         Encrypted: true
         CreatedAt: "2000-01-23T04:56:07.000+00:00"
         Host:
@@ -4028,19 +3867,19 @@ definitions:
           Vendor: "Vendor"
           admin_ip: "admin_ip"
           UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-          Cores: 3
+          Cores: 4
           HostModel: "HostModel"
           Serial: "Serial"
           Type: "Type"
-          CPUs: 9
-          MemoryMB: 4
-          ID: 2
+          CPUs: 2
+          MemoryMB: 1
+          ID: 7
           DeletedAt: "DeletedAt"
           cluster_ip: "cluster_ip"
           host_name: "host_name"
           CPUModel: "CPUModel"
         Vendor: "Vendor"
-        HostID: 7
+        HostID: 1
         Rotational: true
         UpdatedAt: "2000-01-23T04:56:07.000+00:00"
         Name: "Name"
@@ -4056,7 +3895,7 @@ definitions:
         Filesystem: "Filesystem"
         UUID: "UUID"
         Cache: true
-      DiskID: 1
+      DiskID: 7
   models.Pool:
     required:
     - "BlockPoolProperty"
@@ -4109,38 +3948,35 @@ definitions:
         format: "date-time"
     example:
       Status: "Status"
-      PoolID: 6
+      PoolID: 2
       CreatedAt: "2000-01-23T04:56:07.000+00:00"
       UpdatedAt: "2000-01-23T04:56:07.000+00:00"
       PgAutoscaleMode: true
       Name: "Name"
       BlockPoolProperty:
-        Replicated: 9
-        PoolID: 8
-        CreatedAt: "2000-01-23T04:56:07.000+00:00"
-        ECCodingChunks: 5
-        UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-        CephfsID: 5
         Type: "Type"
+        Replicated: 3
+        PoolID: 6
+        CreatedAt: "2000-01-23T04:56:07.000+00:00"
         CrushRoot:
-          ParentID: 1
+          ParentID: 5
           Status: "Status"
           Osds:
           - Status: "Status"
-            ClusterID: 2
+            ClusterID: 9
             In: true
             CreatedAt: "2000-01-23T04:56:07.000+00:00"
             UpdatedAt: "2000-01-23T04:56:07.000+00:00"
             Name: "Name"
-            OsdID: 7
-            CrushRootID: 7
-            ID: 6
+            OsdID: 4
+            CrushRootID: 3
+            ID: 1
             Up: true
             DeletedAt: "DeletedAt"
             Disk:
               DeviceModel: "DeviceModel"
               IsRoot: true
-              MBytes: 1
+              MBytes: 6
               Encrypted: true
               CreatedAt: "2000-01-23T04:56:07.000+00:00"
               Host:
@@ -4150,19 +3986,19 @@ definitions:
                 Vendor: "Vendor"
                 admin_ip: "admin_ip"
                 UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-                Cores: 3
+                Cores: 4
                 HostModel: "HostModel"
                 Serial: "Serial"
                 Type: "Type"
-                CPUs: 9
-                MemoryMB: 4
-                ID: 2
+                CPUs: 2
+                MemoryMB: 1
+                ID: 7
                 DeletedAt: "DeletedAt"
                 cluster_ip: "cluster_ip"
                 host_name: "host_name"
                 CPUModel: "CPUModel"
               Vendor: "Vendor"
-              HostID: 7
+              HostID: 1
               Rotational: true
               UpdatedAt: "2000-01-23T04:56:07.000+00:00"
               Name: "Name"
@@ -4178,22 +4014,22 @@ definitions:
               Filesystem: "Filesystem"
               UUID: "UUID"
               Cache: true
-            DiskID: 1
+            DiskID: 7
           - Status: "Status"
-            ClusterID: 2
+            ClusterID: 9
             In: true
             CreatedAt: "2000-01-23T04:56:07.000+00:00"
             UpdatedAt: "2000-01-23T04:56:07.000+00:00"
             Name: "Name"
-            OsdID: 7
-            CrushRootID: 7
-            ID: 6
+            OsdID: 4
+            CrushRootID: 3
+            ID: 1
             Up: true
             DeletedAt: "DeletedAt"
             Disk:
               DeviceModel: "DeviceModel"
               IsRoot: true
-              MBytes: 1
+              MBytes: 6
               Encrypted: true
               CreatedAt: "2000-01-23T04:56:07.000+00:00"
               Host:
@@ -4203,19 +4039,19 @@ definitions:
                 Vendor: "Vendor"
                 admin_ip: "admin_ip"
                 UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-                Cores: 3
+                Cores: 4
                 HostModel: "HostModel"
                 Serial: "Serial"
                 Type: "Type"
-                CPUs: 9
-                MemoryMB: 4
-                ID: 2
+                CPUs: 2
+                MemoryMB: 1
+                ID: 7
                 DeletedAt: "DeletedAt"
                 cluster_ip: "cluster_ip"
                 host_name: "host_name"
                 CPUModel: "CPUModel"
               Vendor: "Vendor"
-              HostID: 7
+              HostID: 1
               Rotational: true
               UpdatedAt: "2000-01-23T04:56:07.000+00:00"
               Name: "Name"
@@ -4231,27 +4067,28 @@ definitions:
               Filesystem: "Filesystem"
               UUID: "UUID"
               Cache: true
-            DiskID: 1
+            DiskID: 7
           CreatedAt: "2000-01-23T04:56:07.000+00:00"
-          ID: 5
+          ID: 7
           DeletedAt: "DeletedAt"
           UpdatedAt: "2000-01-23T04:56:07.000+00:00"
           Name: "Name"
-        ECDataChunks: 9
-        ObjectStoreID: 6
-        CrushRootID: 4
-        ID: 9
+        ECDataChunks: 6
+        ObjectStoreID: 9
+        CrushRootID: 9
+        ID: 8
         DeletedAt: "DeletedAt"
+        ECCodingChunks: 9
+        UpdatedAt: "2000-01-23T04:56:07.000+00:00"
       Type: "Type"
       PoolName: "PoolName"
       State: "State"
       ErasureCodeProfile: "ErasureCodeProfile"
-      PgNum: 3
+      PgNum: 1
       ID: 6
       DeletedAt: "DeletedAt"
   models.PoolProperty:
     required:
-    - "CephfsID"
     - "CreatedAt"
     - "CrushRoot"
     - "CrushRootID"
@@ -4265,9 +4102,6 @@ definitions:
     - "Type"
     - "UpdatedAt"
     properties:
-      CephfsID:
-        type: "integer"
-        format: "int64"
       CreatedAt:
         type: "string"
         format: "date-time"
@@ -4302,32 +4136,29 @@ definitions:
         type: "string"
         format: "date-time"
     example:
-      Replicated: 9
-      PoolID: 8
-      CreatedAt: "2000-01-23T04:56:07.000+00:00"
-      ECCodingChunks: 5
-      UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-      CephfsID: 5
       Type: "Type"
+      Replicated: 3
+      PoolID: 6
+      CreatedAt: "2000-01-23T04:56:07.000+00:00"
       CrushRoot:
-        ParentID: 1
+        ParentID: 5
         Status: "Status"
         Osds:
         - Status: "Status"
-          ClusterID: 2
+          ClusterID: 9
           In: true
           CreatedAt: "2000-01-23T04:56:07.000+00:00"
           UpdatedAt: "2000-01-23T04:56:07.000+00:00"
           Name: "Name"
-          OsdID: 7
-          CrushRootID: 7
-          ID: 6
+          OsdID: 4
+          CrushRootID: 3
+          ID: 1
           Up: true
           DeletedAt: "DeletedAt"
           Disk:
             DeviceModel: "DeviceModel"
             IsRoot: true
-            MBytes: 1
+            MBytes: 6
             Encrypted: true
             CreatedAt: "2000-01-23T04:56:07.000+00:00"
             Host:
@@ -4337,19 +4168,19 @@ definitions:
               Vendor: "Vendor"
               admin_ip: "admin_ip"
               UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-              Cores: 3
+              Cores: 4
               HostModel: "HostModel"
               Serial: "Serial"
               Type: "Type"
-              CPUs: 9
-              MemoryMB: 4
-              ID: 2
+              CPUs: 2
+              MemoryMB: 1
+              ID: 7
               DeletedAt: "DeletedAt"
               cluster_ip: "cluster_ip"
               host_name: "host_name"
               CPUModel: "CPUModel"
             Vendor: "Vendor"
-            HostID: 7
+            HostID: 1
             Rotational: true
             UpdatedAt: "2000-01-23T04:56:07.000+00:00"
             Name: "Name"
@@ -4365,22 +4196,22 @@ definitions:
             Filesystem: "Filesystem"
             UUID: "UUID"
             Cache: true
-          DiskID: 1
+          DiskID: 7
         - Status: "Status"
-          ClusterID: 2
+          ClusterID: 9
           In: true
           CreatedAt: "2000-01-23T04:56:07.000+00:00"
           UpdatedAt: "2000-01-23T04:56:07.000+00:00"
           Name: "Name"
-          OsdID: 7
-          CrushRootID: 7
-          ID: 6
+          OsdID: 4
+          CrushRootID: 3
+          ID: 1
           Up: true
           DeletedAt: "DeletedAt"
           Disk:
             DeviceModel: "DeviceModel"
             IsRoot: true
-            MBytes: 1
+            MBytes: 6
             Encrypted: true
             CreatedAt: "2000-01-23T04:56:07.000+00:00"
             Host:
@@ -4390,19 +4221,19 @@ definitions:
               Vendor: "Vendor"
               admin_ip: "admin_ip"
               UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-              Cores: 3
+              Cores: 4
               HostModel: "HostModel"
               Serial: "Serial"
               Type: "Type"
-              CPUs: 9
-              MemoryMB: 4
-              ID: 2
+              CPUs: 2
+              MemoryMB: 1
+              ID: 7
               DeletedAt: "DeletedAt"
               cluster_ip: "cluster_ip"
               host_name: "host_name"
               CPUModel: "CPUModel"
             Vendor: "Vendor"
-            HostID: 7
+            HostID: 1
             Rotational: true
             UpdatedAt: "2000-01-23T04:56:07.000+00:00"
             Name: "Name"
@@ -4418,17 +4249,19 @@ definitions:
             Filesystem: "Filesystem"
             UUID: "UUID"
             Cache: true
-          DiskID: 1
+          DiskID: 7
         CreatedAt: "2000-01-23T04:56:07.000+00:00"
-        ID: 5
+        ID: 7
         DeletedAt: "DeletedAt"
         UpdatedAt: "2000-01-23T04:56:07.000+00:00"
         Name: "Name"
-      ECDataChunks: 9
-      ObjectStoreID: 6
-      CrushRootID: 4
-      ID: 9
+      ECDataChunks: 6
+      ObjectStoreID: 9
+      CrushRootID: 9
+      ID: 8
       DeletedAt: "DeletedAt"
+      ECCodingChunks: 9
+      UpdatedAt: "2000-01-23T04:56:07.000+00:00"
   models.Volume:
     required:
     - "ByteSize"
@@ -4480,49 +4313,46 @@ definitions:
         type: "string"
     example:
       Status: "Status"
-      ByteSize: 0
+      ByteSize: 5
       VolumeName: "VolumeName"
-      PoolID: 1
+      PoolID: 6
       CreatedAt: "2000-01-23T04:56:07.000+00:00"
       UpdatedAt: "2000-01-23T04:56:07.000+00:00"
       Name: "Name"
-      Format: 6
-      UsedByteSize: 2
+      Format: 5
+      UsedByteSize: 6
       ImageID: "ImageID"
       Pool:
         Status: "Status"
-        PoolID: 6
+        PoolID: 2
         CreatedAt: "2000-01-23T04:56:07.000+00:00"
         UpdatedAt: "2000-01-23T04:56:07.000+00:00"
         PgAutoscaleMode: true
         Name: "Name"
         BlockPoolProperty:
-          Replicated: 9
-          PoolID: 8
-          CreatedAt: "2000-01-23T04:56:07.000+00:00"
-          ECCodingChunks: 5
-          UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-          CephfsID: 5
           Type: "Type"
+          Replicated: 3
+          PoolID: 6
+          CreatedAt: "2000-01-23T04:56:07.000+00:00"
           CrushRoot:
-            ParentID: 1
+            ParentID: 5
             Status: "Status"
             Osds:
             - Status: "Status"
-              ClusterID: 2
+              ClusterID: 9
               In: true
               CreatedAt: "2000-01-23T04:56:07.000+00:00"
               UpdatedAt: "2000-01-23T04:56:07.000+00:00"
               Name: "Name"
-              OsdID: 7
-              CrushRootID: 7
-              ID: 6
+              OsdID: 4
+              CrushRootID: 3
+              ID: 1
               Up: true
               DeletedAt: "DeletedAt"
               Disk:
                 DeviceModel: "DeviceModel"
                 IsRoot: true
-                MBytes: 1
+                MBytes: 6
                 Encrypted: true
                 CreatedAt: "2000-01-23T04:56:07.000+00:00"
                 Host:
@@ -4532,19 +4362,19 @@ definitions:
                   Vendor: "Vendor"
                   admin_ip: "admin_ip"
                   UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-                  Cores: 3
+                  Cores: 4
                   HostModel: "HostModel"
                   Serial: "Serial"
                   Type: "Type"
-                  CPUs: 9
-                  MemoryMB: 4
-                  ID: 2
+                  CPUs: 2
+                  MemoryMB: 1
+                  ID: 7
                   DeletedAt: "DeletedAt"
                   cluster_ip: "cluster_ip"
                   host_name: "host_name"
                   CPUModel: "CPUModel"
                 Vendor: "Vendor"
-                HostID: 7
+                HostID: 1
                 Rotational: true
                 UpdatedAt: "2000-01-23T04:56:07.000+00:00"
                 Name: "Name"
@@ -4560,22 +4390,22 @@ definitions:
                 Filesystem: "Filesystem"
                 UUID: "UUID"
                 Cache: true
-              DiskID: 1
+              DiskID: 7
             - Status: "Status"
-              ClusterID: 2
+              ClusterID: 9
               In: true
               CreatedAt: "2000-01-23T04:56:07.000+00:00"
               UpdatedAt: "2000-01-23T04:56:07.000+00:00"
               Name: "Name"
-              OsdID: 7
-              CrushRootID: 7
-              ID: 6
+              OsdID: 4
+              CrushRootID: 3
+              ID: 1
               Up: true
               DeletedAt: "DeletedAt"
               Disk:
                 DeviceModel: "DeviceModel"
                 IsRoot: true
-                MBytes: 1
+                MBytes: 6
                 Encrypted: true
                 CreatedAt: "2000-01-23T04:56:07.000+00:00"
                 Host:
@@ -4585,19 +4415,19 @@ definitions:
                   Vendor: "Vendor"
                   admin_ip: "admin_ip"
                   UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-                  Cores: 3
+                  Cores: 4
                   HostModel: "HostModel"
                   Serial: "Serial"
                   Type: "Type"
-                  CPUs: 9
-                  MemoryMB: 4
-                  ID: 2
+                  CPUs: 2
+                  MemoryMB: 1
+                  ID: 7
                   DeletedAt: "DeletedAt"
                   cluster_ip: "cluster_ip"
                   host_name: "host_name"
                   CPUModel: "CPUModel"
                 Vendor: "Vendor"
-                HostID: 7
+                HostID: 1
                 Rotational: true
                 UpdatedAt: "2000-01-23T04:56:07.000+00:00"
                 Name: "Name"
@@ -4613,32 +4443,28 @@ definitions:
                 Filesystem: "Filesystem"
                 UUID: "UUID"
                 Cache: true
-              DiskID: 1
+              DiskID: 7
             CreatedAt: "2000-01-23T04:56:07.000+00:00"
-            ID: 5
+            ID: 7
             DeletedAt: "DeletedAt"
             UpdatedAt: "2000-01-23T04:56:07.000+00:00"
             Name: "Name"
-          ECDataChunks: 9
-          ObjectStoreID: 6
-          CrushRootID: 4
-          ID: 9
+          ECDataChunks: 6
+          ObjectStoreID: 9
+          CrushRootID: 9
+          ID: 8
           DeletedAt: "DeletedAt"
+          ECCodingChunks: 9
+          UpdatedAt: "2000-01-23T04:56:07.000+00:00"
         Type: "Type"
         PoolName: "PoolName"
         State: "State"
         ErasureCodeProfile: "ErasureCodeProfile"
-        PgNum: 3
+        PgNum: 1
         ID: 6
         DeletedAt: "DeletedAt"
-      ID: 1
+      ID: 2
       DeletedAt: "DeletedAt"
-  routes.CephfsRequestParams:
-    required:
-    - "cephfs"
-    properties:
-      cephfs:
-        $ref: "#/definitions/.cephfs"
   routes.CreateCephClusterRequestParams:
     required:
     - "ceph_cluster"
@@ -4704,7 +4530,6 @@ definitions:
     - "crush_root_id"
     - "ec_coding_chunks"
     - "ec_data_chunks"
-    - "name"
     - "replicated"
     - "type"
     properties:
@@ -4717,8 +4542,6 @@ definitions:
       ec_data_chunks:
         type: "integer"
         format: "int64"
-      name:
-        type: "string"
       replicated:
         type: "integer"
         format: "int64"

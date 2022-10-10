@@ -6,7 +6,6 @@ Name | Type | Description | Notes
 **CrushRootId** | **int64** |  | [default to null]
 **EcCodingChunks** | **int64** |  | [default to null]
 **EcDataChunks** | **int64** |  | [default to null]
-**Name** | **string** |  | [default to null]
 **Replicated** | **int64** |  | [default to null]
 **Type_** | **string** |  | [default to null]
 

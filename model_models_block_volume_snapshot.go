@@ -14,14 +14,18 @@ import (
 	"time"
 )
 
-type ModelsCephfs struct {
+type ModelsBlockVolumeSnapshot struct {
 	CreatedAt time.Time `json:"CreatedAt"`
 	DeletedAt string `json:"DeletedAt"`
 	ID int64 `json:"ID"`
 	Name string `json:"Name"`
-	PoolProperties []ModelsPoolProperty `json:"PoolProperties"`
-	PreserveFilesystemOnDelete bool `json:"PreserveFilesystemOnDelete"`
-	PreservePoolsOnDelete bool `json:"PreservePoolsOnDelete"`
+	Protected bool `json:"Protected"`
+	Size int64 `json:"Size"`
+	SnapID int64 `json:"SnapID"`
+	SnapName string `json:"SnapName"`
 	Status string `json:"Status"`
+	Timestamp string `json:"Timestamp"`
 	UpdatedAt time.Time `json:"UpdatedAt"`
+	Volume *ModelsVolume `json:"Volume"`
+	VolumeID int64 `json:"VolumeID"`
 }
