@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **ID** | **int64** |  | [default to null]
 **ImageID** | **string** |  | [default to null]
 **Name** | **string** |  | [default to null]
+**Passvie** | **bool** |  | [default to null]
 **Pool** | [***ModelsPool**](models.Pool.md) |  | [default to null]
 **PoolID** | **int64** |  | [default to null]
 **Status** | **string** |  | [default to null]

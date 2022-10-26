@@ -10,8 +10,6 @@
 
 package smdclient
 
-type Pool struct {
-	BlockPool *RoutesPoolRequestParams `json:"block_pool"`
-	Name string `json:"name"`
-	PoolName string `json:"pool_name"`
+type RoutesCephfsRequestParams struct {
+	Cephfs *Cephfs `json:"cephfs"`
 }

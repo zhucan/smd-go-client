@@ -34,4 +34,5 @@ type ModelsOsUser struct {
 	ObjectStoreId int64 `json:"object_store_id"`
 	Sk string `json:"sk"`
 	Status string `json:"status"`
+	UserName string `json:"user_name"`
 }

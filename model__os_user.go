@@ -20,5 +20,6 @@ type OsUser struct {
 	ObjectStoreId int64 `json:"object_store_id"`
 	UsageCapability string `json:"usage_capability"`
 	UserCapability string `json:"user_capability"`
+	UserName string `json:"user_name"`
 	ZoneCapability string `json:"zone_capability"`
 }

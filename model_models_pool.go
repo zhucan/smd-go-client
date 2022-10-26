@@ -21,6 +21,7 @@ type ModelsPool struct {
 	ErasureCodeProfile string `json:"ErasureCodeProfile"`
 	ID int64 `json:"ID"`
 	Name string `json:"Name"`
+	Passive bool `json:"Passive"`
 	PgAutoscaleMode bool `json:"PgAutoscaleMode"`
 	PgNum int64 `json:"PgNum"`
 	PoolID int32 `json:"PoolID"`

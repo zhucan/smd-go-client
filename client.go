@@ -54,6 +54,8 @@ type APIClient struct {
 
 	CephClustersApi *CephClustersApiService
 
+	CephFilesystemsApi *CephFilesystemsApiService
+
 	CrushRootsApi *CrushRootsApiService
 
 	DisksApi *DisksApiService
@@ -61,6 +63,8 @@ type APIClient struct {
 	HostsApi *HostsApiService
 
 	ObjectBucketsApi *ObjectBucketsApiService
+
+	ObjectGatewaysApi *ObjectGatewaysApiService
 
 	ObjectStorageClassesApi *ObjectStorageClassesApiService
 
@@ -93,10 +97,12 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.BlockVolumeSnapshotsApi = (*BlockVolumeSnapshotsApiService)(&c.common)
 	c.BlockVolumesApi = (*BlockVolumesApiService)(&c.common)
 	c.CephClustersApi = (*CephClustersApiService)(&c.common)
+	c.CephFilesystemsApi = (*CephFilesystemsApiService)(&c.common)
 	c.CrushRootsApi = (*CrushRootsApiService)(&c.common)
 	c.DisksApi = (*DisksApiService)(&c.common)
 	c.HostsApi = (*HostsApiService)(&c.common)
 	c.ObjectBucketsApi = (*ObjectBucketsApiService)(&c.common)
+	c.ObjectGatewaysApi = (*ObjectGatewaysApiService)(&c.common)
 	c.ObjectStorageClassesApi = (*ObjectStorageClassesApiService)(&c.common)
 	c.ObjectStoresApi = (*ObjectStoresApiService)(&c.common)
 	c.OsUserApi = (*OsUserApiService)(&c.common)

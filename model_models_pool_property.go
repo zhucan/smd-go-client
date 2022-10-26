@@ -15,6 +15,7 @@ import (
 )
 
 type ModelsPoolProperty struct {
+	CephfsID int64 `json:"CephfsID"`
 	CreatedAt time.Time `json:"CreatedAt"`
 	CrushRoot *ModelsCrushRoot `json:"CrushRoot"`
 	CrushRootID int64 `json:"CrushRootID"`

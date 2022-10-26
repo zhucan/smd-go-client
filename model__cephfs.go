@@ -10,12 +10,10 @@
 
 package smdclient
 
-type ObjectStore struct {
-	DataPool *RoutesPoolRequestParams `json:"data_pool"`
-	GatewayInstances int32 `json:"gateway_instances"`
+type Cephfs struct {
+	DataPools []RoutesPoolRequestParams `json:"data_pools"`
 	MetadataPool *RoutesPoolRequestParams `json:"metadata_pool"`
 	Name string `json:"name"`
-	Port int32 `json:"port"`
+	PreserveFilesystemOnDelete bool `json:"preserve_filesystem_on_delete"`
 	PreservePoolsOnDelete bool `json:"preserve_pools_on_delete"`
-	StoreName string `json:"store_name"`
 }

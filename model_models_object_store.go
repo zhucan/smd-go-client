@@ -23,5 +23,6 @@ type ModelsObjectStore struct {
 	Port int32 `json:"Port"`
 	PreservePoolsOnDelete bool `json:"PreservePoolsOnDelete"`
 	Status string `json:"Status"`
+	StoreName string `json:"StoreName"`
 	UpdatedAt time.Time `json:"UpdatedAt"`
 }

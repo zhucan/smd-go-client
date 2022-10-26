@@ -3,6 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**CephfsID** | **int64** |  | [default to null]
 **CreatedAt** | [**time.Time**](time.Time.md) |  | [default to null]
 **CrushRoot** | [***ModelsCrushRoot**](models.CrushRoot.md) |  | [default to null]
 **CrushRootID** | **int64** |  | [default to null]

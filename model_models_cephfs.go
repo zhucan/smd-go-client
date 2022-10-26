@@ -14,19 +14,14 @@ import (
 	"time"
 )
 
-type ModelsVolume struct {
-	ByteSize int64 `json:"ByteSize"`
+type ModelsCephfs struct {
 	CreatedAt time.Time `json:"CreatedAt"`
 	DeletedAt string `json:"DeletedAt"`
-	Format int32 `json:"Format"`
 	ID int64 `json:"ID"`
-	ImageID string `json:"ImageID"`
 	Name string `json:"Name"`
-	Passvie bool `json:"Passvie"`
-	Pool *ModelsPool `json:"Pool"`
-	PoolID int64 `json:"PoolID"`
+	PoolProperties []ModelsPoolProperty `json:"PoolProperties"`
+	PreserveFilesystemOnDelete bool `json:"PreserveFilesystemOnDelete"`
+	PreservePoolsOnDelete bool `json:"PreservePoolsOnDelete"`
 	Status string `json:"Status"`
 	UpdatedAt time.Time `json:"UpdatedAt"`
-	UsedByteSize int64 `json:"UsedByteSize"`
-	VolumeName string `json:"VolumeName"`
 }

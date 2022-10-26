@@ -14,6 +14,7 @@ type RoutesPoolRequestParams struct {
 	CrushRootId int64 `json:"crush_root_id"`
 	EcCodingChunks int64 `json:"ec_coding_chunks"`
 	EcDataChunks int64 `json:"ec_data_chunks"`
+	Name string `json:"name"`
 	Replicated int64 `json:"replicated"`
 	Type_ string `json:"type"`
 }

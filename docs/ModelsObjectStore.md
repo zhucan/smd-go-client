@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **Port** | **int32** |  | [default to null]
 **PreservePoolsOnDelete** | **bool** |  | [default to null]
 **Status** | **string** |  | [default to null]
+**StoreName** | **string** |  | [default to null]
 **UpdatedAt** | [**time.Time**](time.Time.md) |  | [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

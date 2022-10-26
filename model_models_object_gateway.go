@@ -14,19 +14,14 @@ import (
 	"time"
 )
 
-type ModelsVolume struct {
-	ByteSize int64 `json:"ByteSize"`
+type ModelsObjectGateway struct {
 	CreatedAt time.Time `json:"CreatedAt"`
 	DeletedAt string `json:"DeletedAt"`
-	Format int32 `json:"Format"`
+	HttpPort int32 `json:"HttpPort"`
+	HttpsPort int32 `json:"HttpsPort"`
 	ID int64 `json:"ID"`
-	ImageID string `json:"ImageID"`
+	Ip string `json:"Ip"`
 	Name string `json:"Name"`
-	Passvie bool `json:"Passvie"`
-	Pool *ModelsPool `json:"Pool"`
-	PoolID int64 `json:"PoolID"`
 	Status string `json:"Status"`
 	UpdatedAt time.Time `json:"UpdatedAt"`
-	UsedByteSize int64 `json:"UsedByteSize"`
-	VolumeName string `json:"VolumeName"`
 }
