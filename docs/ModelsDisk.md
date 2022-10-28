@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **Osd** | [***ModelsOsd**](models.Osd.md) |  | [default to null]
 **PathID** | **string** |  | [default to null]
 **RealPath** | **string** |  | [default to null]
+**Removed** | **bool** |  | [default to null]
 **Rotational** | **bool** |  | [default to null]
 **Serial** | **string** |  | [default to null]
 **Type_** | **string** |  | [default to null]

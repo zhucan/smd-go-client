@@ -36,6 +36,22 @@ Class | Method | HTTP request | Description
 *CephFilesystemsApi* | [**DeleteCephFilesystem**](docs/CephFilesystemsApi.md#deletecephfilesystem) | **Delete** /ceph-filesystems/{cephfs-id} | delete a ceph filesystem
 *CephFilesystemsApi* | [**GetCephFilesystem**](docs/CephFilesystemsApi.md#getcephfilesystem) | **Get** /ceph-filesystems/{cephfs-id} | get a ceph filesystem
 *CephFilesystemsApi* | [**ListCephFilesystems**](docs/CephFilesystemsApi.md#listcephfilesystems) | **Get** /ceph-filesystems | get all ceph filesystems
+*CephNfsApi* | [**CreateCephNFS**](docs/CephNfsApi.md#createcephnfs) | **Post** /ceph-nfs | create an ceph nfs
+*CephNfsApi* | [**DeleteCephNFS**](docs/CephNfsApi.md#deletecephnfs) | **Delete** /ceph-nfs/{ceph-nfs-id} | delete an ceph nfs
+*CephNfsApi* | [**GetCephNFS**](docs/CephNfsApi.md#getcephnfs) | **Get** /ceph-nfs/{ceph-nfs-id} | get an ceph nfs
+*CephNfsApi* | [**ListCephNFSes**](docs/CephNfsApi.md#listcephnfses) | **Get** /ceph-nfs | get all ceph nfs
+*CephNfsExportsApi* | [**CreateCephNFSExport**](docs/CephNfsExportsApi.md#createcephnfsexport) | **Post** /ceph-nfs-exports | create ceph nfs export
+*CephNfsExportsApi* | [**DeleteCephNFSExport**](docs/CephNfsExportsApi.md#deletecephnfsexport) | **Delete** /ceph-nfs-exports/{ceph-nfs-export-id} | delete a ceph nfs export
+*CephNfsExportsApi* | [**GetCephNFSExport**](docs/CephNfsExportsApi.md#getcephnfsexport) | **Get** /ceph-nfs-exports/{ceph-nfs-export-id} | get a ceph nfs export
+*CephNfsExportsApi* | [**ListCephNFSExports**](docs/CephNfsExportsApi.md#listcephnfsexports) | **Get** /ceph-nfs-exports | get all ceph nfs exports
+*CephfsSubvolumegroupsApi* | [**CreateCephfsSubvolumeGroup**](docs/CephfsSubvolumegroupsApi.md#createcephfssubvolumegroup) | **Post** /cephfs-subvolumegroups | create cephfs subvolumegroup
+*CephfsSubvolumegroupsApi* | [**DeleteCephfsSubvolumeGroup**](docs/CephfsSubvolumegroupsApi.md#deletecephfssubvolumegroup) | **Delete** /cephfs-subvolumegroups/{cephfs-subvolumegroup-id} | delete a cephfs subvolumegroup
+*CephfsSubvolumegroupsApi* | [**GetCephfsSubvolumeGroup**](docs/CephfsSubvolumegroupsApi.md#getcephfssubvolumegroup) | **Get** /cephfs-subvolumegroups/{cephfs-subvolumegroup-id} | get a cephfs subvolumegroup
+*CephfsSubvolumegroupsApi* | [**ListCephfsSubvolumeGroups**](docs/CephfsSubvolumegroupsApi.md#listcephfssubvolumegroups) | **Get** /cephfs-subvolumegroups | get all cephfs subvolumegroups
+*CephfsSubvolumesApi* | [**CreateCephfsSubvolume**](docs/CephfsSubvolumesApi.md#createcephfssubvolume) | **Post** /cephfs-subvolumes | create cephfs subvolume
+*CephfsSubvolumesApi* | [**DeleteCephfsSubvolume**](docs/CephfsSubvolumesApi.md#deletecephfssubvolume) | **Delete** /cephfs-subvolumes/{cephfs-subvolume-id} | delete a cephfs subvolume
+*CephfsSubvolumesApi* | [**GetCephfsSubvolume**](docs/CephfsSubvolumesApi.md#getcephfssubvolume) | **Get** /cephfs-subvolumes/{cephfs-subvolume-id} | get a cephfs subvolume
+*CephfsSubvolumesApi* | [**ListCephfsSubvolumes**](docs/CephfsSubvolumesApi.md#listcephfssubvolumes) | **Get** /cephfs-subvolumes | get all cephfs subvolumes
 *CrushRootsApi* | [**CreateCrushRoot**](docs/CrushRootsApi.md#createcrushroot) | **Post** /crush-roots | create crush root
 *CrushRootsApi* | [**DeleteCrushRoot**](docs/CrushRootsApi.md#deletecrushroot) | **Delete** /crush-roots/{crush-root-id} | delete a crush root
 *CrushRootsApi* | [**GetCrushRoot**](docs/CrushRootsApi.md#getcrushroot) | **Get** /crush-roots/{crush-root-id} | get a crush root
@@ -77,7 +93,11 @@ Class | Method | HTTP request | Description
 ## Documentation For Models
 
  - [CephCluster](docs/CephCluster.md)
+ - [CephNfs](docs/CephNfs.md)
+ - [CephNfsExport](docs/CephNfsExport.md)
  - [Cephfs](docs/Cephfs.md)
+ - [CephfsSubvolume](docs/CephfsSubvolume.md)
+ - [CephfsSubvolumegroup](docs/CephfsSubvolumegroup.md)
  - [CrushRoot](docs/CrushRoot.md)
  - [Disks](docs/Disks.md)
  - [GormModel](docs/GormModel.md)
@@ -85,7 +105,11 @@ Class | Method | HTTP request | Description
  - [ModelsActionLog](docs/ModelsActionLog.md)
  - [ModelsBlockVolumeSnapshot](docs/ModelsBlockVolumeSnapshot.md)
  - [ModelsCephCluster](docs/ModelsCephCluster.md)
+ - [ModelsCephNfs](docs/ModelsCephNfs.md)
+ - [ModelsCephNfsExport](docs/ModelsCephNfsExport.md)
  - [ModelsCephfs](docs/ModelsCephfs.md)
+ - [ModelsCephfsSubvolume](docs/ModelsCephfsSubvolume.md)
+ - [ModelsCephfsSubvolumeGroup](docs/ModelsCephfsSubvolumeGroup.md)
  - [ModelsCrushRoot](docs/ModelsCrushRoot.md)
  - [ModelsDisk](docs/ModelsDisk.md)
  - [ModelsHost](docs/ModelsHost.md)
@@ -104,7 +128,11 @@ Class | Method | HTTP request | Description
  - [OsUser](docs/OsUser.md)
  - [Osds](docs/Osds.md)
  - [Pool](docs/Pool.md)
+ - [RoutesCephNfsExportRequestParams](docs/RoutesCephNfsExportRequestParams.md)
+ - [RoutesCephNfsRequestParams](docs/RoutesCephNfsRequestParams.md)
  - [RoutesCephfsRequestParams](docs/RoutesCephfsRequestParams.md)
+ - [RoutesCephfsSubvolumeGroupRequestParams](docs/RoutesCephfsSubvolumeGroupRequestParams.md)
+ - [RoutesCephfsSubvolumeRequestParams](docs/RoutesCephfsSubvolumeRequestParams.md)
  - [RoutesCreateCephClusterRequestParams](docs/RoutesCreateCephClusterRequestParams.md)
  - [RoutesCreateHostRequestParams](docs/RoutesCreateHostRequestParams.md)
  - [RoutesCreateOsUserRequestParams](docs/RoutesCreateOsUserRequestParams.md)

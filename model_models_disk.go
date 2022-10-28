@@ -32,6 +32,7 @@ type ModelsDisk struct {
 	Osd *ModelsOsd `json:"Osd"`
 	PathID string `json:"PathID"`
 	RealPath string `json:"RealPath"`
+	Removed bool `json:"Removed"`
 	Rotational bool `json:"Rotational"`
 	Serial string `json:"Serial"`
 	Type_ string `json:"Type"`

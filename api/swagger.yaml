@@ -411,6 +411,452 @@ paths:
           description: "OK"
           schema:
             $ref: "#/definitions/models.Cephfs"
+  /ceph-nfs:
+    get:
+      tags:
+      - "ceph-nfs"
+      summary: "get all ceph nfs"
+      operationId: "ListCephNFSes"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "offset"
+        in: "query"
+        description: "offset"
+        required: false
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Offset"
+        x-optionalDataType: "Int64"
+      - name: "limit"
+        in: "query"
+        description: "limit"
+        required: false
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int64"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/*models.CephNFS"
+    post:
+      tags:
+      - "ceph-nfs"
+      summary: "create an ceph nfs"
+      operationId: "CreateCephNFS"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/routes.CephNFSRequestParams"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/models.CephNFS"
+  /ceph-nfs-exports:
+    get:
+      tags:
+      - "ceph-nfs-exports"
+      summary: "get all ceph nfs exports"
+      operationId: "ListCephNFSExports"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "offset"
+        in: "query"
+        description: "offset"
+        required: false
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Offset"
+        x-optionalDataType: "Int64"
+      - name: "limit"
+        in: "query"
+        description: "limit"
+        required: false
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int64"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/*models.CephNFSExport"
+    post:
+      tags:
+      - "ceph-nfs-exports"
+      summary: "create ceph nfs export"
+      operationId: "CreateCephNFSExport"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/routes.CephNFSExportRequestParams"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/models.CephNFSExport"
+  /ceph-nfs-exports/{ceph-nfs-export-id}:
+    get:
+      tags:
+      - "ceph-nfs-exports"
+      summary: "get a ceph nfs export"
+      operationId: "GetCephNFSExport"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "ceph-nfs-export-id"
+        in: "path"
+        description: "identifier of the ceph nfs export"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "CephNfsExportId"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/models.CephNFSExport"
+    delete:
+      tags:
+      - "ceph-nfs-exports"
+      summary: "delete a ceph nfs export"
+      operationId: "DeleteCephNFSExport"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "ceph-nfs-export-id"
+        in: "path"
+        description: "identifier of the ceph nfs export"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "CephNfsExportId"
+      - name: "force"
+        in: "query"
+        description: "force option will ignore errors"
+        required: false
+        type: "boolean"
+        x-exportParamName: "Force"
+        x-optionalDataType: "Bool"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/models.CephNFSExport"
+  /ceph-nfs/{ceph-nfs-id}:
+    get:
+      tags:
+      - "ceph-nfs"
+      summary: "get an ceph nfs"
+      operationId: "GetCephNFS"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "ceph-nfs-id"
+        in: "path"
+        description: "identifier of the ceph nfs"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "CephNfsId"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/models.CephNFS"
+    delete:
+      tags:
+      - "ceph-nfs"
+      summary: "delete an ceph nfs"
+      operationId: "DeleteCephNFS"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "ceph-nfs-id"
+        in: "path"
+        description: "identifier of the ceph nfs"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "CephNfsId"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/models.CephNFS"
+  /cephfs-subvolumegroups:
+    get:
+      tags:
+      - "cephfs-subvolumegroups"
+      summary: "get all cephfs subvolumegroups"
+      operationId: "ListCephfsSubvolumeGroups"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "offset"
+        in: "query"
+        description: "offset"
+        required: false
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Offset"
+        x-optionalDataType: "Int64"
+      - name: "limit"
+        in: "query"
+        description: "limit"
+        required: false
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int64"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/*models.CephfsSubvolumeGroup"
+    post:
+      tags:
+      - "cephfs-subvolumegroups"
+      summary: "create cephfs subvolumegroup"
+      operationId: "CreateCephfsSubvolumeGroup"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/routes.CephfsSubvolumeGroupRequestParams"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/models.CephfsSubvolumeGroup"
+  /cephfs-subvolumegroups/{cephfs-subvolumegroup-id}:
+    get:
+      tags:
+      - "cephfs-subvolumegroups"
+      summary: "get a cephfs subvolumegroup"
+      operationId: "GetCephfsSubvolumeGroup"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "cephfs-subvolumegroup-id"
+        in: "path"
+        description: "identifier of the cephfs subvolumegroup"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "CephfsSubvolumegroupId"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/models.CephfsSubvolumeGroup"
+    delete:
+      tags:
+      - "cephfs-subvolumegroups"
+      summary: "delete a cephfs subvolumegroup"
+      operationId: "DeleteCephfsSubvolumeGroup"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "cephfs-subvolumegroup-id"
+        in: "path"
+        description: "identifier of the cephfs subvolumegroup"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "CephfsSubvolumegroupId"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/models.CephfsSubvolumeGroup"
+  /cephfs-subvolumes:
+    get:
+      tags:
+      - "cephfs-subvolumes"
+      summary: "get all cephfs subvolumes"
+      operationId: "ListCephfsSubvolumes"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "offset"
+        in: "query"
+        description: "offset"
+        required: false
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Offset"
+        x-optionalDataType: "Int64"
+      - name: "limit"
+        in: "query"
+        description: "limit"
+        required: false
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int64"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/*models.CephfsSubvolume"
+    post:
+      tags:
+      - "cephfs-subvolumes"
+      summary: "create cephfs subvolume"
+      operationId: "CreateCephfsSubvolume"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/routes.CephfsSubvolumeRequestParams"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/models.CephfsSubvolume"
+  /cephfs-subvolumes/{cephfs-subvolume-id}:
+    get:
+      tags:
+      - "cephfs-subvolumes"
+      summary: "get a cephfs subvolume"
+      operationId: "GetCephfsSubvolume"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "cephfs-subvolume-id"
+        in: "path"
+        description: "identifier of the cephfs subvolume"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "CephfsSubvolumeId"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/models.CephfsSubvolume"
+    delete:
+      tags:
+      - "cephfs-subvolumes"
+      summary: "delete a cephfs subvolume"
+      operationId: "DeleteCephfsSubvolume"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "cephfs-subvolume-id"
+        in: "path"
+        description: "identifier of the cephfs subvolume"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "CephfsSubvolumeId"
+      - name: "force"
+        in: "query"
+        description: "force option will ignore errors"
+        required: false
+        type: "boolean"
+        x-exportParamName: "Force"
+        x-optionalDataType: "Bool"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/models.CephfsSubvolume"
   /crush-roots:
     get:
       tags:
@@ -1427,7 +1873,11 @@ definitions:
   '*models.ActionLog': {}
   '*models.BlockVolumeSnapshot': {}
   '*models.CephCluster': {}
+  '*models.CephNFS': {}
+  '*models.CephNFSExport': {}
   '*models.Cephfs': {}
+  '*models.CephfsSubvolume': {}
+  '*models.CephfsSubvolumeGroup': {}
   '*models.CrushRoot': {}
   '*models.Disk': {}
   '*models.Host': {}
@@ -1447,6 +1897,40 @@ definitions:
       name:
         type: "string"
       namespace:
+        type: "string"
+  ".ceph_nfs":
+    required:
+    - "instances"
+    - "name"
+    - "nfs_name"
+    properties:
+      instances:
+        type: "integer"
+        format: "int32"
+      name:
+        type: "string"
+      nfs_name:
+        type: "string"
+  ".ceph_nfs_export":
+    required:
+    - "ceph_nfs_id"
+    - "cephfs_id"
+    - "cephfs_subvolume_id"
+    - "name"
+    - "pseudo_path"
+    properties:
+      ceph_nfs_id:
+        type: "integer"
+        format: "int64"
+      cephfs_id:
+        type: "integer"
+        format: "int64"
+      cephfs_subvolume_id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+      pseudo_path:
         type: "string"
   ".cephfs":
     required:
@@ -1468,6 +1952,29 @@ definitions:
         type: "boolean"
       preserve_pools_on_delete:
         type: "boolean"
+  ".cephfs_subvolume":
+    required:
+    - "cephfs_subvolumegroup_id"
+    - "name"
+    - "size"
+    properties:
+      cephfs_subvolumegroup_id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+      size:
+        type: "string"
+  ".cephfs_subvolumegroup":
+    required:
+    - "cephfs_id"
+    - "name"
+    properties:
+      cephfs_id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
   ".crush_root":
     required:
     - "name"
@@ -1507,10 +2014,13 @@ definitions:
         $ref: "#/definitions/models.Host"
   ".object_bucket":
     required:
+    - "bucket_name"
     - "name"
     - "object_storage_class_id"
     - "os_user_id"
     properties:
+      bucket_name:
+        type: "string"
       name:
         type: "string"
       object_storage_class_id:
@@ -1786,11 +2296,20 @@ definitions:
                 Up: true
                 DeletedAt: "DeletedAt"
                 Disk:
-                  DeviceModel: "DeviceModel"
                   IsRoot: true
-                  MBytes: 7
                   Encrypted: true
                   CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                  HostID: 1
+                  Removed: true
+                  Name: "Name"
+                  RealPath: "RealPath"
+                  Empty: true
+                  ID: 6
+                  DeletedAt: "DeletedAt"
+                  Filesystem: "Filesystem"
+                  UUID: "UUID"
+                  DeviceModel: "DeviceModel"
+                  MBytes: 7
                   Host:
                     public_ip: "public_ip"
                     OS: "OS"
@@ -1810,21 +2329,13 @@ definitions:
                     host_name: "host_name"
                     CPUModel: "CPUModel"
                   Vendor: "Vendor"
-                  HostID: 1
                   Rotational: true
                   UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-                  Name: "Name"
                   WWN: "WWN"
                   PathID: "PathID"
-                  RealPath: "RealPath"
                   HasChildren: true
-                  Empty: true
                   Serial: "Serial"
                   Type: "Type"
-                  ID: 6
-                  DeletedAt: "DeletedAt"
-                  Filesystem: "Filesystem"
-                  UUID: "UUID"
                   Cache: true
                 DiskID: 1
               - Status: "Status"
@@ -1839,11 +2350,20 @@ definitions:
                 Up: true
                 DeletedAt: "DeletedAt"
                 Disk:
-                  DeviceModel: "DeviceModel"
                   IsRoot: true
-                  MBytes: 7
                   Encrypted: true
                   CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                  HostID: 1
+                  Removed: true
+                  Name: "Name"
+                  RealPath: "RealPath"
+                  Empty: true
+                  ID: 6
+                  DeletedAt: "DeletedAt"
+                  Filesystem: "Filesystem"
+                  UUID: "UUID"
+                  DeviceModel: "DeviceModel"
+                  MBytes: 7
                   Host:
                     public_ip: "public_ip"
                     OS: "OS"
@@ -1863,21 +2383,13 @@ definitions:
                     host_name: "host_name"
                     CPUModel: "CPUModel"
                   Vendor: "Vendor"
-                  HostID: 1
                   Rotational: true
                   UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-                  Name: "Name"
                   WWN: "WWN"
                   PathID: "PathID"
-                  RealPath: "RealPath"
                   HasChildren: true
-                  Empty: true
                   Serial: "Serial"
                   Type: "Type"
-                  ID: 6
-                  DeletedAt: "DeletedAt"
-                  Filesystem: "Filesystem"
-                  UUID: "UUID"
                   Cache: true
                 DiskID: 1
               CreatedAt: "2000-01-23T04:56:07.000+00:00"
@@ -1952,11 +2464,20 @@ definitions:
         Up: true
         DeletedAt: "DeletedAt"
         Disk:
-          DeviceModel: "DeviceModel"
           IsRoot: true
-          MBytes: 7
           Encrypted: true
           CreatedAt: "2000-01-23T04:56:07.000+00:00"
+          HostID: 1
+          Removed: true
+          Name: "Name"
+          RealPath: "RealPath"
+          Empty: true
+          ID: 6
+          DeletedAt: "DeletedAt"
+          Filesystem: "Filesystem"
+          UUID: "UUID"
+          DeviceModel: "DeviceModel"
+          MBytes: 7
           Host:
             public_ip: "public_ip"
             OS: "OS"
@@ -1976,21 +2497,13 @@ definitions:
             host_name: "host_name"
             CPUModel: "CPUModel"
           Vendor: "Vendor"
-          HostID: 1
           Rotational: true
           UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-          Name: "Name"
           WWN: "WWN"
           PathID: "PathID"
-          RealPath: "RealPath"
           HasChildren: true
-          Empty: true
           Serial: "Serial"
           Type: "Type"
-          ID: 6
-          DeletedAt: "DeletedAt"
-          Filesystem: "Filesystem"
-          UUID: "UUID"
           Cache: true
         DiskID: 1
       - Status: "Status"
@@ -2005,11 +2518,20 @@ definitions:
         Up: true
         DeletedAt: "DeletedAt"
         Disk:
-          DeviceModel: "DeviceModel"
           IsRoot: true
-          MBytes: 7
           Encrypted: true
           CreatedAt: "2000-01-23T04:56:07.000+00:00"
+          HostID: 1
+          Removed: true
+          Name: "Name"
+          RealPath: "RealPath"
+          Empty: true
+          ID: 6
+          DeletedAt: "DeletedAt"
+          Filesystem: "Filesystem"
+          UUID: "UUID"
+          DeviceModel: "DeviceModel"
+          MBytes: 7
           Host:
             public_ip: "public_ip"
             OS: "OS"
@@ -2029,21 +2551,13 @@ definitions:
             host_name: "host_name"
             CPUModel: "CPUModel"
           Vendor: "Vendor"
-          HostID: 1
           Rotational: true
           UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-          Name: "Name"
           WWN: "WWN"
           PathID: "PathID"
-          RealPath: "RealPath"
           HasChildren: true
-          Empty: true
           Serial: "Serial"
           Type: "Type"
-          ID: 6
-          DeletedAt: "DeletedAt"
-          Filesystem: "Filesystem"
-          UUID: "UUID"
           Cache: true
         DiskID: 1
       State: "State"
@@ -2052,6 +2566,384 @@ definitions:
       DeletedAt: "DeletedAt"
       UpdatedAt: "2000-01-23T04:56:07.000+00:00"
       Namespace: "Namespace"
+      Name: "Name"
+  models.CephNFS:
+    required:
+    - "CreatedAt"
+    - "DeletedAt"
+    - "ID"
+    - "Instances"
+    - "NFSName"
+    - "Name"
+    - "Passive"
+    - "Status"
+    - "UpdatedAt"
+    properties:
+      CreatedAt:
+        type: "string"
+        format: "date-time"
+      DeletedAt:
+        type: "string"
+      ID:
+        type: "integer"
+        format: "int64"
+      Instances:
+        type: "integer"
+        format: "int32"
+      NFSName:
+        type: "string"
+      Name:
+        type: "string"
+      Passive:
+        type: "boolean"
+      Status:
+        type: "string"
+      UpdatedAt:
+        type: "string"
+        format: "date-time"
+    example:
+      Instances: 6
+      Status: "Status"
+      Passive: true
+      CreatedAt: "2000-01-23T04:56:07.000+00:00"
+      NFSName: "NFSName"
+      ID: 0
+      DeletedAt: "DeletedAt"
+      UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+      Name: "Name"
+  models.CephNFSExport:
+    required:
+    - "CephNFS"
+    - "CephNFSID"
+    - "Cephfs"
+    - "CephfsID"
+    - "CephfsSubvolumeID"
+    - "CreatedAt"
+    - "DeletedAt"
+    - "ID"
+    - "Name"
+    - "PseudoPath"
+    - "Status"
+    - "UpdatedAt"
+    properties:
+      CephNFS:
+        $ref: "#/definitions/models.CephNFS"
+      CephNFSID:
+        type: "integer"
+        format: "int64"
+      Cephfs:
+        $ref: "#/definitions/models.Cephfs"
+      CephfsID:
+        type: "integer"
+        format: "int64"
+      CephfsSubvolumeID:
+        type: "integer"
+        format: "int64"
+      CreatedAt:
+        type: "string"
+        format: "date-time"
+      DeletedAt:
+        type: "string"
+      ID:
+        type: "integer"
+        format: "int64"
+      Name:
+        type: "string"
+      PseudoPath:
+        type: "string"
+      Status:
+        type: "string"
+      UpdatedAt:
+        type: "string"
+        format: "date-time"
+    example:
+      Status: "Status"
+      CephNFSID: 0
+      CephNFS:
+        Instances: 6
+        Status: "Status"
+        Passive: true
+        CreatedAt: "2000-01-23T04:56:07.000+00:00"
+        NFSName: "NFSName"
+        ID: 0
+        DeletedAt: "DeletedAt"
+        UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+        Name: "Name"
+      PseudoPath: "PseudoPath"
+      CreatedAt: "2000-01-23T04:56:07.000+00:00"
+      ID: 5
+      CephfsSubvolumeID: 1
+      DeletedAt: "DeletedAt"
+      UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+      CephfsID: 6
+      Cephfs:
+        Status: "Status"
+        CreatedAt: "2000-01-23T04:56:07.000+00:00"
+        PreservePoolsOnDelete: true
+        ID: 0
+        DeletedAt: "DeletedAt"
+        PreserveFilesystemOnDelete: true
+        UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+        Name: "Name"
+        PoolProperties:
+        - Replicated: 6
+          PoolID: 3
+          CreatedAt: "2000-01-23T04:56:07.000+00:00"
+          ECCodingChunks: 6
+          UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+          CephfsID: 7
+          Type: "Type"
+          CrushRoot:
+            ParentID: 9
+            Status: "Status"
+            Osds:
+            - Status: "Status"
+              ClusterID: 3
+              In: true
+              CreatedAt: "2000-01-23T04:56:07.000+00:00"
+              UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+              Name: "Name"
+              OsdID: 5
+              CrushRootID: 2
+              ID: 4
+              Up: true
+              DeletedAt: "DeletedAt"
+              Disk:
+                IsRoot: true
+                Encrypted: true
+                CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                HostID: 1
+                Removed: true
+                Name: "Name"
+                RealPath: "RealPath"
+                Empty: true
+                ID: 6
+                DeletedAt: "DeletedAt"
+                Filesystem: "Filesystem"
+                UUID: "UUID"
+                DeviceModel: "DeviceModel"
+                MBytes: 7
+                Host:
+                  public_ip: "public_ip"
+                  OS: "OS"
+                  CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                  Vendor: "Vendor"
+                  admin_ip: "admin_ip"
+                  UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                  Cores: 7
+                  HostModel: "HostModel"
+                  Serial: "Serial"
+                  Type: "Type"
+                  CPUs: 4
+                  MemoryMB: 1
+                  ID: 1
+                  DeletedAt: "DeletedAt"
+                  cluster_ip: "cluster_ip"
+                  host_name: "host_name"
+                  CPUModel: "CPUModel"
+                Vendor: "Vendor"
+                Rotational: true
+                UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                WWN: "WWN"
+                PathID: "PathID"
+                HasChildren: true
+                Serial: "Serial"
+                Type: "Type"
+                Cache: true
+              DiskID: 1
+            - Status: "Status"
+              ClusterID: 3
+              In: true
+              CreatedAt: "2000-01-23T04:56:07.000+00:00"
+              UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+              Name: "Name"
+              OsdID: 5
+              CrushRootID: 2
+              ID: 4
+              Up: true
+              DeletedAt: "DeletedAt"
+              Disk:
+                IsRoot: true
+                Encrypted: true
+                CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                HostID: 1
+                Removed: true
+                Name: "Name"
+                RealPath: "RealPath"
+                Empty: true
+                ID: 6
+                DeletedAt: "DeletedAt"
+                Filesystem: "Filesystem"
+                UUID: "UUID"
+                DeviceModel: "DeviceModel"
+                MBytes: 7
+                Host:
+                  public_ip: "public_ip"
+                  OS: "OS"
+                  CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                  Vendor: "Vendor"
+                  admin_ip: "admin_ip"
+                  UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                  Cores: 7
+                  HostModel: "HostModel"
+                  Serial: "Serial"
+                  Type: "Type"
+                  CPUs: 4
+                  MemoryMB: 1
+                  ID: 1
+                  DeletedAt: "DeletedAt"
+                  cluster_ip: "cluster_ip"
+                  host_name: "host_name"
+                  CPUModel: "CPUModel"
+                Vendor: "Vendor"
+                Rotational: true
+                UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                WWN: "WWN"
+                PathID: "PathID"
+                HasChildren: true
+                Serial: "Serial"
+                Type: "Type"
+                Cache: true
+              DiskID: 1
+            CreatedAt: "2000-01-23T04:56:07.000+00:00"
+            ID: 9
+            DeletedAt: "DeletedAt"
+            UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+            Name: "Name"
+          ECDataChunks: 8
+          ObjectStoreID: 6
+          CrushRootID: 9
+          ID: 9
+          DeletedAt: "DeletedAt"
+        - Replicated: 6
+          PoolID: 3
+          CreatedAt: "2000-01-23T04:56:07.000+00:00"
+          ECCodingChunks: 6
+          UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+          CephfsID: 7
+          Type: "Type"
+          CrushRoot:
+            ParentID: 9
+            Status: "Status"
+            Osds:
+            - Status: "Status"
+              ClusterID: 3
+              In: true
+              CreatedAt: "2000-01-23T04:56:07.000+00:00"
+              UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+              Name: "Name"
+              OsdID: 5
+              CrushRootID: 2
+              ID: 4
+              Up: true
+              DeletedAt: "DeletedAt"
+              Disk:
+                IsRoot: true
+                Encrypted: true
+                CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                HostID: 1
+                Removed: true
+                Name: "Name"
+                RealPath: "RealPath"
+                Empty: true
+                ID: 6
+                DeletedAt: "DeletedAt"
+                Filesystem: "Filesystem"
+                UUID: "UUID"
+                DeviceModel: "DeviceModel"
+                MBytes: 7
+                Host:
+                  public_ip: "public_ip"
+                  OS: "OS"
+                  CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                  Vendor: "Vendor"
+                  admin_ip: "admin_ip"
+                  UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                  Cores: 7
+                  HostModel: "HostModel"
+                  Serial: "Serial"
+                  Type: "Type"
+                  CPUs: 4
+                  MemoryMB: 1
+                  ID: 1
+                  DeletedAt: "DeletedAt"
+                  cluster_ip: "cluster_ip"
+                  host_name: "host_name"
+                  CPUModel: "CPUModel"
+                Vendor: "Vendor"
+                Rotational: true
+                UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                WWN: "WWN"
+                PathID: "PathID"
+                HasChildren: true
+                Serial: "Serial"
+                Type: "Type"
+                Cache: true
+              DiskID: 1
+            - Status: "Status"
+              ClusterID: 3
+              In: true
+              CreatedAt: "2000-01-23T04:56:07.000+00:00"
+              UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+              Name: "Name"
+              OsdID: 5
+              CrushRootID: 2
+              ID: 4
+              Up: true
+              DeletedAt: "DeletedAt"
+              Disk:
+                IsRoot: true
+                Encrypted: true
+                CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                HostID: 1
+                Removed: true
+                Name: "Name"
+                RealPath: "RealPath"
+                Empty: true
+                ID: 6
+                DeletedAt: "DeletedAt"
+                Filesystem: "Filesystem"
+                UUID: "UUID"
+                DeviceModel: "DeviceModel"
+                MBytes: 7
+                Host:
+                  public_ip: "public_ip"
+                  OS: "OS"
+                  CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                  Vendor: "Vendor"
+                  admin_ip: "admin_ip"
+                  UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                  Cores: 7
+                  HostModel: "HostModel"
+                  Serial: "Serial"
+                  Type: "Type"
+                  CPUs: 4
+                  MemoryMB: 1
+                  ID: 1
+                  DeletedAt: "DeletedAt"
+                  cluster_ip: "cluster_ip"
+                  host_name: "host_name"
+                  CPUModel: "CPUModel"
+                Vendor: "Vendor"
+                Rotational: true
+                UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                WWN: "WWN"
+                PathID: "PathID"
+                HasChildren: true
+                Serial: "Serial"
+                Type: "Type"
+                Cache: true
+              DiskID: 1
+            CreatedAt: "2000-01-23T04:56:07.000+00:00"
+            ID: 9
+            DeletedAt: "DeletedAt"
+            UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+            Name: "Name"
+          ECDataChunks: 8
+          ObjectStoreID: 6
+          CrushRootID: 9
+          ID: 9
+          DeletedAt: "DeletedAt"
       Name: "Name"
   models.Cephfs:
     required:
@@ -2121,11 +3013,20 @@ definitions:
             Up: true
             DeletedAt: "DeletedAt"
             Disk:
-              DeviceModel: "DeviceModel"
               IsRoot: true
-              MBytes: 7
               Encrypted: true
               CreatedAt: "2000-01-23T04:56:07.000+00:00"
+              HostID: 1
+              Removed: true
+              Name: "Name"
+              RealPath: "RealPath"
+              Empty: true
+              ID: 6
+              DeletedAt: "DeletedAt"
+              Filesystem: "Filesystem"
+              UUID: "UUID"
+              DeviceModel: "DeviceModel"
+              MBytes: 7
               Host:
                 public_ip: "public_ip"
                 OS: "OS"
@@ -2145,21 +3046,13 @@ definitions:
                 host_name: "host_name"
                 CPUModel: "CPUModel"
               Vendor: "Vendor"
-              HostID: 1
               Rotational: true
               UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-              Name: "Name"
               WWN: "WWN"
               PathID: "PathID"
-              RealPath: "RealPath"
               HasChildren: true
-              Empty: true
               Serial: "Serial"
               Type: "Type"
-              ID: 6
-              DeletedAt: "DeletedAt"
-              Filesystem: "Filesystem"
-              UUID: "UUID"
               Cache: true
             DiskID: 1
           - Status: "Status"
@@ -2174,11 +3067,20 @@ definitions:
             Up: true
             DeletedAt: "DeletedAt"
             Disk:
-              DeviceModel: "DeviceModel"
               IsRoot: true
-              MBytes: 7
               Encrypted: true
               CreatedAt: "2000-01-23T04:56:07.000+00:00"
+              HostID: 1
+              Removed: true
+              Name: "Name"
+              RealPath: "RealPath"
+              Empty: true
+              ID: 6
+              DeletedAt: "DeletedAt"
+              Filesystem: "Filesystem"
+              UUID: "UUID"
+              DeviceModel: "DeviceModel"
+              MBytes: 7
               Host:
                 public_ip: "public_ip"
                 OS: "OS"
@@ -2198,21 +3100,13 @@ definitions:
                 host_name: "host_name"
                 CPUModel: "CPUModel"
               Vendor: "Vendor"
-              HostID: 1
               Rotational: true
               UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-              Name: "Name"
               WWN: "WWN"
               PathID: "PathID"
-              RealPath: "RealPath"
               HasChildren: true
-              Empty: true
               Serial: "Serial"
               Type: "Type"
-              ID: 6
-              DeletedAt: "DeletedAt"
-              Filesystem: "Filesystem"
-              UUID: "UUID"
               Cache: true
             DiskID: 1
           CreatedAt: "2000-01-23T04:56:07.000+00:00"
@@ -2248,11 +3142,20 @@ definitions:
             Up: true
             DeletedAt: "DeletedAt"
             Disk:
-              DeviceModel: "DeviceModel"
               IsRoot: true
-              MBytes: 7
               Encrypted: true
               CreatedAt: "2000-01-23T04:56:07.000+00:00"
+              HostID: 1
+              Removed: true
+              Name: "Name"
+              RealPath: "RealPath"
+              Empty: true
+              ID: 6
+              DeletedAt: "DeletedAt"
+              Filesystem: "Filesystem"
+              UUID: "UUID"
+              DeviceModel: "DeviceModel"
+              MBytes: 7
               Host:
                 public_ip: "public_ip"
                 OS: "OS"
@@ -2272,21 +3175,13 @@ definitions:
                 host_name: "host_name"
                 CPUModel: "CPUModel"
               Vendor: "Vendor"
-              HostID: 1
               Rotational: true
               UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-              Name: "Name"
               WWN: "WWN"
               PathID: "PathID"
-              RealPath: "RealPath"
               HasChildren: true
-              Empty: true
               Serial: "Serial"
               Type: "Type"
-              ID: 6
-              DeletedAt: "DeletedAt"
-              Filesystem: "Filesystem"
-              UUID: "UUID"
               Cache: true
             DiskID: 1
           - Status: "Status"
@@ -2301,11 +3196,20 @@ definitions:
             Up: true
             DeletedAt: "DeletedAt"
             Disk:
-              DeviceModel: "DeviceModel"
               IsRoot: true
-              MBytes: 7
               Encrypted: true
               CreatedAt: "2000-01-23T04:56:07.000+00:00"
+              HostID: 1
+              Removed: true
+              Name: "Name"
+              RealPath: "RealPath"
+              Empty: true
+              ID: 6
+              DeletedAt: "DeletedAt"
+              Filesystem: "Filesystem"
+              UUID: "UUID"
+              DeviceModel: "DeviceModel"
+              MBytes: 7
               Host:
                 public_ip: "public_ip"
                 OS: "OS"
@@ -2325,21 +3229,13 @@ definitions:
                 host_name: "host_name"
                 CPUModel: "CPUModel"
               Vendor: "Vendor"
-              HostID: 1
               Rotational: true
               UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-              Name: "Name"
               WWN: "WWN"
               PathID: "PathID"
-              RealPath: "RealPath"
               HasChildren: true
-              Empty: true
               Serial: "Serial"
               Type: "Type"
-              ID: 6
-              DeletedAt: "DeletedAt"
-              Filesystem: "Filesystem"
-              UUID: "UUID"
               Cache: true
             DiskID: 1
           CreatedAt: "2000-01-23T04:56:07.000+00:00"
@@ -2352,6 +3248,655 @@ definitions:
         CrushRootID: 9
         ID: 9
         DeletedAt: "DeletedAt"
+  models.CephfsSubvolume:
+    required:
+    - "ByteSize"
+    - "CephfsName"
+    - "CephfsSubvolumeGroup"
+    - "CephfsSubvolumeGroupID"
+    - "CreatedAt"
+    - "DeletedAt"
+    - "ID"
+    - "Name"
+    - "Path"
+    - "Status"
+    - "SubvolumeName"
+    - "UpdatedAt"
+    - "UsedByteSize"
+    properties:
+      ByteSize:
+        type: "integer"
+        format: "int64"
+      CephfsName:
+        type: "string"
+      CephfsSubvolumeGroup:
+        $ref: "#/definitions/models.CephfsSubvolumeGroup"
+      CephfsSubvolumeGroupID:
+        type: "integer"
+        format: "int64"
+      CreatedAt:
+        type: "string"
+        format: "date-time"
+      DeletedAt:
+        type: "string"
+      ID:
+        type: "integer"
+        format: "int64"
+      Name:
+        type: "string"
+      Path:
+        type: "string"
+      Status:
+        type: "string"
+      SubvolumeName:
+        type: "string"
+      UpdatedAt:
+        type: "string"
+        format: "date-time"
+      UsedByteSize:
+        type: "integer"
+        format: "int64"
+    example:
+      Path: "Path"
+      Status: "Status"
+      ByteSize: 0
+      CephfsSubvolumeGroup:
+        GroupName: "GroupName"
+        Status: "Status"
+        CreatedAt: "2000-01-23T04:56:07.000+00:00"
+        ID: 6
+        DeletedAt: "DeletedAt"
+        UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+        CephfsID: 0
+        Cephfs:
+          Status: "Status"
+          CreatedAt: "2000-01-23T04:56:07.000+00:00"
+          PreservePoolsOnDelete: true
+          ID: 0
+          DeletedAt: "DeletedAt"
+          PreserveFilesystemOnDelete: true
+          UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+          Name: "Name"
+          PoolProperties:
+          - Replicated: 6
+            PoolID: 3
+            CreatedAt: "2000-01-23T04:56:07.000+00:00"
+            ECCodingChunks: 6
+            UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+            CephfsID: 7
+            Type: "Type"
+            CrushRoot:
+              ParentID: 9
+              Status: "Status"
+              Osds:
+              - Status: "Status"
+                ClusterID: 3
+                In: true
+                CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                Name: "Name"
+                OsdID: 5
+                CrushRootID: 2
+                ID: 4
+                Up: true
+                DeletedAt: "DeletedAt"
+                Disk:
+                  IsRoot: true
+                  Encrypted: true
+                  CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                  HostID: 1
+                  Removed: true
+                  Name: "Name"
+                  RealPath: "RealPath"
+                  Empty: true
+                  ID: 6
+                  DeletedAt: "DeletedAt"
+                  Filesystem: "Filesystem"
+                  UUID: "UUID"
+                  DeviceModel: "DeviceModel"
+                  MBytes: 7
+                  Host:
+                    public_ip: "public_ip"
+                    OS: "OS"
+                    CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                    Vendor: "Vendor"
+                    admin_ip: "admin_ip"
+                    UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                    Cores: 7
+                    HostModel: "HostModel"
+                    Serial: "Serial"
+                    Type: "Type"
+                    CPUs: 4
+                    MemoryMB: 1
+                    ID: 1
+                    DeletedAt: "DeletedAt"
+                    cluster_ip: "cluster_ip"
+                    host_name: "host_name"
+                    CPUModel: "CPUModel"
+                  Vendor: "Vendor"
+                  Rotational: true
+                  UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                  WWN: "WWN"
+                  PathID: "PathID"
+                  HasChildren: true
+                  Serial: "Serial"
+                  Type: "Type"
+                  Cache: true
+                DiskID: 1
+              - Status: "Status"
+                ClusterID: 3
+                In: true
+                CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                Name: "Name"
+                OsdID: 5
+                CrushRootID: 2
+                ID: 4
+                Up: true
+                DeletedAt: "DeletedAt"
+                Disk:
+                  IsRoot: true
+                  Encrypted: true
+                  CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                  HostID: 1
+                  Removed: true
+                  Name: "Name"
+                  RealPath: "RealPath"
+                  Empty: true
+                  ID: 6
+                  DeletedAt: "DeletedAt"
+                  Filesystem: "Filesystem"
+                  UUID: "UUID"
+                  DeviceModel: "DeviceModel"
+                  MBytes: 7
+                  Host:
+                    public_ip: "public_ip"
+                    OS: "OS"
+                    CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                    Vendor: "Vendor"
+                    admin_ip: "admin_ip"
+                    UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                    Cores: 7
+                    HostModel: "HostModel"
+                    Serial: "Serial"
+                    Type: "Type"
+                    CPUs: 4
+                    MemoryMB: 1
+                    ID: 1
+                    DeletedAt: "DeletedAt"
+                    cluster_ip: "cluster_ip"
+                    host_name: "host_name"
+                    CPUModel: "CPUModel"
+                  Vendor: "Vendor"
+                  Rotational: true
+                  UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                  WWN: "WWN"
+                  PathID: "PathID"
+                  HasChildren: true
+                  Serial: "Serial"
+                  Type: "Type"
+                  Cache: true
+                DiskID: 1
+              CreatedAt: "2000-01-23T04:56:07.000+00:00"
+              ID: 9
+              DeletedAt: "DeletedAt"
+              UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+              Name: "Name"
+            ECDataChunks: 8
+            ObjectStoreID: 6
+            CrushRootID: 9
+            ID: 9
+            DeletedAt: "DeletedAt"
+          - Replicated: 6
+            PoolID: 3
+            CreatedAt: "2000-01-23T04:56:07.000+00:00"
+            ECCodingChunks: 6
+            UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+            CephfsID: 7
+            Type: "Type"
+            CrushRoot:
+              ParentID: 9
+              Status: "Status"
+              Osds:
+              - Status: "Status"
+                ClusterID: 3
+                In: true
+                CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                Name: "Name"
+                OsdID: 5
+                CrushRootID: 2
+                ID: 4
+                Up: true
+                DeletedAt: "DeletedAt"
+                Disk:
+                  IsRoot: true
+                  Encrypted: true
+                  CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                  HostID: 1
+                  Removed: true
+                  Name: "Name"
+                  RealPath: "RealPath"
+                  Empty: true
+                  ID: 6
+                  DeletedAt: "DeletedAt"
+                  Filesystem: "Filesystem"
+                  UUID: "UUID"
+                  DeviceModel: "DeviceModel"
+                  MBytes: 7
+                  Host:
+                    public_ip: "public_ip"
+                    OS: "OS"
+                    CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                    Vendor: "Vendor"
+                    admin_ip: "admin_ip"
+                    UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                    Cores: 7
+                    HostModel: "HostModel"
+                    Serial: "Serial"
+                    Type: "Type"
+                    CPUs: 4
+                    MemoryMB: 1
+                    ID: 1
+                    DeletedAt: "DeletedAt"
+                    cluster_ip: "cluster_ip"
+                    host_name: "host_name"
+                    CPUModel: "CPUModel"
+                  Vendor: "Vendor"
+                  Rotational: true
+                  UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                  WWN: "WWN"
+                  PathID: "PathID"
+                  HasChildren: true
+                  Serial: "Serial"
+                  Type: "Type"
+                  Cache: true
+                DiskID: 1
+              - Status: "Status"
+                ClusterID: 3
+                In: true
+                CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                Name: "Name"
+                OsdID: 5
+                CrushRootID: 2
+                ID: 4
+                Up: true
+                DeletedAt: "DeletedAt"
+                Disk:
+                  IsRoot: true
+                  Encrypted: true
+                  CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                  HostID: 1
+                  Removed: true
+                  Name: "Name"
+                  RealPath: "RealPath"
+                  Empty: true
+                  ID: 6
+                  DeletedAt: "DeletedAt"
+                  Filesystem: "Filesystem"
+                  UUID: "UUID"
+                  DeviceModel: "DeviceModel"
+                  MBytes: 7
+                  Host:
+                    public_ip: "public_ip"
+                    OS: "OS"
+                    CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                    Vendor: "Vendor"
+                    admin_ip: "admin_ip"
+                    UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                    Cores: 7
+                    HostModel: "HostModel"
+                    Serial: "Serial"
+                    Type: "Type"
+                    CPUs: 4
+                    MemoryMB: 1
+                    ID: 1
+                    DeletedAt: "DeletedAt"
+                    cluster_ip: "cluster_ip"
+                    host_name: "host_name"
+                    CPUModel: "CPUModel"
+                  Vendor: "Vendor"
+                  Rotational: true
+                  UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                  WWN: "WWN"
+                  PathID: "PathID"
+                  HasChildren: true
+                  Serial: "Serial"
+                  Type: "Type"
+                  Cache: true
+                DiskID: 1
+              CreatedAt: "2000-01-23T04:56:07.000+00:00"
+              ID: 9
+              DeletedAt: "DeletedAt"
+              UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+              Name: "Name"
+            ECDataChunks: 8
+            ObjectStoreID: 6
+            CrushRootID: 9
+            ID: 9
+            DeletedAt: "DeletedAt"
+        Name: "Name"
+      CreatedAt: "2000-01-23T04:56:07.000+00:00"
+      CephfsSubvolumeGroupID: 6
+      UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+      Name: "Name"
+      SubvolumeName: "SubvolumeName"
+      UsedByteSize: 5
+      CephfsName: "CephfsName"
+      ID: 1
+      DeletedAt: "DeletedAt"
+  models.CephfsSubvolumeGroup:
+    required:
+    - "Cephfs"
+    - "CephfsID"
+    - "CreatedAt"
+    - "DeletedAt"
+    - "GroupName"
+    - "ID"
+    - "Name"
+    - "Status"
+    - "UpdatedAt"
+    properties:
+      Cephfs:
+        $ref: "#/definitions/models.Cephfs"
+      CephfsID:
+        type: "integer"
+        format: "int64"
+      CreatedAt:
+        type: "string"
+        format: "date-time"
+      DeletedAt:
+        type: "string"
+      GroupName:
+        type: "string"
+      ID:
+        type: "integer"
+        format: "int64"
+      Name:
+        type: "string"
+      Status:
+        type: "string"
+      UpdatedAt:
+        type: "string"
+        format: "date-time"
+    example:
+      GroupName: "GroupName"
+      Status: "Status"
+      CreatedAt: "2000-01-23T04:56:07.000+00:00"
+      ID: 6
+      DeletedAt: "DeletedAt"
+      UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+      CephfsID: 0
+      Cephfs:
+        Status: "Status"
+        CreatedAt: "2000-01-23T04:56:07.000+00:00"
+        PreservePoolsOnDelete: true
+        ID: 0
+        DeletedAt: "DeletedAt"
+        PreserveFilesystemOnDelete: true
+        UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+        Name: "Name"
+        PoolProperties:
+        - Replicated: 6
+          PoolID: 3
+          CreatedAt: "2000-01-23T04:56:07.000+00:00"
+          ECCodingChunks: 6
+          UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+          CephfsID: 7
+          Type: "Type"
+          CrushRoot:
+            ParentID: 9
+            Status: "Status"
+            Osds:
+            - Status: "Status"
+              ClusterID: 3
+              In: true
+              CreatedAt: "2000-01-23T04:56:07.000+00:00"
+              UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+              Name: "Name"
+              OsdID: 5
+              CrushRootID: 2
+              ID: 4
+              Up: true
+              DeletedAt: "DeletedAt"
+              Disk:
+                IsRoot: true
+                Encrypted: true
+                CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                HostID: 1
+                Removed: true
+                Name: "Name"
+                RealPath: "RealPath"
+                Empty: true
+                ID: 6
+                DeletedAt: "DeletedAt"
+                Filesystem: "Filesystem"
+                UUID: "UUID"
+                DeviceModel: "DeviceModel"
+                MBytes: 7
+                Host:
+                  public_ip: "public_ip"
+                  OS: "OS"
+                  CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                  Vendor: "Vendor"
+                  admin_ip: "admin_ip"
+                  UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                  Cores: 7
+                  HostModel: "HostModel"
+                  Serial: "Serial"
+                  Type: "Type"
+                  CPUs: 4
+                  MemoryMB: 1
+                  ID: 1
+                  DeletedAt: "DeletedAt"
+                  cluster_ip: "cluster_ip"
+                  host_name: "host_name"
+                  CPUModel: "CPUModel"
+                Vendor: "Vendor"
+                Rotational: true
+                UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                WWN: "WWN"
+                PathID: "PathID"
+                HasChildren: true
+                Serial: "Serial"
+                Type: "Type"
+                Cache: true
+              DiskID: 1
+            - Status: "Status"
+              ClusterID: 3
+              In: true
+              CreatedAt: "2000-01-23T04:56:07.000+00:00"
+              UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+              Name: "Name"
+              OsdID: 5
+              CrushRootID: 2
+              ID: 4
+              Up: true
+              DeletedAt: "DeletedAt"
+              Disk:
+                IsRoot: true
+                Encrypted: true
+                CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                HostID: 1
+                Removed: true
+                Name: "Name"
+                RealPath: "RealPath"
+                Empty: true
+                ID: 6
+                DeletedAt: "DeletedAt"
+                Filesystem: "Filesystem"
+                UUID: "UUID"
+                DeviceModel: "DeviceModel"
+                MBytes: 7
+                Host:
+                  public_ip: "public_ip"
+                  OS: "OS"
+                  CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                  Vendor: "Vendor"
+                  admin_ip: "admin_ip"
+                  UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                  Cores: 7
+                  HostModel: "HostModel"
+                  Serial: "Serial"
+                  Type: "Type"
+                  CPUs: 4
+                  MemoryMB: 1
+                  ID: 1
+                  DeletedAt: "DeletedAt"
+                  cluster_ip: "cluster_ip"
+                  host_name: "host_name"
+                  CPUModel: "CPUModel"
+                Vendor: "Vendor"
+                Rotational: true
+                UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                WWN: "WWN"
+                PathID: "PathID"
+                HasChildren: true
+                Serial: "Serial"
+                Type: "Type"
+                Cache: true
+              DiskID: 1
+            CreatedAt: "2000-01-23T04:56:07.000+00:00"
+            ID: 9
+            DeletedAt: "DeletedAt"
+            UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+            Name: "Name"
+          ECDataChunks: 8
+          ObjectStoreID: 6
+          CrushRootID: 9
+          ID: 9
+          DeletedAt: "DeletedAt"
+        - Replicated: 6
+          PoolID: 3
+          CreatedAt: "2000-01-23T04:56:07.000+00:00"
+          ECCodingChunks: 6
+          UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+          CephfsID: 7
+          Type: "Type"
+          CrushRoot:
+            ParentID: 9
+            Status: "Status"
+            Osds:
+            - Status: "Status"
+              ClusterID: 3
+              In: true
+              CreatedAt: "2000-01-23T04:56:07.000+00:00"
+              UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+              Name: "Name"
+              OsdID: 5
+              CrushRootID: 2
+              ID: 4
+              Up: true
+              DeletedAt: "DeletedAt"
+              Disk:
+                IsRoot: true
+                Encrypted: true
+                CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                HostID: 1
+                Removed: true
+                Name: "Name"
+                RealPath: "RealPath"
+                Empty: true
+                ID: 6
+                DeletedAt: "DeletedAt"
+                Filesystem: "Filesystem"
+                UUID: "UUID"
+                DeviceModel: "DeviceModel"
+                MBytes: 7
+                Host:
+                  public_ip: "public_ip"
+                  OS: "OS"
+                  CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                  Vendor: "Vendor"
+                  admin_ip: "admin_ip"
+                  UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                  Cores: 7
+                  HostModel: "HostModel"
+                  Serial: "Serial"
+                  Type: "Type"
+                  CPUs: 4
+                  MemoryMB: 1
+                  ID: 1
+                  DeletedAt: "DeletedAt"
+                  cluster_ip: "cluster_ip"
+                  host_name: "host_name"
+                  CPUModel: "CPUModel"
+                Vendor: "Vendor"
+                Rotational: true
+                UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                WWN: "WWN"
+                PathID: "PathID"
+                HasChildren: true
+                Serial: "Serial"
+                Type: "Type"
+                Cache: true
+              DiskID: 1
+            - Status: "Status"
+              ClusterID: 3
+              In: true
+              CreatedAt: "2000-01-23T04:56:07.000+00:00"
+              UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+              Name: "Name"
+              OsdID: 5
+              CrushRootID: 2
+              ID: 4
+              Up: true
+              DeletedAt: "DeletedAt"
+              Disk:
+                IsRoot: true
+                Encrypted: true
+                CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                HostID: 1
+                Removed: true
+                Name: "Name"
+                RealPath: "RealPath"
+                Empty: true
+                ID: 6
+                DeletedAt: "DeletedAt"
+                Filesystem: "Filesystem"
+                UUID: "UUID"
+                DeviceModel: "DeviceModel"
+                MBytes: 7
+                Host:
+                  public_ip: "public_ip"
+                  OS: "OS"
+                  CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                  Vendor: "Vendor"
+                  admin_ip: "admin_ip"
+                  UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                  Cores: 7
+                  HostModel: "HostModel"
+                  Serial: "Serial"
+                  Type: "Type"
+                  CPUs: 4
+                  MemoryMB: 1
+                  ID: 1
+                  DeletedAt: "DeletedAt"
+                  cluster_ip: "cluster_ip"
+                  host_name: "host_name"
+                  CPUModel: "CPUModel"
+                Vendor: "Vendor"
+                Rotational: true
+                UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+                WWN: "WWN"
+                PathID: "PathID"
+                HasChildren: true
+                Serial: "Serial"
+                Type: "Type"
+                Cache: true
+              DiskID: 1
+            CreatedAt: "2000-01-23T04:56:07.000+00:00"
+            ID: 9
+            DeletedAt: "DeletedAt"
+            UpdatedAt: "2000-01-23T04:56:07.000+00:00"
+            Name: "Name"
+          ECDataChunks: 8
+          ObjectStoreID: 6
+          CrushRootID: 9
+          ID: 9
+          DeletedAt: "DeletedAt"
+      Name: "Name"
   models.CrushRoot:
     required:
     - "CreatedAt"
@@ -2407,11 +3952,20 @@ definitions:
         Up: true
         DeletedAt: "DeletedAt"
         Disk:
-          DeviceModel: "DeviceModel"
           IsRoot: true
-          MBytes: 7
           Encrypted: true
           CreatedAt: "2000-01-23T04:56:07.000+00:00"
+          HostID: 1
+          Removed: true
+          Name: "Name"
+          RealPath: "RealPath"
+          Empty: true
+          ID: 6
+          DeletedAt: "DeletedAt"
+          Filesystem: "Filesystem"
+          UUID: "UUID"
+          DeviceModel: "DeviceModel"
+          MBytes: 7
           Host:
             public_ip: "public_ip"
             OS: "OS"
@@ -2431,21 +3985,13 @@ definitions:
             host_name: "host_name"
             CPUModel: "CPUModel"
           Vendor: "Vendor"
-          HostID: 1
           Rotational: true
           UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-          Name: "Name"
           WWN: "WWN"
           PathID: "PathID"
-          RealPath: "RealPath"
           HasChildren: true
-          Empty: true
           Serial: "Serial"
           Type: "Type"
-          ID: 6
-          DeletedAt: "DeletedAt"
-          Filesystem: "Filesystem"
-          UUID: "UUID"
           Cache: true
         DiskID: 1
       - Status: "Status"
@@ -2460,11 +4006,20 @@ definitions:
         Up: true
         DeletedAt: "DeletedAt"
         Disk:
-          DeviceModel: "DeviceModel"
           IsRoot: true
-          MBytes: 7
           Encrypted: true
           CreatedAt: "2000-01-23T04:56:07.000+00:00"
+          HostID: 1
+          Removed: true
+          Name: "Name"
+          RealPath: "RealPath"
+          Empty: true
+          ID: 6
+          DeletedAt: "DeletedAt"
+          Filesystem: "Filesystem"
+          UUID: "UUID"
+          DeviceModel: "DeviceModel"
+          MBytes: 7
           Host:
             public_ip: "public_ip"
             OS: "OS"
@@ -2484,21 +4039,13 @@ definitions:
             host_name: "host_name"
             CPUModel: "CPUModel"
           Vendor: "Vendor"
-          HostID: 1
           Rotational: true
           UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-          Name: "Name"
           WWN: "WWN"
           PathID: "PathID"
-          RealPath: "RealPath"
           HasChildren: true
-          Empty: true
           Serial: "Serial"
           Type: "Type"
-          ID: 6
-          DeletedAt: "DeletedAt"
-          Filesystem: "Filesystem"
-          UUID: "UUID"
           Cache: true
         DiskID: 1
       CreatedAt: "2000-01-23T04:56:07.000+00:00"
@@ -2525,6 +4072,7 @@ definitions:
     - "Osd"
     - "PathID"
     - "RealPath"
+    - "Removed"
     - "Rotational"
     - "Serial"
     - "Type"
@@ -2571,6 +4119,8 @@ definitions:
         type: "string"
       RealPath:
         type: "string"
+      Removed:
+        type: "boolean"
       Rotational:
         type: "boolean"
       Serial:
@@ -2587,11 +4137,20 @@ definitions:
       WWN:
         type: "string"
     example:
-      DeviceModel: "DeviceModel"
       IsRoot: true
-      MBytes: 7
       Encrypted: true
       CreatedAt: "2000-01-23T04:56:07.000+00:00"
+      HostID: 1
+      Removed: true
+      Name: "Name"
+      RealPath: "RealPath"
+      Empty: true
+      ID: 6
+      DeletedAt: "DeletedAt"
+      Filesystem: "Filesystem"
+      UUID: "UUID"
+      DeviceModel: "DeviceModel"
+      MBytes: 7
       Host:
         public_ip: "public_ip"
         OS: "OS"
@@ -2611,21 +4170,13 @@ definitions:
         host_name: "host_name"
         CPUModel: "CPUModel"
       Vendor: "Vendor"
-      HostID: 1
       Rotational: true
       UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-      Name: "Name"
       WWN: "WWN"
       PathID: "PathID"
-      RealPath: "RealPath"
       HasChildren: true
-      Empty: true
       Serial: "Serial"
       Type: "Type"
-      ID: 6
-      DeletedAt: "DeletedAt"
-      Filesystem: "Filesystem"
-      UUID: "UUID"
       Cache: true
   models.Host:
     required:
@@ -2810,11 +4361,20 @@ definitions:
                 Up: true
                 DeletedAt: "DeletedAt"
                 Disk:
-                  DeviceModel: "DeviceModel"
                   IsRoot: true
-                  MBytes: 7
                   Encrypted: true
                   CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                  HostID: 1
+                  Removed: true
+                  Name: "Name"
+                  RealPath: "RealPath"
+                  Empty: true
+                  ID: 6
+                  DeletedAt: "DeletedAt"
+                  Filesystem: "Filesystem"
+                  UUID: "UUID"
+                  DeviceModel: "DeviceModel"
+                  MBytes: 7
                   Host:
                     public_ip: "public_ip"
                     OS: "OS"
@@ -2834,21 +4394,13 @@ definitions:
                     host_name: "host_name"
                     CPUModel: "CPUModel"
                   Vendor: "Vendor"
-                  HostID: 1
                   Rotational: true
                   UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-                  Name: "Name"
                   WWN: "WWN"
                   PathID: "PathID"
-                  RealPath: "RealPath"
                   HasChildren: true
-                  Empty: true
                   Serial: "Serial"
                   Type: "Type"
-                  ID: 6
-                  DeletedAt: "DeletedAt"
-                  Filesystem: "Filesystem"
-                  UUID: "UUID"
                   Cache: true
                 DiskID: 1
               - Status: "Status"
@@ -2863,11 +4415,20 @@ definitions:
                 Up: true
                 DeletedAt: "DeletedAt"
                 Disk:
-                  DeviceModel: "DeviceModel"
                   IsRoot: true
-                  MBytes: 7
                   Encrypted: true
                   CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                  HostID: 1
+                  Removed: true
+                  Name: "Name"
+                  RealPath: "RealPath"
+                  Empty: true
+                  ID: 6
+                  DeletedAt: "DeletedAt"
+                  Filesystem: "Filesystem"
+                  UUID: "UUID"
+                  DeviceModel: "DeviceModel"
+                  MBytes: 7
                   Host:
                     public_ip: "public_ip"
                     OS: "OS"
@@ -2887,21 +4448,13 @@ definitions:
                     host_name: "host_name"
                     CPUModel: "CPUModel"
                   Vendor: "Vendor"
-                  HostID: 1
                   Rotational: true
                   UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-                  Name: "Name"
                   WWN: "WWN"
                   PathID: "PathID"
-                  RealPath: "RealPath"
                   HasChildren: true
-                  Empty: true
                   Serial: "Serial"
                   Type: "Type"
-                  ID: 6
-                  DeletedAt: "DeletedAt"
-                  Filesystem: "Filesystem"
-                  UUID: "UUID"
                   Cache: true
                 DiskID: 1
               CreatedAt: "2000-01-23T04:56:07.000+00:00"
@@ -2937,11 +4490,20 @@ definitions:
                 Up: true
                 DeletedAt: "DeletedAt"
                 Disk:
-                  DeviceModel: "DeviceModel"
                   IsRoot: true
-                  MBytes: 7
                   Encrypted: true
                   CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                  HostID: 1
+                  Removed: true
+                  Name: "Name"
+                  RealPath: "RealPath"
+                  Empty: true
+                  ID: 6
+                  DeletedAt: "DeletedAt"
+                  Filesystem: "Filesystem"
+                  UUID: "UUID"
+                  DeviceModel: "DeviceModel"
+                  MBytes: 7
                   Host:
                     public_ip: "public_ip"
                     OS: "OS"
@@ -2961,21 +4523,13 @@ definitions:
                     host_name: "host_name"
                     CPUModel: "CPUModel"
                   Vendor: "Vendor"
-                  HostID: 1
                   Rotational: true
                   UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-                  Name: "Name"
                   WWN: "WWN"
                   PathID: "PathID"
-                  RealPath: "RealPath"
                   HasChildren: true
-                  Empty: true
                   Serial: "Serial"
                   Type: "Type"
-                  ID: 6
-                  DeletedAt: "DeletedAt"
-                  Filesystem: "Filesystem"
-                  UUID: "UUID"
                   Cache: true
                 DiskID: 1
               - Status: "Status"
@@ -2990,11 +4544,20 @@ definitions:
                 Up: true
                 DeletedAt: "DeletedAt"
                 Disk:
-                  DeviceModel: "DeviceModel"
                   IsRoot: true
-                  MBytes: 7
                   Encrypted: true
                   CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                  HostID: 1
+                  Removed: true
+                  Name: "Name"
+                  RealPath: "RealPath"
+                  Empty: true
+                  ID: 6
+                  DeletedAt: "DeletedAt"
+                  Filesystem: "Filesystem"
+                  UUID: "UUID"
+                  DeviceModel: "DeviceModel"
+                  MBytes: 7
                   Host:
                     public_ip: "public_ip"
                     OS: "OS"
@@ -3014,21 +4577,13 @@ definitions:
                     host_name: "host_name"
                     CPUModel: "CPUModel"
                   Vendor: "Vendor"
-                  HostID: 1
                   Rotational: true
                   UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-                  Name: "Name"
                   WWN: "WWN"
                   PathID: "PathID"
-                  RealPath: "RealPath"
                   HasChildren: true
-                  Empty: true
                   Serial: "Serial"
                   Type: "Type"
-                  ID: 6
-                  DeletedAt: "DeletedAt"
-                  Filesystem: "Filesystem"
-                  UUID: "UUID"
                   Cache: true
                 DiskID: 1
               CreatedAt: "2000-01-23T04:56:07.000+00:00"
@@ -3103,11 +4658,20 @@ definitions:
                 Up: true
                 DeletedAt: "DeletedAt"
                 Disk:
-                  DeviceModel: "DeviceModel"
                   IsRoot: true
-                  MBytes: 7
                   Encrypted: true
                   CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                  HostID: 1
+                  Removed: true
+                  Name: "Name"
+                  RealPath: "RealPath"
+                  Empty: true
+                  ID: 6
+                  DeletedAt: "DeletedAt"
+                  Filesystem: "Filesystem"
+                  UUID: "UUID"
+                  DeviceModel: "DeviceModel"
+                  MBytes: 7
                   Host:
                     public_ip: "public_ip"
                     OS: "OS"
@@ -3127,21 +4691,13 @@ definitions:
                     host_name: "host_name"
                     CPUModel: "CPUModel"
                   Vendor: "Vendor"
-                  HostID: 1
                   Rotational: true
                   UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-                  Name: "Name"
                   WWN: "WWN"
                   PathID: "PathID"
-                  RealPath: "RealPath"
                   HasChildren: true
-                  Empty: true
                   Serial: "Serial"
                   Type: "Type"
-                  ID: 6
-                  DeletedAt: "DeletedAt"
-                  Filesystem: "Filesystem"
-                  UUID: "UUID"
                   Cache: true
                 DiskID: 1
               - Status: "Status"
@@ -3156,11 +4712,20 @@ definitions:
                 Up: true
                 DeletedAt: "DeletedAt"
                 Disk:
-                  DeviceModel: "DeviceModel"
                   IsRoot: true
-                  MBytes: 7
                   Encrypted: true
                   CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                  HostID: 1
+                  Removed: true
+                  Name: "Name"
+                  RealPath: "RealPath"
+                  Empty: true
+                  ID: 6
+                  DeletedAt: "DeletedAt"
+                  Filesystem: "Filesystem"
+                  UUID: "UUID"
+                  DeviceModel: "DeviceModel"
+                  MBytes: 7
                   Host:
                     public_ip: "public_ip"
                     OS: "OS"
@@ -3180,21 +4745,13 @@ definitions:
                     host_name: "host_name"
                     CPUModel: "CPUModel"
                   Vendor: "Vendor"
-                  HostID: 1
                   Rotational: true
                   UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-                  Name: "Name"
                   WWN: "WWN"
                   PathID: "PathID"
-                  RealPath: "RealPath"
                   HasChildren: true
-                  Empty: true
                   Serial: "Serial"
                   Type: "Type"
-                  ID: 6
-                  DeletedAt: "DeletedAt"
-                  Filesystem: "Filesystem"
-                  UUID: "UUID"
                   Cache: true
                 DiskID: 1
               CreatedAt: "2000-01-23T04:56:07.000+00:00"
@@ -3230,11 +4787,20 @@ definitions:
                 Up: true
                 DeletedAt: "DeletedAt"
                 Disk:
-                  DeviceModel: "DeviceModel"
                   IsRoot: true
-                  MBytes: 7
                   Encrypted: true
                   CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                  HostID: 1
+                  Removed: true
+                  Name: "Name"
+                  RealPath: "RealPath"
+                  Empty: true
+                  ID: 6
+                  DeletedAt: "DeletedAt"
+                  Filesystem: "Filesystem"
+                  UUID: "UUID"
+                  DeviceModel: "DeviceModel"
+                  MBytes: 7
                   Host:
                     public_ip: "public_ip"
                     OS: "OS"
@@ -3254,21 +4820,13 @@ definitions:
                     host_name: "host_name"
                     CPUModel: "CPUModel"
                   Vendor: "Vendor"
-                  HostID: 1
                   Rotational: true
                   UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-                  Name: "Name"
                   WWN: "WWN"
                   PathID: "PathID"
-                  RealPath: "RealPath"
                   HasChildren: true
-                  Empty: true
                   Serial: "Serial"
                   Type: "Type"
-                  ID: 6
-                  DeletedAt: "DeletedAt"
-                  Filesystem: "Filesystem"
-                  UUID: "UUID"
                   Cache: true
                 DiskID: 1
               - Status: "Status"
@@ -3283,11 +4841,20 @@ definitions:
                 Up: true
                 DeletedAt: "DeletedAt"
                 Disk:
-                  DeviceModel: "DeviceModel"
                   IsRoot: true
-                  MBytes: 7
                   Encrypted: true
                   CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                  HostID: 1
+                  Removed: true
+                  Name: "Name"
+                  RealPath: "RealPath"
+                  Empty: true
+                  ID: 6
+                  DeletedAt: "DeletedAt"
+                  Filesystem: "Filesystem"
+                  UUID: "UUID"
+                  DeviceModel: "DeviceModel"
+                  MBytes: 7
                   Host:
                     public_ip: "public_ip"
                     OS: "OS"
@@ -3307,21 +4874,13 @@ definitions:
                     host_name: "host_name"
                     CPUModel: "CPUModel"
                   Vendor: "Vendor"
-                  HostID: 1
                   Rotational: true
                   UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-                  Name: "Name"
                   WWN: "WWN"
                   PathID: "PathID"
-                  RealPath: "RealPath"
                   HasChildren: true
-                  Empty: true
                   Serial: "Serial"
                   Type: "Type"
-                  ID: 6
-                  DeletedAt: "DeletedAt"
-                  Filesystem: "Filesystem"
-                  UUID: "UUID"
                   Cache: true
                 DiskID: 1
               CreatedAt: "2000-01-23T04:56:07.000+00:00"
@@ -3461,11 +5020,20 @@ definitions:
               Up: true
               DeletedAt: "DeletedAt"
               Disk:
-                DeviceModel: "DeviceModel"
                 IsRoot: true
-                MBytes: 7
                 Encrypted: true
                 CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                HostID: 1
+                Removed: true
+                Name: "Name"
+                RealPath: "RealPath"
+                Empty: true
+                ID: 6
+                DeletedAt: "DeletedAt"
+                Filesystem: "Filesystem"
+                UUID: "UUID"
+                DeviceModel: "DeviceModel"
+                MBytes: 7
                 Host:
                   public_ip: "public_ip"
                   OS: "OS"
@@ -3485,21 +5053,13 @@ definitions:
                   host_name: "host_name"
                   CPUModel: "CPUModel"
                 Vendor: "Vendor"
-                HostID: 1
                 Rotational: true
                 UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-                Name: "Name"
                 WWN: "WWN"
                 PathID: "PathID"
-                RealPath: "RealPath"
                 HasChildren: true
-                Empty: true
                 Serial: "Serial"
                 Type: "Type"
-                ID: 6
-                DeletedAt: "DeletedAt"
-                Filesystem: "Filesystem"
-                UUID: "UUID"
                 Cache: true
               DiskID: 1
             - Status: "Status"
@@ -3514,11 +5074,20 @@ definitions:
               Up: true
               DeletedAt: "DeletedAt"
               Disk:
-                DeviceModel: "DeviceModel"
                 IsRoot: true
-                MBytes: 7
                 Encrypted: true
                 CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                HostID: 1
+                Removed: true
+                Name: "Name"
+                RealPath: "RealPath"
+                Empty: true
+                ID: 6
+                DeletedAt: "DeletedAt"
+                Filesystem: "Filesystem"
+                UUID: "UUID"
+                DeviceModel: "DeviceModel"
+                MBytes: 7
                 Host:
                   public_ip: "public_ip"
                   OS: "OS"
@@ -3538,21 +5107,13 @@ definitions:
                   host_name: "host_name"
                   CPUModel: "CPUModel"
                 Vendor: "Vendor"
-                HostID: 1
                 Rotational: true
                 UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-                Name: "Name"
                 WWN: "WWN"
                 PathID: "PathID"
-                RealPath: "RealPath"
                 HasChildren: true
-                Empty: true
                 Serial: "Serial"
                 Type: "Type"
-                ID: 6
-                DeletedAt: "DeletedAt"
-                Filesystem: "Filesystem"
-                UUID: "UUID"
                 Cache: true
               DiskID: 1
             CreatedAt: "2000-01-23T04:56:07.000+00:00"
@@ -3588,11 +5149,20 @@ definitions:
               Up: true
               DeletedAt: "DeletedAt"
               Disk:
-                DeviceModel: "DeviceModel"
                 IsRoot: true
-                MBytes: 7
                 Encrypted: true
                 CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                HostID: 1
+                Removed: true
+                Name: "Name"
+                RealPath: "RealPath"
+                Empty: true
+                ID: 6
+                DeletedAt: "DeletedAt"
+                Filesystem: "Filesystem"
+                UUID: "UUID"
+                DeviceModel: "DeviceModel"
+                MBytes: 7
                 Host:
                   public_ip: "public_ip"
                   OS: "OS"
@@ -3612,21 +5182,13 @@ definitions:
                   host_name: "host_name"
                   CPUModel: "CPUModel"
                 Vendor: "Vendor"
-                HostID: 1
                 Rotational: true
                 UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-                Name: "Name"
                 WWN: "WWN"
                 PathID: "PathID"
-                RealPath: "RealPath"
                 HasChildren: true
-                Empty: true
                 Serial: "Serial"
                 Type: "Type"
-                ID: 6
-                DeletedAt: "DeletedAt"
-                Filesystem: "Filesystem"
-                UUID: "UUID"
                 Cache: true
               DiskID: 1
             - Status: "Status"
@@ -3641,11 +5203,20 @@ definitions:
               Up: true
               DeletedAt: "DeletedAt"
               Disk:
-                DeviceModel: "DeviceModel"
                 IsRoot: true
-                MBytes: 7
                 Encrypted: true
                 CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                HostID: 1
+                Removed: true
+                Name: "Name"
+                RealPath: "RealPath"
+                Empty: true
+                ID: 6
+                DeletedAt: "DeletedAt"
+                Filesystem: "Filesystem"
+                UUID: "UUID"
+                DeviceModel: "DeviceModel"
+                MBytes: 7
                 Host:
                   public_ip: "public_ip"
                   OS: "OS"
@@ -3665,21 +5236,13 @@ definitions:
                   host_name: "host_name"
                   CPUModel: "CPUModel"
                 Vendor: "Vendor"
-                HostID: 1
                 Rotational: true
                 UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-                Name: "Name"
                 WWN: "WWN"
                 PathID: "PathID"
-                RealPath: "RealPath"
                 HasChildren: true
-                Empty: true
                 Serial: "Serial"
                 Type: "Type"
-                ID: 6
-                DeletedAt: "DeletedAt"
-                Filesystem: "Filesystem"
-                UUID: "UUID"
                 Cache: true
               DiskID: 1
             CreatedAt: "2000-01-23T04:56:07.000+00:00"
@@ -3774,11 +5337,20 @@ definitions:
             Up: true
             DeletedAt: "DeletedAt"
             Disk:
-              DeviceModel: "DeviceModel"
               IsRoot: true
-              MBytes: 7
               Encrypted: true
               CreatedAt: "2000-01-23T04:56:07.000+00:00"
+              HostID: 1
+              Removed: true
+              Name: "Name"
+              RealPath: "RealPath"
+              Empty: true
+              ID: 6
+              DeletedAt: "DeletedAt"
+              Filesystem: "Filesystem"
+              UUID: "UUID"
+              DeviceModel: "DeviceModel"
+              MBytes: 7
               Host:
                 public_ip: "public_ip"
                 OS: "OS"
@@ -3798,21 +5370,13 @@ definitions:
                 host_name: "host_name"
                 CPUModel: "CPUModel"
               Vendor: "Vendor"
-              HostID: 1
               Rotational: true
               UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-              Name: "Name"
               WWN: "WWN"
               PathID: "PathID"
-              RealPath: "RealPath"
               HasChildren: true
-              Empty: true
               Serial: "Serial"
               Type: "Type"
-              ID: 6
-              DeletedAt: "DeletedAt"
-              Filesystem: "Filesystem"
-              UUID: "UUID"
               Cache: true
             DiskID: 1
           - Status: "Status"
@@ -3827,11 +5391,20 @@ definitions:
             Up: true
             DeletedAt: "DeletedAt"
             Disk:
-              DeviceModel: "DeviceModel"
               IsRoot: true
-              MBytes: 7
               Encrypted: true
               CreatedAt: "2000-01-23T04:56:07.000+00:00"
+              HostID: 1
+              Removed: true
+              Name: "Name"
+              RealPath: "RealPath"
+              Empty: true
+              ID: 6
+              DeletedAt: "DeletedAt"
+              Filesystem: "Filesystem"
+              UUID: "UUID"
+              DeviceModel: "DeviceModel"
+              MBytes: 7
               Host:
                 public_ip: "public_ip"
                 OS: "OS"
@@ -3851,21 +5424,13 @@ definitions:
                 host_name: "host_name"
                 CPUModel: "CPUModel"
               Vendor: "Vendor"
-              HostID: 1
               Rotational: true
               UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-              Name: "Name"
               WWN: "WWN"
               PathID: "PathID"
-              RealPath: "RealPath"
               HasChildren: true
-              Empty: true
               Serial: "Serial"
               Type: "Type"
-              ID: 6
-              DeletedAt: "DeletedAt"
-              Filesystem: "Filesystem"
-              UUID: "UUID"
               Cache: true
             DiskID: 1
           CreatedAt: "2000-01-23T04:56:07.000+00:00"
@@ -3901,11 +5466,20 @@ definitions:
             Up: true
             DeletedAt: "DeletedAt"
             Disk:
-              DeviceModel: "DeviceModel"
               IsRoot: true
-              MBytes: 7
               Encrypted: true
               CreatedAt: "2000-01-23T04:56:07.000+00:00"
+              HostID: 1
+              Removed: true
+              Name: "Name"
+              RealPath: "RealPath"
+              Empty: true
+              ID: 6
+              DeletedAt: "DeletedAt"
+              Filesystem: "Filesystem"
+              UUID: "UUID"
+              DeviceModel: "DeviceModel"
+              MBytes: 7
               Host:
                 public_ip: "public_ip"
                 OS: "OS"
@@ -3925,21 +5499,13 @@ definitions:
                 host_name: "host_name"
                 CPUModel: "CPUModel"
               Vendor: "Vendor"
-              HostID: 1
               Rotational: true
               UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-              Name: "Name"
               WWN: "WWN"
               PathID: "PathID"
-              RealPath: "RealPath"
               HasChildren: true
-              Empty: true
               Serial: "Serial"
               Type: "Type"
-              ID: 6
-              DeletedAt: "DeletedAt"
-              Filesystem: "Filesystem"
-              UUID: "UUID"
               Cache: true
             DiskID: 1
           - Status: "Status"
@@ -3954,11 +5520,20 @@ definitions:
             Up: true
             DeletedAt: "DeletedAt"
             Disk:
-              DeviceModel: "DeviceModel"
               IsRoot: true
-              MBytes: 7
               Encrypted: true
               CreatedAt: "2000-01-23T04:56:07.000+00:00"
+              HostID: 1
+              Removed: true
+              Name: "Name"
+              RealPath: "RealPath"
+              Empty: true
+              ID: 6
+              DeletedAt: "DeletedAt"
+              Filesystem: "Filesystem"
+              UUID: "UUID"
+              DeviceModel: "DeviceModel"
+              MBytes: 7
               Host:
                 public_ip: "public_ip"
                 OS: "OS"
@@ -3978,21 +5553,13 @@ definitions:
                 host_name: "host_name"
                 CPUModel: "CPUModel"
               Vendor: "Vendor"
-              HostID: 1
               Rotational: true
               UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-              Name: "Name"
               WWN: "WWN"
               PathID: "PathID"
-              RealPath: "RealPath"
               HasChildren: true
-              Empty: true
               Serial: "Serial"
               Type: "Type"
-              ID: 6
-              DeletedAt: "DeletedAt"
-              Filesystem: "Filesystem"
-              UUID: "UUID"
               Cache: true
             DiskID: 1
           CreatedAt: "2000-01-23T04:56:07.000+00:00"
@@ -4119,11 +5686,20 @@ definitions:
               Up: true
               DeletedAt: "DeletedAt"
               Disk:
-                DeviceModel: "DeviceModel"
                 IsRoot: true
-                MBytes: 7
                 Encrypted: true
                 CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                HostID: 1
+                Removed: true
+                Name: "Name"
+                RealPath: "RealPath"
+                Empty: true
+                ID: 6
+                DeletedAt: "DeletedAt"
+                Filesystem: "Filesystem"
+                UUID: "UUID"
+                DeviceModel: "DeviceModel"
+                MBytes: 7
                 Host:
                   public_ip: "public_ip"
                   OS: "OS"
@@ -4143,21 +5719,13 @@ definitions:
                   host_name: "host_name"
                   CPUModel: "CPUModel"
                 Vendor: "Vendor"
-                HostID: 1
                 Rotational: true
                 UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-                Name: "Name"
                 WWN: "WWN"
                 PathID: "PathID"
-                RealPath: "RealPath"
                 HasChildren: true
-                Empty: true
                 Serial: "Serial"
                 Type: "Type"
-                ID: 6
-                DeletedAt: "DeletedAt"
-                Filesystem: "Filesystem"
-                UUID: "UUID"
                 Cache: true
               DiskID: 1
             - Status: "Status"
@@ -4172,11 +5740,20 @@ definitions:
               Up: true
               DeletedAt: "DeletedAt"
               Disk:
-                DeviceModel: "DeviceModel"
                 IsRoot: true
-                MBytes: 7
                 Encrypted: true
                 CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                HostID: 1
+                Removed: true
+                Name: "Name"
+                RealPath: "RealPath"
+                Empty: true
+                ID: 6
+                DeletedAt: "DeletedAt"
+                Filesystem: "Filesystem"
+                UUID: "UUID"
+                DeviceModel: "DeviceModel"
+                MBytes: 7
                 Host:
                   public_ip: "public_ip"
                   OS: "OS"
@@ -4196,21 +5773,13 @@ definitions:
                   host_name: "host_name"
                   CPUModel: "CPUModel"
                 Vendor: "Vendor"
-                HostID: 1
                 Rotational: true
                 UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-                Name: "Name"
                 WWN: "WWN"
                 PathID: "PathID"
-                RealPath: "RealPath"
                 HasChildren: true
-                Empty: true
                 Serial: "Serial"
                 Type: "Type"
-                ID: 6
-                DeletedAt: "DeletedAt"
-                Filesystem: "Filesystem"
-                UUID: "UUID"
                 Cache: true
               DiskID: 1
             CreatedAt: "2000-01-23T04:56:07.000+00:00"
@@ -4246,11 +5815,20 @@ definitions:
               Up: true
               DeletedAt: "DeletedAt"
               Disk:
-                DeviceModel: "DeviceModel"
                 IsRoot: true
-                MBytes: 7
                 Encrypted: true
                 CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                HostID: 1
+                Removed: true
+                Name: "Name"
+                RealPath: "RealPath"
+                Empty: true
+                ID: 6
+                DeletedAt: "DeletedAt"
+                Filesystem: "Filesystem"
+                UUID: "UUID"
+                DeviceModel: "DeviceModel"
+                MBytes: 7
                 Host:
                   public_ip: "public_ip"
                   OS: "OS"
@@ -4270,21 +5848,13 @@ definitions:
                   host_name: "host_name"
                   CPUModel: "CPUModel"
                 Vendor: "Vendor"
-                HostID: 1
                 Rotational: true
                 UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-                Name: "Name"
                 WWN: "WWN"
                 PathID: "PathID"
-                RealPath: "RealPath"
                 HasChildren: true
-                Empty: true
                 Serial: "Serial"
                 Type: "Type"
-                ID: 6
-                DeletedAt: "DeletedAt"
-                Filesystem: "Filesystem"
-                UUID: "UUID"
                 Cache: true
               DiskID: 1
             - Status: "Status"
@@ -4299,11 +5869,20 @@ definitions:
               Up: true
               DeletedAt: "DeletedAt"
               Disk:
-                DeviceModel: "DeviceModel"
                 IsRoot: true
-                MBytes: 7
                 Encrypted: true
                 CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                HostID: 1
+                Removed: true
+                Name: "Name"
+                RealPath: "RealPath"
+                Empty: true
+                ID: 6
+                DeletedAt: "DeletedAt"
+                Filesystem: "Filesystem"
+                UUID: "UUID"
+                DeviceModel: "DeviceModel"
+                MBytes: 7
                 Host:
                   public_ip: "public_ip"
                   OS: "OS"
@@ -4323,21 +5902,13 @@ definitions:
                   host_name: "host_name"
                   CPUModel: "CPUModel"
                 Vendor: "Vendor"
-                HostID: 1
                 Rotational: true
                 UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-                Name: "Name"
                 WWN: "WWN"
                 PathID: "PathID"
-                RealPath: "RealPath"
                 HasChildren: true
-                Empty: true
                 Serial: "Serial"
                 Type: "Type"
-                ID: 6
-                DeletedAt: "DeletedAt"
-                Filesystem: "Filesystem"
-                UUID: "UUID"
                 Cache: true
               DiskID: 1
             CreatedAt: "2000-01-23T04:56:07.000+00:00"
@@ -4425,11 +5996,20 @@ definitions:
       Up: true
       DeletedAt: "DeletedAt"
       Disk:
-        DeviceModel: "DeviceModel"
         IsRoot: true
-        MBytes: 7
         Encrypted: true
         CreatedAt: "2000-01-23T04:56:07.000+00:00"
+        HostID: 1
+        Removed: true
+        Name: "Name"
+        RealPath: "RealPath"
+        Empty: true
+        ID: 6
+        DeletedAt: "DeletedAt"
+        Filesystem: "Filesystem"
+        UUID: "UUID"
+        DeviceModel: "DeviceModel"
+        MBytes: 7
         Host:
           public_ip: "public_ip"
           OS: "OS"
@@ -4449,21 +6029,13 @@ definitions:
           host_name: "host_name"
           CPUModel: "CPUModel"
         Vendor: "Vendor"
-        HostID: 1
         Rotational: true
         UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-        Name: "Name"
         WWN: "WWN"
         PathID: "PathID"
-        RealPath: "RealPath"
         HasChildren: true
-        Empty: true
         Serial: "Serial"
         Type: "Type"
-        ID: 6
-        DeletedAt: "DeletedAt"
-        Filesystem: "Filesystem"
-        UUID: "UUID"
         Cache: true
       DiskID: 1
   models.Pool:
@@ -4551,11 +6123,20 @@ definitions:
             Up: true
             DeletedAt: "DeletedAt"
             Disk:
-              DeviceModel: "DeviceModel"
               IsRoot: true
-              MBytes: 7
               Encrypted: true
               CreatedAt: "2000-01-23T04:56:07.000+00:00"
+              HostID: 1
+              Removed: true
+              Name: "Name"
+              RealPath: "RealPath"
+              Empty: true
+              ID: 6
+              DeletedAt: "DeletedAt"
+              Filesystem: "Filesystem"
+              UUID: "UUID"
+              DeviceModel: "DeviceModel"
+              MBytes: 7
               Host:
                 public_ip: "public_ip"
                 OS: "OS"
@@ -4575,21 +6156,13 @@ definitions:
                 host_name: "host_name"
                 CPUModel: "CPUModel"
               Vendor: "Vendor"
-              HostID: 1
               Rotational: true
               UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-              Name: "Name"
               WWN: "WWN"
               PathID: "PathID"
-              RealPath: "RealPath"
               HasChildren: true
-              Empty: true
               Serial: "Serial"
               Type: "Type"
-              ID: 6
-              DeletedAt: "DeletedAt"
-              Filesystem: "Filesystem"
-              UUID: "UUID"
               Cache: true
             DiskID: 1
           - Status: "Status"
@@ -4604,11 +6177,20 @@ definitions:
             Up: true
             DeletedAt: "DeletedAt"
             Disk:
-              DeviceModel: "DeviceModel"
               IsRoot: true
-              MBytes: 7
               Encrypted: true
               CreatedAt: "2000-01-23T04:56:07.000+00:00"
+              HostID: 1
+              Removed: true
+              Name: "Name"
+              RealPath: "RealPath"
+              Empty: true
+              ID: 6
+              DeletedAt: "DeletedAt"
+              Filesystem: "Filesystem"
+              UUID: "UUID"
+              DeviceModel: "DeviceModel"
+              MBytes: 7
               Host:
                 public_ip: "public_ip"
                 OS: "OS"
@@ -4628,21 +6210,13 @@ definitions:
                 host_name: "host_name"
                 CPUModel: "CPUModel"
               Vendor: "Vendor"
-              HostID: 1
               Rotational: true
               UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-              Name: "Name"
               WWN: "WWN"
               PathID: "PathID"
-              RealPath: "RealPath"
               HasChildren: true
-              Empty: true
               Serial: "Serial"
               Type: "Type"
-              ID: 6
-              DeletedAt: "DeletedAt"
-              Filesystem: "Filesystem"
-              UUID: "UUID"
               Cache: true
             DiskID: 1
           CreatedAt: "2000-01-23T04:56:07.000+00:00"
@@ -4738,11 +6312,20 @@ definitions:
           Up: true
           DeletedAt: "DeletedAt"
           Disk:
-            DeviceModel: "DeviceModel"
             IsRoot: true
-            MBytes: 7
             Encrypted: true
             CreatedAt: "2000-01-23T04:56:07.000+00:00"
+            HostID: 1
+            Removed: true
+            Name: "Name"
+            RealPath: "RealPath"
+            Empty: true
+            ID: 6
+            DeletedAt: "DeletedAt"
+            Filesystem: "Filesystem"
+            UUID: "UUID"
+            DeviceModel: "DeviceModel"
+            MBytes: 7
             Host:
               public_ip: "public_ip"
               OS: "OS"
@@ -4762,21 +6345,13 @@ definitions:
               host_name: "host_name"
               CPUModel: "CPUModel"
             Vendor: "Vendor"
-            HostID: 1
             Rotational: true
             UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-            Name: "Name"
             WWN: "WWN"
             PathID: "PathID"
-            RealPath: "RealPath"
             HasChildren: true
-            Empty: true
             Serial: "Serial"
             Type: "Type"
-            ID: 6
-            DeletedAt: "DeletedAt"
-            Filesystem: "Filesystem"
-            UUID: "UUID"
             Cache: true
           DiskID: 1
         - Status: "Status"
@@ -4791,11 +6366,20 @@ definitions:
           Up: true
           DeletedAt: "DeletedAt"
           Disk:
-            DeviceModel: "DeviceModel"
             IsRoot: true
-            MBytes: 7
             Encrypted: true
             CreatedAt: "2000-01-23T04:56:07.000+00:00"
+            HostID: 1
+            Removed: true
+            Name: "Name"
+            RealPath: "RealPath"
+            Empty: true
+            ID: 6
+            DeletedAt: "DeletedAt"
+            Filesystem: "Filesystem"
+            UUID: "UUID"
+            DeviceModel: "DeviceModel"
+            MBytes: 7
             Host:
               public_ip: "public_ip"
               OS: "OS"
@@ -4815,21 +6399,13 @@ definitions:
               host_name: "host_name"
               CPUModel: "CPUModel"
             Vendor: "Vendor"
-            HostID: 1
             Rotational: true
             UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-            Name: "Name"
             WWN: "WWN"
             PathID: "PathID"
-            RealPath: "RealPath"
             HasChildren: true
-            Empty: true
             Serial: "Serial"
             Type: "Type"
-            ID: 6
-            DeletedAt: "DeletedAt"
-            Filesystem: "Filesystem"
-            UUID: "UUID"
             Cache: true
           DiskID: 1
         CreatedAt: "2000-01-23T04:56:07.000+00:00"
@@ -4938,11 +6514,20 @@ definitions:
               Up: true
               DeletedAt: "DeletedAt"
               Disk:
-                DeviceModel: "DeviceModel"
                 IsRoot: true
-                MBytes: 7
                 Encrypted: true
                 CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                HostID: 1
+                Removed: true
+                Name: "Name"
+                RealPath: "RealPath"
+                Empty: true
+                ID: 6
+                DeletedAt: "DeletedAt"
+                Filesystem: "Filesystem"
+                UUID: "UUID"
+                DeviceModel: "DeviceModel"
+                MBytes: 7
                 Host:
                   public_ip: "public_ip"
                   OS: "OS"
@@ -4962,21 +6547,13 @@ definitions:
                   host_name: "host_name"
                   CPUModel: "CPUModel"
                 Vendor: "Vendor"
-                HostID: 1
                 Rotational: true
                 UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-                Name: "Name"
                 WWN: "WWN"
                 PathID: "PathID"
-                RealPath: "RealPath"
                 HasChildren: true
-                Empty: true
                 Serial: "Serial"
                 Type: "Type"
-                ID: 6
-                DeletedAt: "DeletedAt"
-                Filesystem: "Filesystem"
-                UUID: "UUID"
                 Cache: true
               DiskID: 1
             - Status: "Status"
@@ -4991,11 +6568,20 @@ definitions:
               Up: true
               DeletedAt: "DeletedAt"
               Disk:
-                DeviceModel: "DeviceModel"
                 IsRoot: true
-                MBytes: 7
                 Encrypted: true
                 CreatedAt: "2000-01-23T04:56:07.000+00:00"
+                HostID: 1
+                Removed: true
+                Name: "Name"
+                RealPath: "RealPath"
+                Empty: true
+                ID: 6
+                DeletedAt: "DeletedAt"
+                Filesystem: "Filesystem"
+                UUID: "UUID"
+                DeviceModel: "DeviceModel"
+                MBytes: 7
                 Host:
                   public_ip: "public_ip"
                   OS: "OS"
@@ -5015,21 +6601,13 @@ definitions:
                   host_name: "host_name"
                   CPUModel: "CPUModel"
                 Vendor: "Vendor"
-                HostID: 1
                 Rotational: true
                 UpdatedAt: "2000-01-23T04:56:07.000+00:00"
-                Name: "Name"
                 WWN: "WWN"
                 PathID: "PathID"
-                RealPath: "RealPath"
                 HasChildren: true
-                Empty: true
                 Serial: "Serial"
                 Type: "Type"
-                ID: 6
-                DeletedAt: "DeletedAt"
-                Filesystem: "Filesystem"
-                UUID: "UUID"
                 Cache: true
               DiskID: 1
             CreatedAt: "2000-01-23T04:56:07.000+00:00"
@@ -5051,12 +6629,36 @@ definitions:
         DeletedAt: "DeletedAt"
       ID: 2
       DeletedAt: "DeletedAt"
+  routes.CephNFSExportRequestParams:
+    required:
+    - "ceph_nfs_export"
+    properties:
+      ceph_nfs_export:
+        $ref: "#/definitions/.ceph_nfs_export"
+  routes.CephNFSRequestParams:
+    required:
+    - "ceph_nfs"
+    properties:
+      ceph_nfs:
+        $ref: "#/definitions/.ceph_nfs"
   routes.CephfsRequestParams:
     required:
     - "cephfs"
     properties:
       cephfs:
         $ref: "#/definitions/.cephfs"
+  routes.CephfsSubvolumeGroupRequestParams:
+    required:
+    - "cephfs_subvolumegroup"
+    properties:
+      cephfs_subvolumegroup:
+        $ref: "#/definitions/.cephfs_subvolumegroup"
+  routes.CephfsSubvolumeRequestParams:
+    required:
+    - "cephfs_subvolume"
+    properties:
+      cephfs_subvolume:
+        $ref: "#/definitions/.cephfs_subvolume"
   routes.CreateCephClusterRequestParams:
     required:
     - "ceph_cluster"

@@ -10,9 +10,8 @@
 
 package smdclient
 
-type ObjectBucket struct {
-	BucketName string `json:"bucket_name"`
+type CephfsSubvolume struct {
+	CephfsSubvolumegroupId int64 `json:"cephfs_subvolumegroup_id"`
 	Name string `json:"name"`
-	ObjectStorageClassId int64 `json:"object_storage_class_id"`
-	OsUserId int64 `json:"os_user_id"`
+	Size string `json:"size"`
 }
