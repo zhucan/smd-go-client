@@ -52,16 +52,21 @@ Class | Method | HTTP request | Description
 *CephfsSubvolumesApi* | [**DeleteCephfsSubvolume**](docs/CephfsSubvolumesApi.md#deletecephfssubvolume) | **Delete** /cephfs-subvolumes/{cephfs-subvolume-id} | delete a cephfs subvolume
 *CephfsSubvolumesApi* | [**GetCephfsSubvolume**](docs/CephfsSubvolumesApi.md#getcephfssubvolume) | **Get** /cephfs-subvolumes/{cephfs-subvolume-id} | get a cephfs subvolume
 *CephfsSubvolumesApi* | [**ListCephfsSubvolumes**](docs/CephfsSubvolumesApi.md#listcephfssubvolumes) | **Get** /cephfs-subvolumes | get all cephfs subvolumes
+*CephfsSubvolumesApi* | [**ResizeCephfsSubvolume**](docs/CephfsSubvolumesApi.md#resizecephfssubvolume) | **Post** /cephfs-subvolumes/{cephfs-subvolume-id}:resize | resize a cephfs subvolume
+*CrushRootsApi* | [**AddOsdsToCrushRoot**](docs/CrushRootsApi.md#addosdstocrushroot) | **Post** /crush-roots/{crush-root-id}:addOsds | add osds to crush root
 *CrushRootsApi* | [**CreateCrushRoot**](docs/CrushRootsApi.md#createcrushroot) | **Post** /crush-roots | create crush root
 *CrushRootsApi* | [**DeleteCrushRoot**](docs/CrushRootsApi.md#deletecrushroot) | **Delete** /crush-roots/{crush-root-id} | delete a crush root
 *CrushRootsApi* | [**GetCrushRoot**](docs/CrushRootsApi.md#getcrushroot) | **Get** /crush-roots/{crush-root-id} | get a crush root
 *CrushRootsApi* | [**ListCrushRoots**](docs/CrushRootsApi.md#listcrushroots) | **Get** /crush-roots | get all crush roots
+*CrushRootsApi* | [**RemoveOsdsFromCrushRoot**](docs/CrushRootsApi.md#removeosdsfromcrushroot) | **Post** /crush-roots/:removeOsds | remove osds from crush root
 *DisksApi* | [**GetDisk**](docs/DisksApi.md#getdisk) | **Get** /disks/{disk-id} | get a disk
 *DisksApi* | [**ListDisks**](docs/DisksApi.md#listdisks) | **Get** /disks | get all disks
 *HostsApi* | [**CreateHost**](docs/HostsApi.md#createhost) | **Post** /hosts | create a host
 *HostsApi* | [**DeleteHost**](docs/HostsApi.md#deletehost) | **Delete** /hosts/{host-id} | delete a host
 *HostsApi* | [**GetHost**](docs/HostsApi.md#gethost) | **Get** /hosts/{host-id} | get a host
 *HostsApi* | [**ListHosts**](docs/HostsApi.md#listhosts) | **Get** /hosts | get all hosts
+*NfsGatewaysApi* | [**GetNFSGateway**](docs/NfsGatewaysApi.md#getnfsgateway) | **Get** /nfs-gateways/{nfs-gateway-id} | get a nfs gateway
+*NfsGatewaysApi* | [**ListNFSGateways**](docs/NfsGatewaysApi.md#listnfsgateways) | **Get** /nfs-gateways | list all nfs gateways
 *ObjectBucketsApi* | [**CreateObjectBucket**](docs/ObjectBucketsApi.md#createobjectbucket) | **Post** /object-buckets | create an object bucket
 *ObjectBucketsApi* | [**DeleteObjectBucket**](docs/ObjectBucketsApi.md#deleteobjectbucket) | **Delete** /object-buckets/{object-bucket-id} | delete an object bucket
 *ObjectBucketsApi* | [**GetObjectBucket**](docs/ObjectBucketsApi.md#getobjectbucket) | **Get** /object-buckets/{object-bucket-id} | get an object bucket
@@ -113,6 +118,7 @@ Class | Method | HTTP request | Description
  - [ModelsCrushRoot](docs/ModelsCrushRoot.md)
  - [ModelsDisk](docs/ModelsDisk.md)
  - [ModelsHost](docs/ModelsHost.md)
+ - [ModelsNfsGateway](docs/ModelsNfsGateway.md)
  - [ModelsObjectBucket](docs/ModelsObjectBucket.md)
  - [ModelsObjectGateway](docs/ModelsObjectGateway.md)
  - [ModelsObjectStorageClass](docs/ModelsObjectStorageClass.md)

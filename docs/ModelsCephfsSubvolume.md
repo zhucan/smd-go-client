@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **DeletedAt** | **string** |  | [default to null]
 **ID** | **int64** |  | [default to null]
 **Name** | **string** |  | [default to null]
+**Passive** | **bool** |  | [default to null]
 **Path** | **string** |  | [default to null]
 **Status** | **string** |  | [default to null]
 **SubvolumeName** | **string** |  | [default to null]

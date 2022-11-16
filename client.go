@@ -70,6 +70,8 @@ type APIClient struct {
 
 	HostsApi *HostsApiService
 
+	NfsGatewaysApi *NfsGatewaysApiService
+
 	ObjectBucketsApi *ObjectBucketsApiService
 
 	ObjectGatewaysApi *ObjectGatewaysApiService
@@ -113,6 +115,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.CrushRootsApi = (*CrushRootsApiService)(&c.common)
 	c.DisksApi = (*DisksApiService)(&c.common)
 	c.HostsApi = (*HostsApiService)(&c.common)
+	c.NfsGatewaysApi = (*NfsGatewaysApiService)(&c.common)
 	c.ObjectBucketsApi = (*ObjectBucketsApiService)(&c.common)
 	c.ObjectGatewaysApi = (*ObjectGatewaysApiService)(&c.common)
 	c.ObjectStorageClassesApi = (*ObjectStorageClassesApiService)(&c.common)

@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **ObjectStorageClassID** | **int64** |  | [default to null]
 **OsUser** | [***ModelsOsUser**](models.OsUser.md) |  | [default to null]
 **OsUserID** | **int64** |  | [default to null]
+**Passive** | **bool** |  | [default to null]
 **Port** | **string** |  | [default to null]
 **Region** | **string** |  | [default to null]
 **Status** | **string** |  | [default to null]

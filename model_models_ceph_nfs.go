@@ -18,7 +18,7 @@ type ModelsCephNfs struct {
 	CreatedAt time.Time `json:"CreatedAt"`
 	DeletedAt string `json:"DeletedAt"`
 	ID int64 `json:"ID"`
-	Instances int32 `json:"Instances"`
+	Instances int64 `json:"Instances"`
 	NFSName string `json:"NFSName"`
 	Name string `json:"Name"`
 	Passive bool `json:"Passive"`

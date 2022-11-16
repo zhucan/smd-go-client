@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **ID** | **int64** |  | [default to null]
 **In** | **bool** |  | [default to null]
 **Name** | **string** |  | [default to null]
-**OsdID** | **int32** |  | [default to null]
+**OsdID** | **int64** |  | [default to null]
 **Status** | **string** |  | [default to null]
 **Up** | **bool** |  | [default to null]
 **UpdatedAt** | [**time.Time**](time.Time.md) |  | [default to null]

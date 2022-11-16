@@ -12,6 +12,7 @@ package smdclient
 
 type Cephfs struct {
 	DataPools []RoutesPoolRequestParams `json:"data_pools"`
+	FsName string `json:"fs_name"`
 	MetadataPool *RoutesPoolRequestParams `json:"metadata_pool"`
 	Name string `json:"name"`
 	PreserveFilesystemOnDelete bool `json:"preserve_filesystem_on_delete"`

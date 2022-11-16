@@ -17,6 +17,7 @@ import (
 type ModelsCrushRoot struct {
 	CreatedAt time.Time `json:"CreatedAt"`
 	DeletedAt string `json:"DeletedAt"`
+	HostID int64 `json:"HostID"`
 	ID int64 `json:"ID"`
 	Name string `json:"Name"`
 	Osds []ModelsOsd `json:"Osds"`

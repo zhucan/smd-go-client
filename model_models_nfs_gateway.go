@@ -14,15 +14,14 @@ import (
 	"time"
 )
 
-type ModelsCephfsSubvolumeGroup struct {
-	Cephfs *ModelsCephfs `json:"Cephfs"`
-	CephfsID int64 `json:"CephfsID"`
+type ModelsNfsGateway struct {
 	CreatedAt time.Time `json:"CreatedAt"`
 	DeletedAt string `json:"DeletedAt"`
-	GroupName string `json:"GroupName"`
 	ID int64 `json:"ID"`
+	IP string `json:"IP"`
 	Name string `json:"Name"`
-	Passive bool `json:"Passive"`
+	NodeName string `json:"NodeName"`
+	Port int32 `json:"Port"`
 	Status string `json:"Status"`
 	UpdatedAt time.Time `json:"UpdatedAt"`
 }

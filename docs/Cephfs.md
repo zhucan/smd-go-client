@@ -4,6 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DataPools** | [**[]RoutesPoolRequestParams**](routes.PoolRequestParams.md) |  | [default to null]
+**FsName** | **string** |  | [default to null]
 **MetadataPool** | [***RoutesPoolRequestParams**](routes.PoolRequestParams.md) |  | [default to null]
 **Name** | **string** |  | [default to null]
 **PreserveFilesystemOnDelete** | **bool** |  | [default to null]

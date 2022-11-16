@@ -11,7 +11,7 @@
 package smdclient
 
 type CephNfs struct {
-	Instances int32 `json:"instances"`
+	Instances int64 `json:"instances"`
 	Name string `json:"name"`
 	NfsName string `json:"nfs_name"`
 }

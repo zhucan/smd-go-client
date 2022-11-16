@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **GroupName** | **string** |  | [default to null]
 **ID** | **int64** |  | [default to null]
 **Name** | **string** |  | [default to null]
+**Passive** | **bool** |  | [default to null]
 **Status** | **string** |  | [default to null]
 **UpdatedAt** | [**time.Time**](time.Time.md) |  | [default to null]
 

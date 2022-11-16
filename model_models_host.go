@@ -16,8 +16,8 @@ import (
 
 type ModelsHost struct {
 	CPUModel string `json:"CPUModel"`
-	CPUs int32 `json:"CPUs"`
-	Cores int32 `json:"Cores"`
+	CPUs int64 `json:"CPUs"`
+	Cores int64 `json:"Cores"`
 	CreatedAt time.Time `json:"CreatedAt"`
 	DeletedAt string `json:"DeletedAt"`
 	HostModel string `json:"HostModel"`

@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **Passive** | **bool** |  | [default to null]
 **PgAutoscaleMode** | **bool** |  | [default to null]
 **PgNum** | **int64** |  | [default to null]
-**PoolID** | **int32** |  | [default to null]
+**PoolID** | **int64** |  | [default to null]
 **PoolName** | **string** |  | [default to null]
 **State** | **string** |  | [default to null]
 **Status** | **string** |  | [default to null]

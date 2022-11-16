@@ -17,6 +17,7 @@ import (
 type ModelsCephfs struct {
 	CreatedAt time.Time `json:"CreatedAt"`
 	DeletedAt string `json:"DeletedAt"`
+	FSName string `json:"FSName"`
 	ID int64 `json:"ID"`
 	Name string `json:"Name"`
 	PoolProperties []ModelsPoolProperty `json:"PoolProperties"`

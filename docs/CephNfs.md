@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Instances** | **int32** |  | [default to null]
+**Instances** | **int64** |  | [default to null]
 **Name** | **string** |  | [default to null]
 **NfsName** | **string** |  | [default to null]
 

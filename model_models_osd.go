@@ -24,7 +24,7 @@ type ModelsOsd struct {
 	ID int64 `json:"ID"`
 	In bool `json:"In"`
 	Name string `json:"Name"`
-	OsdID int32 `json:"OsdID"`
+	OsdID int64 `json:"OsdID"`
 	Status string `json:"Status"`
 	Up bool `json:"Up"`
 	UpdatedAt time.Time `json:"UpdatedAt"`

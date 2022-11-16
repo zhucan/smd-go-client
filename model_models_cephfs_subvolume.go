@@ -23,6 +23,7 @@ type ModelsCephfsSubvolume struct {
 	DeletedAt string `json:"DeletedAt"`
 	ID int64 `json:"ID"`
 	Name string `json:"Name"`
+	Passive bool `json:"Passive"`
 	Path string `json:"Path"`
 	Status string `json:"Status"`
 	SubvolumeName string `json:"SubvolumeName"`

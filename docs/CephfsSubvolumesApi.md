@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**DeleteCephfsSubvolume**](CephfsSubvolumesApi.md#DeleteCephfsSubvolume) | **Delete** /cephfs-subvolumes/{cephfs-subvolume-id} | delete a cephfs subvolume
 [**GetCephfsSubvolume**](CephfsSubvolumesApi.md#GetCephfsSubvolume) | **Get** /cephfs-subvolumes/{cephfs-subvolume-id} | get a cephfs subvolume
 [**ListCephfsSubvolumes**](CephfsSubvolumesApi.md#ListCephfsSubvolumes) | **Get** /cephfs-subvolumes | get all cephfs subvolumes
+[**ResizeCephfsSubvolume**](CephfsSubvolumesApi.md#ResizeCephfsSubvolume) | **Post** /cephfs-subvolumes/{cephfs-subvolume-id}:resize | resize a cephfs subvolume
 
 
 # **CreateCephfsSubvolume**
@@ -119,6 +120,33 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**[]ModelsCephfsSubvolume**](*models.CephfsSubvolume.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/xml, application/json
+ - **Accept**: application/json, application/xml
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **ResizeCephfsSubvolume**
+> ModelsCephfsSubvolume ResizeCephfsSubvolume(ctx, cephfsSubvolumeId, body)
+resize a cephfs subvolume
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **cephfsSubvolumeId** | **int64**| identifier of the cephfs subvolume | 
+  **body** | [**RoutesCephfsSubvolumeRequestParams**](RoutesCephfsSubvolumeRequestParams.md)|  | 
+
+### Return type
+
+[**ModelsCephfsSubvolume**](models.CephfsSubvolume.md)
 
 ### Authorization
 

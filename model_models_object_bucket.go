@@ -27,6 +27,7 @@ type ModelsObjectBucket struct {
 	ObjectStorageClassID int64 `json:"ObjectStorageClassID"`
 	OsUser *ModelsOsUser `json:"OsUser"`
 	OsUserID int64 `json:"OsUserID"`
+	Passive bool `json:"Passive"`
 	Port string `json:"Port"`
 	Region string `json:"Region"`
 	Status string `json:"Status"`

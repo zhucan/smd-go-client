@@ -20,7 +20,7 @@ type ModelsObjectGateway struct {
 	HttpPort int32 `json:"HttpPort"`
 	HttpsPort int32 `json:"HttpsPort"`
 	ID int64 `json:"ID"`
-	Ip string `json:"Ip"`
+	IP string `json:"IP"`
 	Name string `json:"Name"`
 	Status string `json:"Status"`
 	UpdatedAt time.Time `json:"UpdatedAt"`
