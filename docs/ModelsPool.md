@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **Passive** | **bool** |  | [default to null]
 **PgAutoscaleMode** | **bool** |  | [default to null]
 **PgNum** | **int64** |  | [default to null]
-**PoolID** | **int32** |  | [default to null]
+**PoolID** | **int64** |  | [default to null]
 **PoolName** | **string** |  | [default to null]
 **State** | **string** |  | [default to null]
 **Status** | **string** |  | [default to null]
@@ -20,5 +20,4 @@ Name | Type | Description | Notes
 **UpdatedAt** | [**time.Time**](time.Time.md) |  | [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
 

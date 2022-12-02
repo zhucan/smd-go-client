@@ -1,6 +1,6 @@
-# \CephFilesystemsApi
+# {{classname}}
 
-All URIs are relative to *https://localhost*
+All URIs are relative to */*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -8,7 +8,6 @@ Method | HTTP request | Description
 [**DeleteCephFilesystem**](CephFilesystemsApi.md#DeleteCephFilesystem) | **Delete** /ceph-filesystems/{cephfs-id} | delete a ceph filesystem
 [**GetCephFilesystem**](CephFilesystemsApi.md#GetCephFilesystem) | **Get** /ceph-filesystems/{cephfs-id} | get a ceph filesystem
 [**ListCephFilesystems**](CephFilesystemsApi.md#ListCephFilesystems) | **Get** /ceph-filesystems | get all ceph filesystems
-
 
 # **CreateCephFilesystem**
 > ModelsCephfs CreateCephFilesystem(ctx, body)
@@ -57,7 +56,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/xml, application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/xml
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -83,7 +82,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/xml, application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/xml
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -101,7 +100,6 @@ Name | Type | Description  | Notes
 
 ### Optional Parameters
 Optional parameters are passed through a pointer to a CephFilesystemsApiListCephFilesystemsOpts struct
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **offset** | **optional.Int64**| offset | 
@@ -117,7 +115,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/xml, application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/xml
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

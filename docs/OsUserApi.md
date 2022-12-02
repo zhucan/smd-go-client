@@ -1,6 +1,6 @@
-# \OsUserApi
+# {{classname}}
 
-All URIs are relative to *https://localhost*
+All URIs are relative to */*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -8,7 +8,6 @@ Method | HTTP request | Description
 [**DeleteOsUser**](OsUserApi.md#DeleteOsUser) | **Delete** /os-users/{os-user-id} | delete os user
 [**GetOsUser**](OsUserApi.md#GetOsUser) | **Get** /os-users/{os-user-id} | get an os user
 [**ListOsUsers**](OsUserApi.md#ListOsUsers) | **Get** /os-users | list all kind of os users
-
 
 # **CreateOsUser**
 > ModelsOsUser CreateOsUser(ctx, body)
@@ -57,7 +56,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/xml, application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/xml
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -83,7 +82,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/xml, application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/xml
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -101,7 +100,6 @@ Name | Type | Description  | Notes
 
 ### Optional Parameters
 Optional parameters are passed through a pointer to a OsUserApiListOsUsersOpts struct
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **offset** | **optional.Int64**| offset | 
@@ -117,7 +115,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/xml, application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/xml
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

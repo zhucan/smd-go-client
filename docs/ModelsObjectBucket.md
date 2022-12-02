@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **ObjectStorageClassID** | **int64** |  | [default to null]
 **OsUser** | [***ModelsOsUser**](models.OsUser.md) |  | [default to null]
 **OsUserID** | **int64** |  | [default to null]
+**Passive** | **bool** |  | [default to null]
 **Port** | **string** |  | [default to null]
 **Region** | **string** |  | [default to null]
 **Status** | **string** |  | [default to null]
@@ -22,5 +23,4 @@ Name | Type | Description | Notes
 **UpdatedAt** | [**time.Time**](time.Time.md) |  | [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
 

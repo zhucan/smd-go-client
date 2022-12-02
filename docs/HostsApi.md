@@ -1,6 +1,6 @@
-# \HostsApi
+# {{classname}}
 
-All URIs are relative to *https://localhost*
+All URIs are relative to */*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -8,7 +8,6 @@ Method | HTTP request | Description
 [**DeleteHost**](HostsApi.md#DeleteHost) | **Delete** /hosts/{host-id} | delete a host
 [**GetHost**](HostsApi.md#GetHost) | **Get** /hosts/{host-id} | get a host
 [**ListHosts**](HostsApi.md#ListHosts) | **Get** /hosts | get all hosts
-
 
 # **CreateHost**
 > ModelsHost CreateHost(ctx, body)
@@ -57,7 +56,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/xml, application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/xml
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -83,7 +82,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/xml, application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/xml
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -101,7 +100,6 @@ Name | Type | Description  | Notes
 
 ### Optional Parameters
 Optional parameters are passed through a pointer to a HostsApiListHostsOpts struct
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **offset** | **optional.Int64**| offset | 
@@ -117,7 +115,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/xml, application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/xml
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

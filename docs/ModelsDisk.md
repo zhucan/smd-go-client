@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **Osd** | [***ModelsOsd**](models.Osd.md) |  | [default to null]
 **PathID** | **string** |  | [default to null]
 **RealPath** | **string** |  | [default to null]
+**Removed** | **bool** |  | [default to null]
 **Rotational** | **bool** |  | [default to null]
 **Serial** | **string** |  | [default to null]
 **Type_** | **string** |  | [default to null]
@@ -29,5 +30,4 @@ Name | Type | Description | Notes
 **WWN** | **string** |  | [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
 
