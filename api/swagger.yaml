@@ -4958,6 +4958,7 @@ components:
       - MaxObjects
       - MaxSize
       - Name
+      - NumObjects
       - ObjectStorageClass
       - ObjectStorageClassID
       - OsUser
@@ -4965,6 +4966,7 @@ components:
       - Passive
       - Port
       - Region
+      - SizeUtilized
       - Status
       - SubRegion
       - UpdatedAt
@@ -4989,6 +4991,9 @@ components:
           type: string
         Name:
           type: string
+        NumObjects:
+          type: integer
+          format: int64
         ObjectStorageClass:
           $ref: '#/components/schemas/models.ObjectStorageClass'
         ObjectStorageClassID:
@@ -5005,6 +5010,9 @@ components:
           type: string
         Region:
           type: string
+        SizeUtilized:
+          type: integer
+          format: int64
         Status:
           type: string
         SubRegion:
@@ -5015,49 +5023,50 @@ components:
       example:
         Status: Status
         OsUser:
-          object_store_id: 4
+          object_store_id: 7
           user_name: user_name
           CreatedAt: 2000-01-23T04:56:07.000+00:00
           ObjectBuckets:
           - null
           - null
-          max_buckets: 3
+          max_buckets: 2
           ak: ak
           object_store: null
           UpdatedAt: 2000-01-23T04:56:07.000+00:00
           max_size: max_size
           cap_usage: cap_usage
           cap_metadata: cap_metadata
-          max_objects: 2
+          max_objects: 4
           cap_bucket: cap_bucket
           name: name
           sk: sk
           cap_user: cap_user
           cap_zone: cap_zone
-          ID: 9
+          ID: 3
           DeletedAt: DeletedAt
           status: status
         Passive: true
         CreatedAt: 2000-01-23T04:56:07.000+00:00
         Port: Port
-        ObjectStorageClassID: 7
+        ObjectStorageClassID: 9
         Host: Host
         MaxSize: MaxSize
         UpdatedAt: 2000-01-23T04:56:07.000+00:00
         MaxObjects: 6
         Name: Name
         BucketName: BucketName
-        OsUserID: 7
+        OsUserID: 1
         Region: Region
         ID: 0
         DeletedAt: DeletedAt
+        NumObjects: 1
         ObjectStorageClass:
           Status: Status
           ObjectStore:
             Status: Status
             StoreName: StoreName
             CreatedAt: 2000-01-23T04:56:07.000+00:00
-            Port: 5
+            Port: 2
             PreservePoolsOnDelete: true
             ID: 5
             DeletedAt: DeletedAt
@@ -5336,12 +5345,13 @@ components:
           ObjectBuckets:
           - null
           - null
-          ObjectStoreID: 2
-          ID: 1
+          ObjectStoreID: 7
+          ID: 5
           DeletedAt: DeletedAt
           UpdatedAt: 2000-01-23T04:56:07.000+00:00
           Name: Name
         SubRegion: SubRegion
+        SizeUtilized: 1
     models.ObjectGateway:
       required:
       - CreatedAt
@@ -5431,7 +5441,7 @@ components:
           Status: Status
           StoreName: StoreName
           CreatedAt: 2000-01-23T04:56:07.000+00:00
-          Port: 5
+          Port: 2
           PreservePoolsOnDelete: true
           ID: 5
           DeletedAt: DeletedAt
@@ -5710,8 +5720,8 @@ components:
         ObjectBuckets:
         - null
         - null
-        ObjectStoreID: 2
-        ID: 1
+        ObjectStoreID: 7
+        ID: 5
         DeletedAt: DeletedAt
         UpdatedAt: 2000-01-23T04:56:07.000+00:00
         Name: Name
@@ -5759,7 +5769,7 @@ components:
         Status: Status
         StoreName: StoreName
         CreatedAt: 2000-01-23T04:56:07.000+00:00
-        Port: 5
+        Port: 2
         PreservePoolsOnDelete: true
         ID: 5
         DeletedAt: DeletedAt
@@ -6107,26 +6117,26 @@ components:
         user_name:
           type: string
       example:
-        object_store_id: 4
+        object_store_id: 7
         user_name: user_name
         CreatedAt: 2000-01-23T04:56:07.000+00:00
         ObjectBuckets:
         - null
         - null
-        max_buckets: 3
+        max_buckets: 2
         ak: ak
         object_store: null
         UpdatedAt: 2000-01-23T04:56:07.000+00:00
         max_size: max_size
         cap_usage: cap_usage
         cap_metadata: cap_metadata
-        max_objects: 2
+        max_objects: 4
         cap_bucket: cap_bucket
         name: name
         sk: sk
         cap_user: cap_user
         cap_zone: cap_zone
-        ID: 9
+        ID: 3
         DeletedAt: DeletedAt
         status: status
     models.Osd:

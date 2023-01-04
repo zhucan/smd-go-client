@@ -21,6 +21,7 @@ type ModelsObjectBucket struct {
 	MaxObjects int64 `json:"MaxObjects"`
 	MaxSize string `json:"MaxSize"`
 	Name string `json:"Name"`
+	NumObjects int64 `json:"NumObjects"`
 	ObjectStorageClass *ModelsObjectStorageClass `json:"ObjectStorageClass"`
 	ObjectStorageClassID int64 `json:"ObjectStorageClassID"`
 	OsUser *ModelsOsUser `json:"OsUser"`
@@ -28,6 +29,7 @@ type ModelsObjectBucket struct {
 	Passive bool `json:"Passive"`
 	Port string `json:"Port"`
 	Region string `json:"Region"`
+	SizeUtilized int64 `json:"SizeUtilized"`
 	Status string `json:"Status"`
 	SubRegion string `json:"SubRegion"`
 	UpdatedAt time.Time `json:"UpdatedAt"`
