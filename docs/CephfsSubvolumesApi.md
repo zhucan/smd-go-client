@@ -1,6 +1,6 @@
-# {{classname}}
+# \CephfsSubvolumesApi
 
-All URIs are relative to */*
+All URIs are relative to *https://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**GetCephfsSubvolume**](CephfsSubvolumesApi.md#GetCephfsSubvolume) | **Get** /cephfs-subvolumes/{cephfs-subvolume-id} | get a cephfs subvolume
 [**ListCephfsSubvolumes**](CephfsSubvolumesApi.md#ListCephfsSubvolumes) | **Get** /cephfs-subvolumes | get all cephfs subvolumes
 [**ResizeCephfsSubvolume**](CephfsSubvolumesApi.md#ResizeCephfsSubvolume) | **Post** /cephfs-subvolumes/{cephfs-subvolume-id}:resize | resize a cephfs subvolume
+
 
 # **CreateCephfsSubvolume**
 > ModelsCephfsSubvolume CreateCephfsSubvolume(ctx, body)
@@ -50,6 +51,7 @@ Name | Type | Description  | Notes
 
 ### Optional Parameters
 Optional parameters are passed through a pointer to a CephfsSubvolumesApiDeleteCephfsSubvolumeOpts struct
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
@@ -65,7 +67,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/xml, application/json
  - **Accept**: application/json, application/xml
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -91,7 +93,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/xml, application/json
  - **Accept**: application/json, application/xml
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -109,6 +111,7 @@ Name | Type | Description  | Notes
 
 ### Optional Parameters
 Optional parameters are passed through a pointer to a CephfsSubvolumesApiListCephfsSubvolumesOpts struct
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **offset** | **optional.Int64**| offset | 
@@ -124,13 +127,13 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/xml, application/json
  - **Accept**: application/json, application/xml
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ResizeCephfsSubvolume**
-> ModelsCephfsSubvolume ResizeCephfsSubvolume(ctx, body, cephfsSubvolumeId)
+> ModelsCephfsSubvolume ResizeCephfsSubvolume(ctx, cephfsSubvolumeId, body)
 resize a cephfs subvolume
 
 ### Required Parameters
@@ -138,8 +141,8 @@ resize a cephfs subvolume
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **body** | [**RoutesCephfsSubvolumeRequestParams**](RoutesCephfsSubvolumeRequestParams.md)|  | 
   **cephfsSubvolumeId** | **int64**| identifier of the cephfs subvolume | 
+  **body** | [**RoutesCephfsSubvolumeRequestParams**](RoutesCephfsSubvolumeRequestParams.md)|  | 
 
 ### Return type
 

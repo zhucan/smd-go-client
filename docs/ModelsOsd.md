@@ -13,9 +13,11 @@ Name | Type | Description | Notes
 **In** | **bool** |  | [default to null]
 **Name** | **string** |  | [default to null]
 **OsdID** | **int64** |  | [default to null]
+**SkipReconcile** | **bool** |  | [default to null]
 **Status** | **string** |  | [default to null]
 **Up** | **bool** |  | [default to null]
 **UpdatedAt** | [**time.Time**](time.Time.md) |  | [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
 

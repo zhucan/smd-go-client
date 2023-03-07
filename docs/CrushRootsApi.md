@@ -1,6 +1,6 @@
-# {{classname}}
+# \CrushRootsApi
 
-All URIs are relative to */*
+All URIs are relative to *https://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -11,8 +11,9 @@ Method | HTTP request | Description
 [**ListCrushRoots**](CrushRootsApi.md#ListCrushRoots) | **Get** /crush-roots | get all crush roots
 [**RemoveOsdsFromCrushRoot**](CrushRootsApi.md#RemoveOsdsFromCrushRoot) | **Post** /crush-roots/:removeOsds | remove osds from crush root
 
+
 # **AddOsdsToCrushRoot**
-> ModelsCrushRoot AddOsdsToCrushRoot(ctx, body, crushRootId)
+> ModelsCrushRoot AddOsdsToCrushRoot(ctx, crushRootId, body)
 add osds to crush root
 
 ### Required Parameters
@@ -20,8 +21,8 @@ add osds to crush root
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **body** | [**RoutesCrushRootRequestParams**](RoutesCrushRootRequestParams.md)|  | 
   **crushRootId** | **int64**| identifier of the crush root | 
+  **body** | [**RoutesCrushRootRequestParams**](RoutesCrushRootRequestParams.md)|  | 
 
 ### Return type
 
@@ -78,6 +79,7 @@ Name | Type | Description  | Notes
 
 ### Optional Parameters
 Optional parameters are passed through a pointer to a CrushRootsApiDeleteCrushRootOpts struct
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
@@ -93,7 +95,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/xml, application/json
  - **Accept**: application/json, application/xml
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -119,7 +121,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/xml, application/json
  - **Accept**: application/json, application/xml
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -137,6 +139,7 @@ Name | Type | Description  | Notes
 
 ### Optional Parameters
 Optional parameters are passed through a pointer to a CrushRootsApiListCrushRootsOpts struct
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **offset** | **optional.Int64**| offset | 
@@ -152,7 +155,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/xml, application/json
  - **Accept**: application/json, application/xml
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -171,10 +174,11 @@ Name | Type | Description  | Notes
 
 ### Optional Parameters
 Optional parameters are passed through a pointer to a CrushRootsApiRemoveOsdsFromCrushRootOpts struct
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **force** | **optional.**| force option will ignore errors | 
+ **force** | **optional.Bool**| force option will ignore errors | 
 
 ### Return type
 
