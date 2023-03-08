@@ -1,11 +1,12 @@
-# {{classname}}
+# \DisksApi
 
-All URIs are relative to */*
+All URIs are relative to *https://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**GetDisk**](DisksApi.md#GetDisk) | **Get** /disks/{disk-id} | get a disk
 [**ListDisks**](DisksApi.md#ListDisks) | **Get** /disks | get all disks
+
 
 # **GetDisk**
 > ModelsDisk GetDisk(ctx, diskId)
@@ -28,7 +29,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/xml, application/json
  - **Accept**: application/json, application/xml
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -46,6 +47,7 @@ Name | Type | Description  | Notes
 
 ### Optional Parameters
 Optional parameters are passed through a pointer to a DisksApiListDisksOpts struct
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **offset** | **optional.Int64**| offset | 
@@ -62,7 +64,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/xml, application/json
  - **Accept**: application/json, application/xml
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

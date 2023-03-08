@@ -1,6 +1,6 @@
-# {{classname}}
+# \ObjectStorageClassesApi
 
-All URIs are relative to */*
+All URIs are relative to *https://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**DeleteObjectStorageClass**](ObjectStorageClassesApi.md#DeleteObjectStorageClass) | **Delete** /object-storage-classes/{object-storage-class-id} | delete an object storage class
 [**GetObjectStorageClass**](ObjectStorageClassesApi.md#GetObjectStorageClass) | **Get** /object-storage-classes/{object-storage-class-id} | get an object storage classs
 [**ListObjectStorageClasses**](ObjectStorageClassesApi.md#ListObjectStorageClasses) | **Get** /object-storage-classes | get all object storage classes
+
 
 # **CreateObjectStorageClass**
 > ModelsObjectStorageClass CreateObjectStorageClass(ctx, body)
@@ -56,7 +57,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/xml, application/json
  - **Accept**: application/json, application/xml
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -82,7 +83,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/xml, application/json
  - **Accept**: application/json, application/xml
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -100,6 +101,7 @@ Name | Type | Description  | Notes
 
 ### Optional Parameters
 Optional parameters are passed through a pointer to a ObjectStorageClassesApiListObjectStorageClassesOpts struct
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **offset** | **optional.Int64**| offset | 
@@ -115,7 +117,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/xml, application/json
  - **Accept**: application/json, application/xml
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

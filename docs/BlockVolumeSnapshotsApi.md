@@ -1,11 +1,12 @@
-# {{classname}}
+# \BlockVolumeSnapshotsApi
 
-All URIs are relative to */*
+All URIs are relative to *https://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**GetBlockVolumeSnapshot**](BlockVolumeSnapshotsApi.md#GetBlockVolumeSnapshot) | **Get** /block-volume-snapshots/{snapshot-id} | get a snapshot of block volume
 [**ListBlockVolumeSnapshots**](BlockVolumeSnapshotsApi.md#ListBlockVolumeSnapshots) | **Get** /block-volume-snapshots | list all snapshots of block volume
+
 
 # **GetBlockVolumeSnapshot**
 > ModelsBlockVolumeSnapshot GetBlockVolumeSnapshot(ctx, snapshotId)
@@ -28,7 +29,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/xml, application/json
  - **Accept**: application/json, application/xml
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -46,6 +47,7 @@ Name | Type | Description  | Notes
 
 ### Optional Parameters
 Optional parameters are passed through a pointer to a BlockVolumeSnapshotsApiListBlockVolumeSnapshotsOpts struct
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **offset** | **optional.Int64**| offset | 
@@ -61,7 +63,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/xml, application/json
  - **Accept**: application/json, application/xml
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

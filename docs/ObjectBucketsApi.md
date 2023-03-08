@@ -1,6 +1,6 @@
-# {{classname}}
+# \ObjectBucketsApi
 
-All URIs are relative to */*
+All URIs are relative to *https://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**DeleteObjectBucket**](ObjectBucketsApi.md#DeleteObjectBucket) | **Delete** /object-buckets/{object-bucket-id} | delete an object bucket
 [**GetObjectBucket**](ObjectBucketsApi.md#GetObjectBucket) | **Get** /object-buckets/{object-bucket-id} | get an object bucket
 [**ListObjectBuckets**](ObjectBucketsApi.md#ListObjectBuckets) | **Get** /object-buckets | get all object buckets
+
 
 # **CreateObjectBucket**
 > ModelsObjectBucket CreateObjectBucket(ctx, body)
@@ -56,7 +57,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/xml, application/json
  - **Accept**: application/json, application/xml
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -82,7 +83,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/xml, application/json
  - **Accept**: application/json, application/xml
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -100,6 +101,7 @@ Name | Type | Description  | Notes
 
 ### Optional Parameters
 Optional parameters are passed through a pointer to a ObjectBucketsApiListObjectBucketsOpts struct
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **offset** | **optional.Int64**| offset | 
@@ -116,7 +118,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/xml, application/json
  - **Accept**: application/json, application/xml
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
