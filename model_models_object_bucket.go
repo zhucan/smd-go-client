@@ -24,6 +24,7 @@ type ModelsObjectBucket struct {
 	MaxSize string `json:"MaxSize"`
 	Name string `json:"Name"`
 	NumObjects int64 `json:"NumObjects"`
+	NumShards int64 `json:"NumShards"`
 	ObjectStorageClass *ModelsObjectStorageClass `json:"ObjectStorageClass"`
 	ObjectStorageClassID int64 `json:"ObjectStorageClassID"`
 	OsUser *ModelsOsUser `json:"OsUser"`

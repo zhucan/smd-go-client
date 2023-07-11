@@ -5,6 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CreatedAt** | [**time.Time**](time.Time.md) |  | [default to null]
 **DeletedAt** | **string** |  | [default to null]
+**Fsid** | **string** |  | [default to null]
 **ID** | **int64** |  | [default to null]
 **Name** | **string** |  | [default to null]
 **Namespace** | **string** |  | [default to null]

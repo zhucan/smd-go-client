@@ -53,6 +53,7 @@ Name | Type | Description  | Notes
  **offset** | **optional.Int64**| offset | 
  **limit** | **optional.Int64**| limit | 
  **hostId** | **optional.Int64**| identifier of the host | 
+ **isRoot** | **optional.Bool**|  | 
 
 ### Return type
 

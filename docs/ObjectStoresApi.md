@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**DeleteObjectStore**](ObjectStoresApi.md#DeleteObjectStore) | **Delete** /object-stores/{object-store-id} | delete an object store
 [**GetObjectStore**](ObjectStoresApi.md#GetObjectStore) | **Get** /object-stores/{object-store-id} | get an object store
 [**ListObjectStores**](ObjectStoresApi.md#ListObjectStores) | **Get** /object-stores | get all object stores
+[**UpdateObjectStore**](ObjectStoresApi.md#UpdateObjectStore) | **Post** /object-stores/{object-store-id} | Update ceph object store
 
 
 # **CreateObjectStore**
@@ -110,6 +111,33 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**[]ModelsObjectStore**](*models.ObjectStore.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/xml, application/json
+ - **Accept**: application/json, application/xml
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **UpdateObjectStore**
+> ModelsObjectStore UpdateObjectStore(ctx, objectStoreId, body)
+Update ceph object store
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **objectStoreId** | **int64**| identifier of the ceph object store | 
+  **body** | [**RoutesObjectStoreUpdateParams**](RoutesObjectStoreUpdateParams.md)|  | 
+
+### Return type
+
+[**ModelsObjectStore**](models.ObjectStore.md)
 
 ### Authorization
 

@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **MaxSize** | **string** |  | [default to null]
 **Name** | **string** |  | [default to null]
 **NumObjects** | **int64** |  | [default to null]
+**NumShards** | **int64** |  | [default to null]
 **ObjectStorageClass** | [***ModelsObjectStorageClass**](models.ObjectStorageClass.md) |  | [default to null]
 **ObjectStorageClassID** | **int64** |  | [default to null]
 **OsUser** | [***ModelsOsUser**](models.OsUser.md) |  | [default to null]

@@ -85,6 +85,7 @@ Class | Method | HTTP request | Description
 *ObjectStoresApi* | [**DeleteObjectStore**](docs/ObjectStoresApi.md#deleteobjectstore) | **Delete** /object-stores/{object-store-id} | delete an object store
 *ObjectStoresApi* | [**GetObjectStore**](docs/ObjectStoresApi.md#getobjectstore) | **Get** /object-stores/{object-store-id} | get an object store
 *ObjectStoresApi* | [**ListObjectStores**](docs/ObjectStoresApi.md#listobjectstores) | **Get** /object-stores | get all object stores
+*ObjectStoresApi* | [**UpdateObjectStore**](docs/ObjectStoresApi.md#updateobjectstore) | **Post** /object-stores/{object-store-id} | Update ceph object store
 *OsUserApi* | [**CreateOsUser**](docs/OsUserApi.md#createosuser) | **Post** /os-users | create os user
 *OsUserApi* | [**DeleteOsUser**](docs/OsUserApi.md#deleteosuser) | **Delete** /os-users/{os-user-id} | delete os user
 *OsUserApi* | [**GetOsUser**](docs/OsUserApi.md#getosuser) | **Get** /os-users/{os-user-id} | get an os user
@@ -155,12 +156,14 @@ Class | Method | HTTP request | Description
  - [RoutesObjectBucketRequestParams](docs/RoutesObjectBucketRequestParams.md)
  - [RoutesObjectStorageClassRequestParams](docs/RoutesObjectStorageClassRequestParams.md)
  - [RoutesObjectStoreRequestParams](docs/RoutesObjectStoreRequestParams.md)
+ - [RoutesObjectStoreUpdateParams](docs/RoutesObjectStoreUpdateParams.md)
  - [RoutesOsdsDeleteParams](docs/RoutesOsdsDeleteParams.md)
  - [RoutesOsdsRequestParams](docs/RoutesOsdsRequestParams.md)
  - [RoutesOsdsUpdateParams](docs/RoutesOsdsUpdateParams.md)
  - [RoutesPoolCreateRequestParams](docs/RoutesPoolCreateRequestParams.md)
  - [RoutesPoolRequestParams](docs/RoutesPoolRequestParams.md)
  - [RoutesUpdateOsUserRequestParams](docs/RoutesUpdateOsUserRequestParams.md)
+ - [UpdateObjectStore](docs/UpdateObjectStore.md)
  - [UpdateOsUser](docs/UpdateOsUser.md)
  - [UpdateOsd](docs/UpdateOsd.md)
 

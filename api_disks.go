@@ -121,6 +121,7 @@ DisksApiService get all disks
      * @param "Offset" (optional.Int64) -  offset
      * @param "Limit" (optional.Int64) -  limit
      * @param "HostId" (optional.Int64) -  identifier of the host
+     * @param "IsRoot" (optional.Bool) - 
 
 @return []ModelsDisk
 */
@@ -129,6 +130,7 @@ type DisksApiListDisksOpts struct {
 	Offset optional.Int64
 	Limit optional.Int64
 	HostId optional.Int64
+	IsRoot optional.Bool
 }
 
 func (a *DisksApiService) ListDisks(ctx context.Context, localVarOptionals *DisksApiListDisksOpts) ([]ModelsDisk, *http.Response, error) {
@@ -155,6 +157,9 @@ func (a *DisksApiService) ListDisks(ctx context.Context, localVarOptionals *Disk
 	}
 	if localVarOptionals != nil && localVarOptionals.HostId.IsSet() {
 		localVarQueryParams.Add("host-id", parameterToString(localVarOptionals.HostId.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.IsRoot.IsSet() {
+		localVarQueryParams.Add("is-root", parameterToString(localVarOptionals.IsRoot.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{"application/xml", "application/json"}

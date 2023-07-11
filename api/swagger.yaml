@@ -1219,6 +1219,12 @@ paths:
         format: "int64"
         x-exportParamName: "HostId"
         x-optionalDataType: "Int64"
+      - name: "is-root"
+        in: "query"
+        required: false
+        type: "boolean"
+        x-exportParamName: "IsRoot"
+        x-optionalDataType: "Bool"
       responses:
         "200":
           description: "OK"
@@ -1784,6 +1790,36 @@ paths:
         type: "integer"
         format: "int64"
         x-exportParamName: "ObjectStoreId"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/models.ObjectStore"
+    post:
+      tags:
+      - "object-stores"
+      summary: "Update ceph object store"
+      operationId: "UpdateObjectStore"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "object-store-id"
+        in: "path"
+        description: "identifier of the ceph object store"
+        required: true
+        type: "integer"
+        format: "int64"
+        x-exportParamName: "ObjectStoreId"
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/routes.ObjectStoreUpdateParams"
+        x-exportParamName: "Body"
       responses:
         "200":
           description: "OK"
@@ -2479,6 +2515,13 @@ definitions:
         type: "string"
       pool_name:
         type: "string"
+  ".update_object_store":
+    required:
+    - "gateway_instances"
+    properties:
+      gateway_instances:
+        type: "integer"
+        format: "integer"
   ".update_os_user":
     required:
     - "access_key"
@@ -2866,6 +2909,7 @@ definitions:
     required:
     - "CreatedAt"
     - "DeletedAt"
+    - "Fsid"
     - "ID"
     - "Name"
     - "Namespace"
@@ -2878,6 +2922,8 @@ definitions:
         type: "string"
         format: "date-time"
       DeletedAt:
+        type: "string"
+      Fsid:
         type: "string"
       ID:
         type: "integer"
@@ -3012,6 +3058,7 @@ definitions:
         DiskID: 4
       State: "State"
       CreatedAt: "2000-01-23T04:56:07.000+00:00"
+      Fsid: "Fsid"
       ID: 0
       DeletedAt: "DeletedAt"
       UpdatedAt: "2000-01-23T04:56:07.000+00:00"
@@ -4808,6 +4855,7 @@ definitions:
     - "MaxSize"
     - "Name"
     - "NumObjects"
+    - "NumShards"
     - "ObjectStorageClass"
     - "ObjectStorageClassID"
     - "OsUser"
@@ -4842,6 +4890,9 @@ definitions:
       NumObjects:
         type: "integer"
         format: "int64"
+      NumShards:
+        type: "integer"
+        format: "int64"
       ObjectStorageClass:
         $ref: "#/definitions/models.ObjectStorageClass"
       ObjectStorageClassID:
@@ -4871,21 +4922,22 @@ definitions:
     example:
       Status: "Status"
       OsUser:
-        object_store_id: 7
+        object_store_id: 1
         user_name: "user_name"
         CreatedAt: "2000-01-23T04:56:07.000+00:00"
         ObjectBuckets:
         - null
         - null
-        max_buckets: 2
+        max_buckets: 7
         ak: "ak"
         object_store:
           Status: "Status"
+          GatewayInstances: 2
           StoreName: "StoreName"
           CreatedAt: "2000-01-23T04:56:07.000+00:00"
-          Port: 2
+          Port: 9
           PreservePoolsOnDelete: true
-          ID: 5
+          ID: 7
           DeletedAt: "DeletedAt"
           UpdatedAt: "2000-01-23T04:56:07.000+00:00"
           Name: "Name"
@@ -5158,24 +5210,25 @@ definitions:
         max_size: "max_size"
         cap_usage: "cap_usage"
         cap_metadata: "cap_metadata"
-        max_objects: 4
+        max_objects: 1
         cap_bucket: "cap_bucket"
         name: "name"
         sk: "sk"
         cap_user: "cap_user"
         cap_zone: "cap_zone"
-        ID: 3
+        ID: 4
         DeletedAt: "DeletedAt"
         status: "status"
       Passive: true
       CreatedAt: "2000-01-23T04:56:07.000+00:00"
       Port: "Port"
-      ObjectStorageClassID: 9
+      ObjectStorageClassID: 2
       Host: "Host"
       MaxSize: "MaxSize"
       UpdatedAt: "2000-01-23T04:56:07.000+00:00"
       MaxObjects: 6
       Name: "Name"
+      NumShards: 5
       BucketName: "BucketName"
       OsUserID: 1
       Region: "Region"
@@ -5186,11 +5239,12 @@ definitions:
         Status: "Status"
         ObjectStore:
           Status: "Status"
+          GatewayInstances: 2
           StoreName: "StoreName"
           CreatedAt: "2000-01-23T04:56:07.000+00:00"
-          Port: 2
+          Port: 9
           PreservePoolsOnDelete: true
-          ID: 5
+          ID: 7
           DeletedAt: "DeletedAt"
           UpdatedAt: "2000-01-23T04:56:07.000+00:00"
           Name: "Name"
@@ -5463,13 +5517,13 @@ definitions:
         ObjectBuckets:
         - null
         - null
-        ObjectStoreID: 7
+        ObjectStoreID: 3
         ID: 5
         DeletedAt: "DeletedAt"
         UpdatedAt: "2000-01-23T04:56:07.000+00:00"
         Name: "Name"
       SubRegion: "SubRegion"
-      SizeUtilized: 1
+      SizeUtilized: 6
   models.ObjectGateway:
     required:
     - "CreatedAt"
@@ -5555,11 +5609,12 @@ definitions:
       Status: "Status"
       ObjectStore:
         Status: "Status"
+        GatewayInstances: 2
         StoreName: "StoreName"
         CreatedAt: "2000-01-23T04:56:07.000+00:00"
-        Port: 2
+        Port: 9
         PreservePoolsOnDelete: true
-        ID: 5
+        ID: 7
         DeletedAt: "DeletedAt"
         UpdatedAt: "2000-01-23T04:56:07.000+00:00"
         Name: "Name"
@@ -5832,7 +5887,7 @@ definitions:
       ObjectBuckets:
       - null
       - null
-      ObjectStoreID: 7
+      ObjectStoreID: 3
       ID: 5
       DeletedAt: "DeletedAt"
       UpdatedAt: "2000-01-23T04:56:07.000+00:00"
@@ -5841,6 +5896,7 @@ definitions:
     required:
     - "CreatedAt"
     - "DeletedAt"
+    - "GatewayInstances"
     - "ID"
     - "Name"
     - "PoolProperties"
@@ -5855,6 +5911,9 @@ definitions:
         format: "date-time"
       DeletedAt:
         type: "string"
+      GatewayInstances:
+        type: "integer"
+        format: "integer"
       ID:
         type: "integer"
         format: "int64"
@@ -5878,11 +5937,12 @@ definitions:
         format: "date-time"
     example:
       Status: "Status"
+      GatewayInstances: 2
       StoreName: "StoreName"
       CreatedAt: "2000-01-23T04:56:07.000+00:00"
-      Port: 2
+      Port: 9
       PreservePoolsOnDelete: true
-      ID: 5
+      ID: 7
       DeletedAt: "DeletedAt"
       UpdatedAt: "2000-01-23T04:56:07.000+00:00"
       Name: "Name"
@@ -6223,21 +6283,22 @@ definitions:
       user_name:
         type: "string"
     example:
-      object_store_id: 7
+      object_store_id: 1
       user_name: "user_name"
       CreatedAt: "2000-01-23T04:56:07.000+00:00"
       ObjectBuckets:
       - null
       - null
-      max_buckets: 2
+      max_buckets: 7
       ak: "ak"
       object_store:
         Status: "Status"
+        GatewayInstances: 2
         StoreName: "StoreName"
         CreatedAt: "2000-01-23T04:56:07.000+00:00"
-        Port: 2
+        Port: 9
         PreservePoolsOnDelete: true
-        ID: 5
+        ID: 7
         DeletedAt: "DeletedAt"
         UpdatedAt: "2000-01-23T04:56:07.000+00:00"
         Name: "Name"
@@ -6510,13 +6571,13 @@ definitions:
       max_size: "max_size"
       cap_usage: "cap_usage"
       cap_metadata: "cap_metadata"
-      max_objects: 4
+      max_objects: 1
       cap_bucket: "cap_bucket"
       name: "name"
       sk: "sk"
       cap_user: "cap_user"
       cap_zone: "cap_zone"
-      ID: 3
+      ID: 4
       DeletedAt: "DeletedAt"
       status: "status"
   models.Osd:
@@ -7305,6 +7366,12 @@ definitions:
     properties:
       object_store:
         $ref: "#/definitions/.object_store"
+  routes.ObjectStoreUpdateParams:
+    required:
+    - "update_object_store"
+    properties:
+      update_object_store:
+        $ref: "#/definitions/.update_object_store"
   routes.OsdsDeleteParams:
     required:
     - "osds"
